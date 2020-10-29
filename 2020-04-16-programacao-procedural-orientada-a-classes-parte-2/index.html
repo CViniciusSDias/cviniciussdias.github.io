@@ -36,7 +36,7 @@
     <span class="token keyword">private</span> UserRepository <span class="token variable">$repository</span><span class="token punctuation">;</span>
     <span class="token keyword">private</span> PasswordHasher <span class="token variable">$hasher</span><span class="token punctuation">;</span>
 
-    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">__cosntruct</span><span class="token punctuation">(</span>UserRepository <span class="token variable">$repository</span><span class="token punctuation">,</span> PasswordHasher <span class="token variable">$hasher</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">__construct</span><span class="token punctuation">(</span>UserRepository <span class="token variable">$repository</span><span class="token punctuation">,</span> PasswordHasher <span class="token variable">$hasher</span><span class="token punctuation">)</span>
     <span class="token punctuation">{</span>
         <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">></span><span class="token property">repository</span> <span class="token operator">=</span> <span class="token variable">$repository</span><span class="token punctuation">;</span>
         <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">></span><span class="token property">hasher</span> <span class="token operator">=</span> <span class="token variable">$hasher</span><span class="token punctuation">;</span>
@@ -80,15 +80,14 @@
 <p>Outra característica de programação procedural nesse caso é que muito comumente temos métodos não tão relacionados na mesma classe <code class="language-text">Service</code>.</p>
 <p>É comum um <code class="language-text">UserService</code> ter um método com uma chamada para salvar um usuário e outro método para enviar um e-mail para ele. Responsabilidades que deveriam estar em classes separadas.</p>
 <p>No canal <em>Dev Eficiente</em>, do Aberto Souza, tem um vídeo falando um pouco mais sobre o problema deste tipo de classe, mas sob uma outra ótica. Vale a pena conferir:</p>
-<p>{% youtube szGb93_hXgI %}</p>
+<div class="gatsby-resp-iframe-wrapper" style="padding-bottom: 56.25%; position: relative; height: 0; overflow: hidden; margin-bottom: 1.0725rem" > <iframe src="https://www.youtube-nocookie.com/embed/szGb93_hXgI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style=" position: absolute; top: 0; left: 0; width: 100%; height: 100%; "></iframe> </div>
 <h2>Camada Model do MVC</h2>
 <p>Um ponto que tem levantado bastante discussão em comunidades que participo é: O que é a camada <em>Model</em> no MVC?</p>
 <p>Discutir sobre MVC é assunto pra outro post, mas o que tenho visto como consenso é: Camada que faz a persistência dos dados.</p>
 <p>E a regra de negócio? Uma galera tem colocado nos <em>Controllers</em>. E aí? Se essa lógica precisar ser reaproveitada, como fazemos? Como chamamos um <em>Controller</em> dentro de outro? Complicado, né?</p>
 <p>Em nossos <em>Controllers</em> é muito comum ver aquele código super famoso da programação procedural cheio de IFs e verificações em tipos primitivos, sem nenhum significado para o negócio.</p>
 <h3>Padrões arquiteturais</h3>
-<p>Para “resolver” esse problema, diversos padrões arquiteturais existem, e eu falei um pouquinho (bem pouquinho) sobre arquitetura nesse meu outro post: </p>
-<p>{% post <a href="https://dev.to/phprio/o-que-e-arquitetura-17ob">https://dev.to/phprio/o-que-e-arquitetura-17ob</a> %}</p>
+<p>Para “resolver” esse problema, diversos padrões arquiteturais existem, e eu falei um pouquinho (bem pouquinho) sobre arquitetura nesse meu outro post: <a href="https://dias.dev/2020-04-10-o-que-e-arquitetura/">O que é Arquitetura</a></p>
 <h2>Conclusão</h2>
 <p>Por mais que a gente estude muito sobre ferramentas, frameworks, hypes e modinhas, os princípios da programação orientada a objetos mudam muito pouco e merecem MUITA atenção.</p>
 <p>Estude conceitos, princípios, padrões… Tudo isso vai poder ser aplicado naquele framework que foi lançado semana passada e você está doido pra usar pra fazer um CRUD. Acredite.</p>
