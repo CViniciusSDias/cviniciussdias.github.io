@@ -1,4 +1,130 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Dias de Dev]]></title><description><![CDATA[Conteúdo sobre boas práticas de programação, arquitetura de software, design orientado a objetos e uma pitada de PHP.]]></description><link>https://dias.dev</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 30 Oct 2020 16:06:35 GMT</lastBuildDate><item><title><![CDATA[PHP além da Web]]></title><description><![CDATA[PHP + Web = <3 Não é nenhum segredo que o PHP nasceu na web e para a web. Seu propósito inicial era servir páginas dinâmicas de forma…]]></description><link>https://dias.dev/2020-10-27-php-alem-da-web/</link><guid isPermaLink="false">https://dias.dev/2020-10-27-php-alem-da-web/</guid><pubDate>Tue, 27 Oct 2020 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;PHP + Web = &amp;#x3C;3&lt;/h2&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Dias de Dev]]></title><description><![CDATA[Conteúdo sobre boas práticas de programação, arquitetura de software, design orientado a objetos e uma pitada de PHP.]]></description><link>https://dias.dev</link><generator>GatsbyJS</generator><lastBuildDate>Tue, 03 Nov 2020 14:59:35 GMT</lastBuildDate><item><title><![CDATA[Wrapper de Streams php://]]></title><description><![CDATA[Streams Antes de falarmos sobre um wrapper específico, é legal dar um certo contexto sobre streams. Um stream basicamente é um fluxo de…]]></description><link>https://dias.dev/2020-11-03-wraper-de-streams-php/</link><guid isPermaLink="false">https://dias.dev/2020-11-03-wraper-de-streams-php/</guid><pubDate>Tue, 03 Nov 2020 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;Streams&lt;/h2&gt;
+&lt;p&gt;Antes de falarmos sobre um wrapper específico, é legal dar um certo contexto sobre streams.&lt;/p&gt;
+&lt;p&gt;Um stream basicamente é um fluxo de dados. Usando streams podemos realizar operações de I/O como leitura de arquivos,
+acessos a rede, comunicação por sockets e muito mais.&lt;/p&gt;
+&lt;p&gt;Existem muitas funcionalidades que giram em torno dos streams do PHP como filtros, contextos, etc,
+mas neste artigo meu foco vai ser em um wrapper específico.&lt;/p&gt;
+&lt;h2&gt;Wrappers&lt;/h2&gt;
+&lt;p&gt;Wrappers de streams em PHP são o código que diz como aquele determinado protocolo vai ser usado e gerenciado.&lt;/p&gt;
+&lt;p&gt;Ler um arquivo é diferente de realizar uma requisição HTTP que é diferente de se conectar com um Unix socket.
+Para que todas essas diferenças sejam abstraídas para nós devs, o PHP fornece wrappers.&lt;/p&gt;
+&lt;p&gt;Quando você abre um arquivo para leitura em PHP, usa o wrapper &lt;code class=&quot;language-text&quot;&gt;file://&lt;/code&gt;.
+Quando faz uma requisição HTTP, usa o wrapper &lt;code class=&quot;language-text&quot;&gt;http://&lt;/code&gt;.
+Com wrappers diferentes, podemos utilizar o mesmo código para realizar tarefas completamente diferentes. Ex.:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;php&quot;&gt;&lt;pre class=&quot;language-php&quot;&gt;&lt;code class=&quot;language-php&quot;&gt;&lt;span class=&quot;token php language-php&quot;&gt;&lt;span class=&quot;token delimiter important&quot;&gt;&amp;lt;?php&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;file_get_contents&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token single-quoted-string string&quot;&gt;&apos;file://arquivo.txt&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// lê um arquivo&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;file_get_contents&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token single-quoted-string string&quot;&gt;&apos;http://google.com&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// faz uma requisição HTTP&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;Wrappers disponíveis&lt;/h3&gt;
+&lt;p&gt;Por padrão o PHP já fornece diversos wrappers como&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;file://&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;http://&lt;/code&gt; e &lt;code class=&quot;language-text&quot;&gt;https://&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;ftp://&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;zlib://&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;ssh2://&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;rar://&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;etc&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Existem outros wrappers fornecidos por padrão e além disso nós podemos criar nossos próprios wrappers.
+Mas isso foge do escopo desse artigo e no final dele vou deixar alguns links de referências.&lt;/p&gt;
+&lt;h2&gt;Wrapper php://&lt;/h2&gt;
+&lt;p&gt;Um dos wrappers mais interessantes e que menos vejo material sobre é o &lt;code class=&quot;language-text&quot;&gt;php://&lt;/code&gt;.
+Através dele temos acesso a diversos recursos de I/O como a entrada e saída padrão do sistema, streams temporários em
+disco e em memória, etc.&lt;/p&gt;
+&lt;p&gt;Vamos ver de forma resumida algumas das possibilidades deste wrapper&lt;/p&gt;
+&lt;h3&gt;php://input&lt;/h3&gt;
+&lt;p&gt;Este provavelmente é o stream mais utilizado fornecido por este wrapper. Através dele nós conseguimos acessar diretamente
+o corpo de uma requisição. Então se uma requisição &lt;code class=&quot;language-text&quot;&gt;POST&lt;/code&gt; é feita para seu sistema enviando o corpo em JSON, por exmeplo,
+o seguinte código pode fazer o parse:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;php&quot;&gt;&lt;pre class=&quot;language-php&quot;&gt;&lt;code class=&quot;language-php&quot;&gt;&lt;span class=&quot;token php language-php&quot;&gt;&lt;span class=&quot;token delimiter important&quot;&gt;&amp;lt;?php&lt;/span&gt;
+
+&lt;span class=&quot;token variable&quot;&gt;$corpo&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;file_get_contents&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token single-quoted-string string&quot;&gt;&apos;php://input&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// recupera o corpo todo da requisição, como string&lt;/span&gt;
+&lt;span class=&quot;token variable&quot;&gt;$json&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;json_decode&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token variable&quot;&gt;$corpo&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// decodifica a string em json&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;token variable&quot;&gt;$json&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;&lt;span class=&quot;token property&quot;&gt;algumValor&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// acessa um valor já parseado&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;É válido citar que este stream permite apenas a leitura, logo, não podemos escrever nada nele. &lt;/p&gt;
+&lt;h3&gt;php://memory e php://temp&lt;/h3&gt;
+&lt;p&gt;Ambos streams são de leitura e escrita, e nos permitem acesso a um espaço que pode ser no disco ou na RAM para manipular
+dados temporários. São interessantes para realizar processamentos em dados já existentes usando a interface de streams,
+por exemplo.&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;php://memory&lt;/code&gt; vai manter todo o dado na RAM enquanto &lt;code class=&quot;language-text&quot;&gt;php://temp&lt;/code&gt; vai utilizar um arquivo quando o conteúdo do stream
+atingir um limite de tamanho pré-definido (2MB por padrão).&lt;/p&gt;
+&lt;h3&gt;php://filter&lt;/h3&gt;
+&lt;p&gt;Aplicar filtros de streams pode trazer grandes poderes para sua aplicação e até poupar bastante uso de memória.
+Mas para utilizar filtros, teoricamente nós precisaríamos de um recurso de stream aberto. Qual o problema disso?
+Não poderíamos usar filtros com funções como &lt;code class=&quot;language-text&quot;&gt;file_get_contents&lt;/code&gt; que ao invés de um recurso, recebe uma string por
+parâmetro.&lt;/p&gt;
+&lt;p&gt;Usando o stream &lt;code class=&quot;language-text&quot;&gt;php://filter&lt;/code&gt; nós podemos especificar filtros para esse tipo de função sem nenhum problema. Exemplo:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;php&quot;&gt;&lt;pre class=&quot;language-php&quot;&gt;&lt;code class=&quot;language-php&quot;&gt;&lt;span class=&quot;token php language-php&quot;&gt;&lt;span class=&quot;token delimiter important&quot;&gt;&amp;lt;?php&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;file_get_contents&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token double-quoted-string string&quot;&gt;&quot;php://filter/read=string.toupper|string.rot13/resource=http://www.example.com&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Isso vai aplicar os filtros &lt;code class=&quot;language-text&quot;&gt;string.toupper&lt;/code&gt; e &lt;code class=&quot;language-text&quot;&gt;string.rot13&lt;/code&gt; ao ler de &lt;em&gt;&lt;a href=&quot;http://www.example.com&quot;&gt;http://www.example.com&lt;/a&gt;&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Se você não conhece os filtros de streams, vale a pena conferir as referências no final do artigo. ;-)&lt;/p&gt;
+&lt;h3&gt;php://stdin, php://stdout e php://stderr&lt;/h3&gt;
+&lt;p&gt;Estes streams fornecem acesso aos streams correspondentes do próprio processo do PHP.
+&lt;code class=&quot;language-text&quot;&gt;php://stdin&lt;/code&gt; fornece acesso à entrada padrão do processo (que pode ser o teclado ou um pipe, por exemplo).
+&lt;code class=&quot;language-text&quot;&gt;php://stdout&lt;/code&gt; permite acessar a saída padrão, que pode ser o terminal em uma aplicação CLI.
+&lt;code class=&quot;language-text&quot;&gt;php://stderr&lt;/code&gt; nos deixa escrever na saída de erro do processo.&lt;/p&gt;
+&lt;p&gt;O primeiro stream é apenas para leitura, enquanto os 2 outros são apenas para escrita. Não é possível escrever em
+&lt;code class=&quot;language-text&quot;&gt;php://stdin&lt;/code&gt; por exemplo.&lt;/p&gt;
+&lt;h3&gt;php://output&lt;/h3&gt;
+&lt;p&gt;Este stream permite escrever no mecanismo de buffer de saída do PHP, assim como &lt;code class=&quot;language-text&quot;&gt;echo&lt;/code&gt; e &lt;code class=&quot;language-text&quot;&gt;print&lt;/code&gt; fazem.&lt;/p&gt;
+&lt;h3&gt;php://output vs php://stdout&lt;/h3&gt;
+&lt;p&gt;Você talvez esteja se perguntando a diferença entre &lt;code class=&quot;language-text&quot;&gt;php://output&lt;/code&gt; e &lt;code class=&quot;language-text&quot;&gt;php://stdout&lt;/code&gt;.
+Basicamente o primeiro escreve no mecanismo de buffer de saída do PHP, o que permite o controle através de funções
+como &lt;code class=&quot;language-text&quot;&gt;ob_start&lt;/code&gt;. Já o segundo escreve direto na saída do processo, não passando pelo controle de buffer do PHP.&lt;/p&gt;
+&lt;p&gt;Para entender melhor:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;php&quot;&gt;&lt;pre class=&quot;language-php&quot;&gt;&lt;code class=&quot;language-php&quot;&gt;&lt;span class=&quot;token php language-php&quot;&gt;&lt;span class=&quot;token delimiter important&quot;&gt;&amp;lt;?php&lt;/span&gt;
+
+&lt;span class=&quot;token variable&quot;&gt;$stdout&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;fopen&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token single-quoted-string string&quot;&gt;&apos;php://stdout&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token single-quoted-string string&quot;&gt;&apos;w&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token variable&quot;&gt;$output&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;fopen&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token single-quoted-string string&quot;&gt;&apos;php://output&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token single-quoted-string string&quot;&gt;&apos;w&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token function&quot;&gt;ob_start&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token function&quot;&gt;fwrite&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token variable&quot;&gt;$output&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token single-quoted-string string&quot;&gt;&apos;Escrevendo no output&apos;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;token constant&quot;&gt;PHP_EOL&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token function&quot;&gt;fwrite&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token variable&quot;&gt;$stdout&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token single-quoted-string string&quot;&gt;&apos;Escrevendo na saída padrão&apos;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;token constant&quot;&gt;PHP_EOL&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token function&quot;&gt;ob_end_flush&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Ao executar este script em um terminal, o primeiro &lt;code class=&quot;language-text&quot;&gt;fwrite&lt;/code&gt; envia a string para o mecanismo de buffer do PHP, e devido
+ao &lt;code class=&quot;language-text&quot;&gt;ob_start()&lt;/code&gt;, não vai ser imprimido ainda. O segundo &lt;code class=&quot;language-text&quot;&gt;fwrite&lt;/code&gt; manda o conteúdo direto para a saída (tela do terminal).
+Ao executar &lt;code class=&quot;language-text&quot;&gt;ob_end_flush()&lt;/code&gt; o buffer é enviado para a saída do processo, então o resultado é:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;Escrevendo na saída padrão
+Escrevendo no output&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;Buffer de saída&lt;/h3&gt;
+&lt;p&gt;Se você não entendeu bem essa parte de buffer de saída e quiser que eu faça um artigo específico sobre isso, é só me
+contar nos comentários que eu preparo pra você! :-D&lt;/p&gt;
+&lt;h2&gt;Conclusão&lt;/h2&gt;
+&lt;p&gt;Analisando apenas um dos possíveis wrappers dá pra ter uma breve noção de como essa feature do PHP é poderosa. Através
+de streams podemos compactar e descompactar arquivos, enviar dados por FTP, acessar servidores via SSH e muito mais.&lt;/p&gt;
+&lt;h3&gt;Referências&lt;/h3&gt;
+&lt;p&gt;Conforme prometido, vou deixar aqui alguns links para que você possa se aprofundar nesse assunto tão rico e importante.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=ZRYMzS97HVQ&quot;&gt;https://www.youtube.com/watch?v=ZRYMzS97HVQ&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Nessa palestra o &lt;a href=&quot;https://twitter.com/alganet&quot;&gt;Alexandre Gaigalas&lt;/a&gt; mostra um pouco do poder dos streams&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.php.net/manual/en/book.stream.php&quot;&gt;https://www.php.net/manual/en/book.stream.php&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A documentação oficial é sempre um ótimo lugar para recorrer e entender a fundo as funcionalidades&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;https://cursos.alura.com.br/course/php-io-arquivos-streams&quot;&gt;https://cursos.alura.com.br/course/php-io-arquivos-streams&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Na Alura existe um curso específico de streams usando filtros, contextos e muito mais&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;/2020-09-16-php-assincrono-de-forma-nativa/&quot;&gt;PHP Assíncrono de Forma Nativa&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Aqui mesmo no blog tem um post onde uso streams para realizar programação assíncrona através de I/O não bloqueante.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[PHP além da Web]]></title><description><![CDATA[PHP + Web = <3 Não é nenhum segredo que o PHP nasceu na web e para a web. Seu propósito inicial era servir páginas dinâmicas de forma…]]></description><link>https://dias.dev/2020-10-27-php-alem-da-web/</link><guid isPermaLink="false">https://dias.dev/2020-10-27-php-alem-da-web/</guid><pubDate>Tue, 27 Oct 2020 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;PHP + Web = &amp;#x3C;3&lt;/h2&gt;
 &lt;p&gt;Não é nenhum segredo que o PHP nasceu na web e para a web. Seu propósito inicial era servir páginas dinâmicas de forma simples e amigável, mas a Web evoluiu e o PHP também. Hoje em dia o PHP é uma linguagem de programação completa e pronta para ser executada nos mais diversos ambientes, e não só na Web.&lt;/p&gt;
 &lt;h3&gt;Web além do HTML&lt;/h3&gt;
 &lt;p&gt;Antes de sair da Web, acredito que seja muito importante citar que nem só de HTML vive a Web. É mais do que comum vermos URLs gerando dados nos mais diversos formatos como XML, JSON, etc. Você provavelmente conhece isso como API, correto? Obviamente o PHP está mais do que preparado para este tipo de trabalho e de forma muito simples. A ideia desse artigo é trazer as possibilidades realmente fora da Web.&lt;/p&gt;
