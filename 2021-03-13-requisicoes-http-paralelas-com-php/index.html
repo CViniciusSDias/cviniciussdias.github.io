@@ -13,7 +13,7 @@ bloqueante, e consequentemente com programação assíncrona. Usando os conhecim
 Porém é bastante comum podermos nos dar ao luxo de processar todas as respostas HTTP depois de prontas, desde que todas
 as requisições tenham sido feitas de forma concorrente.</p>
 <h2>cURL</h2>
-<p>Como realizar requisições HTTP usando sockets pode se tornar uma tarefa muito complicada, principalmente em cenários
+<p>Como realizar requisições HTTP usando <em>sockets</em> pode se tornar uma tarefa muito complicada, principalmente em cenários
 onde precisamos enviar dados (requisições POST, por exemplo), cURL é uma alternativa muito interessante. Essa biblioteca
 é pensada especialmente em realizar requisições pela rede e possui diversos facilitadores.</p>
 <h2>O problema</h2>
@@ -34,7 +34,7 @@ os seus detalhes em outra URL (<a href="https://swapi.dev/api/films/:id/">https:
 <span class="token variable">$data</span> <span class="token operator">=</span> <span class="token function">json_decode</span><span class="token punctuation">(</span><span class="token variable">$response</span><span class="token punctuation">,</span> <span class="token boolean constant">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token variable">$movies</span> <span class="token operator">=</span> <span class="token variable">$data</span><span class="token punctuation">[</span><span class="token single-quoted-string string">'results'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 
-<span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token variable">$movies</span> <span class="token keyword">as</span> <span class="token variable">$i</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token variable">$movie</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token variable">$movies</span> <span class="token keyword">as</span> <span class="token variable">$movie</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token comment">// Alterando o protocolo para https</span>
     <span class="token variable">$url</span> <span class="token operator">=</span> <span class="token function">str_replace</span><span class="token punctuation">(</span><span class="token single-quoted-string string">'http:'</span><span class="token punctuation">,</span> <span class="token single-quoted-string string">'https:'</span><span class="token punctuation">,</span> <span class="token variable">$movie</span><span class="token punctuation">[</span><span class="token single-quoted-string string">'url'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token variable">$handle</span> <span class="token operator">=</span> <span class="token function">curl_init</span><span class="token punctuation">(</span><span class="token variable">$url</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -44,10 +44,10 @@ os seus detalhes em outra URL (<a href="https://swapi.dev/api/films/:id/">https:
     <span class="token variable">$movieData</span> <span class="token operator">=</span> <span class="token function">json_decode</span><span class="token punctuation">(</span><span class="token variable">$response</span><span class="token punctuation">,</span> <span class="token boolean constant">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token function">var_dump</span><span class="token punctuation">(</span><span class="token variable">$movieData</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></span></code></pre></div>
-<p>O problema desta abordagem é que cada requisição para os destalhes do filme vai travar a execução do PHP, fazendo
+<p>O problema desta abordagem é que cada requisição para os detalhes do filme vai travar a execução do PHP, fazendo
 com que a próxima requisição só seja iniciada quando a anterior for finalizada.</p>
 <h3>Solução não bloqueante</h3>
-<p>Para nós informarmos um determinado número de requisições e realizarmos todas de uma vez, podemos usar o <code class="language-text">curl_multi_init</code>.</p>
+<p>Para informarmos um determinado número de requisições e realizarmos todas de uma vez, podemos usar o <code class="language-text">curl_multi_init</code>.</p>
 <div class="gatsby-highlight" data-language="php"><pre class="language-php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
 
 <span class="token comment">// Primeira requisição como no código anterior</span>
@@ -68,7 +68,7 @@ com que a próxima requisição só seja iniciada quando a anterior for finaliza
 <p>Assim nós temos diversos <em>handles</em> do <code class="language-text">cURL</code> adicionados a um gerenciador de múltiplas requisições. Quando executarmos o
 <code class="language-text">$multiHandle</code>, todas as requisições serão feitas em paralelo. Maravilha, não é mesmo?</p>
 <p>Infelizmente não é tão simples assim. Não basta fazer um <code class="language-text">curl_multi_exec</code> e receber um array de respostas. A função
-<code class="language-text">curl_multi_exec</code> inicia as requisições, porém não bloqueia o código, ou seja, nós precisamos ficar em um loop verificando
+<code class="language-text">curl_multi_exec</code> inicia as requisições, porém não bloqueia o código, ou seja, nós precisamos ficar em um <em>loop</em> verificando
 se todas as requisições já foram feitas. Algo como:</p>
 <div class="gatsby-highlight" data-language="php"><pre class="language-php"><code class="language-php"><span class="token keyword">do</span> <span class="token punctuation">{</span>
     <span class="token variable">$result</span> <span class="token operator">=</span> <span class="token function">curl_multi_exec</span><span class="token punctuation">(</span><span class="token variable">$multiHandle</span><span class="token punctuation">,</span> <span class="token variable">$numberOfMissingHandles</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -77,7 +77,7 @@ se todas as requisições já foram feitas. Algo como:</p>
 <span class="token comment">// Processar respostas</span></code></pre></div>
 <p>A variável <code class="language-text">$numberOfMissingHandles</code> é passada por referência e é preenchida com o número dos <em>handles</em> que faltam ser
 resolvidos. Em outras palavras, enquanto esse valor não chegar a 0, temos requisições sendo processadas.</p>
-<p>Depois de sair desse loop, podemos recuperar as respostas de todas as requisições, então voltamos para a tarefa fácil:</p>
+<p>Depois de sair desse <em>loop</em>, podemos recuperar as respostas de todas as requisições, então voltamos para a tarefa fácil:</p>
 <div class="gatsby-highlight" data-language="php"><pre class="language-php"><code class="language-php"><span class="token comment">// Por isso armazenamos o array de $handles</span>
 <span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token variable">$handles</span> <span class="token keyword">as</span> <span class="token variable">$handle</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token comment">// Usamos curl_multi_getcontent para recuperar a resposta</span>
@@ -91,15 +91,15 @@ resolvidos. Em outras palavras, enquanto esse valor não chegar a 0, temos requi
 <span class="token punctuation">}</span></code></pre></div>
 <p>Com isso nós atingimos o objetivo de realizar todas as requisições de uma vez e só depois ler as respostas.</p>
 <h3>Mal uso de recursos</h3>
-<p>O problema de nossa abordagem é que a função <code class="language-text">curl_multi_exec</code> retorna imediatamente, sem esperar por nenhuma atividade
-nos handles, ou seja, se as requisições forem demoradas ou houverem muitas requisições (ou ambos), esse loop vai ser
+<p>O problema da nossa abordagem é que a função <code class="language-text">curl_multi_exec</code> retorna imediatamente, sem esperar por nenhuma atividade
+nos <em>handles</em>, ou seja, se as requisições forem demoradas ou houverem muitas requisições (ou ambos), esse <em>loop</em> vai ser
 executado de forma muito rápida, por muito tempo. Isso vai fazer com que o uso de CPU vá ao topo, atrasando inclusive o
 processo de realizar requisições, afinal de contas o sistema operacional precisa destinar certos recursos para essa tarefa.</p>
 <p>Para mitigar esse problema, podemos usar uma função chamada <code class="language-text">curl_multi_select</code>. Ela é semelhante à <code class="language-text">stream_select</code> que
 vimos no post sobre <a href="/2020-09-16-php-assincrono-de-forma-nativa">PHP assíncrono</a>. Essa função espera que alguma
 atividade aconteça nos handles que estamos utilizando. A diferença é que ela não recebe um array, mas sim o nosso
-<code class="language-text">$multiHandle</code>. Então tudo que temos de informação é quantos possuem atividade no momento, mas não quais. Mas tudo bem,
-já que nosso propósito é ler todos apenas no final.</p>
+<code class="language-text">$multiHandle</code>. Então tudo que temos de informação é quantos <em>handles</em> possuem atividade no momento, mas não quais deles.
+Mas tudo bem, já que o nosso propósito é ler todos apenas no final.</p>
 <p>A função <code class="language-text">curl_multi_select</code> deve ser chamada após o <code class="language-text">curl_multi_exec</code>, já que é essa que inicia as requisições efetivamente.
 Então o nosso primeiro <em>loop</em> ficaria assim:</p>
 <div class="gatsby-highlight" data-language="php"><pre class="language-php"><code class="language-php"><span class="token keyword">do</span> <span class="token punctuation">{</span>
@@ -137,7 +137,6 @@ se parecer com isso:</p>
 <span class="token variable">$movies</span> <span class="token operator">=</span> <span class="token variable">$data</span><span class="token punctuation">[</span><span class="token single-quoted-string string">'results'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 
 <span class="token variable">$multiHandle</span> <span class="token operator">=</span> <span class="token function">curl_multi_init</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token function">curl_multi_setopt</span><span class="token punctuation">(</span><span class="token variable">$multiHandle</span><span class="token punctuation">,</span> <span class="token constant">CURLOPT_TIMEOUT</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token variable">$handles</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 <span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token variable">$movies</span> <span class="token keyword">as</span> <span class="token variable">$i</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token variable">$movie</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -157,7 +156,7 @@ se parecer com isso:</p>
     <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$descriptorsCount</span> <span class="token operator">===</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">RuntimeException</span><span class="token punctuation">(</span><span class="token single-quoted-string string">'Error checking for activity'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
-<span class="token punctuation">}</span> <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token variable">$numberOfMissingHandles</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token variable">$numberOfMissingHandles</span> <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token variable">$handles</span> <span class="token keyword">as</span> <span class="token variable">$handle</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token variable">$response</span> <span class="token operator">=</span> <span class="token function">curl_multi_getcontent</span><span class="token punctuation">(</span><span class="token variable">$handle</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -170,10 +169,10 @@ se parecer com isso:</p>
 <p>Esse código provavelmente pode ser refatorado para torná-lo um pouco mais legível, mas acredito que a lógica por trás dele
 tenha ficado clara. Caso contrário, você pode usar a sessão de comentários dessa página para fazer perguntas.</p>
 <h2>Benchmarks</h2>
-<p>Agora que temos 2 versões de código que resolvem o mesmo problema de forma diferente, podemos testar sua performance.
-Para quem usa sistemas Unix (Linux e Mac) existe um comando chamado <code class="language-text">time</code> que é muito útil para verificações simples
+<p>Agora que temos 2 versões de código que resolvem o mesmo problema de formas diferentes, podemos testar a sua performance.
+Para quem usa sistemas <em>Unix</em> (<em>Linux</em> ou <em>Mac</em>) existe um comando chamado <code class="language-text">time</code> que é muito útil para verificações simples
 como essas.</p>
-<p>A primeira versão do nosso código (bloqueante) traz essa informação quando executo o seguinte comando (sendo <code class="language-text">star-wars.php</code>o nome do nosso arquivo):</p>
+<p>A primeira versão do nosso código (bloqueante) gera essa informação quando executo o seguinte comando (sendo <code class="language-text">star-wars.php</code>o nome do nosso arquivo):</p>
 <div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash">$ <span class="token function">time</span> php star-wars.php
 
 php star-wars.php  <span class="token number">0</span>.14s user <span class="token number">0</span>.04s system <span class="token number">2</span>% cpu <span class="token number">7.186</span> total</code></pre></div>
@@ -181,12 +180,12 @@ php star-wars.php  <span class="token number">0</span>.14s user <span class="tok
 <p>Já com a versão final do código, temos a seguinte saída:</p>
 <div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash">$ <span class="token function">time</span> php star-wars.php
 
-php sw.php  <span class="token number">0</span>.14s user <span class="token number">0</span>.04s system <span class="token number">6</span>% cpu <span class="token number">2.387</span> total</code></pre></div>
+php star-wars.php  <span class="token number">0</span>.14s user <span class="token number">0</span>.04s system <span class="token number">6</span>% cpu <span class="token number">2.387</span> total</code></pre></div>
 <p>Ou seja, pouco mais de 2 segundos (quase 5 segundos a menos). É uma baita diferença para um exemplo tão simples, não acha?</p>
 <p>Agora um último teste, comentando a parte referente ao <code class="language-text">curl_multi_select</code>:</p>
 <div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash">$ <span class="token function">time</span> php star-wars.php
 
-php sw.php  <span class="token number">0</span>.50s user <span class="token number">0</span>.70s system <span class="token number">49</span>% cpu <span class="token number">2.421</span> total</code></pre></div>
+php star-wars.php  <span class="token number">0</span>.50s user <span class="token number">0</span>.70s system <span class="token number">49</span>% cpu <span class="token number">2.421</span> total</code></pre></div>
 <p>Repare que o uso de CPU subiu muito. De algo próximo de 6% para quase 50%. Esse é o propósito da chamada da função
 <code class="language-text">curl_multi_select</code>.</p>
 <h2>Conclusão</h2>
@@ -196,4 +195,4 @@ opção para isso.</p>
 <p>Mas seguindo o que citei no <a href="/2020-04-23-principios-ou-ferramentas-o-que-estudar">post sobre aprendizado</a>, eu penso como
 Richard Feynman (Nobel de física): “O que eu não consigo criar, eu não entendo”. Então antes de utilizar uma ferramenta
 que realiza o trabalho para mim, eu gosto de saber como realizar este trabalho sem ela. Com isso, se algum problema
-acontecer com a biblioteca, por exemplo, eu vou estar mais preparado para resolvê-lo já que eu entendo um pouco melhor como as coisas funcionam.</p></section><hr/><footer><div class="bio"><div style="margin-right:var(--spacing-4)"><img src="https://gravatar.com/avatar/63579c5a873f3ab6abff10803e9a252f.jpg?s=50" alt="Foto de Vinicius Dias segurando um microfone durante uma palestra" style="border-radius:50%;width:50.01px;height:50.01px"/></div><p>Escrito por <strong>Vinicius Dias</strong> <!-- -->que sempre tenta seguir a regra do bom escoteiro: &quot;Sempre deixe o código mais limpo do que quando você encontrou&quot;<!-- --> <a href="https://twitter.com/cviniciussdias">Que tal seguir ele no Twitter?</a></p></div><div id="disqus_thread"></div></footer></article><nav class="blog-post-nav"><ul style="display:flex;flex-wrap:wrap;justify-content:space-between;list-style:none;padding:0"><li><a rel="prev" href="/2020-11-03-wraper-de-streams-php/">← <!-- -->Wrapper de Streams php://</a></li><li></li></ul></nav></main><footer>© <!-- -->2021<!-- -->, Dias de Dev</footer></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/2021-03-13-requisicoes-http-paralelas-com-php/";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-f00012387f29843efc53.js"],"app":["/app-0b9262c0f04bb41b41a8.js"],"component---src-pages-404-js":["/component---src-pages-404-js-0be74b1562aed08f4898.js"],"component---src-pages-index-js":["/component---src-pages-index-js-4200f50076d90d10ec90.js"],"component---src-pages-sobre-mim-js":["/component---src-pages-sobre-mim-js-b70707a3ce342f314ba9.js"],"component---src-templates-blog-post-js":["/component---src-templates-blog-post-js-8ee75b1b29937d9e0f86.js"]};/*]]>*/</script><script src="/polyfill-f00012387f29843efc53.js" nomodule=""></script><script src="/component---src-templates-blog-post-js-8ee75b1b29937d9e0f86.js" async=""></script><script src="/commons-104f96b1f17f8df09d39.js" async=""></script><script src="/app-0b9262c0f04bb41b41a8.js" async=""></script><script src="/framework-83e11af5cf111be5ad89.js" async=""></script><script src="/styles-bc72ca78f9bad9fb1f45.js" async=""></script><script src="/webpack-runtime-ef1e1a4dcbe047692eef.js" async=""></script></body></html>
+acontecer com a biblioteca, por exemplo, eu vou estar mais preparado para resolvê-lo já que entendo um pouco melhor como as coisas funcionam.</p></section><hr/><footer><div class="bio"><div style="margin-right:var(--spacing-4)"><img src="https://gravatar.com/avatar/63579c5a873f3ab6abff10803e9a252f.jpg?s=50" alt="Foto de Vinicius Dias segurando um microfone durante uma palestra" style="border-radius:50%;width:50.01px;height:50.01px"/></div><p>Escrito por <strong>Vinicius Dias</strong> <!-- -->que sempre tenta seguir a regra do bom escoteiro: &quot;Sempre deixe o código mais limpo do que quando você encontrou&quot;<!-- --> <a href="https://twitter.com/cviniciussdias">Que tal seguir ele no Twitter?</a></p></div><div id="disqus_thread"></div></footer></article><nav class="blog-post-nav"><ul style="display:flex;flex-wrap:wrap;justify-content:space-between;list-style:none;padding:0"><li><a rel="prev" href="/2020-11-03-wraper-de-streams-php/">← <!-- -->Wrapper de Streams php://</a></li><li></li></ul></nav></main><footer>© <!-- -->2021<!-- -->, Dias de Dev</footer></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/2021-03-13-requisicoes-http-paralelas-com-php/";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-f00012387f29843efc53.js"],"app":["/app-0b9262c0f04bb41b41a8.js"],"component---src-pages-404-js":["/component---src-pages-404-js-0be74b1562aed08f4898.js"],"component---src-pages-index-js":["/component---src-pages-index-js-4200f50076d90d10ec90.js"],"component---src-pages-sobre-mim-js":["/component---src-pages-sobre-mim-js-b70707a3ce342f314ba9.js"],"component---src-templates-blog-post-js":["/component---src-templates-blog-post-js-8ee75b1b29937d9e0f86.js"]};/*]]>*/</script><script src="/polyfill-f00012387f29843efc53.js" nomodule=""></script><script src="/component---src-templates-blog-post-js-8ee75b1b29937d9e0f86.js" async=""></script><script src="/commons-104f96b1f17f8df09d39.js" async=""></script><script src="/app-0b9262c0f04bb41b41a8.js" async=""></script><script src="/framework-83e11af5cf111be5ad89.js" async=""></script><script src="/styles-bc72ca78f9bad9fb1f45.js" async=""></script><script src="/webpack-runtime-ef1e1a4dcbe047692eef.js" async=""></script></body></html>
