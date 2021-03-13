@@ -110,7 +110,7 @@ Então o nosso primeiro <em>loop</em> ficaria assim:</p>
 <code class="language-text">-1</code>, significa que aconteceu algum erro.</p>
 <p>Dessa forma esse <em>loop</em> será executado menos vezes e em um intervalo maior, ou seja, menos CPU será consumida.</p>
 <h3>Tratamento de erros</h3>
-<p>Falando em erros, nosso código está supondo que tudo vai correr bem. Nesse primeiro loop nós precisamos realizar algumas
+<p>Falando em erros, nosso código está supondo que tudo vai correr bem. Nesse primeiro <em>loop</em> nós precisamos realizar algumas
 verificações. Então no final, teremos algo como:</p>
 <div class="gatsby-highlight" data-language="php"><pre class="language-php"><code class="language-php"><span class="token keyword">do</span> <span class="token punctuation">{</span>
     <span class="token variable">$result</span> <span class="token operator">=</span> <span class="token function">curl_multi_exec</span><span class="token punctuation">(</span><span class="token variable">$multiHandle</span><span class="token punctuation">,</span> <span class="token variable">$numberOfMissingHandles</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
