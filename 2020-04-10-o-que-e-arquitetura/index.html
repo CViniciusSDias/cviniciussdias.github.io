@@ -20,7 +20,7 @@
 <h2>Como poderia ter sido?</h2>
 <p>Se os arquitetos desse sistema pudessem voltar no tempo, o que fariam, você pode se perguntar. Minha ideia aqui é levantar algumas opções.</p>
 <p>Em termos de código, entidades poderiam ter sido criadas sem nenhum conhecimento da infraestrutura que cuida da persistência. Se é utilizado Pear DB, PDO, Doctrine, Eloquent, uma API, um arquivo com os dados, tanto faz. A lógica de negócios estaria intacta.</p>
-<p>E para salvar no banco? Classes especializadas nessa tarefa, também conhecidas como repositórios, poderiam ter sido utilizadas. Essas classes saberiam lidar com as entidades e fazerem a tradução necessária para o sistema de persistência (usando SQL, por exemplo).</p>
+<p>E para salvar no banco? Classes especializadas nessa tarefa, também conhecidas como repositórios, poderiam ter sido utilizadas. Essas classes saberiam lidar com as entidades e fazer a tradução necessária para o sistema de persistência (usando SQL, por exemplo).</p>
 <p>E se a ferramenta usada fosse descontinuada? Bom, simples: Poderíamos criar uma <code class="language-text">interface</code> que define o que um repositório deve saber fazer. Quando o Pear DB deixasse de receber suporte, nossa classe <code class="language-text">PearDbQuestionRepository</code> (repositório de perguntas) poderia ser fácilmente substituída por uma classe <code class="language-text">PdoQuestionRepository</code>, ou até mesmo <code class="language-text">DoctrineQuestionRepository</code>. Isso não faria diferença para as regras de negócio, que precisavam de qualquer implementação da interface <code class="language-text">QuestionRepository</code>.</p>
 <h2>O que isso tem a ver com arquitetura?</h2>
 <p>— Essa solução proposta é perfeita?
