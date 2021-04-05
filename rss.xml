@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Dias de Dev]]></title><description><![CDATA[Conteúdo sobre boas práticas de programação, arquitetura de software, design orientado a objetos e uma pitada de PHP.]]></description><link>https://dias.dev</link><generator>GatsbyJS</generator><lastBuildDate>Wed, 31 Mar 2021 02:25:51 GMT</lastBuildDate><item><title><![CDATA[Requisições HTTP paralelas com PHP]]></title><description><![CDATA[I/O não bloqueante (programação assíncrona) Em um post anterior falei bastante sobre como o PHP trabalha por baixo dos panos de forma nativa…]]></description><link>https://dias.dev/2021-03-13-requisicoes-http-paralelas-com-php/</link><guid isPermaLink="false">https://dias.dev/2021-03-13-requisicoes-http-paralelas-com-php/</guid><pubDate>Sat, 13 Mar 2021 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;I/O não bloqueante (programação assíncrona)&lt;/h2&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Dias de Dev]]></title><description><![CDATA[Conteúdo sobre boas práticas de programação, arquitetura de software, design orientado a objetos e uma pitada de PHP.]]></description><link>https://dias.dev</link><generator>GatsbyJS</generator><lastBuildDate>Mon, 05 Apr 2021 19:31:52 GMT</lastBuildDate><item><title><![CDATA[Requisições HTTP paralelas com PHP]]></title><description><![CDATA[I/O não bloqueante (programação assíncrona) Em um post anterior falei bastante sobre como o PHP trabalha por baixo dos panos de forma nativa…]]></description><link>https://dias.dev/2021-03-13-requisicoes-http-paralelas-com-php/</link><guid isPermaLink="false">https://dias.dev/2021-03-13-requisicoes-http-paralelas-com-php/</guid><pubDate>Sat, 13 Mar 2021 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;I/O não bloqueante (programação assíncrona)&lt;/h2&gt;
 &lt;p&gt;Em um &lt;a href=&quot;/2020-09-16-php-assincrono-de-forma-nativa&quot;&gt;post anterior&lt;/a&gt; falei bastante sobre como o PHP trabalha por baixo dos panos de forma nativa com I/O não
 bloqueante, e consequentemente com programação assíncrona. Usando os conhecimentos daquele post com conhecimentos de
 &lt;em&gt;sockets&lt;/em&gt; e HTTP seria possível realizarmos chamadas HTTP assíncronas e processá-las conforme elas fossem recebidas.
@@ -544,11 +544,11 @@ de streams podemos compactar e descompactar arquivos, enviar dados por FTP, aces
 &lt;p&gt;Cada paradigma de programação (e suas respectivas linguagens suportadas) sugerem diversos princípios para que seu código seja de fácil manutenção, testável, legível, etc.&lt;/p&gt;
 &lt;p&gt;Princípios muito comuns da programação orientada a objetos (paradigma que estudo mais a fundo) são:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;Tell, don’t ask;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://youtu.be/7IXeLhpjk6g&quot;&gt;Tell, don’t ask&lt;/a&gt;;&lt;/li&gt;
 &lt;li&gt;Least astonishment;&lt;/li&gt;
-&lt;li&gt;*Fail fast;&lt;/li&gt;
+&lt;li&gt;*&lt;a href=&quot;https://youtu.be/6mfX6863SAk&quot;&gt;Fail fast&lt;/a&gt;;&lt;/li&gt;
 &lt;li&gt;*Early return;&lt;/li&gt;
-&lt;li&gt;SOLID (conjunto de princípios);&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://amzn.to/2PAWL60&quot;&gt;SOLID&lt;/a&gt; (conjunto de princípios);&lt;/li&gt;
 &lt;li&gt;etc.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;em&gt;* Princípios também aplicáveis a outros paradigmas&lt;/em&gt;&lt;/p&gt;
@@ -559,7 +559,7 @@ de streams podemos compactar e descompactar arquivos, enviar dados por FTP, aces
 &lt;p&gt;Alguns dos padrões mais famosos seguindos os princípios da programação orientada a objetos são:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;Padrões da “turma dos 4” (&lt;em&gt;Gang of Four “GoF”&lt;/em&gt;)&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://amzn.to/3fN9aOS&quot;&gt;Padrões da “turma dos 4” (&lt;em&gt;Gang of Four “GoF”&lt;/em&gt;)&lt;/a&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;24 padrões (super famosos) separados em 3 categorias&lt;/li&gt;
 &lt;/ul&gt;
@@ -571,7 +571,7 @@ de streams podemos compactar e descompactar arquivos, enviar dados por FTP, aces
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Sugeridos pelo “desenvolvimento guiado a domínio” (&lt;em&gt;DDD&lt;/em&gt;)&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://amzn.to/3fN9aOS&quot;&gt;Sugeridos pelo “desenvolvimento guiado a domínio” (&lt;em&gt;DDD&lt;/em&gt;)&lt;/a&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Conhecidos como blocos de construção do &lt;em&gt;DDD&lt;/em&gt; como &lt;em&gt;Entity&lt;/em&gt;, &lt;em&gt;Value Object&lt;/em&gt;, etc.&lt;/li&gt;
 &lt;/ul&gt;
@@ -607,7 +607,7 @@ Antes de aprender Orientação a Objetos, é importante conhecermos o paradigma 
 &lt;p&gt;Mas na maioria das vezes as verificações nesse tipo de classe são específicas de regras de negócio. Ex.: Garantir que nome possua pelo menos 10 letras.&lt;/p&gt;
 &lt;p&gt;Se é uma regra de negócio, deveria estar na classe de negócio. Talvez na classe &lt;code class=&quot;language-text&quot;&gt;Pessoa&lt;/code&gt;. Talvez numa classe mais específica, como &lt;code class=&quot;language-text&quot;&gt;Nome&lt;/code&gt;. Depende do seu sistema.&lt;/p&gt;
 &lt;h2&gt;Services inúteis&lt;/h2&gt;
-&lt;p&gt;O livro do Eric Evans sobre DDD é certamente uma obra que revolucionou o mundo do desenvolvimento. Eu particularmente ainda não o li, mas li obras inspiradas por este livro, então sei que: Neste livro foram definidos alguns conceitos sobre classes chamadas de &lt;code class=&quot;language-text&quot;&gt;Services&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://amzn.to/39MBuNH&quot;&gt;O livro do Eric Evans sobre DDD&lt;/a&gt; é certamente uma obra que revolucionou o mundo do desenvolvimento. Eu particularmente ainda não o li, mas li &lt;a href=&quot;https://amzn.to/2Q1bW8d&quot;&gt;obras inspiradas por este livro&lt;/a&gt;, então sei que: Neste livro foram definidos alguns conceitos sobre classes chamadas de &lt;code class=&quot;language-text&quot;&gt;Services&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;Uma das possíveis “categorias” desse tipo de classe é &lt;code class=&quot;language-text&quot;&gt;Application Service&lt;/code&gt;. Este tipo de classe tem como propósito receber informações de fora do domínio do sistema (da web, linha de comando, etc) e orquestrar as chamadas a regras de domínio.&lt;/p&gt;
 &lt;p&gt;Um exemplo clássico:&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;php&quot;&gt;&lt;pre class=&quot;language-php&quot;&gt;&lt;code class=&quot;language-php&quot;&gt;&lt;span class=&quot;token php language-php&quot;&gt;&lt;span class=&quot;token delimiter important&quot;&gt;&amp;lt;?php&lt;/span&gt;
@@ -781,7 +781,7 @@ Antes de aprender Orientação a Objetos, é importante conhecermos o paradigma 
 &lt;p&gt;Embora seja um exemplo muito simples, ele mostra com clareza como normalmente escrevemos código acreditando estar utilizando a programação orientada a objetos.&lt;/p&gt;
 &lt;p&gt;Caso você tenha algum outro exemplo desse tipo em mente, já tenha visto algum código procedural com classes assim, ou tenha alguma outra sugestão de melhoria pra esse exemplo, que tal compartilhar com a gente aqui nos comentários?&lt;/p&gt;
 &lt;h2&gt;Princípios e padrões&lt;/h2&gt;
-&lt;p&gt;Para nos ajudar a utilizar de forma mais “correta” a orientação a objetos, existem diversos padrões e princípios. Uns mais simples como o &lt;a href=&quot;https://youtu.be/6mfX6863SAk&quot;&gt;Tell, Don’t ask&lt;/a&gt;, outros mais completos e complexos como os princípios SOLID.&lt;/p&gt;
+&lt;p&gt;Para nos ajudar a utilizar de forma mais “correta” a orientação a objetos, existem diversos padrões e princípios. Uns mais simples como o &lt;a href=&quot;https://youtu.be/7IXeLhpjk6g&quot;&gt;Tell, Don’t ask&lt;/a&gt;, outros mais completos e complexos como os &lt;a href=&quot;https://amzn.to/2PAWL60&quot;&gt;princípios SOLID&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Todos os princípios merecem uma atenção especial, porém isso foge do escopo deste artigo, mas uma rápida busca te mostra uma imensidão de conteúdo a respeito.&lt;/p&gt;
 &lt;h2&gt;Conclusão&lt;/h2&gt;
 &lt;p&gt;Muito frequentemente nós utilizamos o paradigma procedural em nosso código e só pelo fato de termos classes definidas no código, achamos que estamos utilizando a Orientação a Objetos.&lt;/p&gt;

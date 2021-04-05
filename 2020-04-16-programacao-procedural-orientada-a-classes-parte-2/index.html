@@ -26,7 +26,7 @@
 <p>Mas na maioria das vezes as verificações nesse tipo de classe são específicas de regras de negócio. Ex.: Garantir que nome possua pelo menos 10 letras.</p>
 <p>Se é uma regra de negócio, deveria estar na classe de negócio. Talvez na classe <code class="language-text">Pessoa</code>. Talvez numa classe mais específica, como <code class="language-text">Nome</code>. Depende do seu sistema.</p>
 <h2>Services inúteis</h2>
-<p>O livro do Eric Evans sobre DDD é certamente uma obra que revolucionou o mundo do desenvolvimento. Eu particularmente ainda não o li, mas li obras inspiradas por este livro, então sei que: Neste livro foram definidos alguns conceitos sobre classes chamadas de <code class="language-text">Services</code>.</p>
+<p><a href="https://amzn.to/39MBuNH">O livro do Eric Evans sobre DDD</a> é certamente uma obra que revolucionou o mundo do desenvolvimento. Eu particularmente ainda não o li, mas li <a href="https://amzn.to/2Q1bW8d">obras inspiradas por este livro</a>, então sei que: Neste livro foram definidos alguns conceitos sobre classes chamadas de <code class="language-text">Services</code>.</p>
 <p>Uma das possíveis “categorias” desse tipo de classe é <code class="language-text">Application Service</code>. Este tipo de classe tem como propósito receber informações de fora do domínio do sistema (da web, linha de comando, etc) e orquestrar as chamadas a regras de domínio.</p>
 <p>Um exemplo clássico:</p>
 <div class="gatsby-highlight" data-language="php"><pre class="language-php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
