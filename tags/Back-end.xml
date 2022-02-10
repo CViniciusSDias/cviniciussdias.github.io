@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <title><![CDATA[Dias de Dev]]></title>
+    <link href="https://dias.dev//tags/Back-end.xml" rel="self"/>
+    <link href="https://dias.dev//"/>
+    <updated>2022-02-10T03:26:17+00:00</updated>
+    <id>https://dias.dev//</id>
+        <generator uri="http://sculpin.io/">Sculpin</generator>
+            <entry>
+            <title type="html"><![CDATA[Como o PHP funciona na Web?]]></title>
+            <link href="https://dias.dev//2021-06-15-como-o-php-funciona-na-web/"/>
+            <updated>2021-06-15T00:00:00+00:00</updated>
+            <id>https://dias.dev//2021-06-15-como-o-php-funciona-na-web/</id>
+            <content type="html"><![CDATA[<p>O PHP é o que conhecemos como linguagem <em>server-side</em>, ou seja, ele roda nos servidores web, e não nos navegadores.</p>
+
+<p>Isso já é de conhecimento geral, mas nem todos entendem como uma requisição sai do navegador e chega em seu código PHP. É exatamente sobre isso que vamos tratar neste artigo.</p>
+
+<h2 id="como-funciona-a-web%3F">Como funciona a Web?</h2>
+
+<p>Antes de falarmos sobre o papel do PHP na Web, é muito importante entendermos como a Web funciona. O protocolo HTTP é o que torna toda a comunicação entre nosso navegador e servidores, possível, então é de suma importância que a gente estude ele.</p>
+
+<p>Neste vídeo eu expliquei um pouco de como funciona o processo desde quando damos <em>Enter</em> em nosso navegador até termos uma resposta em nossa tela. Vale a pena conferir antes de continuar lendo este artigo:</p>
+
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/B2IWlnJ_dt0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<p>Existem várias outras referências (inclusive mais completas) para você conhecer as tecnologias por trás da Web. Vou deixar aqui algumas referências:
+- <a href="https://amzn.to/3lzFVkD">Desconstruindo a Web: As tecnologias por trás de uma requisição</a>
+- <a href="https://amzn.to/35k9rT1">HTTP: The Definitive Guide</a>
+- <a href="https://amzn.to/3gEgz22">Learning Http/2: A Practical Guide for Beginners</a>
+- <a href="https://www.alura.com.br/promocao/diasdedev">Cursos de HTTP na Alura</a></p>
+
+<p>Com esse conhecimento, já podemos partir para o foco deste artigo: como o <strong>PHP</strong> funciona na Web?</p>
+
+<h2 id="cgi-_common-gateway-interface_">CGI (<em>Common Gateway Interface</em>)</h2>
+
+<p>A primeira forma de se executar código em servidores ao receber uma requisição HTTP foi através de uma técnica chamada CGI (<em>Common Gateway Interface</em>).</p>
+
+<p>Esta técnica consistia em basicamente um servidor Web (como Apache, por exemplo) receber uma requisição HTTP e executar um processo enviando os dados da requisição através da entrada padrão. A saída do processo era lida pelo servidor Web e devolvida em uma resposta HTTP.</p>
+
+<p>Assim o PHP nasceu, sendo uma espécie de <em>framework</em> C. O Apache executava um programa escrito em C, onde PHP era um conjunto de ferramentas para facilitar a escrita, principalmente de <em>templates</em> (para não misturar C e HTML).</p>
+
+<p>Esta é a forma mais rudimentar de se executar um código <em>server-side</em> e não é mais recomendada, pois há alternativas mais interessantes que veremos neste artigo.</p>
+
+<h2 id="apache-mod_php">Apache mod_php</h2>
+
+<p>Conforme o PHP (e a Web em si) foi evoluindo, a abordagem utilizando CGI foi se mostrando ineficaz, desperdiçando recursos de processamento.</p>
+
+<p>Neste momento surgiu um módulo do PHP para Apache, o famoso <code>mod_php</code>. Esse módulo "anexava" um executável do PHP em cada processo do Apache, ou seja, a cada processo que o Apache criava para servir uma requisição, o executável do PHP era também inicializado, mesmo que a requisição fosse apenas para servir arquivos estáticos e o PHP não fosse necessário.</p>
+
+<p>Isso era muito mais rápido do que utilizar CGI, mas ainda havia muito desperdício de recursos. O apache evoluiu a ponto de não precisar criar um processo a cada nova requisição e passou a trabalhar com <em>threads</em>, mas além dessa evolução ter demorado para acontecer, esse modelo não funciona bem com o <code>mod_php</code>.</p>
+
+<h2 id="fastcgi-e-php-fpm">FastCGI e PHP-FPM</h2>
+
+<p>Com a nova solução do <code>mod_php</code> também se mostrando ineficaz perante a tantas evoluções do PHP e da Web (ambos sempre cresceram juntos), o protocolo FastCGI passou a ser utilizado. Com isso, um servidor Web recebia as requisições e apenas se fosse necessário algum processamento, executaria o PHP.</p>
+
+<p>Porém, essa execução não era como no CGI. Um conceito de "processos persistentes" foi utilizado, diminuindo muito a quantidade de recursos necessários para processar cada requisição. Um único processo agora passa a ser capaz de tratar diversas requisições e não apenas uma. Com isso todo o <em>overhead</em> de criar e matar processos a cada requisição foi drasticamente reduzido.</p>
+
+<p>Para extrair o máximo do protocolo FastCGI, foi desenvolvida uma ferramenta chamada PHP-FPM (<em>FastCGI Process Manager</em>). Este servidor de aplicação permite que realizemos diversas configurações como o número de processos <em>workers</em>, a quantidade de recursos liberada para cada processo e muito mais. Este é o software utilizado atualmente para termos um servidor FastCGI em produção com PHP.</p>
+
+<p>Atualmente, qualquer servidor web que saiba se comunicar através do protocolo FastCGI pode ser utilizado em conjunto com PHP, mas o <em>Nginx</em> ganhou muita força por prometer (e segundo benchmarks, cumprir) entregar diversas melhorias de performance em relação ao Apache. Os recursos são mais bem gerenciados e o uso de programação assíncrona através de <em>multiplexing</em> de I/O trazem ganhos expressivos quando comparamos com o ainda amplamente utilizado Apache.</p>
+
+<h2 id="arquitetura-_share-nothing_">Arquitetura <em>share-nothing</em></h2>
+
+<p>Em qualquer uma das abordagens citadas até agora, uma das principais filosofias do PHP se mantém: a <em>share-nothing architecture</em>.</p>
+
+<p>A ideia por trás disso é não compartilhar nenhum recurso entre uma requisição e outra. Por mais que o mesmo processo possa ser utilizado para servir múltiplas requisições, em nosso código, cada execução é como um novo processo. Ao finalizar a execução de um código PHP, todas as variáveis são excluídas, todos os recursos são liberados. Praticamente nada é armazenado entre uma requisição e outra.</p>
+
+<p>Isso permitiu e ainda permite que o PHP tenha uma arquitetura muito simples de escalar e isso é um dos fatores que contribuíram para a ampla adoção do PHP como linguagem back-end Web.</p>
+
+<p>A abordagem utilizando Nginx + PHP-FPM é a ideal para grande parte das aplicações que usam PHP, porém existem cenários onde ainda mais performance é necessária.</p>
+
+<h2 id="servidores-auto-contidos">Servidores auto-contidos</h2>
+
+<p>Quando temos milhões de requisições chegando ou comunicação em tempo real acontecendo, o fato de ser necessária a inicialização de todas as variáveis novamente e o início do código de toda nossa aplicação ter que ser realizada a cada requisição pode ser um peso. Imagine que a cada requisição seu <em>framework</em> favorito (que provavelmente é bem pesado) precisa ser inicializado novamente.</p>
+
+<p>Para resolver os problemas deste tipo de aplicação que demanda um nível a mais de performance, servidores auto-contidos podem ser utilizados. Um servidor auto-contido é um serivdor web exposto pela própria aplicação, ou seja, seu próprio código PHP recebe diretamente as requisições.</p>
+
+<p>Com isso a inicialização da sua aplicação pode ser feita uma única vez e a cada nova requisição, podemos somente executar o código necessário, sem necessidade de levantar de novo o <em>framework</em>, buscar as configurações, ler variáveis de ambiente, processar as dependências, definir as rotas, etc.</p>
+
+<p>Essa abordagem já é possível há muito tempo. Um dos precursores desta técnica é o <a href="https://github.com/php-pm/php-pm">PHP-PM</a> que usa o <a href="https://reactphp.org/">ReactPHP</a> por baixo dos panos. O ReactPHP facilita a execução de código assíncrono e não bloqueante no PHP através de um <em>Event Loop</em>. Nós falamos um pouco sobre programação assíncrona <a href="/2020-09-16-php-assincrono-de-forma-nativa/">neste post</a>. O ReactPHP torna esta tarefa MUITO mais fácil, por isso ferramentas como PHP-PM puderam surgir.</p>
+
+<p>Outros <em>frameworks</em> como <a href="https://amphp.org/">Amp PHP</a> têm a mesma proposta, porém uma ferramenta um pouco diferente tem chamado muita atenção nos últimos anos e levado essa proposta para outro nível</p>
+
+<h2 id="swoole">Swoole</h2>
+
+<p>É impossível falar de servidores auto-contidos PHP e não citar o <a href="https://www.swoole.co.uk/">Swoole</a>.</p>
+
+<p>A principal diferença entre o Swoole e as demais ferramentas citadas de servidores auto-contidos é que o Swoole não é um componente em PHP e sim uma extensão, ou seja, o Swoole foi escrito em C e compilado para ser "integrado" ao PHP. Isso além de conceder ainda mais performance para o código, ainda dá poderes a mais para o Swoole como lidar de forma assíncrona com código que originalmente seria síncrono (como com PDO e curl, por exemplo).</p>
+
+<p>Já existe material por aí sobre Swoole, inclusive <a href="https://youtu.be/GCECSLtT49U">esse vídeo</a> no meu canal e o <a href="https://amzn.to/3gxamov">livro</a> escrito por um dos criadores da ferramenta, por isso não vou transformar esse artigo em um tutorial, mas vale a pena pesquisar mais a fundo.</p>
+
+<h2 id="conclus%C3%A3o">Conclusão</h2>
+
+<p>Vimos neste artigo que há várias formas para fazer com que uma requisição chegue no PHP. Algumas bem antigas, outras bem modernas.</p>
+
+<p>Atualmente as 2 opções aceitáveis são utilizando PHP-FPM ou algum servidor auto-contido. Nenhuma das 2 abordagens tira o papel de servidores Web como o amado Apache ou o moderno Nginx.</p>
+
+<p>No caso do PHP-FPM precisamos de um servidor para receber as requisições HTTP e enviar as chamadas para o PHP com FastCGI. No caso de um servidor auto-contido, podemos ter um proxy reverso servindo os arquivos estáticos e realizando cache, por exemplo, enquanto o servidor auto-contido responde apenas as requisições realmente necessárias.</p>
+
+<p>Se você quiser aprender mais sobre algum desses assuntos, pode considerar assinar a Alura. Lá existem treinamentos (gravados por mim) sobre Nginx, ReactPHP, Swoole e muito mais. Caso pretenda estudar na Alura, <a href="https://www.alura.com.br/promocao/diasdedev">neste link</a> você tem um desconto de 10%.</p>
+]]></content>
+        </entry>
+    </feed>

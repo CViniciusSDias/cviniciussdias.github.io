@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <title><![CDATA[Dias de Dev]]></title>
+    <link href="https://dias.dev//tags/Paralela.xml" rel="self"/>
+    <link href="https://dias.dev//"/>
+    <updated>2022-02-10T03:26:17+00:00</updated>
+    <id>https://dias.dev//</id>
+        <generator uri="http://sculpin.io/">Sculpin</generator>
+            <entry>
+            <title type="html"><![CDATA[Requisições HTTP paralelas com PHP]]></title>
+            <link href="https://dias.dev//2021-03-13-requisicoes-http-paralelas-com-php/"/>
+            <updated>2021-03-13T00:00:00+00:00</updated>
+            <id>https://dias.dev//2021-03-13-requisicoes-http-paralelas-com-php/</id>
+            <content type="html"><![CDATA[<h2 id="i%2Fo-n%C3%A3o-bloqueante-programa%C3%A7%C3%A3o-ass%C3%ADncrona">I/O não bloqueante (programação assíncrona)</h2>
+
+<p>Em um <a href="/2020-09-16-php-assincrono-de-forma-nativa/">post anterior</a> falei bastante sobre como o PHP trabalha por baixo dos panos de forma nativa com I/O não
+bloqueante, e consequentemente com programação assíncrona. Usando os conhecimentos daquele post com conhecimentos de
+<em>sockets</em> e HTTP seria possível realizarmos chamadas HTTP assíncronas e processá-las conforme elas fossem recebidas.
+Porém é bastante comum podermos nos dar ao luxo de processar todas as respostas HTTP depois de prontas, desde que todas
+as requisições tenham sido feitas de forma concorrente.</p>
+
+<h2 id="curl">cURL</h2>
+
+<p>Como realizar requisições HTTP usando <em>sockets</em> pode se tornar uma tarefa muito complicada, principalmente em cenários
+onde precisamos enviar dados (requisições POST, por exemplo), cURL é uma alternativa muito interessante. Essa biblioteca
+é pensada especialmente em realizar requisições pela rede e possui diversos facilitadores.</p>
+
+<h2 id="o-problema">O problema</h2>
+
+<p>Entendido o contexto das tecnologias que temos disponíveis, vamos falar do problema que temos em mãos. Existe uma API
+que fornece informações sobre o universo <em>Star Wars</em>. Essa API é gratuita e vai servir perfeitamente para nosso exemplo.</p>
+
+<p>O que queremos fazer é buscar a lista de filmes (através da url https://swapi.dev/api/films/) e para cada filme buscar
+os seus detalhes em outra URL (https://swapi.dev/api/films/:id/).</p>
+
+<h3 id="solu%C3%A7%C3%A3o-bloqueante">Solução bloqueante</h3>
+
+<p>Usando o <code>cURL</code> de forma “padrão”, ou seja, bloqueante, podemos atingir este objetivo com o seguinte código:</p>
+
+<pre><code class="php">&lt;?php
+
+$handle = curl_init('https://swapi.dev/api/films/');
+// informa que não queremos exibir a resposta diretamente, mas sim pegar seu retorno
+curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
+$response = curl_exec($handle);
+curl_close($handle);
+
+$data = json_decode($response, true);
+$movies = $data['results'];
+
+foreach ($movies as $movie) {
+    // Alterando o protocolo para https
+    $url = str_replace('http:', 'https:', $movie['url']);
+    $handle = curl_init($url);
+    curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
+    $response = curl_exec($handle);
+
+    $movieData = json_decode($response, true);
+    var_dump($movieData);
+}
+</code></pre>
+
+<p>O problema desta abordagem é que cada requisição para os detalhes do filme vai travar a execução do PHP, fazendo
+com que a próxima requisição só seja iniciada quando a anterior for finalizada.</p>
+
+<h3 id="solu%C3%A7%C3%A3o-n%C3%A3o-bloqueante">Solução não bloqueante</h3>
+
+<p>Para informarmos um determinado número de requisições e realizarmos todas de uma vez, podemos usar o <code>curl_multi_init</code>.</p>
+
+<pre><code class="php">&lt;?php
+
+// Primeira requisição como no código anterior
+$movies = $data['results'];
+
+// Inicializa o handle de múltiplas conexões
+$multiHandle = curl_multi_init();
+
+// Armazena cada handle individual em um array
+// além de adicioná-los ao $multiHandle
+$handles = [];
+foreach ($movies as $i =&gt; $movie) {
+    $url = str_replace('http:', 'https:', $movie['url']);
+    $handles[$i] = curl_init($url);
+    curl_setopt($handles[$i], CURLOPT_RETURNTRANSFER, true);
+    curl_multi_add_handle($multiHandle, $handles[$i]);
+}
+</code></pre>
+
+<p>Assim nós temos diversos <em>handles</em> do <code>cURL</code> adicionados a um gerenciador de múltiplas requisições. Quando executarmos o
+<code>$multiHandle</code>, todas as requisições serão feitas em paralelo. Maravilha, não é mesmo?</p>
+
+<p>Infelizmente não é tão simples assim. Não basta fazer um <code>curl_multi_exec</code> e receber um array de respostas. A função
+<code>curl_multi_exec</code> inicia as requisições, porém não bloqueia o código, ou seja, nós precisamos ficar em um <em>loop</em> verificando
+se todas as requisições já foram feitas. Algo como:</p>
+
+<pre><code class="php">do {
+    $result = curl_multi_exec($multiHandle, $numberOfMissingHandles);
+} while ($numberOfMissingHandles &gt; 0);
+
+// Processar respostas
+</code></pre>
+
+<p>A variável <code>$numberOfMissingHandles</code> é passada por referência e é preenchida com o número dos <em>handles</em> que faltam ser
+resolvidos. Em outras palavras, enquanto esse valor não chegar a 0, temos requisições sendo processadas.</p>
+
+<p>Depois de sair desse <em>loop</em>, podemos recuperar as respostas de todas as requisições, então voltamos para a tarefa fácil:</p>
+
+<pre><code class="php">// Por isso armazenamos o array de $handles
+foreach ($handles as $handle) {
+    // Usamos curl_multi_getcontent para recuperar a resposta
+    // de cada um dos handles que foi executado pelo curl_multi_exec
+    $response = curl_multi_getcontent($handle);
+    curl_multi_remove_handle($multiHandle, $handle);
+    curl_close($handle);
+
+    $movieData = json_decode($response, true);
+    var_dump($movieData);
+}
+</code></pre>
+
+<p>Com isso nós atingimos o objetivo de realizar todas as requisições de uma vez e só depois ler as respostas.</p>
+
+<h3 id="mal-uso-de-recursos">Mal uso de recursos</h3>
+
+<p>O problema da nossa abordagem é que a função <code>curl_multi_exec</code> retorna imediatamente, sem esperar por nenhuma atividade
+nos <em>handles</em>, ou seja, se as requisições forem demoradas ou houverem muitas requisições (ou ambos), esse <em>loop</em> vai ser
+executado de forma muito rápida, por muito tempo. Isso vai fazer com que o uso de CPU vá ao topo, atrasando inclusive o
+processo de realizar requisições, afinal de contas o sistema operacional precisa destinar certos recursos para essa tarefa.</p>
+
+<p>Para mitigar esse problema, podemos usar uma função chamada <code>curl_multi_select</code>. Ela é semelhante à <code>stream_select</code> que
+vimos no post sobre <a href="/2020-09-16-php-assincrono-de-forma-nativa/">PHP assíncrono</a>. Essa função espera que alguma
+atividade aconteça nos handles que estamos utilizando. A diferença é que ela não recebe um array, mas sim o nosso
+<code>$multiHandle</code>. Então tudo que temos de informação é quantos <em>handles</em> possuem atividade no momento, mas não quais deles.
+Mas tudo bem, já que o nosso propósito é ler todos apenas no final.</p>
+
+<p>A função <code>curl_multi_select</code> deve ser chamada após o <code>curl_multi_exec</code>, já que é essa que inicia as requisições efetivamente.
+Então o nosso primeiro <em>loop</em> ficaria assim:</p>
+
+<pre><code class="php">do {
+    $result = curl_multi_exec($multiHandle, $numberOfMissingHandles);
+    $descriptorsCount = curl_multi_select($multiHandle);
+} while ($numberOfMissingHandles &gt; 0);
+</code></pre>
+
+<p>Onde <code>$descriptorsCount</code> é o número de handles que possuem alguma atividade nesse exato momento. Caso esse número seja
+<code>-1</code>, significa que aconteceu algum erro.</p>
+
+<p>Dessa forma esse <em>loop</em> será executado menos vezes e em um intervalo maior, ou seja, menos CPU será consumida.</p>
+
+<h3 id="tratamento-de-erros">Tratamento de erros</h3>
+
+<p>Falando em erros, nosso código está supondo que tudo vai correr bem. Nesse primeiro <em>loop</em> nós precisamos realizar algumas
+verificações. Então no final, teremos algo como:</p>
+
+<pre><code class="php">do {
+    $result = curl_multi_exec($multiHandle, $numberOfMissingHandles);
+    if ($result !== CURLM_OK) { // CURLM_OK é uma constante que indica sucesso nesse caso
+        throw new RuntimeException('Error executing all the requests', $result);
+    }
+
+    $descriptorsCount = curl_multi_select($multiHandle);
+    if ($descriptorsCount === -1) {
+        throw new RuntimeException('Error checking for activity');
+    }
+} while ($numberOfMissingHandles);
+</code></pre>
+
+<h3 id="c%C3%B3digo-final">Código final</h3>
+
+<p>Com isso finalizamos todo o processamento necessário para realizar requisições paralelas com PHP. O código completo vai
+se parecer com isso:</p>
+
+<pre><code class="php">&lt;?php
+
+$handle = curl_init('https://swapi.dev/api/films/');
+curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
+$response = curl_exec($handle);
+curl_close($handle);
+
+$data = json_decode($response, true);
+$movies = $data['results'];
+
+$multiHandle = curl_multi_init();
+
+$handles = [];
+foreach ($movies as $i =&gt; $movie) {
+    $url = str_replace('http:', 'https:', $movie['url']);
+    $handles[$i] = curl_init($url);
+    curl_setopt($handles[$i], CURLOPT_RETURNTRANSFER, true);
+    curl_multi_add_handle($multiHandle, $handles[$i]);
+}
+
+do {
+    $result = curl_multi_exec($multiHandle, $numberOfMissingHandles);
+    if ($result !== CURLM_OK) {
+        throw new RuntimeException('Error executing all the requests', $result);
+    }
+
+    $descriptorsCount = curl_multi_select($multiHandle);
+    if ($descriptorsCount === -1) {
+        throw new RuntimeException('Error checking for activity');
+    }
+} while ($numberOfMissingHandles &gt; 0);
+
+foreach ($handles as $handle) {
+    $response = curl_multi_getcontent($handle);
+    curl_multi_remove_handle($multiHandle, $handle);
+    curl_close($handle);
+
+    $movieData = json_decode($response, true);
+    var_dump($movieData);
+}
+</code></pre>
+
+<p>Esse código provavelmente pode ser refatorado para torná-lo um pouco mais legível, mas acredito que a lógica por trás dele
+tenha ficado clara. Caso contrário, você pode usar a sessão de comentários dessa página para fazer perguntas.</p>
+
+<h2 id="benchmarks">Benchmarks</h2>
+
+<p>Agora que temos 2 versões de código que resolvem o mesmo problema de formas diferentes, podemos testar a sua performance.
+Para quem usa sistemas <em>Unix</em> (<em>Linux</em> ou <em>Mac</em>) existe um comando chamado <code>time</code> que é muito útil para verificações simples
+como essas.</p>
+
+<p>A primeira versão do nosso código (bloqueante) gera essa informação quando executo o seguinte comando (sendo <code>star-wars.php</code>o nome do nosso arquivo):</p>
+
+<pre><code class="bash">$ time php star-wars.php
+
+php star-wars.php  0.14s user 0.04s system 2% cpu 7.186 total
+</code></pre>
+
+<p>Basicamente, um pouco mais de 7 segundos foram necessários para executar todas as requisições.</p>
+
+<p>Já com a versão final do código, temos a seguinte saída:</p>
+
+<pre><code class="bash">$ time php star-wars.php
+
+php star-wars.php  0.14s user 0.04s system 6% cpu 2.387 total
+</code></pre>
+
+<p>Ou seja, pouco mais de 2 segundos (quase 5 segundos a menos). É uma baita diferença para um exemplo tão simples, não acha?</p>
+
+<p>Agora um último teste, comentando a parte referente ao <code>curl_multi_select</code>:</p>
+
+<pre><code class="bash">$ time php star-wars.php
+
+php star-wars.php  0.50s user 0.70s system 49% cpu 2.421 total
+</code></pre>
+
+<p>Repare que o uso de CPU subiu muito. De algo próximo de 6% para quase 50%. Esse é o propósito da chamada da função
+<code>curl_multi_select</code>.</p>
+
+<h2 id="conclus%C3%A3o">Conclusão</h2>
+
+<p>Assim como já foi citado no post sobre <a href="/2020-09-16-php-assincrono-de-forma-nativa/">PHP assíncrono</a>, existem
+várias ferramentas que facilitam (e muito) o trabalho de realizar requisições HTTP paralelas com PHP. Guzzle é uma ótima
+opção para isso.</p>
+
+<p>Mas seguindo o que citei no <a href="/2020-04-23-principios-ou-ferramentas-o-que-estudar/">post sobre aprendizado</a>, eu penso como
+Richard Feynman (Nobel de física): “O que eu não consigo criar, eu não entendo”. Então antes de utilizar uma ferramenta
+que realiza o trabalho para mim, eu gosto de saber como realizar este trabalho sem ela. Com isso, se algum problema
+acontecer com a biblioteca, por exemplo, eu vou estar mais preparado para resolvê-lo já que entendo um pouco melhor como as coisas funcionam.</p>
+]]></content>
+        </entry>
+    </feed>

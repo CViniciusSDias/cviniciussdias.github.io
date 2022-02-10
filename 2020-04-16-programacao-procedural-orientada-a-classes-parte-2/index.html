@@ -1,90 +1,250 @@
-<!DOCTYPE html><html lang="pt-BR"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="ie=edge"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><style data-href="/styles.46d211ff30ee18662939.css" data-identity="gatsby-global-css">@font-face{font-display:swap;font-family:Montserrat;font-style:normal;font-weight:100;src:local("Montserrat Thin "),local("Montserrat-Thin"),url(/static/montserrat-latin-100-8d7d79679b70dbe27172b6460e7a7910.woff2) format("woff2"),url(/static/montserrat-latin-100-ec38980a9e0119a379e2a9b3dbb1901a.woff) format("woff")}@font-face{font-display:swap;font-family:Montserrat;font-style:italic;font-weight:100;src:local("Montserrat Thin italic"),local("Montserrat-Thinitalic"),url(/static/montserrat-latin-100italic-e279051046ba1286706adc886cf1c96b.woff2) format("woff2"),url(/static/montserrat-latin-100italic-3b325a3173c8207435cd1b76e19bf501.woff) format("woff")}@font-face{font-display:swap;font-family:Montserrat;font-style:normal;font-weight:200;src:local("Montserrat Extra Light "),local("Montserrat-Extra Light"),url(/static/montserrat-latin-200-9d266fbbfa6cab7009bd56003b1eeb67.woff2) format("woff2"),url(/static/montserrat-latin-200-2d8ba08717110d27122e54c34b8a5798.woff) format("woff")}@font-face{font-display:swap;font-family:Montserrat;font-style:italic;font-weight:200;src:local("Montserrat Extra Light italic"),local("Montserrat-Extra Lightitalic"),url(/static/montserrat-latin-200italic-6e5b3756583bb2263eb062eae992735e.woff2) format("woff2"),url(/static/montserrat-latin-200italic-a0d6f343e4b536c582926255367a57da.woff) format("woff")}@font-face{font-display:swap;font-family:Montserrat;font-style:normal;font-weight:300;src:local("Montserrat Light "),local("Montserrat-Light"),url(/static/montserrat-latin-300-00b3e893aab5a8fd632d6342eb72551a.woff2) format("woff2"),url(/static/montserrat-latin-300-ea303695ceab35f17e7d062f30e0173b.woff) format("woff")}@font-face{font-display:swap;font-family:Montserrat;font-style:italic;font-weight:300;src:local("Montserrat Light italic"),local("Montserrat-Lightitalic"),url(/static/montserrat-latin-300italic-56f34ea368f6aedf89583d444bbcb227.woff2) format("woff2"),url(/static/montserrat-latin-300italic-54b0bf2c8c4c12ffafd803be2466a790.woff) format("woff")}@font-face{font-display:swap;font-family:Montserrat;font-style:normal;font-weight:400;src:local("Montserrat Regular "),local("Montserrat-Regular"),url(/static/montserrat-latin-400-b71748ae4f80ec8c014def4c5fa8688b.woff2) format("woff2"),url(/static/montserrat-latin-400-0659a9f4e90db5cf51b50d005bff1e41.woff) format("woff")}@font-face{font-display:swap;font-family:Montserrat;font-style:italic;font-weight:400;src:local("Montserrat Regular italic"),local("Montserrat-Regularitalic"),url(/static/montserrat-latin-400italic-6eed6b4cbb809c6efc7aa7ddad6dbe3e.woff2) format("woff2"),url(/static/montserrat-latin-400italic-7583622cfde30ae49086d18447ab28e7.woff) format("woff")}@font-face{font-display:swap;font-family:Montserrat;font-style:normal;font-weight:500;src:local("Montserrat Medium "),local("Montserrat-Medium"),url(/static/montserrat-latin-500-091b209546e16313fd4f4fc36090c757.woff2) format("woff2"),url(/static/montserrat-latin-500-edd311588712a96bbf435fad264fff62.woff) format("woff")}@font-face{font-display:swap;font-family:Montserrat;font-style:italic;font-weight:500;src:local("Montserrat Medium italic"),local("Montserrat-Mediumitalic"),url(/static/montserrat-latin-500italic-c90ced68b46050061d1a41842d6dfb43.woff2) format("woff2"),url(/static/montserrat-latin-500italic-5146cbfe02b1deea5dffea27a5f2f998.woff) format("woff")}@font-face{font-display:swap;font-family:Montserrat;font-style:normal;font-weight:600;src:local("Montserrat SemiBold "),local("Montserrat-SemiBold"),url(/static/montserrat-latin-600-0480d2f8a71f38db8633b84d8722e0c2.woff2) format("woff2"),url(/static/montserrat-latin-600-b77863a375260a05dd13f86a1cee598f.woff) format("woff")}@font-face{font-display:swap;font-family:Montserrat;font-style:italic;font-weight:600;src:local("Montserrat SemiBold italic"),local("Montserrat-SemiBolditalic"),url(/static/montserrat-latin-600italic-cf46ffb11f3a60d7df0567f8851a1d00.woff2) format("woff2"),url(/static/montserrat-latin-600italic-c4fcfeeb057724724097167e57bd7801.woff) format("woff")}@font-face{font-display:swap;font-family:Montserrat;font-style:normal;font-weight:700;src:local("Montserrat Bold "),local("Montserrat-Bold"),url(/static/montserrat-latin-700-7dbcc8a5ea2289d83f657c25b4be6193.woff2) format("woff2"),url(/static/montserrat-latin-700-99271a835e1cae8c76ef8bba99a8cc4e.woff) format("woff")}@font-face{font-display:swap;font-family:Montserrat;font-style:italic;font-weight:700;src:local("Montserrat Bold italic"),local("Montserrat-Bolditalic"),url(/static/montserrat-latin-700italic-c41ad6bdb4bd504a843d546d0a47958d.woff2) format("woff2"),url(/static/montserrat-latin-700italic-6779372f04095051c62ed36bc1dcc142.woff) format("woff")}@font-face{font-display:swap;font-family:Montserrat;font-style:normal;font-weight:800;src:local("Montserrat ExtraBold "),local("Montserrat-ExtraBold"),url(/static/montserrat-latin-800-db9a3e0ba7eaea32e5f55328ace6cf23.woff2) format("woff2"),url(/static/montserrat-latin-800-4e3c615967a2360f5db87d2f0fd2456f.woff) format("woff")}@font-face{font-display:swap;font-family:Montserrat;font-style:italic;font-weight:800;src:local("Montserrat ExtraBold italic"),local("Montserrat-ExtraBolditalic"),url(/static/montserrat-latin-800italic-bf45bfa14805969eda318973947bc42b.woff2) format("woff2"),url(/static/montserrat-latin-800italic-fe82abb0bcede51bf724254878e0c374.woff) format("woff")}@font-face{font-display:swap;font-family:Montserrat;font-style:normal;font-weight:900;src:local("Montserrat Black "),local("Montserrat-Black"),url(/static/montserrat-latin-900-e66c7edc609e24bacbb705175669d814.woff2) format("woff2"),url(/static/montserrat-latin-900-8211f418baeb8ec880b80ba3c682f957.woff) format("woff")}@font-face{font-display:swap;font-family:Montserrat;font-style:italic;font-weight:900;src:local("Montserrat Black italic"),local("Montserrat-Blackitalic"),url(/static/montserrat-latin-900italic-4454c775e48152c1a72510ceed3603e2.woff2) format("woff2"),url(/static/montserrat-latin-900italic-efcaa0f6a82ee0640b83a0916e6e8d68.woff) format("woff")}@font-face{font-display:swap;font-family:Merriweather;font-style:normal;font-weight:300;src:local("Merriweather Light "),local("Merriweather-Light"),url(/static/merriweather-latin-300-fc117160c69a8ea0851b26dd14748ee4.woff2) format("woff2"),url(/static/merriweather-latin-300-58b18067ebbd21fda77b67e73c241d3b.woff) format("woff")}@font-face{font-display:swap;font-family:Merriweather;font-style:italic;font-weight:300;src:local("Merriweather Light italic"),local("Merriweather-Lightitalic"),url(/static/merriweather-latin-300italic-fe29961474f8dbf77c0aa7b9a629e4bc.woff2) format("woff2"),url(/static/merriweather-latin-300italic-23c3f1f88683618a4fb8d265d33d383a.woff) format("woff")}@font-face{font-display:swap;font-family:Merriweather;font-style:normal;font-weight:400;src:local("Merriweather Regular "),local("Merriweather-Regular"),url(/static/merriweather-latin-400-d9479e8023bef9cbd9bf8d6eabd6bf36.woff2) format("woff2"),url(/static/merriweather-latin-400-040426f99ff6e00b86506452e0d1f10b.woff) format("woff")}@font-face{font-display:swap;font-family:Merriweather;font-style:italic;font-weight:400;src:local("Merriweather Regular italic"),local("Merriweather-Regularitalic"),url(/static/merriweather-latin-400italic-2de7bfeaf08fb03d4315d49947f062f7.woff2) format("woff2"),url(/static/merriweather-latin-400italic-79db67aca65f5285964ab332bd65f451.woff) format("woff")}@font-face{font-display:swap;font-family:Merriweather;font-style:normal;font-weight:700;src:local("Merriweather Bold "),local("Merriweather-Bold"),url(/static/merriweather-latin-700-4b08e01d805fa35d7bf777f1b24314ae.woff2) format("woff2"),url(/static/merriweather-latin-700-22fb8afba4ab1f093b6ef9e28a9b6e92.woff) format("woff")}@font-face{font-display:swap;font-family:Merriweather;font-style:italic;font-weight:700;src:local("Merriweather Bold italic"),local("Merriweather-Bolditalic"),url(/static/merriweather-latin-700italic-cd92541b177652fffb6e3b952f1c33f1.woff2) format("woff2"),url(/static/merriweather-latin-700italic-f87f3d87cea0dd0979bfc8ac9ea90243.woff) format("woff")}@font-face{font-display:swap;font-family:Merriweather;font-style:normal;font-weight:900;src:local("Merriweather Black "),local("Merriweather-Black"),url(/static/merriweather-latin-900-f813fc6a4bee46eda5224ac7ebf1b7be.woff2) format("woff2"),url(/static/merriweather-latin-900-5d4e42cb44410674acd99153d57df032.woff) format("woff")}@font-face{font-display:swap;font-family:Merriweather;font-style:italic;font-weight:900;src:local("Merriweather Black italic"),local("Merriweather-Blackitalic"),url(/static/merriweather-latin-900italic-b7901d85486871c1779c0e93ddd85656.woff2) format("woff2"),url(/static/merriweather-latin-900italic-9647f9fdab98756989a8a5550eb205c3.woff) format("woff")}
+<!DOCTYPE html>
+<html>
+    <head lang="pt-BR">
+        <title>Programação procedural orientada a classes - Parte 2 | Dias de Dev</title>
+        <meta charset="utf-8">
+        <meta name="theme-color" content="#ffffff">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <meta name="robots" content="index, follow">
+    <meta name="keywords" content="Programação procedural, Orientação a objetos, Dias de Dev">
+    <meta name="description" content="Neste post nós vamos continuar a provocação sobre: será que você está usando programação orientada a objetos da forma correta? Será que não está apenas usando classes na programação procedural?">
+        <link rel="stylesheet" href="https://dias.dev//build/app.css">
 
+        <!--<link rel="apple-touch-startup-image" href="https://dias.dev//build/2048x2048.png">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="shortcut icon" sizes="76x76" href="https://dias.dev//build/jackson/76x76.png">
+        <link rel="shortcut icon" sizes="120x120" href="https://dias.dev//build/jackson/120x120.png">
+        <link rel="shortcut icon" sizes="128x128" href="https://dias.dev//build/jackson/128x128.png">
+        <link rel="shortcut icon" sizes="152x152" href="https://dias.dev//build/jackson/152x152.png">
+        <link rel="shortcut icon" sizes="196x196" href="https://dias.dev//build/jackson/196x196.png">
+        <link rel="shortcut icon" sizes="512x512" href="https://dias.dev//build/jackson/512x512.png">
+        <link rel="shortcut icon" sizes="1024x1024" href="https://dias.dev//build/jackson/1024x1024.png">
+        <link rel="shortcut icon" sizes="2048x2048" href="https://dias.dev//build/jackson/2048x2048.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="https://dias.dev//build/jackson/76x76.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="https://dias.dev//build/jackson/120x120.png">
+        <link rel="apple-touch-icon" sizes="128x128" href="https://dias.dev//build/jackson/128x128.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="https://dias.dev//build/jackson/152x152.png">
+        <link rel="apple-touch-icon" sizes="196x196" href="https://dias.dev//build/jackson/196x196.png">
+        <link rel="apple-touch-icon" sizes="512x512" href="https://dias.dev//build/jackson/512x512.png">
+        <link rel="apple-touch-icon" sizes="1024x1024" href="https://dias.dev//build/jackson/1024x1024.png">
+        <link rel="apple-touch-icon" sizes="2048x2048" href="https://dias.dev//build/jackson/2048x2048.png">-->
 
-/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */html{-webkit-text-size-adjust:100%;line-height:1.15}body{margin:0}main{display:block}h1{font-size:2em;margin:.67em 0}hr{box-sizing:content-box;height:0;overflow:visible}pre{font-family:monospace,monospace;font-size:1em}a{background-color:transparent}abbr[title]{border-bottom:none;text-decoration:underline;-webkit-text-decoration:underline dotted;text-decoration:underline dotted}b,strong{font-weight:bolder}code,kbd,samp{font-family:monospace,monospace;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}img{border-style:none}button,input,optgroup,select,textarea{font-family:inherit;font-size:100%;line-height:1.15;margin:0}button,input{overflow:visible}button,select{text-transform:none}[type=button],[type=reset],[type=submit],button{-webkit-appearance:button}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner{border-style:none;padding:0}[type=button]:-moz-focusring,[type=reset]:-moz-focusring,[type=submit]:-moz-focusring,button:-moz-focusring{outline:1px dotted ButtonText}fieldset{padding:.35em .75em .625em}legend{box-sizing:border-box;color:inherit;display:table;max-width:100%;padding:0;white-space:normal}progress{vertical-align:baseline}textarea{overflow:auto}[type=checkbox],[type=radio]{box-sizing:border-box;padding:0}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}details{display:block}summary{display:list-item}[hidden]{display:none}:root{--maxWidth-none:"none";--maxWidth-xs:20rem;--maxWidth-sm:24rem;--maxWidth-md:28rem;--maxWidth-lg:32rem;--maxWidth-xl:36rem;--maxWidth-2xl:42rem;--maxWidth-3xl:48rem;--maxWidth-4xl:56rem;--maxWidth-full:"100%";--maxWidth-wrapper:var(--maxWidth-2xl);--spacing-px:"1px";--spacing-0:0;--spacing-1:0.25rem;--spacing-2:0.5rem;--spacing-3:0.75rem;--spacing-4:1rem;--spacing-5:1.25rem;--spacing-6:1.5rem;--spacing-8:2rem;--spacing-10:2.5rem;--spacing-12:3rem;--spacing-16:4rem;--spacing-20:5rem;--spacing-24:6rem;--spacing-32:8rem;--fontFamily-sans:Montserrat,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";--fontFamily-mainHeading:"Fugaz One",Roboto,sans-serif;--font-body:"Baloo 2",Georgia,Cambria,serif;--font-heading:var(--font-body);--fontWeight-normal:400;--fontWeight-medium:500;--fontWeight-semibold:600;--fontWeight-bold:700;--fontWeight-extrabold:800;--fontWeight-black:900;--fontSize-root:16px;--lineHeight-none:1;--lineHeight-tight:1.1;--lineHeight-normal:1.5;--lineHeight-relaxed:1.625;--fontSize-0:0.833rem;--fontSize-1:1rem;--fontSize-2:1.2rem;--fontSize-3:1.44rem;--fontSize-4:1.728rem;--fontSize-5:2.074rem;--fontSize-6:2.488rem;--fontSize-7:2.986rem;--color-primary:#005b99;--color-text:#2e353f;--color-text-light:#4f5969;--color-heading:#52c196;--color-heading-black:#550766;--color-accent:#f00696}*,:after,:before{box-sizing:border-box}html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-size:var(--fontSize-root);line-height:var(--lineHeight-normal)}body{color:var(--color-text);font-family:var(--font-body);font-size:var(--fontSize-1)}footer{padding:var(--spacing-6) var(--spacing-0)}hr{background:var(--color-accent);border:0;height:1px}h1,h2,h3,h4,h5,h6{font-family:var(--font-heading);letter-spacing:-.025em;line-height:var(--lineHeight-tight);margin-bottom:var(--spacing-6);margin-top:var(--spacing-12)}h2,h3,h4,h5,h6{color:var(--color-heading);font-weight:var(--fontWeight-bold)}h1{color:var(--color-accent);font-size:var(--fontSize-6);font-weight:var(--fontWeight-black)}h2{font-size:var(--fontSize-5)}h3{font-size:var(--fontSize-4)}h4{font-size:var(--fontSize-3)}h5{font-size:var(--fontSize-2)}h6{font-size:var(--fontSize-1)}h1>a,h2>a,h3>a,h4>a,h5>a,h6>a{color:inherit;text-decoration:none}p{--baseline-multiplier:0.179;--x-height-multiplier:0.35;line-height:var(--lineHeight-relaxed);margin:var(--spacing-0) var(--spacing-0) var(--spacing-8) var(--spacing-0)}ol,p,ul{padding:var(--spacing-0)}ol,ul{list-style-image:none;list-style-position:outside;margin-bottom:var(--spacing-8);margin-left:var(--spacing-0);margin-right:var(--spacing-0)}ol li,ul li{padding-left:var(--spacing-0)}li>p,ol li,ul li{margin-bottom:calc(var(--spacing-8)/2)}li :last-child{margin-bottom:var(--spacing-0)}li>ul{margin-left:var(--spacing-8);margin-top:calc(var(--spacing-8)/2)}blockquote{border-left:var(--spacing-1) solid var(--color-primary);color:var(--color-text-light);font-size:var(--fontSize-2);font-style:italic;margin-bottom:var(--spacing-8);margin-left:calc(var(--spacing-6)*-1);margin-right:var(--spacing-8);padding:var(--spacing-0) var(--spacing-0) var(--spacing-0) var(--spacing-6)}blockquote>:last-child{margin-bottom:var(--spacing-0)}blockquote>ol,blockquote>ul{list-style-position:inside}table{border-collapse:collapse;border-spacing:.25rem;margin-bottom:var(--spacing-8);width:100%}table thead tr th{border-bottom:1px solid var(--color-accent)}a{color:var(--color-primary)}a:focus,a:hover{text-decoration:none}.global-wrapper{margin:var(--spacing-0) auto;max-width:var(--maxWidth-wrapper);padding:var(--spacing-10) var(--spacing-5)}.global-wrapper[data-is-root-path=true] .bio{margin-bottom:var(--spacing-20)}.global-header{border-bottom:var(--spacing-2) solid var(--color-accent);border-left-style:solid;border-left-width:0;border-right-style:solid;border-right-width:0;border-top:var(--spacing-2) solid var(--color-heading);margin-bottom:var(--spacing-5);padding:var(--spacing-3) 0;text-align:center}.main-heading{color:var(--color-heading-black);font-family:var(--fontFamily-mainHeading);font-size:var(--fontSize-7);font-weight:var(--fontWeight-black);margin:0;text-transform:uppercase}nav.menu{background:var(--color-heading-black);display:flex;justify-content:space-evenly;padding:var(--spacing-1) 0}nav.menu a{align-items:flex-start;color:#fff;display:flex;font-family:var(--fontFamily-mainHeading);text-decoration:none}nav.menu a:hover{text-decoration:underline}.post-list-item{margin-bottom:var(--spacing-8);margin-top:var(--spacing-8)}.post-list-item p{margin-bottom:var(--spacing-0)}.post-list-item h2{font-size:var(--fontSize-4);margin-bottom:var(--spacing-2);margin-top:var(--spacing-0)}.post-list-item header{margin-bottom:var(--spacing-4)}.bio{display:flex;margin-bottom:var(--spacing-16)}.bio p{margin-bottom:var(--spacing-0)}.bio strong{color:var(--color-accent)}.bio-avatar{border-radius:100%;margin-bottom:var(--spacing-0);margin-right:var(--spacing-4);min-width:50px}.blog-post{margin-top:var(--spacing-8)}.blog-post header h1{margin:var(--spacing-0) var(--spacing-0) var(--spacing-4) var(--spacing-0)}.blog-post header p{font-family:var(--font-heading);font-size:var(--fontSize-2)}.blog-post-nav ul{margin:var(--spacing-0)}.gatsby-highlight{margin-bottom:var(--spacing-8)}@media (max-width:42rem){blockquote{margin-left:var(--spacing-0);padding:var(--spacing-0) var(--spacing-0) var(--spacing-0) var(--spacing-4)}ol,ul{list-style-position:inside}}section[itemprop=articleBody] img{display:block;margin:0 auto;max-width:100%}div.iframe{text-align:center}img.big-image{max-height:80vh}code[class*=language-],pre[class*=language-]{word-wrap:normal;background:none;color:#000;font-family:Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;font-size:1em;-webkit-hyphens:none;-ms-hyphens:none;hyphens:none;line-height:1.5;-moz-tab-size:4;-o-tab-size:4;tab-size:4;text-align:left;text-shadow:0 1px #fff;white-space:pre;word-break:normal;word-spacing:normal}code[class*=language-]::selection,code[class*=language-] ::selection,pre[class*=language-]::selection,pre[class*=language-] ::selection{background:#b3d4fc;text-shadow:none}@media print{code[class*=language-],pre[class*=language-]{text-shadow:none}}pre[class*=language-]{margin:.5em 0;overflow:auto;padding:1em}:not(pre)>code[class*=language-],pre[class*=language-]{background:#f5f2f0}:not(pre)>code[class*=language-]{border-radius:.3em;padding:.1em;white-space:normal}.token.cdata,.token.comment,.token.doctype,.token.prolog{color:#708090}.token.punctuation{color:#999}.token.namespace{opacity:.7}.token.boolean,.token.constant,.token.deleted,.token.number,.token.property,.token.symbol,.token.tag{color:#905}.token.attr-name,.token.builtin,.token.char,.token.inserted,.token.selector,.token.string{color:#690}.language-css .token.string,.style .token.string,.token.entity,.token.operator,.token.url{background:hsla(0,0%,100%,.5);color:#9a6e3a}.token.atrule,.token.attr-value,.token.keyword{color:#07a}.token.class-name,.token.function{color:#dd4a68}.token.important,.token.regex,.token.variable{color:#e90}.token.bold,.token.important{font-weight:700}.token.italic{font-style:italic}.token.entity{cursor:help}@font-face{font-display:swap;font-family:Fugaz One;font-style:normal;font-weight:400;src:local("Fugaz One"),local("FugazOne-Regular"),url(/static/FugazOne-Regular-bb916c7e293e03d98ac838ba18684a8b.ttf) format("truetype"),url(https://fonts.gstatic.com/s/fugazone/v10/rax_HiWKp9EAITukFsl8Axhf.woff2) format("woff2");unicode-range:U+00??,U+0131,U+0152-0153,U+02bb-02bc,U+02c6,U+02da,U+02dc,U+2000-206f,U+2074,U+20ac,U+2122,U+2191,U+2193,U+2212,U+2215,U+feff,U+fffd}@font-face{font-display:swap;font-family:Baloo\ 2;font-style:normal;font-weight:400;src:local("Baloo 2 Regular"),local("Baloo2-Regular"),url(/static/Baloo2-Regular-6208e6316eed6b9e1de0a022ace38958.ttf) format("truetype"),url(https://fonts.gstatic.com/s/baloo2/v1/wXKrE3kTposypRyd51jcAA.woff2) format("woff2");unicode-range:U+00??,U+0131,U+0152-0153,U+02bb-02bc,U+02c6,U+02da,U+02dc,U+2000-206f,U+2074,U+20ac,U+2122,U+2191,U+2193,U+2212,U+2215,U+feff,U+fffd}@font-face{font-display:swap;font-family:Baloo\ 2;font-style:normal;font-weight:500;src:local("Baloo 2 Medium"),local("Baloo2-Medium"),url(/static/Baloo2-Medium-1f413877aed565cf46d36eee02b2d808.ttf) format("truetype"),url(https://fonts.gstatic.com/s/baloo2/v1/wXKuE3kTposypRyd76v_FeMKmA.woff2) format("woff2");unicode-range:U+00??,U+0131,U+0152-0153,U+02bb-02bc,U+02c6,U+02da,U+02dc,U+2000-206f,U+2074,U+20ac,U+2122,U+2191,U+2193,U+2212,U+2215,U+feff,U+fffd}@font-face{font-display:swap;font-family:Baloo\ 2;font-style:normal;font-weight:600;src:local("Baloo 2 SemiBold"),local("Baloo2-SemiBold"),url(/static/Baloo2-SemiBold-ff177ef2da64b35e00a4a95d01cf370f.ttf) format("truetype"),url(https://fonts.gstatic.com/s/baloo2/v1/wXKuE3kTposypRyd74f4FeMKmA.woff2) format("woff2");unicode-range:U+00??,U+0131,U+0152-0153,U+02bb-02bc,U+02c6,U+02da,U+02dc,U+2000-206f,U+2074,U+20ac,U+2122,U+2191,U+2193,U+2212,U+2215,U+feff,U+fffd}@font-face{font-display:swap;font-family:Baloo\ 2;font-style:normal;font-weight:700;src:local("Baloo 2 Bold"),local("Baloo2-Bold"),url(/static/Baloo2-Bold-65719b39434b2c86bea54d53354cb10c.ttf) format("truetype"),url(https://fonts.gstatic.com/s/baloo2/v1/wXKuE3kTposypRyd7-P5FeMKmA.woff2) format("woff2");unicode-range:U+00??,U+0131,U+0152-0153,U+02bb-02bc,U+02c6,U+02da,U+02dc,U+2000-206f,U+2074,U+20ac,U+2122,U+2191,U+2193,U+2212,U+2215,U+feff,U+fffd}@font-face{font-display:swap;font-family:Baloo\ 2;font-style:normal;font-weight:800;src:local("Baloo 2 ExtraBold"),local("Baloo2-ExtraBold"),url(/static/Baloo2-ExtraBold-17c8015d558be1c57e591eba8d55287c.ttf) format("truetype"),url(https://fonts.gstatic.com/s/baloo2/v1/wXKuE3kTposypRyd7__6FeMKmA.woff2) format("woff2");unicode-range:U+00??,U+0131,U+0152-0153,U+02bb-02bc,U+02c6,U+02da,U+02dc,U+2000-206f,U+2074,U+20ac,U+2122,U+2191,U+2193,U+2212,U+2215,U+feff,U+fffd}</style><meta name="generator" content="Gatsby 3.12.0"/><link rel="alternate" type="application/rss+xml" href="/rss.xml"/><link rel="icon" href="/favicon-32x32.png?v=77d9c37a2f41228079811c3cc39ae141" type="image/png"/><link rel="manifest" href="/manifest.webmanifest" crossorigin="anonymous"/><meta name="theme-color" content="#550766"/><link rel="apple-touch-icon" sizes="48x48" href="/icons/icon-48x48.png?v=77d9c37a2f41228079811c3cc39ae141"/><link rel="apple-touch-icon" sizes="72x72" href="/icons/icon-72x72.png?v=77d9c37a2f41228079811c3cc39ae141"/><link rel="apple-touch-icon" sizes="96x96" href="/icons/icon-96x96.png?v=77d9c37a2f41228079811c3cc39ae141"/><link rel="apple-touch-icon" sizes="144x144" href="/icons/icon-144x144.png?v=77d9c37a2f41228079811c3cc39ae141"/><link rel="apple-touch-icon" sizes="192x192" href="/icons/icon-192x192.png?v=77d9c37a2f41228079811c3cc39ae141"/><link rel="apple-touch-icon" sizes="256x256" href="/icons/icon-256x256.png?v=77d9c37a2f41228079811c3cc39ae141"/><link rel="apple-touch-icon" sizes="384x384" href="/icons/icon-384x384.png?v=77d9c37a2f41228079811c3cc39ae141"/><link rel="apple-touch-icon" sizes="512x512" href="/icons/icon-512x512.png?v=77d9c37a2f41228079811c3cc39ae141"/><title data-react-helmet="true">Programação procedural orientada a classes - Parte 2 | Dias de Dev</title><meta data-react-helmet="true" name="description" content="Neste post nós vamos continuar a provocação sobre: será que você está usando programação orientada a objetos da forma correta? Será que não está apenas usando classes na programação procedural?"/><meta data-react-helmet="true" property="og:title" content="Programação procedural orientada a classes - Parte 2 | Dias de Dev"/><meta data-react-helmet="true" property="og:description" content="Neste post nós vamos continuar a provocação sobre: será que você está usando programação orientada a objetos da forma correta? Será que não está apenas usando classes na programação procedural?"/><meta data-react-helmet="true" property="og:type" content="website"/><meta data-react-helmet="true" property="og:image" content="https://s.gravatar.com/avatar/63579c5a873f3ab6abff10803e9a252f?s=600"/><meta data-react-helmet="true" property="og:image:width" content="600"/><meta data-react-helmet="true" property="og:image:height" content="600"/><meta data-react-helmet="true" name="twitter:card" content="summary"/><meta data-react-helmet="true" name="twitter:creator" content="cviniciussdias"/><meta data-react-helmet="true" name="twitter:title" content="Programação procedural orientada a classes - Parte 2 | Dias de Dev"/><meta data-react-helmet="true" name="twitter:description" content="Neste post nós vamos continuar a provocação sobre: será que você está usando programação orientada a objetos da forma correta? Será que não está apenas usando classes na programação procedural?"/><meta data-react-helmet="true" name="twitter:image" content="https://s.gravatar.com/avatar/63579c5a873f3ab6abff10803e9a252f?s=600"/><meta data-react-helmet="true" name="author" content="Vinicius Dias"/><script>window.dataLayer = window.dataLayer || [];window.dataLayer.push({"platform":"gatsby"}); (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl+'';f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer', 'GTM-5ZJJ977');</script><link rel="canonical" href="https://dias.dev/2020-04-16-programacao-procedural-orientada-a-classes-parte-2/" data-baseprotocol="https:" data-basehost="dias.dev"/><link as="script" rel="preload" href="/webpack-runtime-2e458592185173b755b7.js"/><link as="script" rel="preload" href="/framework-26912e4c097a2be780ad.js"/><link as="script" rel="preload" href="/app-2e8ae21195d0948243bc.js"/><link as="script" rel="preload" href="/commons-70f92c7cb9ff71476bea.js"/><link as="script" rel="preload" href="/component---src-templates-blog-post-js-e151ad291e6453a17222.js"/><link as="fetch" rel="preload" href="/page-data/2020-04-16-programacao-procedural-orientada-a-classes-parte-2/page-data.json" crossorigin="anonymous"/><link as="fetch" rel="preload" href="/page-data/sq/d/2841359383.json" crossorigin="anonymous"/><link as="fetch" rel="preload" href="/page-data/sq/d/3257411868.json" crossorigin="anonymous"/><link as="fetch" rel="preload" href="/page-data/app-data.json" crossorigin="anonymous"/></head><body><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5ZJJ977" height="0" width="0" style="display: none; visibility: hidden" aria-hidden="true"></iframe></noscript><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><div class="global-wrapper" data-is-root-path="false"><header class="global-header"><h3 class="main-heading"><a href="/">Dias de Dev</a></h3></header><nav class="menu"><a href="/">Home</a><a href="/sobre-mim/">Sobre Mim</a><a href="https://youtube.com/DiasDeDev?sub_confirmation=1" target="_blank">YouTube <img src="/img/external-link-symbol.svg" alt="Símbolo de link externo" aria-hidden="true" width="12" height="12"/></a><a href="https://github.com/PHPRio/CFP/issues?q=label%3APalestras+author%3Acviniciussdias" target="_blank">Palestras <img src="/img/external-link-symbol.svg" alt="Símbolo de link externo" aria-hidden="true" width="12" height="12"/></a></nav><main><article class="blog-post" itemscope="" itemType="http://schema.org/Article"><header><h1 itemProp="headline">Programação procedural orientada a classes - Parte 2</h1><p itemProp="dateCreated">16 de abril de 2020</p></header><section itemProp="articleBody"><h2>Design de código</h2>
-<p>Uma vez eu ouvi uma frase mas não me lembro o autor: “Não existe código sem design. Existe código com design ruim”. Inclusive adaptei esta frase para “arquitetura” na primeira parte desta publicação.</p>
+        <link rel="alternate" type="application/atom+xml" href="https://dias.dev//atom.xml" title="Dias de Dev activity feed" />
+                    <link rel="stylesheet" href="/build/post.css">
+                    </head>
+    <body>
+        <div class="global-container">
+            <header>
+                <div class="header-title">
+                    <h1 class="main-heading">
+                        <a aria-current="page" href="/">Dias de Dev</a>
+                    </h1>
+                </div>
+                <nav class="menu">
+                    <a aria-current="page" href="/">Home</a>
+                    <a href="/categorias">Categorias</a>
+                    <!--<a class="nav-link" href="https://dias.dev//blog">Posts Archive</a>
+                    <a class="nav-link" href="https://dias.dev//blog/tags">Tags</a>-->
+                    <a href="/sobre-mim/">Sobre Mim</a>
+                    <a href="https://youtube.com/DiasDeDev?sub_confirmation=1" target="_blank">
+                        YouTube
+                    </a>
+                </nav>
+            </header>
+            <main role="main">
+                    <article itemscope itemtype="https://schema.org/Article">
+        <header>
+            <h1 itemprop="headline" class="post-title">
+                Programação procedural orientada a classes - Parte 2
+            </h1>
+            <p class="post-date" itemprop="dateCreated">
+                10 de fevereiro de 2022
+            </p>
+        </header>
+        <div itemprop="articleBody">
+            <h2 id="design-de-c%C3%B3digo">Design de código</h2>
+
+<p>Uma vez eu ouvi uma frase mas não me lembro o autor: "Não existe código sem design. Existe código com design ruim". Inclusive adaptei esta frase para "arquitetura" na primeira parte desta publicação.</p>
+
 <p>Antes de falarmos sobre as péssimas decisões de design que tomamos, vamos falar sobre o que é design de código.</p>
+
 <p>Uma analogia interessante foi feita pelo <a href="https://twitter.com/junior_grossi">Junior Grossi</a> em um workshop maravilhoso de qualidade de código que fiz com ele. Foi mais ou menos assim (não com essas exatas palavras):</p>
-<p>“Podemos fazer uma analogia da arquitetura de software com a arquitetura de uma casa. Onde fica cada cômodo, como se encaixam juntos, etc. É uma visão de bem <strong>alto nível</strong>. Já o design de código pode ser considerado análogo aos móveis de uma casa. É uma visão de mais <strong>baixo nível</strong> sobre nossas decisões sobre o código”.</p>
+
+<p>"Podemos fazer uma analogia da arquitetura de software com a arquitetura de uma casa. Onde fica cada cômodo, como se encaixam juntos, etc. É uma visão de bem <strong>alto nível</strong>. Já o design de código pode ser considerado análogo aos móveis de uma casa. É uma visão de mais <strong>baixo nível</strong> sobre nossas decisões sobre o código".</p>
+
 <p>Então, basicamente (beem basicamente), arquitetura diz respeito a como você vai separar sua aplicação em camadas, por exemplo, onde cada camada pode ter sua responsabilidade bem definida. Já o design de código diz respeito a como você vai organizar suas classes e métodos em cada uma das camadas. Quais padrões você vai seguir, como cada classe vai se comportar sozinha ou em conjunto com suas respetivas dependências, etc.</p>
-<h2>Escolhas corriqueiras</h2>
+
+<h2 id="escolhas-corriqueiras">Escolhas corriqueiras</h2>
+
 <p>Agora que já entendemos basicamente o que é Design de Código, vamos falar sobre escolhas que fazemos frequentemente e que talvez não sejam as mais interessantes sob a ótica da programação orientada a objetos, ou melhor, sob a ótica do design orientado a objetos.</p>
-<p>Como já foi discutido no post anterior, é muito comum termos um modelo anêmico: Classes que apenas possuem <code class="language-text">getters</code> e <code class="language-text">setters</code>, ou seja, meros sacos de dados. Para quem já estudou C sabe que no fundo isso não é uma classe, mas sim uma <code class="language-text">struct</code>.</p>
-<p>O fato de termos modelos anêmicos onde classes que deveriam ser do nosso domínio na verdade acabam sem nenhuma regra de negócio, geralmente faz com que nós transfiramos essas regras para lugares “errados” (entre aspas porque quem sou eu pra dizer o que é certo ou errado?).</p>
+
+<p>Como já foi discutido no post anterior, é muito comum termos um modelo anêmico: Classes que apenas possuem <code>getters</code> e <code>setters</code>, ou seja, meros sacos de dados. Para quem já estudou C sabe que no fundo isso não é uma classe, mas sim uma <code>struct</code>.</p>
+
+<p>O fato de termos modelos anêmicos onde classes que deveriam ser do nosso domínio na verdade acabam sem nenhuma regra de negócio, geralmente faz com que nós transfiramos essas regras para lugares "errados" (entre aspas porque quem sou eu pra dizer o que é certo ou errado?).</p>
+
 <p>Que lugares errados seriam esses?</p>
-<h2>Helpers ou Utils</h2>
-<p>Quem nunca viu uma classe chamada <code class="language-text">StringHelper</code> ou <code class="language-text">DateUtils</code>? São classes que claramente estão perdidas em nosso sistema. O que seria, no mundo real, um(a) <code class="language-text">StringHelper</code>? Se não existe no mundo real, tem certeza que deveria existir no código?</p>
-<p><img src="https://i.imgur.com/rc9OMWr.jpg" alt="Reflitão"></p>
+
+<h2 id="helpers-ou-utils">Helpers ou Utils</h2>
+
+<p>Quem nunca viu uma classe chamada <code>StringHelper</code> ou <code>DateUtils</code>? São classes que claramente estão perdidas em nosso sistema. O que seria, no mundo real, um(a) <code>StringHelper</code>? Se não existe no mundo real, tem certeza que deveria existir no código?</p>
+
+<p><img src="https://i.imgur.com/rc9OMWr.jpg" alt="Reflitão" /></p>
+
 <p>Esse tipo de classe é uma herança clara da programação procedural em nosso código onde estamos separando o comportamento dos seus dados, quando a orientação a objetos tem todas as ferramentas necessárias para nós os juntarmos.</p>
-<h3>Possível solução</h3>
-<p>Se você possui uma classe <code class="language-text">StringHelper</code>, talvez ela esteja fazendo validações bem genéricas. Nesse caso, nada mais justo do que transformá-la em uma classe bem genérica, como <code class="language-text">String</code>. Nessa classe você pode ter comportamentos e verificações pertinentes a uma string em seu código.</p>
+
+<h3 id="poss%C3%ADvel-solu%C3%A7%C3%A3o">Possível solução</h3>
+
+<p>Se você possui uma classe <code>StringHelper</code>, talvez ela esteja fazendo validações bem genéricas. Nesse caso, nada mais justo do que transformá-la em uma classe bem genérica, como <code>String</code>. Nessa classe você pode ter comportamentos e verificações pertinentes a uma string em seu código.</p>
+
 <p>Mas na maioria das vezes as verificações nesse tipo de classe são específicas de regras de negócio. Ex.: Garantir que nome possua pelo menos 10 letras.</p>
-<p>Se é uma regra de negócio, deveria estar na classe de negócio. Talvez na classe <code class="language-text">Pessoa</code>. Talvez numa classe mais específica, como <code class="language-text">Nome</code>. Depende do seu sistema.</p>
-<h2>Services inúteis</h2>
-<p><a href="https://amzn.to/39MBuNH">O livro do Eric Evans sobre DDD</a> é certamente uma obra que revolucionou o mundo do desenvolvimento. Eu particularmente ainda não o li, mas li <a href="https://amzn.to/2Q1bW8d">obras inspiradas por este livro</a>, então sei que: Neste livro foram definidos alguns conceitos sobre classes chamadas de <code class="language-text">Services</code>.</p>
-<p>Uma das possíveis “categorias” desse tipo de classe é <code class="language-text">Application Service</code>. Este tipo de classe tem como propósito receber informações de fora do domínio do sistema (da web, linha de comando, etc) e orquestrar as chamadas a regras de domínio.</p>
+
+<p>Se é uma regra de negócio, deveria estar na classe de negócio. Talvez na classe <code>Pessoa</code>. Talvez numa classe mais específica, como <code>Nome</code>. Depende do seu sistema.</p>
+
+<h2 id="services-in%C3%BAteis">Services inúteis</h2>
+
+<p><a href="https://amzn.to/39MBuNH">O livro do Eric Evans sobre DDD</a> é certamente uma obra que revolucionou o mundo do desenvolvimento. Eu particularmente ainda não o li, mas li <a href="https://amzn.to/2Q1bW8d">obras inspiradas por este livro</a>, então sei que: Neste livro foram definidos alguns conceitos sobre classes chamadas de <code>Services</code>.</p>
+
+<p>Uma das possíveis "categorias" desse tipo de classe é <code>Application Service</code>. Este tipo de classe tem como propósito receber informações de fora do domínio do sistema (da web, linha de comando, etc) e orquestrar as chamadas a regras de domínio.</p>
+
 <p>Um exemplo clássico:</p>
-<div class="gatsby-highlight" data-language="php"><pre class="language-php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
 
-<span class="token keyword">class</span> <span class="token class-name-definition class-name">AddUser</span>
-<span class="token punctuation">{</span>
-    <span class="token keyword">private</span> <span class="token class-name type-declaration">UserRepository</span> <span class="token variable">$repository</span><span class="token punctuation">;</span>
-    <span class="token keyword">private</span> <span class="token class-name type-declaration">PasswordHasher</span> <span class="token variable">$hasher</span><span class="token punctuation">;</span>
+<pre><code class="php">&lt;?php
 
-    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">__construct</span><span class="token punctuation">(</span><span class="token class-name type-declaration">UserRepository</span> <span class="token variable">$repository</span><span class="token punctuation">,</span> <span class="token class-name type-declaration">PasswordHasher</span> <span class="token variable">$hasher</span><span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
-        <span class="token variable">$this</span><span class="token operator">-></span><span class="token property">repository</span> <span class="token operator">=</span> <span class="token variable">$repository</span><span class="token punctuation">;</span>
-        <span class="token variable">$this</span><span class="token operator">-></span><span class="token property">hasher</span> <span class="token operator">=</span> <span class="token variable">$hasher</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
+class AddUser
+{
+    private UserRepository $repository;
+    private PasswordHasher $hasher;
 
-    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">execute</span><span class="token punctuation">(</span><span class="token class-name type-declaration">AddUserDto</span> <span class="token variable">$data</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword return-type">void</span>
-    <span class="token punctuation">{</span>
-        <span class="token variable">$hashedPassword</span> <span class="token operator">=</span> <span class="token variable">$this</span><span class="token operator">-></span><span class="token property">hasher</span>
-            <span class="token operator">-></span><span class="token function">hash</span><span class="token punctuation">(</span><span class="token variable">$data</span><span class="token operator">-></span><span class="token function">password</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token variable">$user</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">User</span><span class="token punctuation">(</span><span class="token variable">$data</span><span class="token operator">-></span><span class="token function">email</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token variable">$hashedPassword</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    public function __construct(UserRepository $repository, PasswordHasher $hasher)
+    {
+        $this-&gt;repository = $repository;
+        $this-&gt;hasher = $hasher;
+    }
 
-        <span class="token variable">$this</span><span class="token operator">-></span><span class="token property">repository</span><span class="token operator">-></span><span class="token function">add</span><span class="token punctuation">(</span><span class="token variable">$user</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span></span></code></pre></div>
+    public function execute(AddUserDto $data): void
+    {
+        $hashedPassword = $this-&gt;hasher
+            -&gt;hash($data-&gt;password());
+        $user = new User($data-&gt;email(), $hashedPassword);
+
+        $this-&gt;repository-&gt;add($user);
+    }
+}
+</code></pre>
+
 <p>Há pontos de melhoria nesse código (sempre há), mas basicamente: Ele recebe os dados de algum mecanismo de entrega através de um DTO (objeto de transferência de dados, que serve basicamente para transferir dados entre camadas no sistema), e passa para o domínio que sabe cifrar a senha, armazenar o usuário no repositório, etc.</p>
-<h3>Problema comum</h3>
-<p>Essa definição de <code class="language-text">Application Service</code> em algum momento foi tomada por alguém como “Classe obrigatória para adicionar <em>indireção</em> desnecessária no sistema”.</p>
-<p>Na prática é muito comum vermos código onde um Controller chama um método de uma classe com <code class="language-text">Service</code> no nome, e esse método não faz nada além de chamar um método de outra classe. Essa chamada extra de um método é conhecida como indireção, de forma resumida.</p>
+
+<h3 id="problema-comum">Problema comum</h3>
+
+<p>Essa definição de <code>Application Service</code> em algum momento foi tomada por alguém como "Classe obrigatória para adicionar <em>indireção</em> desnecessária no sistema".</p>
+
+<p>Na prática é muito comum vermos código onde um Controller chama um método de uma classe com <code>Service</code> no nome, e esse método não faz nada além de chamar um método de outra classe. Essa chamada extra de um método é conhecida como indireção, de forma resumida.</p>
+
 <p>Algo parecido com isso:</p>
-<div class="gatsby-highlight" data-language="php"><pre class="language-php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
 
-<span class="token keyword">class</span> <span class="token class-name-definition class-name">UserService</span>
-<span class="token punctuation">{</span>
-    <span class="token keyword">private</span> <span class="token class-name type-declaration">UserRepository</span> <span class="token variable">$repository</span><span class="token punctuation">;</span>
+<pre><code class="php">&lt;?php
 
-    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">__construct</span><span class="token punctuation">(</span><span class="token class-name type-declaration">UserRepository</span> <span class="token variable">$repository</span><span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
-        <span class="token variable">$this</span><span class="token operator">-></span><span class="token property">repository</span> <span class="token operator">=</span> <span class="token variable">$repository</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
+class UserService
+{
+    private UserRepository $repository;
 
-    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">add</span><span class="token punctuation">(</span><span class="token class-name type-declaration">User</span> <span class="token variable">$user</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword return-type">void</span>
-    <span class="token punctuation">{</span>
-        <span class="token variable">$this</span><span class="token operator">-></span><span class="token property">repository</span><span class="token operator">-></span><span class="token function">add</span><span class="token punctuation">(</span><span class="token variable">$user</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
+    public function __construct(UserRepository $repository)
+    {
+        $this-&gt;repository = $repository;
+    }
 
-    <span class="token comment">// todos os outros métodos públicos que também existem em UserRepository</span>
-<span class="token punctuation">}</span></span></code></pre></div>
-<p>Agora me responda: O que ganhamos ao ter a classe <code class="language-text">UserService</code>? Ganhamos apenas mais indireções em nosso sistema. Mais um lugar que nossa IDE vai nos fazer passar até chegar no código que de fato executa algo.</p>
+    public function add(User $user): void
+    {
+        $this-&gt;repository-&gt;add($user);
+    }
+
+    // todos os outros métodos públicos que também existem em UserRepository
+}
+</code></pre>
+
+<p>Agora me responda: O que ganhamos ao ter a classe <code>UserService</code>? Ganhamos apenas mais indireções em nosso sistema. Mais um lugar que nossa IDE vai nos fazer passar até chegar no código que de fato executa algo.</p>
+
 <p>Além de parecerem ser classes conhecidas como <em>God classes</em>, já que aparentam fazer tudo no sistema, são inúteis na prática.</p>
+
 <p>Esse é mais um exemplo de programação procedural sendo aplicada, onde temos apenas funções sem nenhum significado pro negócio agrupadas em uma classe que simplesmente chama outras funções.</p>
-<p>Outra característica de programação procedural nesse caso é que muito comumente temos métodos não tão relacionados na mesma classe <code class="language-text">Service</code>.</p>
-<p>É comum um <code class="language-text">UserService</code> ter um método com uma chamada para salvar um usuário e outro método para enviar um e-mail para ele. Responsabilidades que deveriam estar em classes separadas.</p>
+
+<p>Outra característica de programação procedural nesse caso é que muito comumente temos métodos não tão relacionados na mesma classe <code>Service</code>.</p>
+
+<p>É comum um <code>UserService</code> ter um método com uma chamada para salvar um usuário e outro método para enviar um e-mail para ele. Responsabilidades que deveriam estar em classes separadas.</p>
+
 <p>No canal <em>Dev Eficiente</em>, do Aberto Souza, tem um vídeo falando um pouco mais sobre o problema deste tipo de classe, mas sob uma outra ótica. Vale a pena conferir:</p>
-<div class="gatsby-resp-iframe-wrapper" style="padding-bottom: 56.25%; position: relative; height: 0; overflow: hidden; margin-bottom: 1.0725rem" > <iframe src="https://www.youtube-nocookie.com/embed/szGb93_hXgI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" style=" position: absolute; top: 0; left: 0; width: 100%; height: 100%; "></iframe> </div>
-<h2>Camada Model do MVC</h2>
+
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/szGb93_hXgI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<h2 id="camada-model-do-mvc">Camada Model do MVC</h2>
+
 <p>Um ponto que tem levantado bastante discussão em comunidades que participo é: O que é a camada <em>Model</em> no MVC?</p>
+
 <p>Discutir sobre MVC é assunto pra outro post, mas o que tenho visto como consenso é: Camada que faz a persistência dos dados.</p>
+
 <p>E a regra de negócio? Uma galera tem colocado nos <em>Controllers</em>. E aí? Se essa lógica precisar ser reaproveitada, como fazemos? Como chamamos um <em>Controller</em> dentro de outro? Complicado, né?</p>
+
 <p>Em nossos <em>Controllers</em> é muito comum ver aquele código super famoso da programação procedural cheio de IFs e verificações em tipos primitivos, sem nenhum significado para o negócio.</p>
-<h3>Padrões arquiteturais</h3>
-<p>Para “resolver” esse problema, diversos padrões arquiteturais existem, e eu falei um pouquinho (bem pouquinho) sobre arquitetura nesse meu outro post: <a href="https://dias.dev/2020-04-10-o-que-e-arquitetura/">O que é Arquitetura</a></p>
-<h2>Conclusão</h2>
+
+<h3 id="padr%C3%B5es-arquiteturais">Padrões arquiteturais</h3>
+
+<p>Para "resolver" esse problema, diversos padrões arquiteturais existem, e eu falei um pouquinho (bem pouquinho) sobre arquitetura nesse meu outro post: <a href="https://dias.dev/2020-04-10-o-que-e-arquitetura/">O que é Arquitetura</a></p>
+
+<h2 id="conclus%C3%A3o">Conclusão</h2>
+
 <p>Por mais que a gente estude muito sobre ferramentas, frameworks, hypes e modinhas, os princípios da programação orientada a objetos mudam muito pouco e merecem MUITA atenção.</p>
-<p>Estude conceitos, princípios, padrões… Tudo isso vai poder ser aplicado naquele framework que foi lançado semana passada e você está doido pra usar pra fazer um CRUD. Acredite.</p>
-<p>Infelizmente eu ainda vejo muito código utilizando estas “técnicas” procedurais utilizando classes, e pessoas acreditando que isso é desenvolver utilizando a programação orientada a objetos.</p>
-<p>Você costuma ver código assim no seu dia a dia? Compartilha aqui nos comentários algum caso que você tenha visto recentemente.</p></section><hr/><footer><div class="bio"><div style="margin-right:var(--spacing-4)"><img src="https://gravatar.com/avatar/63579c5a873f3ab6abff10803e9a252f.jpg?s=50" alt="Foto de Vinicius Dias segurando um microfone durante uma palestra" style="border-radius:50%;width:50.01px;height:50.01px"/></div><p>Escrito por <strong>Vinicius Dias</strong> <!-- -->que sempre tenta seguir a regra do bom escoteiro: &quot;Sempre deixe o código mais limpo do que quando você encontrou&quot;<!-- --> <a href="https://twitter.com/cviniciussdias">Que tal seguir ele no Twitter?</a></p></div><div id="disqus_thread"></div></footer></article><nav class="blog-post-nav"><ul style="display:flex;flex-wrap:wrap;justify-content:space-between;list-style:none;padding:0"><li><a rel="prev" href="/2020-04-13-programacao-procedural-orientada-a-classes-parte-1/">← <!-- -->Programação procedural orientada a classes - Parte 1</a></li><li><a rel="next" href="/2020-04-23-principios-ou-ferramentas-o-que-estudar/">Princípios ou Ferramentas - O que estudar<!-- --> →</a></li></ul></nav></main><footer>© <!-- -->2021<!-- -->, Dias de Dev</footer></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/2020-04-16-programacao-procedural-orientada-a-classes-parte-2/";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-e6b5355c9ecf751d8025.js"],"app":["/app-2e8ae21195d0948243bc.js"],"component---src-pages-404-js":["/component---src-pages-404-js-bb1698d01a7f9dde5caa.js"],"component---src-pages-index-js":["/component---src-pages-index-js-c72ca9be79004406d5c4.js"],"component---src-pages-sobre-mim-js":["/component---src-pages-sobre-mim-js-036dc2b6227c3ee44d67.js"],"component---src-templates-blog-post-js":["/component---src-templates-blog-post-js-e151ad291e6453a17222.js"]};/*]]>*/</script><script src="/polyfill-e6b5355c9ecf751d8025.js" nomodule=""></script><script src="/component---src-templates-blog-post-js-e151ad291e6453a17222.js" async=""></script><script src="/commons-70f92c7cb9ff71476bea.js" async=""></script><script src="/app-2e8ae21195d0948243bc.js" async=""></script><script src="/framework-26912e4c097a2be780ad.js" async=""></script><script src="/webpack-runtime-2e458592185173b755b7.js" async=""></script></body></html>
+
+<p>Estude conceitos, princípios, padrões... Tudo isso vai poder ser aplicado naquele framework que foi lançado semana passada e você está doido pra usar pra fazer um CRUD. Acredite.</p>
+
+<p>Infelizmente eu ainda vejo muito código utilizando estas "técnicas" procedurais utilizando classes, e pessoas acreditando que isso é desenvolver utilizando a programação orientada a objetos.</p>
+
+<p>Você costuma ver código assim no seu dia a dia? Compartilha aqui nos comentários algum caso que você tenha visto recentemente.</p>
+
+        </div>
+        <footer class="post-footer" itemprop="author" itemscope itemtype="https://schema.org/Person">
+            <img src="https://gravatar.com/avatar/63579c5a873f3ab6abff10803e9a252f.jpg?s=50"
+                 alt="Foto do Vinicius Dias com o microfone na mão durante uma palestra"
+                 itemprop="image" />
+            <p>
+                Escrito por <a href="https://twitter.com/cviniciussdias" itemprop="givenName">Vinicius Dias</a>
+            </p>
+        </footer>
+
+                    <nav class="article-navigation">
+                <ul>
+                    <li>
+                                                <a class="previous" href="/2020-04-13-programacao-procedural-orientada-a-classes-parte-1/" title="Programação procedural orientada a classes - Parte 1">
+                            ← <span class="title">Programação procedural orientada a classes - Parte 1</span>
+                        </a>
+                                            </li>
+                    <li>
+                                                <a class="next" href="/2020-04-23-principios-ou-ferramentas-o-que-estudar/" title="Princípios ou Ferramentas - O que estudar">
+                            <span class="title">Princípios ou Ferramentas - O que estudar</span> →
+                        </a>
+                                            </li>
+                </ul>
+            </nav>
+            </article>
+
+
+
+            </main>
+            <footer class="global-footer">&copy; 2022 Dias de Dev</footer>
+        </div>
+
+        <script src="https://dias.dev//build/app.js"></script>
+                
+        <!-- Google Tag Manager -->
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','GTM-5ZJJ977');</script>
+        <!-- End Google Tag Manager -->
+        <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5ZJJ977"
+                          height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <!-- End Google Tag Manager (noscript) -->
+                    </body>
+</html>

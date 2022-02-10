@@ -1,0 +1,494 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <title><![CDATA[Dias de Dev]]></title>
+    <link href="https://dias.dev//tags/Assíncrono.xml" rel="self"/>
+    <link href="https://dias.dev//"/>
+    <updated>2022-02-10T03:26:17+00:00</updated>
+    <id>https://dias.dev//</id>
+        <generator uri="http://sculpin.io/">Sculpin</generator>
+            <entry>
+            <title type="html"><![CDATA[Requisições HTTP paralelas com PHP]]></title>
+            <link href="https://dias.dev//2021-03-13-requisicoes-http-paralelas-com-php/"/>
+            <updated>2021-03-13T00:00:00+00:00</updated>
+            <id>https://dias.dev//2021-03-13-requisicoes-http-paralelas-com-php/</id>
+            <content type="html"><![CDATA[<h2 id="i%2Fo-n%C3%A3o-bloqueante-programa%C3%A7%C3%A3o-ass%C3%ADncrona">I/O não bloqueante (programação assíncrona)</h2>
+
+<p>Em um <a href="/2020-09-16-php-assincrono-de-forma-nativa/">post anterior</a> falei bastante sobre como o PHP trabalha por baixo dos panos de forma nativa com I/O não
+bloqueante, e consequentemente com programação assíncrona. Usando os conhecimentos daquele post com conhecimentos de
+<em>sockets</em> e HTTP seria possível realizarmos chamadas HTTP assíncronas e processá-las conforme elas fossem recebidas.
+Porém é bastante comum podermos nos dar ao luxo de processar todas as respostas HTTP depois de prontas, desde que todas
+as requisições tenham sido feitas de forma concorrente.</p>
+
+<h2 id="curl">cURL</h2>
+
+<p>Como realizar requisições HTTP usando <em>sockets</em> pode se tornar uma tarefa muito complicada, principalmente em cenários
+onde precisamos enviar dados (requisições POST, por exemplo), cURL é uma alternativa muito interessante. Essa biblioteca
+é pensada especialmente em realizar requisições pela rede e possui diversos facilitadores.</p>
+
+<h2 id="o-problema">O problema</h2>
+
+<p>Entendido o contexto das tecnologias que temos disponíveis, vamos falar do problema que temos em mãos. Existe uma API
+que fornece informações sobre o universo <em>Star Wars</em>. Essa API é gratuita e vai servir perfeitamente para nosso exemplo.</p>
+
+<p>O que queremos fazer é buscar a lista de filmes (através da url https://swapi.dev/api/films/) e para cada filme buscar
+os seus detalhes em outra URL (https://swapi.dev/api/films/:id/).</p>
+
+<h3 id="solu%C3%A7%C3%A3o-bloqueante">Solução bloqueante</h3>
+
+<p>Usando o <code>cURL</code> de forma “padrão”, ou seja, bloqueante, podemos atingir este objetivo com o seguinte código:</p>
+
+<pre><code class="php">&lt;?php
+
+$handle = curl_init('https://swapi.dev/api/films/');
+// informa que não queremos exibir a resposta diretamente, mas sim pegar seu retorno
+curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
+$response = curl_exec($handle);
+curl_close($handle);
+
+$data = json_decode($response, true);
+$movies = $data['results'];
+
+foreach ($movies as $movie) {
+    // Alterando o protocolo para https
+    $url = str_replace('http:', 'https:', $movie['url']);
+    $handle = curl_init($url);
+    curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
+    $response = curl_exec($handle);
+
+    $movieData = json_decode($response, true);
+    var_dump($movieData);
+}
+</code></pre>
+
+<p>O problema desta abordagem é que cada requisição para os detalhes do filme vai travar a execução do PHP, fazendo
+com que a próxima requisição só seja iniciada quando a anterior for finalizada.</p>
+
+<h3 id="solu%C3%A7%C3%A3o-n%C3%A3o-bloqueante">Solução não bloqueante</h3>
+
+<p>Para informarmos um determinado número de requisições e realizarmos todas de uma vez, podemos usar o <code>curl_multi_init</code>.</p>
+
+<pre><code class="php">&lt;?php
+
+// Primeira requisição como no código anterior
+$movies = $data['results'];
+
+// Inicializa o handle de múltiplas conexões
+$multiHandle = curl_multi_init();
+
+// Armazena cada handle individual em um array
+// além de adicioná-los ao $multiHandle
+$handles = [];
+foreach ($movies as $i =&gt; $movie) {
+    $url = str_replace('http:', 'https:', $movie['url']);
+    $handles[$i] = curl_init($url);
+    curl_setopt($handles[$i], CURLOPT_RETURNTRANSFER, true);
+    curl_multi_add_handle($multiHandle, $handles[$i]);
+}
+</code></pre>
+
+<p>Assim nós temos diversos <em>handles</em> do <code>cURL</code> adicionados a um gerenciador de múltiplas requisições. Quando executarmos o
+<code>$multiHandle</code>, todas as requisições serão feitas em paralelo. Maravilha, não é mesmo?</p>
+
+<p>Infelizmente não é tão simples assim. Não basta fazer um <code>curl_multi_exec</code> e receber um array de respostas. A função
+<code>curl_multi_exec</code> inicia as requisições, porém não bloqueia o código, ou seja, nós precisamos ficar em um <em>loop</em> verificando
+se todas as requisições já foram feitas. Algo como:</p>
+
+<pre><code class="php">do {
+    $result = curl_multi_exec($multiHandle, $numberOfMissingHandles);
+} while ($numberOfMissingHandles &gt; 0);
+
+// Processar respostas
+</code></pre>
+
+<p>A variável <code>$numberOfMissingHandles</code> é passada por referência e é preenchida com o número dos <em>handles</em> que faltam ser
+resolvidos. Em outras palavras, enquanto esse valor não chegar a 0, temos requisições sendo processadas.</p>
+
+<p>Depois de sair desse <em>loop</em>, podemos recuperar as respostas de todas as requisições, então voltamos para a tarefa fácil:</p>
+
+<pre><code class="php">// Por isso armazenamos o array de $handles
+foreach ($handles as $handle) {
+    // Usamos curl_multi_getcontent para recuperar a resposta
+    // de cada um dos handles que foi executado pelo curl_multi_exec
+    $response = curl_multi_getcontent($handle);
+    curl_multi_remove_handle($multiHandle, $handle);
+    curl_close($handle);
+
+    $movieData = json_decode($response, true);
+    var_dump($movieData);
+}
+</code></pre>
+
+<p>Com isso nós atingimos o objetivo de realizar todas as requisições de uma vez e só depois ler as respostas.</p>
+
+<h3 id="mal-uso-de-recursos">Mal uso de recursos</h3>
+
+<p>O problema da nossa abordagem é que a função <code>curl_multi_exec</code> retorna imediatamente, sem esperar por nenhuma atividade
+nos <em>handles</em>, ou seja, se as requisições forem demoradas ou houverem muitas requisições (ou ambos), esse <em>loop</em> vai ser
+executado de forma muito rápida, por muito tempo. Isso vai fazer com que o uso de CPU vá ao topo, atrasando inclusive o
+processo de realizar requisições, afinal de contas o sistema operacional precisa destinar certos recursos para essa tarefa.</p>
+
+<p>Para mitigar esse problema, podemos usar uma função chamada <code>curl_multi_select</code>. Ela é semelhante à <code>stream_select</code> que
+vimos no post sobre <a href="/2020-09-16-php-assincrono-de-forma-nativa/">PHP assíncrono</a>. Essa função espera que alguma
+atividade aconteça nos handles que estamos utilizando. A diferença é que ela não recebe um array, mas sim o nosso
+<code>$multiHandle</code>. Então tudo que temos de informação é quantos <em>handles</em> possuem atividade no momento, mas não quais deles.
+Mas tudo bem, já que o nosso propósito é ler todos apenas no final.</p>
+
+<p>A função <code>curl_multi_select</code> deve ser chamada após o <code>curl_multi_exec</code>, já que é essa que inicia as requisições efetivamente.
+Então o nosso primeiro <em>loop</em> ficaria assim:</p>
+
+<pre><code class="php">do {
+    $result = curl_multi_exec($multiHandle, $numberOfMissingHandles);
+    $descriptorsCount = curl_multi_select($multiHandle);
+} while ($numberOfMissingHandles &gt; 0);
+</code></pre>
+
+<p>Onde <code>$descriptorsCount</code> é o número de handles que possuem alguma atividade nesse exato momento. Caso esse número seja
+<code>-1</code>, significa que aconteceu algum erro.</p>
+
+<p>Dessa forma esse <em>loop</em> será executado menos vezes e em um intervalo maior, ou seja, menos CPU será consumida.</p>
+
+<h3 id="tratamento-de-erros">Tratamento de erros</h3>
+
+<p>Falando em erros, nosso código está supondo que tudo vai correr bem. Nesse primeiro <em>loop</em> nós precisamos realizar algumas
+verificações. Então no final, teremos algo como:</p>
+
+<pre><code class="php">do {
+    $result = curl_multi_exec($multiHandle, $numberOfMissingHandles);
+    if ($result !== CURLM_OK) { // CURLM_OK é uma constante que indica sucesso nesse caso
+        throw new RuntimeException('Error executing all the requests', $result);
+    }
+
+    $descriptorsCount = curl_multi_select($multiHandle);
+    if ($descriptorsCount === -1) {
+        throw new RuntimeException('Error checking for activity');
+    }
+} while ($numberOfMissingHandles);
+</code></pre>
+
+<h3 id="c%C3%B3digo-final">Código final</h3>
+
+<p>Com isso finalizamos todo o processamento necessário para realizar requisições paralelas com PHP. O código completo vai
+se parecer com isso:</p>
+
+<pre><code class="php">&lt;?php
+
+$handle = curl_init('https://swapi.dev/api/films/');
+curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
+$response = curl_exec($handle);
+curl_close($handle);
+
+$data = json_decode($response, true);
+$movies = $data['results'];
+
+$multiHandle = curl_multi_init();
+
+$handles = [];
+foreach ($movies as $i =&gt; $movie) {
+    $url = str_replace('http:', 'https:', $movie['url']);
+    $handles[$i] = curl_init($url);
+    curl_setopt($handles[$i], CURLOPT_RETURNTRANSFER, true);
+    curl_multi_add_handle($multiHandle, $handles[$i]);
+}
+
+do {
+    $result = curl_multi_exec($multiHandle, $numberOfMissingHandles);
+    if ($result !== CURLM_OK) {
+        throw new RuntimeException('Error executing all the requests', $result);
+    }
+
+    $descriptorsCount = curl_multi_select($multiHandle);
+    if ($descriptorsCount === -1) {
+        throw new RuntimeException('Error checking for activity');
+    }
+} while ($numberOfMissingHandles &gt; 0);
+
+foreach ($handles as $handle) {
+    $response = curl_multi_getcontent($handle);
+    curl_multi_remove_handle($multiHandle, $handle);
+    curl_close($handle);
+
+    $movieData = json_decode($response, true);
+    var_dump($movieData);
+}
+</code></pre>
+
+<p>Esse código provavelmente pode ser refatorado para torná-lo um pouco mais legível, mas acredito que a lógica por trás dele
+tenha ficado clara. Caso contrário, você pode usar a sessão de comentários dessa página para fazer perguntas.</p>
+
+<h2 id="benchmarks">Benchmarks</h2>
+
+<p>Agora que temos 2 versões de código que resolvem o mesmo problema de formas diferentes, podemos testar a sua performance.
+Para quem usa sistemas <em>Unix</em> (<em>Linux</em> ou <em>Mac</em>) existe um comando chamado <code>time</code> que é muito útil para verificações simples
+como essas.</p>
+
+<p>A primeira versão do nosso código (bloqueante) gera essa informação quando executo o seguinte comando (sendo <code>star-wars.php</code>o nome do nosso arquivo):</p>
+
+<pre><code class="bash">$ time php star-wars.php
+
+php star-wars.php  0.14s user 0.04s system 2% cpu 7.186 total
+</code></pre>
+
+<p>Basicamente, um pouco mais de 7 segundos foram necessários para executar todas as requisições.</p>
+
+<p>Já com a versão final do código, temos a seguinte saída:</p>
+
+<pre><code class="bash">$ time php star-wars.php
+
+php star-wars.php  0.14s user 0.04s system 6% cpu 2.387 total
+</code></pre>
+
+<p>Ou seja, pouco mais de 2 segundos (quase 5 segundos a menos). É uma baita diferença para um exemplo tão simples, não acha?</p>
+
+<p>Agora um último teste, comentando a parte referente ao <code>curl_multi_select</code>:</p>
+
+<pre><code class="bash">$ time php star-wars.php
+
+php star-wars.php  0.50s user 0.70s system 49% cpu 2.421 total
+</code></pre>
+
+<p>Repare que o uso de CPU subiu muito. De algo próximo de 6% para quase 50%. Esse é o propósito da chamada da função
+<code>curl_multi_select</code>.</p>
+
+<h2 id="conclus%C3%A3o">Conclusão</h2>
+
+<p>Assim como já foi citado no post sobre <a href="/2020-09-16-php-assincrono-de-forma-nativa/">PHP assíncrono</a>, existem
+várias ferramentas que facilitam (e muito) o trabalho de realizar requisições HTTP paralelas com PHP. Guzzle é uma ótima
+opção para isso.</p>
+
+<p>Mas seguindo o que citei no <a href="/2020-04-23-principios-ou-ferramentas-o-que-estudar/">post sobre aprendizado</a>, eu penso como
+Richard Feynman (Nobel de física): “O que eu não consigo criar, eu não entendo”. Então antes de utilizar uma ferramenta
+que realiza o trabalho para mim, eu gosto de saber como realizar este trabalho sem ela. Com isso, se algum problema
+acontecer com a biblioteca, por exemplo, eu vou estar mais preparado para resolvê-lo já que entendo um pouco melhor como as coisas funcionam.</p>
+]]></content>
+        </entry>
+            <entry>
+            <title type="html"><![CDATA[PHP assíncrono de forma nativa]]></title>
+            <link href="https://dias.dev//2020-09-16-php-assincrono-de-forma-nativa/"/>
+            <updated>2020-09-16T00:00:00+00:00</updated>
+            <id>https://dias.dev//2020-09-16-php-assincrono-de-forma-nativa/</id>
+            <content type="html"><![CDATA[<p>Realizar acesso a streams é uma tarefa relativamente comum para devs PHP. Seja lendo e escrevendo em arquivos, fazendo requisições HTTP, etc.</p>
+
+<p>Operações de I/O são custosas e levam algum tempo para executar. Quando temos diversas operações desse tipo, uma técnica que pode ajudar (e muito) na performance da aplicação é realizá-las de forma assíncrona.</p>
+
+<h2 id="acesso-a-streams">Acesso a streams</h2>
+
+<p>Antes de falar sobre técnicas e funções que permitem a programação assíncrona, é importante saber como normalmente nós trabalhamos com I/O.</p>
+
+<p>Acesso a arquivos, requisições HTTP, sockets e muito mais pode ser feito através de <a href="https://php.net/streams">streams</a>. Um stream é basicamente um fluxo de dados, sendo que a origem desse fluxo pode variar (vide o início desse parágrafo). Quando utilizamos funções como <code>file_get_contents</code>, <code>fopen</code>, <code>fgets</code>, e as demais, estamos trabalhando com streams do PHP.</p>
+
+<h2 id="programa%C3%A7%C3%A3o-ass%C3%ADncrona">Programação assíncrona</h2>
+
+<p>Se você não está familiarizado com o termo "programação assíncrona", recomendo assistir este vídeo antes de continuar o artigo:</p>
+
+<p><a href="https://youtu.be/zLfXPSeCkB8">Programação Assíncrona vs Programação Paralela</a></p>
+
+<p>Entendido o que é programação assíncrona, como podemos fazer acesso a streams de forma assíncrona utilizando PHP sem nenhuma extensão ou biblioteca externa? Será possível?</p>
+
+<h2 id="eventos">Eventos</h2>
+
+<p>Programação orientada a eventos não é novidade e nós utilizamos muito na web. Para agir quando um botão for clicado, ou quando um texto for digitado em um <code>input</code> nós utilizamos eventos no JavaScript. Eventos podem acontecer a qualquer momento então sua natureza é assíncrona. Mas será possível fazer algo parecido do lado do PHP?</p>
+
+<p>Antes de falar do PHP em si, acho válido citar que o sistema operacional já trabalha com chamadas assíncronas. Diversos eventos acontecem durante a execução do seu sistema, e há código reagindo a estes eventos o tempo todo. Utilizando PHP nós podemos acessar algumas dessas funcionalidades do sistema operacional</p>
+
+<h3 id="fun%C3%A7%C3%A3o-stream_select">Função stream_select</h3>
+
+<p>Uma função não muito comum para nós que trabalhamos com PHP é a <a href="https://php.net/stream_select">stream_select</a>. Essa função nos permite "observar" modificações que possam acontecer em streams. O probelma é que ela não é nada fácil de se entender, então vou tentar tornar este processo menos doloroso para você.</p>
+
+<h2 id="cen%C3%A1rio">Cenário</h2>
+
+<p>Imagine que para executar uma tarefa nós precisemos ler 5 arquivos distintos e depois realizar algum processamento. Normalmente utilizando PHP nós poderíamos fazer algo como:</p>
+
+<pre><code class="php">&lt;?php
+
+$conteudoDoArquivo1 = file_get_contents('arquivo1.txt');
+$conteudoDoArquivo2 = file_get_contents('arquivo2.txt');
+$conteudoDoArquivo3 = file_get_contents('arquivo3.txt');
+$conteudoDoArquivo4 = file_get_contents('arquivo4.txt');
+$conteudoDoArquivo5 = file_get_contents('arquivo5.txt');
+
+// Processar os 5 arquivos
+</code></pre>
+
+<p>O problema nessa abordagem é óbvio: Antes de ler o <code>arquivo2.txt</code> precisamos terminar de ler todo o conteúdo de <code>arquivo1.txt</code>. Enquanto o computador espera, nós já poderíamos estar sendo os demais arquivos e os processando de forma individual.</p>
+
+<p>Quando temos uma operação de I/O (acesso a arquivos, rede, etc) sendo realizada de forma síncrona, o processador fica ocioso enquanto a operação não é executada. Ou seja, enquanto o arquivo estiver sendo carregado, o processador fica esperando, sem fazer nada. É exatamente isso que queremos evitar. Queremos garantir que ele continue trabalhando enquanto o arquivo não estiver pronto para leitura.</p>
+
+<h2 id="solu%C3%A7%C3%A3o-com-assincronicidade">Solução com assincronicidade</h2>
+
+<p>Para resolver essa situação, podemos utilizar a função <code>stream_select</code> que observa alterações no status de uma lista de streams, ou seja, quando algum dos arquivos estiver pronto para leitura, essa função nos avisará. E é interessante citar que a leitura não necessariamente vai acontecer em ordem. O sistema operacional pode abrir o <code>arquivo3.txt</code> mais rápido do que o <code>arquivo1.txt</code>, por exemplo. Neste cenário, vamos processá-lo logo, sem ficar esperando os arquivos anteriores.</p>
+
+<pre><code class="php">&lt;?php
+
+$listaDeStreamsDeArquivos = [
+    fopen('arquivo1.txt', 'r'),
+    fopen('arquivo2.txt', 'r'),
+    fopen('arquivo3.txt', 'r'),
+    fopen('arquivo4.txt', 'r'),
+    fopen('arquivo5.txt', 'r'),
+];
+
+foreach ($listaDeStreamsDeArquivos as $streamDeArquivo) {
+    stream_set_blocking($streamDeArquivo, false);
+}
+
+do {
+    $streamsParaLer = $listaDeStreamsDeArquivos;
+    $streamsComNovidades = stream_select($streamsParaLer, $write, $except, 1, 0);
+
+    if ($streamsComNovidades === false) {
+        echo 'Erro inesperado';
+        exit(1);
+    }
+
+    if ($streamsComNovidades === 0) {
+        continue;
+    }
+
+    foreach ($streamsParaLer as $indice =&gt; $streamDeArquivo) {
+        $conteudo = stream_get_contents($streamDeArquivo);
+        // processa o conteúdo do arquivo
+        if (feof($streamDeArquivo)) {
+            fclose($streamDeArquivo);
+            unset($listaDeStreamsDeArquivos[$indice]);
+        }
+    }
+} while ($listaDeStreamsDeArquivos !== []);
+</code></pre>
+
+<h3 id="explica%C3%A7%C3%A3o">Explicação</h3>
+
+<h4 id="prepara%C3%A7%C3%A3o">Preparação</h4>
+
+<p>Como eu disse, não é muito fácil, então vamos por partes. Primeiro abrimos todos os arquivos que queremos ler com o <code>fopen</code>. Até aí sem segredo. Depois, informamos com a função <code>stream_set_blocking</code> que o recurso deve ser aberto em modo não-bloqueante - assim, o processo que acessa o arquivo não bloqueará a CPU por causar um estado de espera ao tentar acessar os arquivos.</p>
+
+<p>Nesse ponto, temos um array com 5 recursos abertos para podermos trabalhar com estes streams. Então analisando o este pedaço de código:</p>
+
+<pre><code class="php">$listaDeStreamsDeArquivos = [
+    fopen('arquivo1.txt', 'r'),
+    fopen('arquivo2.txt', 'r'),
+    fopen('arquivo3.txt', 'r'),
+    fopen('arquivo4.txt', 'r'),
+    fopen('arquivo5.txt', 'r'),
+];
+
+var_dump($listaDeStreamsDeArquivos);
+</code></pre>
+
+<p>Teríamos a seguinte saída:</p>
+
+<pre><code class="php">array(5) {
+  [0]=&gt;
+  resource(5) of type (stream)
+  [1]=&gt;
+  resource(6) of type (stream)
+  [2]=&gt;
+  resource(7) of type (stream)
+  [3]=&gt;
+  resource(8) of type (stream)
+  [4]=&gt;
+  resource(9) of type (stream)
+}
+</code></pre>
+
+<p>Depois disso que começa a parte difícil. A chamada para a função <code>stream_select</code> deve estar em um loop, porque pode acontecer de nem todos os streams estarem prontos para leitura logo de cara.</p>
+
+<h4 id="par%C3%A2metros">Parâmetros</h4>
+
+<p>Segundo detalhe importante: os parâmetros. O 3 primeiros parâmetros dessa função são passados por referência. Por isso o segundo e terceiro são variáveis que nós nem tínhamos definido ainda. O primeiro parâmetro é a lista de streams que queremos observar para ler. O segundo é para escrita. Já o terceiro, menos comum, é para dados excepcionais que possuem maior prioridade. Os 2 últimos parâmetros são sobre timeout.</p>
+
+<p>O parâmetro passado como 1 indica o número de segundos que essa função deve esperar receber uma notificação de novidade nos streams até "desistir", ou seja, o timeout. Esse é o motivo pelo qual ela deve estar em um loop. Se esse tempo passar e nós não tivermos novidade, devemos tentar de novo depois. Caso algum (não necessariamente todos) stream esteja pronto antes desse 1 segundo, a função retornará. O último parâmetro, que informamos como 0, indica o tempo em microsegundos para timeout.</p>
+
+<h4 id="retorno-e-leitura">Retorno e leitura</h4>
+
+<p>Agora vamos falar do retorno. Essa função retorna o número de streams que contém modificações. No nosso caso, vai informar quantos arquivos estão prontos para leitura. Porém em caso de erro essa função nos retorna o valor <code>false</code>.</p>
+
+<p>Além disso, os parâmetros que nós passamos podem ter sido modificados. Por isso eu realizo uma cópia da lista original de streams em <code>$arquivosParaLer = $listaDeArquivos;</code>. Após o retorno da função, o parâmetro passado vai conter apenas os streams que possuem novidades, ou seja, no nosso caso, os arquivos que estão prontos para leitura.</p>
+
+<p>Para exemplificar, vamos supor que na primeira execução do loop todos os arquivos já estejam disponíveis. Nesse caso, analisando os valores das variáveis, podemos entender o que está acontecendo. Analisando então o valor de <code>$streamsComNovidades</code>, teríamos <code>int(5)</code> como resultado deste cenário.</p>
+
+<p>Já analisando ambos arrays de streams (<code>$listaDeStreamsDeArquivos</code> e <code>$streamsParaLer</code>), teríamos exatamente o mesmo resultado:</p>
+
+<pre><code class="php">array(5) {
+  [0]=&gt;
+  resource(5) of type (stream)
+  [1]=&gt;
+  resource(6) of type (stream)
+  [2]=&gt;
+  resource(7) of type (stream)
+  [3]=&gt;
+  resource(8) of type (stream)
+  [4]=&gt;
+  resource(9) of type (stream)
+}
+array(5) {
+  [0]=&gt;
+  resource(5) of type (stream)
+  [1]=&gt;
+  resource(6) of type (stream)
+  [2]=&gt;
+  resource(7) of type (stream)
+  [3]=&gt;
+  resource(8) of type (stream)
+  [4]=&gt;
+  resource(9) of type (stream)
+}
+</code></pre>
+
+<p>Agora caso na primeira execução tivéssemos apenas 3 dos 5 arquivos prontos, e analisássemos os 3 valores anteriores, teríamos ter algo como:</p>
+
+<pre><code class="php">var_dump($streamsComNovidades, $listaDeStreamsDeArquivos, $streamsParaLer);
+</code></pre>
+
+<pre><code class="php">int(3)
+array(5) {
+  [0]=&gt;
+  resource(5) of type (stream)
+  [1]=&gt;
+  resource(6) of type (stream)
+  [2]=&gt;
+  resource(7) of type (stream)
+  [3]=&gt;
+  resource(8) of type (stream)
+  [4]=&gt;
+  resource(9) of type (stream)
+}
+array(3) {
+  [0]=&gt;
+  resource(5) of type (stream)
+  [2]=&gt;
+  resource(7) of type (stream)
+  [4]=&gt;
+  resource(9) of type (stream)
+}
+</code></pre>
+
+<p>Onde, nesse caso, o segundo array exibido é o de <code>$streamsParaLer</code>, e possui apenas os 3 arquivos prontos para leitura.</p>
+
+<p>Sendo assim, posso percorrer este array tendo a certeza de que há dados para ler e processar. Mas não há garantia de que todo o conteúdo do arquivo estará lá, por isso verifico se cheguei ao fim do arquivo com <code>feof</code>. Para arquivos pequenos, via de regra, todo o conteúdo virá de uma vez só, mas não conte com isso e prepare seu código para ler até mesmo um único byte por vez.</p>
+
+<p>Após ler todo o arquivo, devemos fechá-lo. Mas um outro detalhe importante é que eu também o removo da lista original de streams que queremos ler. Faço isso para que caso seja necessária uma nova iteração no loop, ou seja, caso nem todos os arquivos tenham sido lidos, eu não tente ler novamente os arquivos que já foram lidos e fechados.</p>
+
+<p>Com isso temos nossa condição de saída do loop. Quando todos os arquivos tiverem sido removidos e minha lista estiver vazia, sei que processei todos os arquivos.</p>
+
+<p>PS.: A função <code>stream_set_blocking</code> só surte efeito com arquivos e sockets. Os outros wrappers, com esta técnica, não podem ser lidos de forma assíncrona e não bloqueante.</p>
+
+<h2 id="conceitos">Conceitos</h2>
+
+<p>Esse código obviamente pode ser refatorado para torná-lo um pouco mais legível, mas acredito que a lógica por trás dele tenha ficado clara. Caso contrário, você pode usar a sessão de comentários dessa página para fazer perguntas.</p>
+
+<p>O que nós escrevemos de forma rudimentar aqui pode ser visto como uma implementação do que é conhecido como <em>Event Loop</em>, ou loop de eventos. Você provavelmente já ouviu esse termo se estuda sobre a runtime Node.js.</p>
+
+<p>Claro que essa implementação não é completa ou otimizada, mas atende nosso propósito: ler arquivos conforme eles fiquem prontos para leitura. Dessa forma nós vamos pedir para que o sistema operacional prepare todos os arquivos para leitura de uma só vez.</p>
+
+<p>As vantagens nessa abordagem assíncrona são mais perceptíveis quando temos operações mais lentas como chamadas HTTP, por exemplo. Mas isso aumentaria a complexidade do código para este artigo.</p>
+
+<h2 id="conclus%C3%A3o">Conclusão</h2>
+
+<p>Claro que o PHP já possui ferramentas que realizam este trabalho de forma muito mais simples. ReactPHP com seu pacote de Streams é um ótimo exemplo.</p>
+
+<p>Mas seguindo o que citei no post sobre aprendizado, eu penso como <a href="https://pt.wikipedia.org/wiki/Richard_Feynman">Richard Feynman</a> (Nobel de física): "O que eu não consigo criar, eu não entendo". Então antes de utilizar uma ferramenta que realiza o trabalho para mim, eu gosto de saber como realizar este trabalho sem ela. Com isso, se algum problema acontecer com a biblioteca, por exemplo, eu vou estar mais preparado para resolvê-lo já que eu entendo um pouco melhor como as coisas funcionam.</p>
+
+<p>Se você quiser aprender mais sobre algum desses assuntos, pode considerar assinar a Alura. Lá existem treinamentos (gravados por mim) sobre PHP Streams, ReactPHP e muito mais. Caso pretenda estudar na Alura, <a href="https://www.alura.com.br/promocao/diasdedev">neste link</a> você tem um desconto de 10%.</p>
+]]></content>
+        </entry>
+    </feed>

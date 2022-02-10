@@ -1,0 +1,1396 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <title><![CDATA[Dias de Dev]]></title>
+    <link href="https://dias.dev//atom.xml" rel="self"/>
+    <link href="https://dias.dev//"/>
+    <updated>2022-02-10T03:26:17+00:00</updated>
+    <id>https://dias.dev//</id>
+        <generator uri="http://sculpin.io/">Sculpin</generator>
+            <entry>
+            <title type="html"><![CDATA[O que são PWAs?]]></title>
+            <link href="https://dias.dev//2021-09-14-o-que-sao-pwas/"/>
+            <updated>2021-09-14T00:00:00+00:00</updated>
+            <id>https://dias.dev//2021-09-14-o-que-sao-pwas/</id>
+            <content type="html"><![CDATA[<p><em>Progressive Web Apps</em>, como o nome mesmo já diz, são aplicativos <em>web</em> progressivos. Vamos falar um pouco mais sobre a parte de "progressivos", mas o básico é isso: Um aplicativo que roda no "mundo <em>web</em>"</p>
+
+<h2 id="aplicativo-na-web%3F">Aplicativo na Web?</h2>
+
+<p>Quando falamos de aplicativos, principalmente móveis, pensamos logo em acessar uma loja de aplicativos, escolher um disponível e instalar. Pensamos em todo o poder que estes aplicativos têm de controlar o <em>hardware</em> de nossos dispositivos. Mas será que precisa ser assim?</p>
+
+<p>Primeiro, precisamos mesmo de uma loja? Por que não pesquisar diretamente no Google um serviço ao invés de pesquisar em uma loja de aplicativos? Segundo, será que só aplicativos móveis "nativos" são capazes de controlar o <em>hardware</em> dos dispositivos onde eles rodam?</p>
+
+<p><img src="https://web-dev.imgix.net/image/tcFciHGuF3MxnTr1y5ue01OGLBn2/1DKtUFjXLJbiiruKA9P1.svg" alt="Gráfico mostrando a relação entre capacidade e alcance de PWAs e aplicações nativas e serviços web, onde PWAs possuem tanta capacidade quanto um aplicativo nativo e tanto alcance quanto um serviço Web" class="big-image" /></p>
+
+<h2 id="o-poder-da-web">O poder da Web</h2>
+
+<p>A <em>Web</em> evoluiu absurdamente nas últimas décadas e trouxe muito poder para nós <em>devs</em>. Coisas que antigamente seriam impensáveis sem instalar de forma "nativa" uma aplicação, hoje é trivial de ser feito diretamente no navegador. Alguns exemplos:</p>
+
+<ul>
+<li>Acessar à câmera;</li>
+<li>Disponibilidade offline;</li>
+<li>Acesso ao GPS;</li>
+<li>Execução de tarefas no plano de fundo;</li>
+<li>etc.</li>
+</ul>
+
+<p>Hoje em dia é perfeitamente possível que após acessar um aplicativo <em>web</em>, os próximos acessos possam ser feitos sem uma conexão ativa com a <em>internet</em>. Além disso é muito comum aplicativos <em>web</em> acessarem recursos nativos como localização, sistema de sons, baterias, etc.</p>
+
+<p>Aqui você pode conferir algumas <em>APIs Web</em> para ter acesso a recursos que antigamente só eram possíveis através de aplicações nativas: https://developer.mozilla.org/en-US/docs/Web/API</p>
+
+<h2 id="aplica%C3%A7%C3%B5es-progressivas">Aplicações progressivas</h2>
+
+<p>Já vimos que através da <em>Web</em> podemos ter acesso a recursos muito poderosos, mas o que significa o <strong>P</strong> de PWA?</p>
+
+<p>PWAs são aplicações progressivas, ou seja, se adaptam a diferentes cenários e dispositivos.</p>
+
+<p>Um exemplo já citado de cenário adverso: dispositivo sem conexão com a <em>internet</em>. Quando você acessa o aplicativo móvel do Twitter sem estar conectado a <em>internet</em>, ele te mostra os <em>tweets</em> que já foram carregados anteriormente. Ou seja, a sua experiência é degradada, mas o aplicativo continua funcionando. A ideia de PWAs é exatamente essa.</p>
+
+<p>Se você tentar acessar uma PWA que precisa da localização do usuário a partir de um dispositivo sem GPS, a aplicação deve estar preparada para buscar a localização menos precisa (através da rede) ou solicitar o endereço ao usuário. Com isso, quanto mais recursos o dispositivo tiver, melhor será a experiência. Em outras palavras, teremos uma experiência <strong>progressiva</strong>.</p>
+
+<h2 id="posso-instalar-%22sites%22%3F">Posso instalar "sites"?</h2>
+
+<p>Uma dúvida comum ao aprender sobre PWAs é sobre a instalação da aplicação. Não seria prático que um usuário precisasse abrir o navegador e digitar a URL da nossa aplicação sempre que quisesse acessá-la. Com aplicativos nativos nós temos os ícones na tela inicial do dispositivo.</p>
+
+<p>Outro ponto é que um aplicativo possui uma experiência mais imersiva, sem interferências de outras abas do navegador, além de barras de ferramentas, etc.</p>
+
+<p><img src="/build/pwa/pwa-ifood.jpg" alt="Tela da PWA do ifood, que é exatamente igual ao aplicativo nativo" class="big-image" /></p>
+
+<p>Como podemos ver, uma PWA pode se comportar visualmente exatamente como uma aplicação nativa. As barras do navegador podem sumir, a cor da barra de notificação pode ser personalizada, etc.</p>
+
+<p>Além do mais, podemos optar por criar um atalho para essa aplicação web direto em nossa tela inicial:</p>
+
+<p><img src="/build/pwa/menu-instalar-ifood.jpg" alt='Tela do navegador com o menu aberto, mostrando a opção de "Adicionar à tela inicial"' class="big-image" /></p>
+
+<p>Mas claro, nem todo usuário vai abrir o menu do navegador para adicionar um atalho à tela inicial. O ideal seria poder ter um botão de instalar essa aplicação para que o usuário não tenha esse "esforço".</p>
+
+<p><img src="/build/pwa/tela-instalacao-uber.jpg" alt="Mensagem sugerindo a instalação da PWA do uber sem precisar abrir o menu do navegador" class="big-image" /></p>
+
+<p>Conforme podemos ver na imagem anterior, isso também é perfeitamente possível. Além de termos um botão na aplicação para instalá-la, o próprio navegador ao identificar uma PWA pode sugerir sua instalação. A ideia é que isso fiquei cada vez mais natural, inclusive, com os navegadores tomando decisões mais assertivas ao fazer tais sugestões.</p>
+
+<h2 id="como-desenvolver-pwas%3F">Como desenvolver PWAs?</h2>
+
+<p>Como sou um desenvolvedor Web, o assunto de PWAs me anima bastante. A ideia deste post não é te ensinar a desenvolver PWAs, mas sim te apresentar ao conceito. Caso você tenha interesse na parte prática, vou deixar aqui algumas referências.</p>
+
+<p>Se você aprende melhor lendo, esse livro é um ótimo início:</p>
+
+<div class="iframe">
+    <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//ws-na.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&OneJS=1&Operation=GetAdHtml&MarketPlace=BR&source=ss&ref=as_ss_li_til&ad_type=product_link&tracking_id=cviniciussd06-20&language=pt_BR&marketplace=amazon&region=BR&placement=B07BZK71NV&asins=B07BZK71NV&linkId=39b9fcf31f08c2d76b0d6f4284cb6a60&show_border=true&link_opens_in_new_window=true"></iframe>
+</div>
+
+<p>Porém uma desvantagem (na minha opinião) deste livro é o uso de React para a criação da aplicação. Eu gosto mais de conteúdos conceituais, que explicam a base sem o uso de muitas ferramentas.</p>
+
+<p>Se você também prefere esse tipo de conteúdo, pode dar uma olhada nesse livro (um pouco mais caro):</p>
+
+<div class="iframe" style="margin-bottom: 1rem;">
+    <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//ws-na.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&OneJS=1&Operation=GetAdHtml&MarketPlace=BR&source=ss&ref=as_ss_li_til&ad_type=product_link&tracking_id=cviniciussd06-20&language=pt_BR&marketplace=amazon&region=BR&placement=B075HP52WY&asins=B075HP52WY&linkId=955ce63a435057d47ccd0bd81620193c&show_border=true&link_opens_in_new_window=true"></iframe>
+</div>
+
+<p>Agora se você prefere estudar através de cursos e vídeos, super recomendo os treinamentos de front-end e de PWA da Alura. Lá você consegue toda a base para desenvolver uma PWA de forma profissional, aprendendo desde a base, passando por <em>JavaScript</em> avançado e <em>APIs Web</em>, até <em>PWAs</em> de fato. Se for o seu caso, aqui tenho um cupom de 10% de desconto para estudar na Alura:
+<a href="https://www.alura.com.br/promocao/diasdedev">https://www.alura.com.br/promocao/diasdedev</a></p>
+]]></content>
+        </entry>
+            <entry>
+            <title type="html"><![CDATA[Charsets e Encodings: Como strings funcionam]]></title>
+            <link href="https://dias.dev//2021-08-24-charsets-e-encodings-como-strings-funcionam/"/>
+            <updated>2021-08-24T00:00:00+00:00</updated>
+            <id>https://dias.dev//2021-08-24-charsets-e-encodings-como-strings-funcionam/</id>
+            <content type="html"><![CDATA[<p>É de conhecimento geral que computadores trabalham com números, especificamente números na base binária. Sabendo disso, como podemos representar o texto que eu estou escrevendo apenas com conjuntos de 0s e 1s? Como o computador, trabalhando apenas com números, consegue lidar com textos?</p>
+
+<h2 id="tabelas-de-caracteres-charsets">Tabelas de caracteres (Charsets)</h2>
+
+<p>Para realizar essa tarefa, tabelas de caracteres (<em>charsets</em>) são utilizadas. Com essas tabelas, algum caractere pode ser mapeado para algum número. Esse número que será armazenado e manipulado pelos programas que lidam com textos. Mas como esse mapeamento é feito?</p>
+
+<h2 id="ascii">ASCII</h2>
+
+<p>Uma das tabelas de caracteres mais antigas que se tem conhecimento é a ASCII (<em>American Standard Code for Information Interchange</em>). Esta tabela contém todos os números e os caracteres usados pelo idioma inglês, onde cada um desses caracteres é mapeado para um número e esse número é convertido diretamente para a base binária, sendo uma representação bastante simples. Os números vão de 0 a 127, ou seja, qualquer caractere da tabela ASCII pode ser representado em até 7 <em>bits</em>, o que é menos que 1 <em>byte</em> (1 <em>byte</em> = 8 <em>bits</em>).</p>
+
+<p><img src="https://raw.githubusercontent.com/wiki/tomgibara/ascii-table/tables/ascii-table-1.1.png" alt="Tabela ASCII" /></p>
+
+<p>Isso funcionava muito bem para textos que usavam inglês como idioma (ou algum idioma com o mesmo conjunto de caracteres). Porém, diversos outros idiomas possuem caracteres que não estão representados nesta tabela. Caracteres acentuados, por exemplo, não estão na tabela ASCII. Como representar textos em português, por exemplo?</p>
+
+<h2 id="extended-ascii">Extended ASCII</h2>
+
+<p>Como pudemos ver na imagem da tabela ASCII, os valores vão de 0 a 127. Isso pode ser representado com 7 <em>bits</em>.</p>
+
+<p>Como foi citado no capítulo anterior, todos os caracteres da tabela ASCII podem ser representados com até 7 <em>bits</em>. Sendo assim, temos 1 bit "sobrando" para cada caractere completar 1 <em>byte</em>.</p>
+
+<p>Pensando nisso, surgiram diversas outras tabelas de caracteres fazendo uso deste bit adicional para representar outros caracteres. Desta forma é criada a tabela ASCII estendida: <em>Extended ASCII</em> ou <em>EASCII</em></p>
+
+<p><img src="https://files.passeidireto.com/0b57a2e8-7fae-4e06-ac73-a7004f09a741/0b57a2e8-7fae-4e06-ac73-a7004f09a741.gif" alt="Tabela ASCII Estendida" /></p>
+
+<p>Ao mesmo tempo, outros idiomas que possuem seu alfabeto sem nenhuma semelhança com o inglês (como japonês ou russo) utilizavam tabelas completamente diferentes para representar seus caracteres.</p>
+
+<h2 id="ascens%C3%A3o-da-web">Ascensão da Web</h2>
+
+<p>O uso de tabelas diferentes funcionou muito bem enquanto os arquivos ficavam apenas em um computador ou eram compartilhados em redes locais (como de universidades). Porém, conforme a Web nasceu e cresceu, o compartilhamento de arquivos se tornou uma tarefa trivial. Como eu, no Brasil, poderia enviar um documento para o Egito, usando o alfabeto grego? Essa tarefa era simplesmente impossível.</p>
+
+<h2 id="unicode">Unicode</h2>
+
+<p>Pensando em ter uma forma unificada de representar todos os caracteres conhecidos no mundo, em 1991 foi criada o <em>Unicode Consortium</em>. Essa iniciativa trabalha e tem encontros frequentes para garantir que há suporte a todos os idiomas e caracteres conhecidos pela humanidade, incluindo <em>emojis</em>. Parece um trabalho enorme e realmente é.</p>
+
+<p><em>Emojis</em>, por exemplo, foram sugeridos à iniciativa em meados de 2000, porém apenas após 2007 eles foram incorporados ao <em>Unicode</em>.</p>
+
+<p>Então, se formos supersimplificar (muito), podemos dizer que o <em>Unicode Consortium</em> criou um grande <em>charset</em>, ou seja, uma grande tabela de caracteres. Porém, essa "tabela" é gigante! Como representar estes números enormes de forma eficiente?</p>
+
+<h2 id="encodings">Encodings</h2>
+
+<p>Aqui entram os encodings. O número <strong>128 512</strong> (em hexadecimal, 1F600) representa o emoji de sorriso (😀). Esse número <strong>128 512</strong> pode ser representado de várias formas dependendo do encoding selecionado para tal arquivo. Alguns encodings compatíveis com <em>Unicode</em> são:
+- UTF-8
+- UTF-16
+- UTF-32</p>
+
+<p>Inicialmente eu acreditava que a diferença entre eles era apenas o número de <em>bits</em> utilizado, sendo assim UTF-8 poderia representar menos caracteres já que usa menos bits. Não é o caso. Todos eles podem consumir um número variável de <em>bits</em> os organizando de forma diferente. Cada encoding pode ser mais vantajoso dependendo do cenário. Para representar textos (como esse que escrevo) e mensagens transferidas pela rede, UTF-8 é o mais recomendado e utilizado, visto que sua organização permite que os caracteres mais comuns ocupem o menor espaço possível. Já UTF-16 ocupa menos espaço representando caracteres com números maiores na "tabela" unicode.</p>
+
+<h2 id="conclus%C3%A3o">Conclusão</h2>
+
+<p>É comum utilizarmos funções de conversão de encoding sem entender bem o que estamos fazendo e muito provavelmente todo mundo que desenvolve <em>software</em> para a <em>web</em> já se deparou com o seguinte problema:</p>
+
+<p><img src="https://i.stack.imgur.com/590Tg.png" alt="Texto com caracteres mal codificados" /></p>
+
+<p>Entender como funcionam charsets e encodings de texto além de ser interessante e divertido, pode nos ajudar a compreender melhor problemas deste tipo e principalmente encontrar a solução de forma mais simples.</p>
+
+<p>Creio que seja seguro afirmar que a grande maioria dos textos que tratamos como desenvolvedores utiliza UTF-8 como encoding e neste artigo nós entendemos o motivo disso e como o tratamento de textos evoluiu até chegar a esse ponto.</p>
+
+<p>Se você quiser aprender mais sobre esse assunto, pode considerar assinar a Alura. Lá existem treinamentos que tratam sobre charsets, encoding, manipulação de <em>strings</em>    e muito mais. Caso pretenda estudar na Alura, <a href="https://www.alura.com.br/promocao/diasdedev">neste link</a> você tem um desconto de 10%.</p>
+]]></content>
+        </entry>
+            <entry>
+            <title type="html"><![CDATA[Como o PHP funciona na Web?]]></title>
+            <link href="https://dias.dev//2021-06-15-como-o-php-funciona-na-web/"/>
+            <updated>2021-06-15T00:00:00+00:00</updated>
+            <id>https://dias.dev//2021-06-15-como-o-php-funciona-na-web/</id>
+            <content type="html"><![CDATA[<p>O PHP é o que conhecemos como linguagem <em>server-side</em>, ou seja, ele roda nos servidores web, e não nos navegadores.</p>
+
+<p>Isso já é de conhecimento geral, mas nem todos entendem como uma requisição sai do navegador e chega em seu código PHP. É exatamente sobre isso que vamos tratar neste artigo.</p>
+
+<h2 id="como-funciona-a-web%3F">Como funciona a Web?</h2>
+
+<p>Antes de falarmos sobre o papel do PHP na Web, é muito importante entendermos como a Web funciona. O protocolo HTTP é o que torna toda a comunicação entre nosso navegador e servidores, possível, então é de suma importância que a gente estude ele.</p>
+
+<p>Neste vídeo eu expliquei um pouco de como funciona o processo desde quando damos <em>Enter</em> em nosso navegador até termos uma resposta em nossa tela. Vale a pena conferir antes de continuar lendo este artigo:</p>
+
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/B2IWlnJ_dt0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<p>Existem várias outras referências (inclusive mais completas) para você conhecer as tecnologias por trás da Web. Vou deixar aqui algumas referências:
+- <a href="https://amzn.to/3lzFVkD">Desconstruindo a Web: As tecnologias por trás de uma requisição</a>
+- <a href="https://amzn.to/35k9rT1">HTTP: The Definitive Guide</a>
+- <a href="https://amzn.to/3gEgz22">Learning Http/2: A Practical Guide for Beginners</a>
+- <a href="https://www.alura.com.br/promocao/diasdedev">Cursos de HTTP na Alura</a></p>
+
+<p>Com esse conhecimento, já podemos partir para o foco deste artigo: como o <strong>PHP</strong> funciona na Web?</p>
+
+<h2 id="cgi-_common-gateway-interface_">CGI (<em>Common Gateway Interface</em>)</h2>
+
+<p>A primeira forma de se executar código em servidores ao receber uma requisição HTTP foi através de uma técnica chamada CGI (<em>Common Gateway Interface</em>).</p>
+
+<p>Esta técnica consistia em basicamente um servidor Web (como Apache, por exemplo) receber uma requisição HTTP e executar um processo enviando os dados da requisição através da entrada padrão. A saída do processo era lida pelo servidor Web e devolvida em uma resposta HTTP.</p>
+
+<p>Assim o PHP nasceu, sendo uma espécie de <em>framework</em> C. O Apache executava um programa escrito em C, onde PHP era um conjunto de ferramentas para facilitar a escrita, principalmente de <em>templates</em> (para não misturar C e HTML).</p>
+
+<p>Esta é a forma mais rudimentar de se executar um código <em>server-side</em> e não é mais recomendada, pois há alternativas mais interessantes que veremos neste artigo.</p>
+
+<h2 id="apache-mod_php">Apache mod_php</h2>
+
+<p>Conforme o PHP (e a Web em si) foi evoluindo, a abordagem utilizando CGI foi se mostrando ineficaz, desperdiçando recursos de processamento.</p>
+
+<p>Neste momento surgiu um módulo do PHP para Apache, o famoso <code>mod_php</code>. Esse módulo "anexava" um executável do PHP em cada processo do Apache, ou seja, a cada processo que o Apache criava para servir uma requisição, o executável do PHP era também inicializado, mesmo que a requisição fosse apenas para servir arquivos estáticos e o PHP não fosse necessário.</p>
+
+<p>Isso era muito mais rápido do que utilizar CGI, mas ainda havia muito desperdício de recursos. O apache evoluiu a ponto de não precisar criar um processo a cada nova requisição e passou a trabalhar com <em>threads</em>, mas além dessa evolução ter demorado para acontecer, esse modelo não funciona bem com o <code>mod_php</code>.</p>
+
+<h2 id="fastcgi-e-php-fpm">FastCGI e PHP-FPM</h2>
+
+<p>Com a nova solução do <code>mod_php</code> também se mostrando ineficaz perante a tantas evoluções do PHP e da Web (ambos sempre cresceram juntos), o protocolo FastCGI passou a ser utilizado. Com isso, um servidor Web recebia as requisições e apenas se fosse necessário algum processamento, executaria o PHP.</p>
+
+<p>Porém, essa execução não era como no CGI. Um conceito de "processos persistentes" foi utilizado, diminuindo muito a quantidade de recursos necessários para processar cada requisição. Um único processo agora passa a ser capaz de tratar diversas requisições e não apenas uma. Com isso todo o <em>overhead</em> de criar e matar processos a cada requisição foi drasticamente reduzido.</p>
+
+<p>Para extrair o máximo do protocolo FastCGI, foi desenvolvida uma ferramenta chamada PHP-FPM (<em>FastCGI Process Manager</em>). Este servidor de aplicação permite que realizemos diversas configurações como o número de processos <em>workers</em>, a quantidade de recursos liberada para cada processo e muito mais. Este é o software utilizado atualmente para termos um servidor FastCGI em produção com PHP.</p>
+
+<p>Atualmente, qualquer servidor web que saiba se comunicar através do protocolo FastCGI pode ser utilizado em conjunto com PHP, mas o <em>Nginx</em> ganhou muita força por prometer (e segundo benchmarks, cumprir) entregar diversas melhorias de performance em relação ao Apache. Os recursos são mais bem gerenciados e o uso de programação assíncrona através de <em>multiplexing</em> de I/O trazem ganhos expressivos quando comparamos com o ainda amplamente utilizado Apache.</p>
+
+<h2 id="arquitetura-_share-nothing_">Arquitetura <em>share-nothing</em></h2>
+
+<p>Em qualquer uma das abordagens citadas até agora, uma das principais filosofias do PHP se mantém: a <em>share-nothing architecture</em>.</p>
+
+<p>A ideia por trás disso é não compartilhar nenhum recurso entre uma requisição e outra. Por mais que o mesmo processo possa ser utilizado para servir múltiplas requisições, em nosso código, cada execução é como um novo processo. Ao finalizar a execução de um código PHP, todas as variáveis são excluídas, todos os recursos são liberados. Praticamente nada é armazenado entre uma requisição e outra.</p>
+
+<p>Isso permitiu e ainda permite que o PHP tenha uma arquitetura muito simples de escalar e isso é um dos fatores que contribuíram para a ampla adoção do PHP como linguagem back-end Web.</p>
+
+<p>A abordagem utilizando Nginx + PHP-FPM é a ideal para grande parte das aplicações que usam PHP, porém existem cenários onde ainda mais performance é necessária.</p>
+
+<h2 id="servidores-auto-contidos">Servidores auto-contidos</h2>
+
+<p>Quando temos milhões de requisições chegando ou comunicação em tempo real acontecendo, o fato de ser necessária a inicialização de todas as variáveis novamente e o início do código de toda nossa aplicação ter que ser realizada a cada requisição pode ser um peso. Imagine que a cada requisição seu <em>framework</em> favorito (que provavelmente é bem pesado) precisa ser inicializado novamente.</p>
+
+<p>Para resolver os problemas deste tipo de aplicação que demanda um nível a mais de performance, servidores auto-contidos podem ser utilizados. Um servidor auto-contido é um serivdor web exposto pela própria aplicação, ou seja, seu próprio código PHP recebe diretamente as requisições.</p>
+
+<p>Com isso a inicialização da sua aplicação pode ser feita uma única vez e a cada nova requisição, podemos somente executar o código necessário, sem necessidade de levantar de novo o <em>framework</em>, buscar as configurações, ler variáveis de ambiente, processar as dependências, definir as rotas, etc.</p>
+
+<p>Essa abordagem já é possível há muito tempo. Um dos precursores desta técnica é o <a href="https://github.com/php-pm/php-pm">PHP-PM</a> que usa o <a href="https://reactphp.org/">ReactPHP</a> por baixo dos panos. O ReactPHP facilita a execução de código assíncrono e não bloqueante no PHP através de um <em>Event Loop</em>. Nós falamos um pouco sobre programação assíncrona <a href="/2020-09-16-php-assincrono-de-forma-nativa/">neste post</a>. O ReactPHP torna esta tarefa MUITO mais fácil, por isso ferramentas como PHP-PM puderam surgir.</p>
+
+<p>Outros <em>frameworks</em> como <a href="https://amphp.org/">Amp PHP</a> têm a mesma proposta, porém uma ferramenta um pouco diferente tem chamado muita atenção nos últimos anos e levado essa proposta para outro nível</p>
+
+<h2 id="swoole">Swoole</h2>
+
+<p>É impossível falar de servidores auto-contidos PHP e não citar o <a href="https://www.swoole.co.uk/">Swoole</a>.</p>
+
+<p>A principal diferença entre o Swoole e as demais ferramentas citadas de servidores auto-contidos é que o Swoole não é um componente em PHP e sim uma extensão, ou seja, o Swoole foi escrito em C e compilado para ser "integrado" ao PHP. Isso além de conceder ainda mais performance para o código, ainda dá poderes a mais para o Swoole como lidar de forma assíncrona com código que originalmente seria síncrono (como com PDO e curl, por exemplo).</p>
+
+<p>Já existe material por aí sobre Swoole, inclusive <a href="https://youtu.be/GCECSLtT49U">esse vídeo</a> no meu canal e o <a href="https://amzn.to/3gxamov">livro</a> escrito por um dos criadores da ferramenta, por isso não vou transformar esse artigo em um tutorial, mas vale a pena pesquisar mais a fundo.</p>
+
+<h2 id="conclus%C3%A3o">Conclusão</h2>
+
+<p>Vimos neste artigo que há várias formas para fazer com que uma requisição chegue no PHP. Algumas bem antigas, outras bem modernas.</p>
+
+<p>Atualmente as 2 opções aceitáveis são utilizando PHP-FPM ou algum servidor auto-contido. Nenhuma das 2 abordagens tira o papel de servidores Web como o amado Apache ou o moderno Nginx.</p>
+
+<p>No caso do PHP-FPM precisamos de um servidor para receber as requisições HTTP e enviar as chamadas para o PHP com FastCGI. No caso de um servidor auto-contido, podemos ter um proxy reverso servindo os arquivos estáticos e realizando cache, por exemplo, enquanto o servidor auto-contido responde apenas as requisições realmente necessárias.</p>
+
+<p>Se você quiser aprender mais sobre algum desses assuntos, pode considerar assinar a Alura. Lá existem treinamentos (gravados por mim) sobre Nginx, ReactPHP, Swoole e muito mais. Caso pretenda estudar na Alura, <a href="https://www.alura.com.br/promocao/diasdedev">neste link</a> você tem um desconto de 10%.</p>
+]]></content>
+        </entry>
+            <entry>
+            <title type="html"><![CDATA[Por que não usar XAMPP]]></title>
+            <link href="https://dias.dev//2021-04-10-por-que-nao-usar-xampp/"/>
+            <updated>2021-04-10T00:00:00+00:00</updated>
+            <id>https://dias.dev//2021-04-10-por-que-nao-usar-xampp/</id>
+            <content type="html"><![CDATA[<p>Umas das perguntas mais frequentes que vejo em comunidades de iniciantes em PHP são:
+- Como instalar o XAMPP?
+- Como configurar URLs amigáveis no XAMPP?
+- Por que o MySQL não funciona com XAMPP?</p>
+
+<p>A resposta que eu gostaria de dar geralmente é: “pare de usar XAMPP!”, mas sempre tento ajudar.</p>
+
+<p>A ideia desse artigo é expor a razão para eu não recomendar XAMPP e acreditar que essa ferramenta traz muito mais
+problemas do que solução.</p>
+
+<h2 id="o-que-%C3%A9-e-para-que-serve-xampp%3F">O que é e para que serve XAMPP?</h2>
+
+<p>Antes de falarmos os motivos de não usar XAMPP, é importante entendermos o que é a ferramenta. XAMPP é uma sigla para
+<strong>A</strong>pache, <strong>M</strong>ySQL, <strong>P</strong>HP e <strong>P</strong>earl, sendo o <strong>X</strong> inicial para identificar que esta ferramenta é multiplataforma
+(funciona em Windows, Linux e Mac).</p>
+
+<h2 id="qual-o-problema-dessa-abordagem%3F">Qual o problema dessa abordagem?</h2>
+
+<p>Existem alguns problemas com o uso dessa ferramenta, principalmente por iniciantes (que são justamente o público alvo da
+ferramenta).</p>
+
+<h3 id="processo-de-aprendizado">Processo de aprendizado</h3>
+
+<p>Ao aprender Java, C#, C ou alguma outra linguagem considerada mais <em>enterprise</em>, é comum aprendermos a sintaxe primeiro,
+rodando simples códigos na linha de comando. Depois estudamos um pouco sobre o paradigma principal usado na linguagem e
+só então, se for o caso de uma linguagem Web, aprendemos a usá-la na Web.</p>
+
+<p>Por que um iniciante aprenderia a usar PHP na Web configurando um Apache e se conectando a um banco MySQL tudo de uma
+vez só?</p>
+
+<p>Infelizmente muitos treinamentos que encontramos pela internet são ministrados por pessoas que não se atualizaram e nem
+ao menos trabalham com as tecnologias que se propõem a ensinar.</p>
+
+<h3 id="dificuldades-desnecess%C3%A1rias">Dificuldades desnecessárias</h3>
+
+<p>Supondo que você já conheça a linguagem e queira apenas um ambiente simplificado para continuar seus estudos. Como ter
+Apache, MySQL e Pearl instalados na sua máquina pode te ajudar? Problemas de configuração no Apache, configurações
+específicas para frameworks… Essas complicações infelizmente são muito comuns e geradas pelo XAMPP quando talvez tudo que
+precisávamos era do PHP instalado.</p>
+
+<h2 id="o-que-aprender-primeiro%3F">O que aprender primeiro?</h2>
+
+<p>Minha recomendação sempre é para aprender primeiro a linguagem que se vai utilizar. Como estamos falando do XAMPP,
+aprender PHP. Estude a sintaxe da linguagem, entenda como aplicar os conceitos de lógica de programação usando a
+linguagem. Estude sobre Orientação a Objetos, aprenda a organizar um código de exemplo. Só depois você vai pensar em
+usar PHP no mundo da Web. E quando chegar o momento, você não vai sair de cara configurando um servidor Web como o
+Apache.</p>
+
+<h2 id="como-usar-php-sem-xampp%3F">Como usar PHP sem XAMPP?</h2>
+
+<p>No capítulo anterior citei que primeiro os iniciantes deveriam estudar a sintaxe da linguagem e executar alguns códigos
+na linha de comando, mas como rodar um código PHP sem XAMPP?</p>
+
+<p>Simples: Instalando o PHP no seu computador.</p>
+
+<p>Existem diversas maneiras de se usar o PHP em cada sistema operacional, então vou citar aqui algumas formas, mas não se
+limite a elas.</p>
+
+<h3 id="como-instalar-php-no-windows%3F">Como instalar PHP no Windows?</h3>
+
+<p>Para usar o PHP no Windows, tudo que precisamos fazer é baixar o executável na página oficial de downloads do PHP para
+Windows: https://windows.php.net/download</p>
+
+<p>Nesta página você terá acesso ao download de um zip, e neste zip você encontra o executável do PHP. Sendo assim, basta
+extrair onde desejar que o PHP seja instalado e pronto. Desta forma, para executar o PHP, acesse no <em>Prompt de Comando</em>
+a pasta em questão (usando o comando <code>cd</code>) e a partir de lá você poderá executar o comando <code>php</code>.</p>
+
+<p>Para executar o PHP a partir de qualquer pasta no prompt de comando, você pode adicionar o caminho de instalação na
+variável <em>PATH</em> do sistema. Existem diversos tutoriais explicando o que é e como modificar a variável de sitema <em>PATH</em>,
+mas se você quiser que eu fale disso, me conta nos comentários.</p>
+
+<h3 id="como-instalar-php-no-linux%3F">Como instalar PHP no Linux?</h3>
+
+<p>A maioria das distribuições Linux já vêm com um pacote PHP pronto para ser instalado através do gerenciador de pacotes.
+Em distribuições baseadas em <em>Debian</em>, por exemplo, basta executar <code>sudo apt install php</code> e você já terá o PHP instalado
+em sua máquina.</p>
+
+<p>Sempre há a opção de compilar o PHP de forma personalizada e eu recomendo fazer isso quando você já tiver mais intimdade
+com a linguagem. É um bom aprendizado.</p>
+
+<h3 id="como-instalar-php-no-mac%3F">Como instalar PHP no Mac?</h3>
+
+<p>No momento da escrita deste artigo o PHP já vem instalado no Mac por padrão. :-D</p>
+
+<p>Porém via de regra uma versão mais antiga e com menos extensões vêm instalada, então o ideal é utilizar o Homebrew
+para instalar o PHP e facilitar instalação de extensões no futuro.</p>
+
+<h2 id="e-como-aprender-web-sem-apache%3F">E como aprender Web sem Apache?</h2>
+
+<p>Se você tem o PHP na sua máquina você já tem também um servidor web instalado, sem precisar alterar arquivos de configuração, abrir
+portas, etc. O PHP vem com um <a href="https://www.php.net/manual/en/features.commandline.webserver.php">servidor embutido</a>
+desde 2011 e ele serve exatamente para termos um ambiente web de desenvolvimento simplificado.</p>
+
+<p>Além de servir conteúdos processados pelo PHP, este servidor também é capaz de servir arquivos estáticos e realizar
+roteamento simples para um ponto de entrada em sua aplicação, por exemplo.</p>
+
+<p>E claro, quando chegar o momento de sair do ambiente de desenvolvimento e aprender sobre realizar deploys, você vai
+estudar sobre servidores Web. Muito provavelmente você vai se deparar com artigos sobre Nginx, PHP-FPM, etc. Mas isso é
+assunto para outro momento, e não para o início do aprendizado em PHP.</p>
+
+<h2 id="como-fa%C3%A7o-para-sair-de-2011-no-php%3F">Como faço para sair de 2011 no PHP?</h2>
+
+<p>Se você percebeu que está aprendendo PHP de forma desatualizada e supercomplicada sem necessidade, não se preocupe nem
+se sinta sozinho. Infelizmente a maioria de nós passou por isso. O primeiro passo para resolver um problema é entender
+que há um problema.</p>
+
+<p>Dado esse primeiro passo (inclusive, parabéns), vamos pesquisar materiais atualizados para aprendermos PHP como deve ser.</p>
+
+<p>Um dos melhores livros que li como iniciante é o <a href="https://amzn.to/3fTOPaF">Modern PHP</a>.
+Se preferir em Português, <a href="https://amzn.to/3dLk4lx">PHP Moderno</a>. Esse livro é de antes do PHP 7 ser lançado então ele
+trata da evolução da linguagem sem entrar nos detalhes de sintaxes de 2016 pra cá.</p>
+
+<p>A partir daí, caso você tenha aprendido a usar o PHP 5, se atualize nas novidades da linguagem. No momento da escrita
+deste post nós estamos na <a href="https://www.youtube.com/playlist?list=PL3j2sfzg3FPuQXklYI2LumuG7jgZsj7cK">versão 8</a>.</p>
+
+<h2 id="conclus%C3%A3o">Conclusão</h2>
+
+<p>XAMPP foi uma ferramenta que ajudou bastante gente que precisava de um ambiente de desenvolvimento web um pouco mais
+simples antes de 2011, já que ele facilitava a instalação da praticamente a única opção do mercado: Apache.</p>
+
+<p>Porém há 10 anos Apache não é mais necessário para um ambiente simples de aprendizado e desenvolvimento, e se o assunto
+for um servidor de produção, XAMPP nunca foi uma alternativa viável. Sendo assim, para desenvolvedores PHP, não há
+motivos válidos para uso do XAMPP nos dias atuais.</p>
+
+<p>Se você quiser aprender mais sobre algum desses assuntos, pode considerar assinar a Alura. Lá existem treinamentos (gravados por mim) sobre PHP, Nginx e muito mais. Caso pretenda estudar na Alura, <a href="https://www.alura.com.br/promocao/diasdedev">neste link</a> você tem um desconto de 10%.</p>
+]]></content>
+        </entry>
+            <entry>
+            <title type="html"><![CDATA[Requisições HTTP paralelas com PHP]]></title>
+            <link href="https://dias.dev//2021-03-13-requisicoes-http-paralelas-com-php/"/>
+            <updated>2021-03-13T00:00:00+00:00</updated>
+            <id>https://dias.dev//2021-03-13-requisicoes-http-paralelas-com-php/</id>
+            <content type="html"><![CDATA[<h2 id="i%2Fo-n%C3%A3o-bloqueante-programa%C3%A7%C3%A3o-ass%C3%ADncrona">I/O não bloqueante (programação assíncrona)</h2>
+
+<p>Em um <a href="/2020-09-16-php-assincrono-de-forma-nativa/">post anterior</a> falei bastante sobre como o PHP trabalha por baixo dos panos de forma nativa com I/O não
+bloqueante, e consequentemente com programação assíncrona. Usando os conhecimentos daquele post com conhecimentos de
+<em>sockets</em> e HTTP seria possível realizarmos chamadas HTTP assíncronas e processá-las conforme elas fossem recebidas.
+Porém é bastante comum podermos nos dar ao luxo de processar todas as respostas HTTP depois de prontas, desde que todas
+as requisições tenham sido feitas de forma concorrente.</p>
+
+<h2 id="curl">cURL</h2>
+
+<p>Como realizar requisições HTTP usando <em>sockets</em> pode se tornar uma tarefa muito complicada, principalmente em cenários
+onde precisamos enviar dados (requisições POST, por exemplo), cURL é uma alternativa muito interessante. Essa biblioteca
+é pensada especialmente em realizar requisições pela rede e possui diversos facilitadores.</p>
+
+<h2 id="o-problema">O problema</h2>
+
+<p>Entendido o contexto das tecnologias que temos disponíveis, vamos falar do problema que temos em mãos. Existe uma API
+que fornece informações sobre o universo <em>Star Wars</em>. Essa API é gratuita e vai servir perfeitamente para nosso exemplo.</p>
+
+<p>O que queremos fazer é buscar a lista de filmes (através da url https://swapi.dev/api/films/) e para cada filme buscar
+os seus detalhes em outra URL (https://swapi.dev/api/films/:id/).</p>
+
+<h3 id="solu%C3%A7%C3%A3o-bloqueante">Solução bloqueante</h3>
+
+<p>Usando o <code>cURL</code> de forma “padrão”, ou seja, bloqueante, podemos atingir este objetivo com o seguinte código:</p>
+
+<pre><code class="php">&lt;?php
+
+$handle = curl_init('https://swapi.dev/api/films/');
+// informa que não queremos exibir a resposta diretamente, mas sim pegar seu retorno
+curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
+$response = curl_exec($handle);
+curl_close($handle);
+
+$data = json_decode($response, true);
+$movies = $data['results'];
+
+foreach ($movies as $movie) {
+    // Alterando o protocolo para https
+    $url = str_replace('http:', 'https:', $movie['url']);
+    $handle = curl_init($url);
+    curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
+    $response = curl_exec($handle);
+
+    $movieData = json_decode($response, true);
+    var_dump($movieData);
+}
+</code></pre>
+
+<p>O problema desta abordagem é que cada requisição para os detalhes do filme vai travar a execução do PHP, fazendo
+com que a próxima requisição só seja iniciada quando a anterior for finalizada.</p>
+
+<h3 id="solu%C3%A7%C3%A3o-n%C3%A3o-bloqueante">Solução não bloqueante</h3>
+
+<p>Para informarmos um determinado número de requisições e realizarmos todas de uma vez, podemos usar o <code>curl_multi_init</code>.</p>
+
+<pre><code class="php">&lt;?php
+
+// Primeira requisição como no código anterior
+$movies = $data['results'];
+
+// Inicializa o handle de múltiplas conexões
+$multiHandle = curl_multi_init();
+
+// Armazena cada handle individual em um array
+// além de adicioná-los ao $multiHandle
+$handles = [];
+foreach ($movies as $i =&gt; $movie) {
+    $url = str_replace('http:', 'https:', $movie['url']);
+    $handles[$i] = curl_init($url);
+    curl_setopt($handles[$i], CURLOPT_RETURNTRANSFER, true);
+    curl_multi_add_handle($multiHandle, $handles[$i]);
+}
+</code></pre>
+
+<p>Assim nós temos diversos <em>handles</em> do <code>cURL</code> adicionados a um gerenciador de múltiplas requisições. Quando executarmos o
+<code>$multiHandle</code>, todas as requisições serão feitas em paralelo. Maravilha, não é mesmo?</p>
+
+<p>Infelizmente não é tão simples assim. Não basta fazer um <code>curl_multi_exec</code> e receber um array de respostas. A função
+<code>curl_multi_exec</code> inicia as requisições, porém não bloqueia o código, ou seja, nós precisamos ficar em um <em>loop</em> verificando
+se todas as requisições já foram feitas. Algo como:</p>
+
+<pre><code class="php">do {
+    $result = curl_multi_exec($multiHandle, $numberOfMissingHandles);
+} while ($numberOfMissingHandles &gt; 0);
+
+// Processar respostas
+</code></pre>
+
+<p>A variável <code>$numberOfMissingHandles</code> é passada por referência e é preenchida com o número dos <em>handles</em> que faltam ser
+resolvidos. Em outras palavras, enquanto esse valor não chegar a 0, temos requisições sendo processadas.</p>
+
+<p>Depois de sair desse <em>loop</em>, podemos recuperar as respostas de todas as requisições, então voltamos para a tarefa fácil:</p>
+
+<pre><code class="php">// Por isso armazenamos o array de $handles
+foreach ($handles as $handle) {
+    // Usamos curl_multi_getcontent para recuperar a resposta
+    // de cada um dos handles que foi executado pelo curl_multi_exec
+    $response = curl_multi_getcontent($handle);
+    curl_multi_remove_handle($multiHandle, $handle);
+    curl_close($handle);
+
+    $movieData = json_decode($response, true);
+    var_dump($movieData);
+}
+</code></pre>
+
+<p>Com isso nós atingimos o objetivo de realizar todas as requisições de uma vez e só depois ler as respostas.</p>
+
+<h3 id="mal-uso-de-recursos">Mal uso de recursos</h3>
+
+<p>O problema da nossa abordagem é que a função <code>curl_multi_exec</code> retorna imediatamente, sem esperar por nenhuma atividade
+nos <em>handles</em>, ou seja, se as requisições forem demoradas ou houverem muitas requisições (ou ambos), esse <em>loop</em> vai ser
+executado de forma muito rápida, por muito tempo. Isso vai fazer com que o uso de CPU vá ao topo, atrasando inclusive o
+processo de realizar requisições, afinal de contas o sistema operacional precisa destinar certos recursos para essa tarefa.</p>
+
+<p>Para mitigar esse problema, podemos usar uma função chamada <code>curl_multi_select</code>. Ela é semelhante à <code>stream_select</code> que
+vimos no post sobre <a href="/2020-09-16-php-assincrono-de-forma-nativa/">PHP assíncrono</a>. Essa função espera que alguma
+atividade aconteça nos handles que estamos utilizando. A diferença é que ela não recebe um array, mas sim o nosso
+<code>$multiHandle</code>. Então tudo que temos de informação é quantos <em>handles</em> possuem atividade no momento, mas não quais deles.
+Mas tudo bem, já que o nosso propósito é ler todos apenas no final.</p>
+
+<p>A função <code>curl_multi_select</code> deve ser chamada após o <code>curl_multi_exec</code>, já que é essa que inicia as requisições efetivamente.
+Então o nosso primeiro <em>loop</em> ficaria assim:</p>
+
+<pre><code class="php">do {
+    $result = curl_multi_exec($multiHandle, $numberOfMissingHandles);
+    $descriptorsCount = curl_multi_select($multiHandle);
+} while ($numberOfMissingHandles &gt; 0);
+</code></pre>
+
+<p>Onde <code>$descriptorsCount</code> é o número de handles que possuem alguma atividade nesse exato momento. Caso esse número seja
+<code>-1</code>, significa que aconteceu algum erro.</p>
+
+<p>Dessa forma esse <em>loop</em> será executado menos vezes e em um intervalo maior, ou seja, menos CPU será consumida.</p>
+
+<h3 id="tratamento-de-erros">Tratamento de erros</h3>
+
+<p>Falando em erros, nosso código está supondo que tudo vai correr bem. Nesse primeiro <em>loop</em> nós precisamos realizar algumas
+verificações. Então no final, teremos algo como:</p>
+
+<pre><code class="php">do {
+    $result = curl_multi_exec($multiHandle, $numberOfMissingHandles);
+    if ($result !== CURLM_OK) { // CURLM_OK é uma constante que indica sucesso nesse caso
+        throw new RuntimeException('Error executing all the requests', $result);
+    }
+
+    $descriptorsCount = curl_multi_select($multiHandle);
+    if ($descriptorsCount === -1) {
+        throw new RuntimeException('Error checking for activity');
+    }
+} while ($numberOfMissingHandles);
+</code></pre>
+
+<h3 id="c%C3%B3digo-final">Código final</h3>
+
+<p>Com isso finalizamos todo o processamento necessário para realizar requisições paralelas com PHP. O código completo vai
+se parecer com isso:</p>
+
+<pre><code class="php">&lt;?php
+
+$handle = curl_init('https://swapi.dev/api/films/');
+curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
+$response = curl_exec($handle);
+curl_close($handle);
+
+$data = json_decode($response, true);
+$movies = $data['results'];
+
+$multiHandle = curl_multi_init();
+
+$handles = [];
+foreach ($movies as $i =&gt; $movie) {
+    $url = str_replace('http:', 'https:', $movie['url']);
+    $handles[$i] = curl_init($url);
+    curl_setopt($handles[$i], CURLOPT_RETURNTRANSFER, true);
+    curl_multi_add_handle($multiHandle, $handles[$i]);
+}
+
+do {
+    $result = curl_multi_exec($multiHandle, $numberOfMissingHandles);
+    if ($result !== CURLM_OK) {
+        throw new RuntimeException('Error executing all the requests', $result);
+    }
+
+    $descriptorsCount = curl_multi_select($multiHandle);
+    if ($descriptorsCount === -1) {
+        throw new RuntimeException('Error checking for activity');
+    }
+} while ($numberOfMissingHandles &gt; 0);
+
+foreach ($handles as $handle) {
+    $response = curl_multi_getcontent($handle);
+    curl_multi_remove_handle($multiHandle, $handle);
+    curl_close($handle);
+
+    $movieData = json_decode($response, true);
+    var_dump($movieData);
+}
+</code></pre>
+
+<p>Esse código provavelmente pode ser refatorado para torná-lo um pouco mais legível, mas acredito que a lógica por trás dele
+tenha ficado clara. Caso contrário, você pode usar a sessão de comentários dessa página para fazer perguntas.</p>
+
+<h2 id="benchmarks">Benchmarks</h2>
+
+<p>Agora que temos 2 versões de código que resolvem o mesmo problema de formas diferentes, podemos testar a sua performance.
+Para quem usa sistemas <em>Unix</em> (<em>Linux</em> ou <em>Mac</em>) existe um comando chamado <code>time</code> que é muito útil para verificações simples
+como essas.</p>
+
+<p>A primeira versão do nosso código (bloqueante) gera essa informação quando executo o seguinte comando (sendo <code>star-wars.php</code>o nome do nosso arquivo):</p>
+
+<pre><code class="bash">$ time php star-wars.php
+
+php star-wars.php  0.14s user 0.04s system 2% cpu 7.186 total
+</code></pre>
+
+<p>Basicamente, um pouco mais de 7 segundos foram necessários para executar todas as requisições.</p>
+
+<p>Já com a versão final do código, temos a seguinte saída:</p>
+
+<pre><code class="bash">$ time php star-wars.php
+
+php star-wars.php  0.14s user 0.04s system 6% cpu 2.387 total
+</code></pre>
+
+<p>Ou seja, pouco mais de 2 segundos (quase 5 segundos a menos). É uma baita diferença para um exemplo tão simples, não acha?</p>
+
+<p>Agora um último teste, comentando a parte referente ao <code>curl_multi_select</code>:</p>
+
+<pre><code class="bash">$ time php star-wars.php
+
+php star-wars.php  0.50s user 0.70s system 49% cpu 2.421 total
+</code></pre>
+
+<p>Repare que o uso de CPU subiu muito. De algo próximo de 6% para quase 50%. Esse é o propósito da chamada da função
+<code>curl_multi_select</code>.</p>
+
+<h2 id="conclus%C3%A3o">Conclusão</h2>
+
+<p>Assim como já foi citado no post sobre <a href="/2020-09-16-php-assincrono-de-forma-nativa/">PHP assíncrono</a>, existem
+várias ferramentas que facilitam (e muito) o trabalho de realizar requisições HTTP paralelas com PHP. Guzzle é uma ótima
+opção para isso.</p>
+
+<p>Mas seguindo o que citei no <a href="/2020-04-23-principios-ou-ferramentas-o-que-estudar/">post sobre aprendizado</a>, eu penso como
+Richard Feynman (Nobel de física): “O que eu não consigo criar, eu não entendo”. Então antes de utilizar uma ferramenta
+que realiza o trabalho para mim, eu gosto de saber como realizar este trabalho sem ela. Com isso, se algum problema
+acontecer com a biblioteca, por exemplo, eu vou estar mais preparado para resolvê-lo já que entendo um pouco melhor como as coisas funcionam.</p>
+]]></content>
+        </entry>
+            <entry>
+            <title type="html"><![CDATA[Wrapper de Streams php://]]></title>
+            <link href="https://dias.dev//2020-11-03-wraper-de-streams-php/"/>
+            <updated>2020-11-03T00:00:00+00:00</updated>
+            <id>https://dias.dev//2020-11-03-wraper-de-streams-php/</id>
+            <content type="html"><![CDATA[<h2 id="streams">Streams</h2>
+
+<p>Antes de falarmos sobre um wrapper específico, é legal dar um certo contexto sobre streams.</p>
+
+<p>Um stream basicamente é um fluxo de dados. Usando streams podemos realizar operações de I/O como leitura de arquivos,
+acessos a rede, comunicação por sockets e muito mais.</p>
+
+<p>Existem muitas funcionalidades que giram em torno dos streams do PHP como filtros, contextos, etc,
+mas neste artigo meu foco vai ser em um wrapper específico.</p>
+
+<h2 id="wrappers">Wrappers</h2>
+
+<p>Wrappers de streams em PHP são o código que diz como aquele determinado protocolo vai ser usado e gerenciado.</p>
+
+<p>Ler um arquivo é diferente de realizar uma requisição HTTP que é diferente de se conectar com um Unix socket.
+Para que todas essas diferenças sejam abstraídas para nós devs, o PHP fornece wrappers.</p>
+
+<p>Quando você abre um arquivo para leitura em PHP, usa o wrapper <code>file://</code>.
+Quando faz uma requisição HTTP, usa o wrapper <code>http://</code>.
+Com wrappers diferentes, podemos utilizar o mesmo código para realizar tarefas completamente diferentes. Ex.:</p>
+
+<pre><code class="php">&lt;?php
+
+echo file_get_contents('file://arquivo.txt'); // lê um arquivo
+echo file_get_contents('http://google.com'); // faz uma requisição HTTP
+</code></pre>
+
+<h3 id="wrappers-dispon%C3%ADveis">Wrappers disponíveis</h3>
+
+<p>Por padrão o PHP já fornece diversos wrappers como</p>
+
+<ul>
+<li><code>file://</code></li>
+<li><code>http://</code> e <code>https://</code></li>
+<li><code>ftp://</code></li>
+<li><code>zlib://</code></li>
+<li><code>ssh2://</code></li>
+<li><code>rar://</code></li>
+<li>etc</li>
+</ul>
+
+<p>Existem outros wrappers fornecidos por padrão e além disso nós podemos criar nossos próprios wrappers.
+Mas isso foge do escopo desse artigo e no final dele vou deixar alguns links de referências.</p>
+
+<h2 id="wrapper-php%3A%2F%2F">Wrapper php://</h2>
+
+<p>Um dos wrappers mais interessantes e que menos vejo material sobre é o <code>php://</code>.
+Através dele temos acesso a diversos recursos de I/O como a entrada e saída padrão do sistema, streams temporários em
+disco e em memória, etc.</p>
+
+<p>Vamos ver de forma resumida algumas das possibilidades deste wrapper</p>
+
+<h3 id="php%3A%2F%2Finput">php://input</h3>
+
+<p>Este provavelmente é o stream mais utilizado fornecido por este wrapper. Através dele nós conseguimos acessar diretamente
+o corpo de uma requisição. Então se uma requisição <code>POST</code> é feita para seu sistema enviando o corpo em JSON, por exemplo,
+o seguinte código pode fazer o parse:</p>
+
+<pre><code class="php">&lt;?php
+
+$corpo = file_get_contents('php://input'); // recupera o corpo todo da requisição, como string
+$json = json_decode($corpo); // decodifica a string em json
+
+echo $json-&gt;algumValor; // acessa um valor já parseado
+</code></pre>
+
+<p>É válido citar que este stream permite apenas a leitura, logo, não podemos escrever nada nele.</p>
+
+<h3 id="php%3A%2F%2Fmemory-e-php%3A%2F%2Ftemp">php://memory e php://temp</h3>
+
+<p>Ambos streams são de leitura e escrita, e nos permitem acesso a um espaço que pode ser no disco ou na RAM para manipular
+dados temporários. São interessantes para realizar processamentos em dados já existentes usando a interface de streams,
+por exemplo.</p>
+
+<p><code>php://memory</code> vai manter todo o dado na RAM enquanto <code>php://temp</code> vai utilizar um arquivo quando o conteúdo do stream
+atingir um limite de tamanho pré-definido (2MB por padrão).</p>
+
+<h3 id="php%3A%2F%2Ffilter">php://filter</h3>
+
+<p>Aplicar filtros de streams pode trazer grandes poderes para sua aplicação e até poupar bastante uso de memória.
+Mas para utilizar filtros, teoricamente nós precisaríamos de um recurso de stream aberto. Qual o problema disso?
+Não poderíamos usar filtros com funções como <code>file_get_contents</code> que ao invés de um recurso, recebe uma string por
+parâmetro.</p>
+
+<p>Usando o stream <code>php://filter</code> nós podemos especificar filtros para esse tipo de função sem nenhum problema. Exemplo:</p>
+
+<pre><code class="php">&lt;?php
+
+echo file_get_contents("php://filter/read=string.toupper|string.rot13/resource=http://www.example.com");
+
+</code></pre>
+
+<p>Isso vai aplicar os filtros <code>string.toupper</code> e <code>string.rot13</code> ao ler de <em>http://www.example.com</em>.</p>
+
+<p>Se você não conhece os filtros de streams, vale a pena conferir as referências no final do artigo. ;-)</p>
+
+<h3 id="php%3A%2F%2Fstdin%2C-php%3A%2F%2Fstdout-e-php%3A%2F%2Fstderr">php://stdin, php://stdout e php://stderr</h3>
+
+<p>Estes streams fornecem acesso aos streams correspondentes do próprio processo do PHP.
+<code>php://stdin</code> fornece acesso à entrada padrão do processo (que pode ser o teclado ou um pipe, por exemplo).
+<code>php://stdout</code> permite acessar a saída padrão, que pode ser o terminal em uma aplicação CLI.
+<code>php://stderr</code> nos deixa escrever na saída de erro do processo.</p>
+
+<p>O primeiro stream é apenas para leitura, enquanto os 2 outros são apenas para escrita. Não é possível escrever em
+<code>php://stdin</code> por exemplo.</p>
+
+<h3 id="php%3A%2F%2Foutput">php://output</h3>
+
+<p>Este stream permite escrever no mecanismo de buffer de saída do PHP, assim como <code>echo</code> e <code>print</code> fazem.</p>
+
+<h3 id="php%3A%2F%2Foutput-vs-php%3A%2F%2Fstdout">php://output vs php://stdout</h3>
+
+<p>Você talvez esteja se perguntando a diferença entre <code>php://output</code> e <code>php://stdout</code>.
+Basicamente o primeiro escreve no mecanismo de buffer de saída do PHP, o que permite o controle através de funções
+como <code>ob_start</code>. Já o segundo escreve direto na saída do processo, não passando pelo controle de buffer do PHP.</p>
+
+<p>Para entender melhor:</p>
+
+<pre><code class="php">&lt;?php
+
+$stdout = fopen('php://stdout', 'w');
+$output = fopen('php://output', 'w');
+
+ob_start();
+
+fwrite($output, 'Escrevendo no output' . PHP_EOL);
+fwrite($stdout, 'Escrevendo na saída padrão' . PHP_EOL);
+
+ob_end_flush();
+</code></pre>
+
+<p>Ao executar este script em um terminal, o primeiro <code>fwrite</code> envia a string para o mecanismo de buffer do PHP, e devido
+ao <code>ob_start()</code>, não vai ser imprimido ainda. O segundo <code>fwrite</code> manda o conteúdo direto para a saída (tela do terminal).
+Ao executar <code>ob_end_flush()</code> o buffer é enviado para a saída do processo, então o resultado é:</p>
+
+<pre><code>Escrevendo na saída padrão
+Escrevendo no output
+</code></pre>
+
+<h3 id="buffer-de-sa%C3%ADda">Buffer de saída</h3>
+
+<p>Se você não entendeu bem essa parte de buffer de saída e quiser que eu faça um artigo específico sobre isso, é só me
+contar nos comentários que eu preparo pra você! :-D</p>
+
+<h2 id="conclus%C3%A3o">Conclusão</h2>
+
+<p>Analisando apenas um dos possíveis wrappers dá pra ter uma breve noção de como essa feature do PHP é poderosa. Através
+de streams podemos compactar e descompactar arquivos, enviar dados por FTP, acessar servidores via SSH e muito mais.</p>
+
+<h3 id="refer%C3%AAncias">Referências</h3>
+
+<p>Conforme prometido, vou deixar aqui alguns links para que você possa se aprofundar nesse assunto tão rico e importante.</p>
+
+<ul>
+<li>https://www.youtube.com/watch?v=ZRYMzS97HVQ
+
+<ul>
+<li>Nessa palestra o <a href="https://twitter.com/alganet">Alexandre Gaigalas</a> mostra um pouco do poder dos streams</li>
+</ul></li>
+<li>https://www.php.net/manual/en/book.stream.php
+
+<ul>
+<li>A documentação oficial é sempre um ótimo lugar para recorrer e entender a fundo as funcionalidades</li>
+</ul></li>
+<li>https://cursos.alura.com.br/course/php-io-arquivos-streams
+
+<ul>
+<li>Na Alura existe um curso específico de streams usando filtros, contextos e muito mais. Se quiser 10% de desconto na sua assinatura, confere <a href="https://www.alura.com.br/promocao/diasdedev">esse link aqui</a>.</li>
+</ul></li>
+<li><a href="/2020-09-16-php-assincrono-de-forma-nativa/">PHP Assíncrono de Forma Nativa</a>
+
+<ul>
+<li>Aqui mesmo no blog tem um post onde uso streams para realizar programação assíncrona através de I/O não bloqueante.</li>
+</ul></li>
+</ul>
+]]></content>
+        </entry>
+            <entry>
+            <title type="html"><![CDATA[PHP além da Web]]></title>
+            <link href="https://dias.dev//2020-10-27-php-alem-da-web/"/>
+            <updated>2020-10-27T00:00:00+00:00</updated>
+            <id>https://dias.dev//2020-10-27-php-alem-da-web/</id>
+            <content type="html"><![CDATA[<h2 id="php-%2B-web-%3D-">PHP + Web = &lt;3</h2>
+
+<p>Não é nenhum segredo que o PHP nasceu na web e para a web. Seu propósito inicial era servir páginas dinâmicas de forma simples e amigável, mas a Web evoluiu e o PHP também. Hoje em dia o PHP é uma linguagem de programação completa e pronta para ser executada nos mais diversos ambientes, e não só na Web.</p>
+
+<h3 id="web-al%C3%A9m-do-html">Web além do HTML</h3>
+
+<p>Antes de sair da Web, acredito que seja muito importante citar que nem só de HTML vive a Web. É mais do que comum vermos URLs gerando dados nos mais diversos formatos como XML, JSON, etc. Você provavelmente conhece isso como API, correto? Obviamente o PHP está mais do que preparado para este tipo de trabalho e de forma muito simples. A ideia desse artigo é trazer as possibilidades realmente fora da Web.</p>
+
+<h2 id="por-que-usar-php-fora-da-web%3F">Por que usar PHP fora da web?</h2>
+
+<p>Antes de vermos as possibilidades, por que eu iria fazer isso? Se o PHP nasceu na Web, por que não mantê-lo lá? Bom, existem diversos motivos para trazermos o PHP para demais ambientes, mas acredito que o mais óbvio e o principal é a equipe. Se nós já temos uma equipe de pessoas que desenvolvem em PHP na Web, por que não utilizar esse conhecimento também fora da Web para processamento de dados assíncronos, leitura de filas, cronjobs, scripts da CLI em geral, etc? É justamente sobre essas possibilidades que quero tratar nesta publicação.</p>
+
+<h2 id="existe-vida-al%C3%A9m-da-web%3F">Existe vida além da Web?</h2>
+
+<p>Agora que já entendemos o motivo de possivelmente utilizar PHP fora da Web, vamos falar sobre... o que seria esse "fora da Web". Em uma equipe de desenvolvimento Web, o que poderia estar fora da Web para nós precisarmos utilizar PHP?</p>
+
+<h3 id="processos-ass%C3%ADncronos">Processos assíncronos</h3>
+
+<p>Uma requisição web deve acontecer da forma mais rápida possível para que o usuário/cliente não fique esperando uma resposta, e uma das técnicas muito conhecidas para evitar essa espera é tornar alguns processos assíncronos.</p>
+
+<p>Se ao cadastrar um usuário no banco de dados nós precisamos enviar um e-mail, por exemplo, não há necessidade de fazê-lo esperar até nós conseguirmos enviar este e-mail para só depois entregar a resposta. Nós podemos armazenar em algum lugar a informação de que um e-mail deverá ser enviado, e fazer isso depois, fora da web, sem que o usuário fique esperando.</p>
+
+<p>Existem inúmeras formas de atingir este objetivo. Uma das mais comuns é através de filas de processos. Nós armazenamos as informações sobre o processo que deve ser executado em algum local específico para isso, e futuramente, fora da web, recuperamos esta informação para processá-la. Banco de dados, mensagerias, onde for. O importante é que a tarefa demorada não faça com que o usuário nos espere.</p>
+
+<h3 id="scripts-cli">Scripts CLI</h3>
+
+<p>Um cenário também muito comum, principalmente em empresas de médio e grande porte, é ter processos que devem ser executados periodicamente de forma manual ou automatica. Sincronização de dados, processamento de informações, o que for... Essas tarefas não precisam ser executadas em um ambiente web, e normalmente são executadas na linha de comando. Os processos automáticos são conhecidos como <em>cronjobs</em> ou tarefas agendadas. Já os processos executados manualmente são simples scripts ou programas de linha de comando (CLI).</p>
+
+<p>O PHP é um executável capaz de rodar na linha de comando e não há dificuldade nenhuma em utilizá-lo para estes casos. Inclusive há diversos recursos da linguagem que nos permitem acessar detalhes interessantes deste novo mundo fora da grande rede mundial.</p>
+
+<h4 id="features-fora-da-web">Features fora da web</h4>
+
+<p>Com PHP nós conseguimos ler parâmetros da linha de comando através de variáveis "mágicas" como <a href="https://php.net/argv">$argv</a> e <a href="https://php.net/argc">$argc</a>. Isso nos permite interatividade de forma semelhante ao que a Web nos traria com formulários, parâmetros via URL, etc.</p>
+
+<p>Além de argumentos, podemos receber algumas opções para personalizar a execução de nossos códigos. A função <a href="https://php.net/getopt">getopt</a> consegue nos ajudar a fazer isso de forma simples e profissional, exatamente como os mais famosos comandos que estamos habituados a utilizar já fazem.</p>
+
+<h3 id="ferramentas">Ferramentas</h3>
+
+<p>O mundo de componentes PHP é fantástico. Temos ferramentas mágicas como Symfony para criar aplicações Web, Doctrine para acessar o banco de dados com mais facilidade, PHPUnit para realizar testes automatizados... Mas será que existem ferramentas específicas para facilitar nosso mundo fora da Web? A resposta felizmente é SIM!</p>
+
+<h4 id="cria%C3%A7%C3%A3o-de-programas">Criação de programas</h4>
+
+<p>O próprio Symfony possui uma das ferramentas mais conhecidas para criação de programas na CLI: O <a href="https://symfony.com/doc/current/components/console.html">Symfony Console</a>. Com ele nós podemos criar aplicações de forma semelhantes com a que criamos na Web, mas ao invés de <em>Controllers</em> criamos <em>Commands</em>, por exemplo. Todas as facilidades de um framework moderno podem ser utilizadas fora da Web sem maiores problemas.</p>
+
+<p>Obviamente está não é a única opção, mas diversas outras ferramentas fazem uso do <em>Symfony Console</em>. Algumas alternativas são <em>Laravel Zero</em>, CLImate, Aura.CLI, etc.</p>
+
+<h4 id="performance">Performance</h4>
+
+<p>Tarefas que são executadas por trás das cortinas tendem a ser mais pesadas, exigir mais I/O ou mais processamento. Nesses casos podemos recorrer a ferramentas específicas para resolver tais problemas.</p>
+
+<p>Se temos um cenários de muitas requisições para servidores externos, seja em chamadas HTTP, STMP ou outros protocolos, devemos fazer bom uso dos streams do PHP e trabalhar com programação assíncrona. Uma ótima ferramenta que pode nos ajudar muito com isso é a <a href="https://reactphp.org/#core-components">ReactPHP</a> que fornece diversos componentes com os mais diversos propósitos.</p>
+
+<p>Já se muito processamento é utilizado, com calculos complexos, manipulação de imagens e qualquer outra coisa que consuma muita CPU, paralelização é a resposta. Podemos criar processos através da extensão <a href="https://php.net/pcntl">pcntl</a> ou threads através da extensão <a href="https://php.net/parallel">parallel</a>. Ambas as opções requerem um estudo mais aprofundado sobre conceitos de sistemas operacionais e programação paralela, mas o resultado é muito gratificante.</p>
+
+<p>Se você quiser entender um pouco melhor sobre a diferença entre Programação Assíncrona e Programação Paralela, pode conferir este vídeo: https://www.youtube.com/watch?v=zLfXPSeCkB8</p>
+
+<h2 id="conclus%C3%A3o">Conclusão</h2>
+
+<p>Nesta rápida leitura já conseguimos notar que não só é possível utilizar PHP fora da Web como também ele está muito preparado para este ambiente.</p>
+
+<p>Por ser uma linguagem de programação completa e madura, diversas bibliotecas, extensões e componentes já surgiram para resolver problemas comuns e cabe a nós, devs e amantes do PHP, aprendê-las e utilizá-las.</p>
+
+<p>Além disso, com o advento do <a href="https://www.youtube.com/watch?v=WLx0z9kloro">JIT</a> que chegará no PHP 8, o uso do PHP fora da web se tornará ainda mais efetivo. Diversas otimizações de baixo nível que eu nem mesmo sei explicar vão acontecer, tornando possíveis aplicações que requerem ainda mais processamento como IoT, Machine Learning e vários outros nomes bonitos que não me arriscarei a citar.</p>
+
+<p>Se você ainda acha que PHP está preso na Web, acredito que não há momento melhor para abrir os olhos e conhecer este novo mundo!</p>
+]]></content>
+        </entry>
+            <entry>
+            <title type="html"><![CDATA[PHP assíncrono de forma nativa]]></title>
+            <link href="https://dias.dev//2020-09-16-php-assincrono-de-forma-nativa/"/>
+            <updated>2020-09-16T00:00:00+00:00</updated>
+            <id>https://dias.dev//2020-09-16-php-assincrono-de-forma-nativa/</id>
+            <content type="html"><![CDATA[<p>Realizar acesso a streams é uma tarefa relativamente comum para devs PHP. Seja lendo e escrevendo em arquivos, fazendo requisições HTTP, etc.</p>
+
+<p>Operações de I/O são custosas e levam algum tempo para executar. Quando temos diversas operações desse tipo, uma técnica que pode ajudar (e muito) na performance da aplicação é realizá-las de forma assíncrona.</p>
+
+<h2 id="acesso-a-streams">Acesso a streams</h2>
+
+<p>Antes de falar sobre técnicas e funções que permitem a programação assíncrona, é importante saber como normalmente nós trabalhamos com I/O.</p>
+
+<p>Acesso a arquivos, requisições HTTP, sockets e muito mais pode ser feito através de <a href="https://php.net/streams">streams</a>. Um stream é basicamente um fluxo de dados, sendo que a origem desse fluxo pode variar (vide o início desse parágrafo). Quando utilizamos funções como <code>file_get_contents</code>, <code>fopen</code>, <code>fgets</code>, e as demais, estamos trabalhando com streams do PHP.</p>
+
+<h2 id="programa%C3%A7%C3%A3o-ass%C3%ADncrona">Programação assíncrona</h2>
+
+<p>Se você não está familiarizado com o termo "programação assíncrona", recomendo assistir este vídeo antes de continuar o artigo:</p>
+
+<p><a href="https://youtu.be/zLfXPSeCkB8">Programação Assíncrona vs Programação Paralela</a></p>
+
+<p>Entendido o que é programação assíncrona, como podemos fazer acesso a streams de forma assíncrona utilizando PHP sem nenhuma extensão ou biblioteca externa? Será possível?</p>
+
+<h2 id="eventos">Eventos</h2>
+
+<p>Programação orientada a eventos não é novidade e nós utilizamos muito na web. Para agir quando um botão for clicado, ou quando um texto for digitado em um <code>input</code> nós utilizamos eventos no JavaScript. Eventos podem acontecer a qualquer momento então sua natureza é assíncrona. Mas será possível fazer algo parecido do lado do PHP?</p>
+
+<p>Antes de falar do PHP em si, acho válido citar que o sistema operacional já trabalha com chamadas assíncronas. Diversos eventos acontecem durante a execução do seu sistema, e há código reagindo a estes eventos o tempo todo. Utilizando PHP nós podemos acessar algumas dessas funcionalidades do sistema operacional</p>
+
+<h3 id="fun%C3%A7%C3%A3o-stream_select">Função stream_select</h3>
+
+<p>Uma função não muito comum para nós que trabalhamos com PHP é a <a href="https://php.net/stream_select">stream_select</a>. Essa função nos permite "observar" modificações que possam acontecer em streams. O probelma é que ela não é nada fácil de se entender, então vou tentar tornar este processo menos doloroso para você.</p>
+
+<h2 id="cen%C3%A1rio">Cenário</h2>
+
+<p>Imagine que para executar uma tarefa nós precisemos ler 5 arquivos distintos e depois realizar algum processamento. Normalmente utilizando PHP nós poderíamos fazer algo como:</p>
+
+<pre><code class="php">&lt;?php
+
+$conteudoDoArquivo1 = file_get_contents('arquivo1.txt');
+$conteudoDoArquivo2 = file_get_contents('arquivo2.txt');
+$conteudoDoArquivo3 = file_get_contents('arquivo3.txt');
+$conteudoDoArquivo4 = file_get_contents('arquivo4.txt');
+$conteudoDoArquivo5 = file_get_contents('arquivo5.txt');
+
+// Processar os 5 arquivos
+</code></pre>
+
+<p>O problema nessa abordagem é óbvio: Antes de ler o <code>arquivo2.txt</code> precisamos terminar de ler todo o conteúdo de <code>arquivo1.txt</code>. Enquanto o computador espera, nós já poderíamos estar sendo os demais arquivos e os processando de forma individual.</p>
+
+<p>Quando temos uma operação de I/O (acesso a arquivos, rede, etc) sendo realizada de forma síncrona, o processador fica ocioso enquanto a operação não é executada. Ou seja, enquanto o arquivo estiver sendo carregado, o processador fica esperando, sem fazer nada. É exatamente isso que queremos evitar. Queremos garantir que ele continue trabalhando enquanto o arquivo não estiver pronto para leitura.</p>
+
+<h2 id="solu%C3%A7%C3%A3o-com-assincronicidade">Solução com assincronicidade</h2>
+
+<p>Para resolver essa situação, podemos utilizar a função <code>stream_select</code> que observa alterações no status de uma lista de streams, ou seja, quando algum dos arquivos estiver pronto para leitura, essa função nos avisará. E é interessante citar que a leitura não necessariamente vai acontecer em ordem. O sistema operacional pode abrir o <code>arquivo3.txt</code> mais rápido do que o <code>arquivo1.txt</code>, por exemplo. Neste cenário, vamos processá-lo logo, sem ficar esperando os arquivos anteriores.</p>
+
+<pre><code class="php">&lt;?php
+
+$listaDeStreamsDeArquivos = [
+    fopen('arquivo1.txt', 'r'),
+    fopen('arquivo2.txt', 'r'),
+    fopen('arquivo3.txt', 'r'),
+    fopen('arquivo4.txt', 'r'),
+    fopen('arquivo5.txt', 'r'),
+];
+
+foreach ($listaDeStreamsDeArquivos as $streamDeArquivo) {
+    stream_set_blocking($streamDeArquivo, false);
+}
+
+do {
+    $streamsParaLer = $listaDeStreamsDeArquivos;
+    $streamsComNovidades = stream_select($streamsParaLer, $write, $except, 1, 0);
+
+    if ($streamsComNovidades === false) {
+        echo 'Erro inesperado';
+        exit(1);
+    }
+
+    if ($streamsComNovidades === 0) {
+        continue;
+    }
+
+    foreach ($streamsParaLer as $indice =&gt; $streamDeArquivo) {
+        $conteudo = stream_get_contents($streamDeArquivo);
+        // processa o conteúdo do arquivo
+        if (feof($streamDeArquivo)) {
+            fclose($streamDeArquivo);
+            unset($listaDeStreamsDeArquivos[$indice]);
+        }
+    }
+} while ($listaDeStreamsDeArquivos !== []);
+</code></pre>
+
+<h3 id="explica%C3%A7%C3%A3o">Explicação</h3>
+
+<h4 id="prepara%C3%A7%C3%A3o">Preparação</h4>
+
+<p>Como eu disse, não é muito fácil, então vamos por partes. Primeiro abrimos todos os arquivos que queremos ler com o <code>fopen</code>. Até aí sem segredo. Depois, informamos com a função <code>stream_set_blocking</code> que o recurso deve ser aberto em modo não-bloqueante - assim, o processo que acessa o arquivo não bloqueará a CPU por causar um estado de espera ao tentar acessar os arquivos.</p>
+
+<p>Nesse ponto, temos um array com 5 recursos abertos para podermos trabalhar com estes streams. Então analisando o este pedaço de código:</p>
+
+<pre><code class="php">$listaDeStreamsDeArquivos = [
+    fopen('arquivo1.txt', 'r'),
+    fopen('arquivo2.txt', 'r'),
+    fopen('arquivo3.txt', 'r'),
+    fopen('arquivo4.txt', 'r'),
+    fopen('arquivo5.txt', 'r'),
+];
+
+var_dump($listaDeStreamsDeArquivos);
+</code></pre>
+
+<p>Teríamos a seguinte saída:</p>
+
+<pre><code class="php">array(5) {
+  [0]=&gt;
+  resource(5) of type (stream)
+  [1]=&gt;
+  resource(6) of type (stream)
+  [2]=&gt;
+  resource(7) of type (stream)
+  [3]=&gt;
+  resource(8) of type (stream)
+  [4]=&gt;
+  resource(9) of type (stream)
+}
+</code></pre>
+
+<p>Depois disso que começa a parte difícil. A chamada para a função <code>stream_select</code> deve estar em um loop, porque pode acontecer de nem todos os streams estarem prontos para leitura logo de cara.</p>
+
+<h4 id="par%C3%A2metros">Parâmetros</h4>
+
+<p>Segundo detalhe importante: os parâmetros. O 3 primeiros parâmetros dessa função são passados por referência. Por isso o segundo e terceiro são variáveis que nós nem tínhamos definido ainda. O primeiro parâmetro é a lista de streams que queremos observar para ler. O segundo é para escrita. Já o terceiro, menos comum, é para dados excepcionais que possuem maior prioridade. Os 2 últimos parâmetros são sobre timeout.</p>
+
+<p>O parâmetro passado como 1 indica o número de segundos que essa função deve esperar receber uma notificação de novidade nos streams até "desistir", ou seja, o timeout. Esse é o motivo pelo qual ela deve estar em um loop. Se esse tempo passar e nós não tivermos novidade, devemos tentar de novo depois. Caso algum (não necessariamente todos) stream esteja pronto antes desse 1 segundo, a função retornará. O último parâmetro, que informamos como 0, indica o tempo em microsegundos para timeout.</p>
+
+<h4 id="retorno-e-leitura">Retorno e leitura</h4>
+
+<p>Agora vamos falar do retorno. Essa função retorna o número de streams que contém modificações. No nosso caso, vai informar quantos arquivos estão prontos para leitura. Porém em caso de erro essa função nos retorna o valor <code>false</code>.</p>
+
+<p>Além disso, os parâmetros que nós passamos podem ter sido modificados. Por isso eu realizo uma cópia da lista original de streams em <code>$arquivosParaLer = $listaDeArquivos;</code>. Após o retorno da função, o parâmetro passado vai conter apenas os streams que possuem novidades, ou seja, no nosso caso, os arquivos que estão prontos para leitura.</p>
+
+<p>Para exemplificar, vamos supor que na primeira execução do loop todos os arquivos já estejam disponíveis. Nesse caso, analisando os valores das variáveis, podemos entender o que está acontecendo. Analisando então o valor de <code>$streamsComNovidades</code>, teríamos <code>int(5)</code> como resultado deste cenário.</p>
+
+<p>Já analisando ambos arrays de streams (<code>$listaDeStreamsDeArquivos</code> e <code>$streamsParaLer</code>), teríamos exatamente o mesmo resultado:</p>
+
+<pre><code class="php">array(5) {
+  [0]=&gt;
+  resource(5) of type (stream)
+  [1]=&gt;
+  resource(6) of type (stream)
+  [2]=&gt;
+  resource(7) of type (stream)
+  [3]=&gt;
+  resource(8) of type (stream)
+  [4]=&gt;
+  resource(9) of type (stream)
+}
+array(5) {
+  [0]=&gt;
+  resource(5) of type (stream)
+  [1]=&gt;
+  resource(6) of type (stream)
+  [2]=&gt;
+  resource(7) of type (stream)
+  [3]=&gt;
+  resource(8) of type (stream)
+  [4]=&gt;
+  resource(9) of type (stream)
+}
+</code></pre>
+
+<p>Agora caso na primeira execução tivéssemos apenas 3 dos 5 arquivos prontos, e analisássemos os 3 valores anteriores, teríamos ter algo como:</p>
+
+<pre><code class="php">var_dump($streamsComNovidades, $listaDeStreamsDeArquivos, $streamsParaLer);
+</code></pre>
+
+<pre><code class="php">int(3)
+array(5) {
+  [0]=&gt;
+  resource(5) of type (stream)
+  [1]=&gt;
+  resource(6) of type (stream)
+  [2]=&gt;
+  resource(7) of type (stream)
+  [3]=&gt;
+  resource(8) of type (stream)
+  [4]=&gt;
+  resource(9) of type (stream)
+}
+array(3) {
+  [0]=&gt;
+  resource(5) of type (stream)
+  [2]=&gt;
+  resource(7) of type (stream)
+  [4]=&gt;
+  resource(9) of type (stream)
+}
+</code></pre>
+
+<p>Onde, nesse caso, o segundo array exibido é o de <code>$streamsParaLer</code>, e possui apenas os 3 arquivos prontos para leitura.</p>
+
+<p>Sendo assim, posso percorrer este array tendo a certeza de que há dados para ler e processar. Mas não há garantia de que todo o conteúdo do arquivo estará lá, por isso verifico se cheguei ao fim do arquivo com <code>feof</code>. Para arquivos pequenos, via de regra, todo o conteúdo virá de uma vez só, mas não conte com isso e prepare seu código para ler até mesmo um único byte por vez.</p>
+
+<p>Após ler todo o arquivo, devemos fechá-lo. Mas um outro detalhe importante é que eu também o removo da lista original de streams que queremos ler. Faço isso para que caso seja necessária uma nova iteração no loop, ou seja, caso nem todos os arquivos tenham sido lidos, eu não tente ler novamente os arquivos que já foram lidos e fechados.</p>
+
+<p>Com isso temos nossa condição de saída do loop. Quando todos os arquivos tiverem sido removidos e minha lista estiver vazia, sei que processei todos os arquivos.</p>
+
+<p>PS.: A função <code>stream_set_blocking</code> só surte efeito com arquivos e sockets. Os outros wrappers, com esta técnica, não podem ser lidos de forma assíncrona e não bloqueante.</p>
+
+<h2 id="conceitos">Conceitos</h2>
+
+<p>Esse código obviamente pode ser refatorado para torná-lo um pouco mais legível, mas acredito que a lógica por trás dele tenha ficado clara. Caso contrário, você pode usar a sessão de comentários dessa página para fazer perguntas.</p>
+
+<p>O que nós escrevemos de forma rudimentar aqui pode ser visto como uma implementação do que é conhecido como <em>Event Loop</em>, ou loop de eventos. Você provavelmente já ouviu esse termo se estuda sobre a runtime Node.js.</p>
+
+<p>Claro que essa implementação não é completa ou otimizada, mas atende nosso propósito: ler arquivos conforme eles fiquem prontos para leitura. Dessa forma nós vamos pedir para que o sistema operacional prepare todos os arquivos para leitura de uma só vez.</p>
+
+<p>As vantagens nessa abordagem assíncrona são mais perceptíveis quando temos operações mais lentas como chamadas HTTP, por exemplo. Mas isso aumentaria a complexidade do código para este artigo.</p>
+
+<h2 id="conclus%C3%A3o">Conclusão</h2>
+
+<p>Claro que o PHP já possui ferramentas que realizam este trabalho de forma muito mais simples. ReactPHP com seu pacote de Streams é um ótimo exemplo.</p>
+
+<p>Mas seguindo o que citei no post sobre aprendizado, eu penso como <a href="https://pt.wikipedia.org/wiki/Richard_Feynman">Richard Feynman</a> (Nobel de física): "O que eu não consigo criar, eu não entendo". Então antes de utilizar uma ferramenta que realiza o trabalho para mim, eu gosto de saber como realizar este trabalho sem ela. Com isso, se algum problema acontecer com a biblioteca, por exemplo, eu vou estar mais preparado para resolvê-lo já que eu entendo um pouco melhor como as coisas funcionam.</p>
+
+<p>Se você quiser aprender mais sobre algum desses assuntos, pode considerar assinar a Alura. Lá existem treinamentos (gravados por mim) sobre PHP Streams, ReactPHP e muito mais. Caso pretenda estudar na Alura, <a href="https://www.alura.com.br/promocao/diasdedev">neste link</a> você tem um desconto de 10%.</p>
+]]></content>
+        </entry>
+            <entry>
+            <title type="html"><![CDATA[Princípios ou Ferramentas - O que estudar]]></title>
+            <link href="https://dias.dev//2020-04-23-principios-ou-ferramentas-o-que-estudar/"/>
+            <updated>2020-04-23T00:00:00+00:00</updated>
+            <id>https://dias.dev//2020-04-23-principios-ou-ferramentas-o-que-estudar/</id>
+            <content type="html"><![CDATA[<h2 id="o-mundo-de-desenvolvimento">O mundo de desenvolvimento</h2>
+
+<p>Quando decidimos entrar para o mundo de desenvolvimento, sofremos um bombardeio de informações e novos termos.</p>
+
+<p>Linguagens, frameworks, bibliotecas, paradigmas, princípios, etc. Não é fácil saber que caminho seguir e o que estudar primeiro.</p>
+
+<p>Obviamente não existe alternativa certa ou errada, então nesse post eu vou somente expor minha opinião. Não tome o que for dito aqui como verdade, mas sim reflita e analise se faz sentido para você.</p>
+
+<h2 id="mercado-de-trabalho">Mercado de trabalho</h2>
+
+<p>É inegável que para atuar no mercado de trabalho nós precisamos de muito mais conhecimento do que nos é passado inicialmente em qualquer livro, curso ou post de blog. Somente a experiência e vivência vão nos dar a bagagem necessária para resolver os problemas e gerar valor para os clientes.</p>
+
+<p>Mas isso não quer dizer que nós só devamos estudar o que o emprego atual nos pede. Pelo contrário. Se nós estudamos além do que nos é pedido, ou no caso do primeiro emprego, estudamos antes de algo nos ser cobrado, quando uma oportunidade ou problema surgir, as chances serão muito maiores de estarmos prontos.</p>
+
+<p>Além de solucionar os problemas ou aproveitar as oportunidades, estudar nos faz conhecer melhores formas de atingir estes objetos, nos dando vantagens competitivas sobre quem simplesmente "resolve o problema".</p>
+
+<p>Ok, até aqui só usei o termo "estudo", mas devemos estudar o que? Ferramentas específicas ou princípios genéricos que podem ser aplicados a várias ferramentas?</p>
+
+<h2 id="linguagens%2C-bibliotecas-e-frameworks">Linguagens, bibliotecas e frameworks</h2>
+
+<p>Se você quer entrar para a área de desenvolvimento e acredita que seu trabalho vai ser escrever código, você está enganado(a). O nosso trabalho é solucionar problemas. Código é uma ferramenta, um meio para o fim. Linguagens de programação são apenas ferramentas para nós resolvermos determinados problemas. Frameworks e bibliotecas nada mais são do que ferramentas de "alto nível", que nos trazem algumas facilidades e alguns problemas genéricos já resolvidos.</p>
+
+<p>Ah, Vinicius, quer dizer que a escolha da linguagem de programação não é importante? Longe disso! A linguagem de programação é uma ferramenta muito importante para a solução do problema e existem linguagens diferentes para solucionar problemas diferentes. O ponto é: elas são ferramentas.</p>
+
+<p>Se nós tivermos isso em mente, acabamos deixando de lado aquele tipo de briga de "minha linguagem é melhor que a sua" ou "meu framework é melhor do que o seu". Discussões desse tipo são interessantes e até emocionantes (eu mesmo adoro falar mal de Laravel ;-p), mas nós não podemos nos cegar achando que realmente há uma ferramenta melhor do que outra e ponto.</p>
+
+<p><strong>Não existe bala de prata</strong> (solução pra qualquer problema)!</p>
+
+<p>Assim como cada linguagem resolve um problema, cada framework tem um propósito, uma identidade. Você vai acabar se identificando mais com um ou outro, mas não faça com que isso seja o foco de todo o seu estudo e trabalho. Conhecer muito bem a linguagem e o framework que você utiliza para trabalhar é importante, mas é o primeiro passo?</p>
+
+<h2 id="paradigmas">Paradigmas</h2>
+
+<p>Como eu citei no último parágrafo, "cada linguagem resolve um problema", e cada linguagem faz isso de um jeito. Existem diversos paradigmas de programação, dentre eles:</p>
+
+<ul>
+<li>Declarativos
+
+<ul>
+<li>Programação funcional</li>
+</ul></li>
+<li>Imperativos
+
+<ul>
+<li>Programação procedural</li>
+<li>Programação orientada a objetos</li>
+</ul></li>
+</ul>
+
+<p>Entender bem as vantagens e desvantagens de cada paradigma e as diferenças entre eles é crucial para aprender qualquer linguagem de programação. Diversas linguagens modernas são o que chamamos de "multi-paradigma", ou seja, nos permitem utilizar mais de um paradigma em nosso código, como procedural e Orientado a Objetos, funcional e Orientado a objetos, funcional e procedural, etc.</p>
+
+<p>Este post (em inglês) fala com bem mais de detalhes sobre os principais paradigmas de programação e alguns exemplos de linguagens:</p>
+
+<p>https://dev.to/vplentinax/classification-of-computer-languages-ii-2201</p>
+
+<p>Se você (assim como eu) prefere vídeos, pode conferir este aqui:</p>
+
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/asFnD-JLFWs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<h2 id="princ%C3%ADpios">Princípios</h2>
+
+<p>Cada paradigma de programação (e suas respectivas linguagens suportadas) sugerem diversos princípios para que seu código seja de fácil manutenção, testável, legível, etc.</p>
+
+<p>Princípios muito comuns da programação orientada a objetos (paradigma que estudo mais a fundo) são:</p>
+
+<ul>
+<li><a href="https://youtu.be/7IXeLhpjk6g">Tell, don't ask</a>;</li>
+<li>Least astonishment;</li>
+<li>*<a href="https://youtu.be/6mfX6863SAk">Fail fast</a>;</li>
+<li>*Early return;</li>
+<li><a href="https://amzn.to/3Eplrm2">SOLID</a> (conjunto de princípios);</li>
+<li>etc.</li>
+</ul>
+
+<p><em>* Princípios também aplicáveis a outros paradigmas</em></p>
+
+<p>Estudar os princípios referentes ao paradigma que você escolher é fundamental para manter seu código saudável. Não aplicá-los pode dar a falsa impressão de que você está sendo mais produtivo(a), mas a longo prazo a verdade sempre surge e nós acabamos nos arrependendo.</p>
+
+<h2 id="padr%C3%B5es">Padrões</h2>
+
+<p>Tendo entendido o que são paradigmas e que cada um deles possui princípios, baseando-se nestes princípios surgem padrões. Os famosos <em>Padrões de Projeto</em> são basicamente soluções padrões para problemas genéricos. São sugestões de como proceder em determinadas situações.</p>
+
+<p>Certos problemas são tão comuns de acontecer, que pessoas através dos anos já estudaram e discutiram muito sobre as melhores formas de resolvê-los.</p>
+
+<p>Alguns dos padrões mais famosos seguindo os princípios da programação orientada a objetos são:</p>
+
+<ul>
+<li><a href="https://amzn.to/3pIqBDR">Padrões da "turma dos 4" (<em>Gang of Four "GoF"</em>)</a>
+
+<ul>
+<li>24 padrões (super famosos) separados em 3 categorias</li>
+</ul></li>
+<li><a href="https://youtu.be/z4fxFU5MoAA">Object calisthenics</a>
+
+<ul>
+<li>9 regras para exercitar em seus códigos</li>
+</ul></li>
+<li><a href="https://amzn.to/3ojA9Wf">Sugeridos pelo "desenvolvimento guiado a domínio" (<em>DDD</em>)</a>
+
+<ul>
+<li>Conhecidos como blocos de construção do <em>DDD</em> como <em>Entity</em>, <em>Value Object</em>, etc.</li>
+</ul></li>
+</ul>
+
+<p>Como citado no início do capítulo, cada padrão visa resolver problemas bem comuns e genéricos, e devem ser aplicados quando fazem sentido. Os padrões exemplificados estão em níveis bem diferentes de sua aplicação e explicá-los individualmente é impossível através de um único post.</p>
+
+<h2 id="o-que-estudar-primeiro%3F">O que estudar primeiro?</h2>
+
+<p>Como foi dito lá no início, esse post é para que eu expressar <strong>minha opinião</strong>.</p>
+
+<p>Na minha visão, devemos estudar o básico dos paradigmas de programação, entendendo qual problema cada um resolve e em que casos são usados. Após entendê-los, normalmente nos aprofundamos em 1 deles, mas existe um porém:
+Antes de aprender Orientação a Objetos, é importante conhecermos o paradigma procedural, visto que o primeiro surgiu para resolver determinados problemas do último.</p>
+
+<p>Para estudar um dos paradigmas, obviamente precisamos de uma linguagem de programação, então este estudo acontece em paralelo: Conhecemos uma linguagem enquanto conhecemos um paradigma.</p>
+
+<p>Após dominar razoavelmente bem os conceitos da linguagem e do paradigma em questão, podemos começar a estudar os princípios sugeridos, entendendo suas propostas, quais problemas resolvem, porque surgiram, etc.</p>
+
+<p>Estes princípios, normalmente nos levam naturalmente para o estudo de alguns padrões. O estudo de padrões já é um estudo mais avançado, porém muito recompensante.</p>
+
+<p>Se você tem um bom conhecimento de um paradigma (e consequentemente, uma linguagem), alguns de seus princípios e padrões, pode ser o momento de aprender a utilizar ferramentas que auxiliem no processo.</p>
+
+<p>Frameworks e bibliotecas são ferramentas que facilitam a resolução de problemas <strong>que você deveria saber resolver sem elas</strong>. Richard Feynman, ganhador do Nobel de física, escreveu uma vez: “What I cannot create I do not understand”. Traduzindo: "O que eu não consigo criar eu não entendo".</p>
+
+<p>Então antes de utilizar um framework, saiba resolver o problema sem ele. Antes de utilizar uma biblioteca mais específica, saiba resolver o problema sem ela. Isso faz com que você consiga resolver um problema nas ferramentas, caso aconteça.</p>
+]]></content>
+        </entry>
+            <entry>
+            <title type="html"><![CDATA[Programação procedural orientada a classes - Parte 2]]></title>
+            <link href="https://dias.dev//2020-04-16-programacao-procedural-orientada-a-classes-parte-2/"/>
+            <updated>2020-04-16T00:00:00+00:00</updated>
+            <id>https://dias.dev//2020-04-16-programacao-procedural-orientada-a-classes-parte-2/</id>
+            <content type="html"><![CDATA[<h2 id="design-de-c%C3%B3digo">Design de código</h2>
+
+<p>Uma vez eu ouvi uma frase mas não me lembro o autor: "Não existe código sem design. Existe código com design ruim". Inclusive adaptei esta frase para "arquitetura" na primeira parte desta publicação.</p>
+
+<p>Antes de falarmos sobre as péssimas decisões de design que tomamos, vamos falar sobre o que é design de código.</p>
+
+<p>Uma analogia interessante foi feita pelo <a href="https://twitter.com/junior_grossi">Junior Grossi</a> em um workshop maravilhoso de qualidade de código que fiz com ele. Foi mais ou menos assim (não com essas exatas palavras):</p>
+
+<p>"Podemos fazer uma analogia da arquitetura de software com a arquitetura de uma casa. Onde fica cada cômodo, como se encaixam juntos, etc. É uma visão de bem <strong>alto nível</strong>. Já o design de código pode ser considerado análogo aos móveis de uma casa. É uma visão de mais <strong>baixo nível</strong> sobre nossas decisões sobre o código".</p>
+
+<p>Então, basicamente (beem basicamente), arquitetura diz respeito a como você vai separar sua aplicação em camadas, por exemplo, onde cada camada pode ter sua responsabilidade bem definida. Já o design de código diz respeito a como você vai organizar suas classes e métodos em cada uma das camadas. Quais padrões você vai seguir, como cada classe vai se comportar sozinha ou em conjunto com suas respetivas dependências, etc.</p>
+
+<h2 id="escolhas-corriqueiras">Escolhas corriqueiras</h2>
+
+<p>Agora que já entendemos basicamente o que é Design de Código, vamos falar sobre escolhas que fazemos frequentemente e que talvez não sejam as mais interessantes sob a ótica da programação orientada a objetos, ou melhor, sob a ótica do design orientado a objetos.</p>
+
+<p>Como já foi discutido no post anterior, é muito comum termos um modelo anêmico: Classes que apenas possuem <code>getters</code> e <code>setters</code>, ou seja, meros sacos de dados. Para quem já estudou C sabe que no fundo isso não é uma classe, mas sim uma <code>struct</code>.</p>
+
+<p>O fato de termos modelos anêmicos onde classes que deveriam ser do nosso domínio na verdade acabam sem nenhuma regra de negócio, geralmente faz com que nós transfiramos essas regras para lugares "errados" (entre aspas porque quem sou eu pra dizer o que é certo ou errado?).</p>
+
+<p>Que lugares errados seriam esses?</p>
+
+<h2 id="helpers-ou-utils">Helpers ou Utils</h2>
+
+<p>Quem nunca viu uma classe chamada <code>StringHelper</code> ou <code>DateUtils</code>? São classes que claramente estão perdidas em nosso sistema. O que seria, no mundo real, um(a) <code>StringHelper</code>? Se não existe no mundo real, tem certeza que deveria existir no código?</p>
+
+<p><img src="https://i.imgur.com/rc9OMWr.jpg" alt="Reflitão" /></p>
+
+<p>Esse tipo de classe é uma herança clara da programação procedural em nosso código onde estamos separando o comportamento dos seus dados, quando a orientação a objetos tem todas as ferramentas necessárias para nós os juntarmos.</p>
+
+<h3 id="poss%C3%ADvel-solu%C3%A7%C3%A3o">Possível solução</h3>
+
+<p>Se você possui uma classe <code>StringHelper</code>, talvez ela esteja fazendo validações bem genéricas. Nesse caso, nada mais justo do que transformá-la em uma classe bem genérica, como <code>String</code>. Nessa classe você pode ter comportamentos e verificações pertinentes a uma string em seu código.</p>
+
+<p>Mas na maioria das vezes as verificações nesse tipo de classe são específicas de regras de negócio. Ex.: Garantir que nome possua pelo menos 10 letras.</p>
+
+<p>Se é uma regra de negócio, deveria estar na classe de negócio. Talvez na classe <code>Pessoa</code>. Talvez numa classe mais específica, como <code>Nome</code>. Depende do seu sistema.</p>
+
+<h2 id="services-in%C3%BAteis">Services inúteis</h2>
+
+<p><a href="https://amzn.to/39MBuNH">O livro do Eric Evans sobre DDD</a> é certamente uma obra que revolucionou o mundo do desenvolvimento. Eu particularmente ainda não o li, mas li <a href="https://amzn.to/2Q1bW8d">obras inspiradas por este livro</a>, então sei que: Neste livro foram definidos alguns conceitos sobre classes chamadas de <code>Services</code>.</p>
+
+<p>Uma das possíveis "categorias" desse tipo de classe é <code>Application Service</code>. Este tipo de classe tem como propósito receber informações de fora do domínio do sistema (da web, linha de comando, etc) e orquestrar as chamadas a regras de domínio.</p>
+
+<p>Um exemplo clássico:</p>
+
+<pre><code class="php">&lt;?php
+
+class AddUser
+{
+    private UserRepository $repository;
+    private PasswordHasher $hasher;
+
+    public function __construct(UserRepository $repository, PasswordHasher $hasher)
+    {
+        $this-&gt;repository = $repository;
+        $this-&gt;hasher = $hasher;
+    }
+
+    public function execute(AddUserDto $data): void
+    {
+        $hashedPassword = $this-&gt;hasher
+            -&gt;hash($data-&gt;password());
+        $user = new User($data-&gt;email(), $hashedPassword);
+
+        $this-&gt;repository-&gt;add($user);
+    }
+}
+</code></pre>
+
+<p>Há pontos de melhoria nesse código (sempre há), mas basicamente: Ele recebe os dados de algum mecanismo de entrega através de um DTO (objeto de transferência de dados, que serve basicamente para transferir dados entre camadas no sistema), e passa para o domínio que sabe cifrar a senha, armazenar o usuário no repositório, etc.</p>
+
+<h3 id="problema-comum">Problema comum</h3>
+
+<p>Essa definição de <code>Application Service</code> em algum momento foi tomada por alguém como "Classe obrigatória para adicionar <em>indireção</em> desnecessária no sistema".</p>
+
+<p>Na prática é muito comum vermos código onde um Controller chama um método de uma classe com <code>Service</code> no nome, e esse método não faz nada além de chamar um método de outra classe. Essa chamada extra de um método é conhecida como indireção, de forma resumida.</p>
+
+<p>Algo parecido com isso:</p>
+
+<pre><code class="php">&lt;?php
+
+class UserService
+{
+    private UserRepository $repository;
+
+    public function __construct(UserRepository $repository)
+    {
+        $this-&gt;repository = $repository;
+    }
+
+    public function add(User $user): void
+    {
+        $this-&gt;repository-&gt;add($user);
+    }
+
+    // todos os outros métodos públicos que também existem em UserRepository
+}
+</code></pre>
+
+<p>Agora me responda: O que ganhamos ao ter a classe <code>UserService</code>? Ganhamos apenas mais indireções em nosso sistema. Mais um lugar que nossa IDE vai nos fazer passar até chegar no código que de fato executa algo.</p>
+
+<p>Além de parecerem ser classes conhecidas como <em>God classes</em>, já que aparentam fazer tudo no sistema, são inúteis na prática.</p>
+
+<p>Esse é mais um exemplo de programação procedural sendo aplicada, onde temos apenas funções sem nenhum significado pro negócio agrupadas em uma classe que simplesmente chama outras funções.</p>
+
+<p>Outra característica de programação procedural nesse caso é que muito comumente temos métodos não tão relacionados na mesma classe <code>Service</code>.</p>
+
+<p>É comum um <code>UserService</code> ter um método com uma chamada para salvar um usuário e outro método para enviar um e-mail para ele. Responsabilidades que deveriam estar em classes separadas.</p>
+
+<p>No canal <em>Dev Eficiente</em>, do Aberto Souza, tem um vídeo falando um pouco mais sobre o problema deste tipo de classe, mas sob uma outra ótica. Vale a pena conferir:</p>
+
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/szGb93_hXgI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<h2 id="camada-model-do-mvc">Camada Model do MVC</h2>
+
+<p>Um ponto que tem levantado bastante discussão em comunidades que participo é: O que é a camada <em>Model</em> no MVC?</p>
+
+<p>Discutir sobre MVC é assunto pra outro post, mas o que tenho visto como consenso é: Camada que faz a persistência dos dados.</p>
+
+<p>E a regra de negócio? Uma galera tem colocado nos <em>Controllers</em>. E aí? Se essa lógica precisar ser reaproveitada, como fazemos? Como chamamos um <em>Controller</em> dentro de outro? Complicado, né?</p>
+
+<p>Em nossos <em>Controllers</em> é muito comum ver aquele código super famoso da programação procedural cheio de IFs e verificações em tipos primitivos, sem nenhum significado para o negócio.</p>
+
+<h3 id="padr%C3%B5es-arquiteturais">Padrões arquiteturais</h3>
+
+<p>Para "resolver" esse problema, diversos padrões arquiteturais existem, e eu falei um pouquinho (bem pouquinho) sobre arquitetura nesse meu outro post: <a href="https://dias.dev/2020-04-10-o-que-e-arquitetura/">O que é Arquitetura</a></p>
+
+<h2 id="conclus%C3%A3o">Conclusão</h2>
+
+<p>Por mais que a gente estude muito sobre ferramentas, frameworks, hypes e modinhas, os princípios da programação orientada a objetos mudam muito pouco e merecem MUITA atenção.</p>
+
+<p>Estude conceitos, princípios, padrões... Tudo isso vai poder ser aplicado naquele framework que foi lançado semana passada e você está doido pra usar pra fazer um CRUD. Acredite.</p>
+
+<p>Infelizmente eu ainda vejo muito código utilizando estas "técnicas" procedurais utilizando classes, e pessoas acreditando que isso é desenvolver utilizando a programação orientada a objetos.</p>
+
+<p>Você costuma ver código assim no seu dia a dia? Compartilha aqui nos comentários algum caso que você tenha visto recentemente.</p>
+]]></content>
+        </entry>
+    </feed>

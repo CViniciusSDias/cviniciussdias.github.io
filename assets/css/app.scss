@@ -1,0 +1,109 @@
+@import "../../../node_modules/highlightjs/styles/github.css";
+@import url("https://necolas.github.io/normalize.css/latest/normalize.css");
+@import "fonts";
+
+body {
+    font-family: "Baloo 2",Georgia,Cambria,serif;
+    color: #2E353F;
+    font-size: 1rem;
+}
+
+h1 {
+    color: #F00696;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+h3 {
+    font-size: 1.7rem;
+}
+
+h2, h3, h4, h5, h6 {
+    color: #52C196;
+    font-weight: bold;
+
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
+}
+
+a {
+    color: #005B99;
+
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+p {
+    margin-bottom: 2rem;
+    line-height: 1.625;
+}
+
+.global-container {
+    max-width: 672px;
+    box-sizing: border-box;
+    margin: 0 auto;
+    padding: 2.5rem 1.25rem;
+}
+
+.header-title {
+    border-bottom: 0.5rem solid #F00696;
+    border-top: 0.5rem solid #52C196;
+    margin-bottom: 1.25rem;
+    padding: 0.75rem 0;
+}
+
+.main-heading {
+    font-family: "Fugaz One", Roboto, sans-serif;
+    font-size: 47px;
+    font-weight: 900;
+    text-transform: uppercase;
+    text-align: center;
+    margin: 0;
+
+    a {
+        text-decoration: none;
+        color: #550766;
+    }
+}
+
+nav.menu {
+    display: flex;
+    justify-content: space-evenly;
+    background-color: #550766;
+    padding: 6px 0;
+
+    a {
+        font-family: "Fugaz One", Roboto, sans-serif;
+        text-decoration: none;
+        color: #FFFFFF;
+
+        &:hover {
+            text-decoration: underline;
+        }
+
+        &[href^=http]::after {
+            content: '';
+            background-image: url('/build/external-link-symbol.svg');
+            background-size: 12px;
+            width: 12px;
+            height: 12px;
+            display: inline-block;
+            vertical-align: top;
+        }
+    }
+}
+
+.global-footer {
+    margin-top: 2rem;
+}
+
+.index-footer {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+}

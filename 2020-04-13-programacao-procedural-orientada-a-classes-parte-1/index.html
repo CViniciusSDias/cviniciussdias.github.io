@@ -1,116 +1,264 @@
-<!DOCTYPE html><html lang="pt-BR"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="ie=edge"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><style data-href="/styles.46d211ff30ee18662939.css" data-identity="gatsby-global-css">@font-face{font-display:swap;font-family:Montserrat;font-style:normal;font-weight:100;src:local("Montserrat Thin "),local("Montserrat-Thin"),url(/static/montserrat-latin-100-8d7d79679b70dbe27172b6460e7a7910.woff2) format("woff2"),url(/static/montserrat-latin-100-ec38980a9e0119a379e2a9b3dbb1901a.woff) format("woff")}@font-face{font-display:swap;font-family:Montserrat;font-style:italic;font-weight:100;src:local("Montserrat Thin italic"),local("Montserrat-Thinitalic"),url(/static/montserrat-latin-100italic-e279051046ba1286706adc886cf1c96b.woff2) format("woff2"),url(/static/montserrat-latin-100italic-3b325a3173c8207435cd1b76e19bf501.woff) format("woff")}@font-face{font-display:swap;font-family:Montserrat;font-style:normal;font-weight:200;src:local("Montserrat Extra Light "),local("Montserrat-Extra Light"),url(/static/montserrat-latin-200-9d266fbbfa6cab7009bd56003b1eeb67.woff2) format("woff2"),url(/static/montserrat-latin-200-2d8ba08717110d27122e54c34b8a5798.woff) format("woff")}@font-face{font-display:swap;font-family:Montserrat;font-style:italic;font-weight:200;src:local("Montserrat Extra Light italic"),local("Montserrat-Extra Lightitalic"),url(/static/montserrat-latin-200italic-6e5b3756583bb2263eb062eae992735e.woff2) format("woff2"),url(/static/montserrat-latin-200italic-a0d6f343e4b536c582926255367a57da.woff) format("woff")}@font-face{font-display:swap;font-family:Montserrat;font-style:normal;font-weight:300;src:local("Montserrat Light "),local("Montserrat-Light"),url(/static/montserrat-latin-300-00b3e893aab5a8fd632d6342eb72551a.woff2) format("woff2"),url(/static/montserrat-latin-300-ea303695ceab35f17e7d062f30e0173b.woff) format("woff")}@font-face{font-display:swap;font-family:Montserrat;font-style:italic;font-weight:300;src:local("Montserrat Light italic"),local("Montserrat-Lightitalic"),url(/static/montserrat-latin-300italic-56f34ea368f6aedf89583d444bbcb227.woff2) format("woff2"),url(/static/montserrat-latin-300italic-54b0bf2c8c4c12ffafd803be2466a790.woff) format("woff")}@font-face{font-display:swap;font-family:Montserrat;font-style:normal;font-weight:400;src:local("Montserrat Regular "),local("Montserrat-Regular"),url(/static/montserrat-latin-400-b71748ae4f80ec8c014def4c5fa8688b.woff2) format("woff2"),url(/static/montserrat-latin-400-0659a9f4e90db5cf51b50d005bff1e41.woff) format("woff")}@font-face{font-display:swap;font-family:Montserrat;font-style:italic;font-weight:400;src:local("Montserrat Regular italic"),local("Montserrat-Regularitalic"),url(/static/montserrat-latin-400italic-6eed6b4cbb809c6efc7aa7ddad6dbe3e.woff2) format("woff2"),url(/static/montserrat-latin-400italic-7583622cfde30ae49086d18447ab28e7.woff) format("woff")}@font-face{font-display:swap;font-family:Montserrat;font-style:normal;font-weight:500;src:local("Montserrat Medium "),local("Montserrat-Medium"),url(/static/montserrat-latin-500-091b209546e16313fd4f4fc36090c757.woff2) format("woff2"),url(/static/montserrat-latin-500-edd311588712a96bbf435fad264fff62.woff) format("woff")}@font-face{font-display:swap;font-family:Montserrat;font-style:italic;font-weight:500;src:local("Montserrat Medium italic"),local("Montserrat-Mediumitalic"),url(/static/montserrat-latin-500italic-c90ced68b46050061d1a41842d6dfb43.woff2) format("woff2"),url(/static/montserrat-latin-500italic-5146cbfe02b1deea5dffea27a5f2f998.woff) format("woff")}@font-face{font-display:swap;font-family:Montserrat;font-style:normal;font-weight:600;src:local("Montserrat SemiBold "),local("Montserrat-SemiBold"),url(/static/montserrat-latin-600-0480d2f8a71f38db8633b84d8722e0c2.woff2) format("woff2"),url(/static/montserrat-latin-600-b77863a375260a05dd13f86a1cee598f.woff) format("woff")}@font-face{font-display:swap;font-family:Montserrat;font-style:italic;font-weight:600;src:local("Montserrat SemiBold italic"),local("Montserrat-SemiBolditalic"),url(/static/montserrat-latin-600italic-cf46ffb11f3a60d7df0567f8851a1d00.woff2) format("woff2"),url(/static/montserrat-latin-600italic-c4fcfeeb057724724097167e57bd7801.woff) format("woff")}@font-face{font-display:swap;font-family:Montserrat;font-style:normal;font-weight:700;src:local("Montserrat Bold "),local("Montserrat-Bold"),url(/static/montserrat-latin-700-7dbcc8a5ea2289d83f657c25b4be6193.woff2) format("woff2"),url(/static/montserrat-latin-700-99271a835e1cae8c76ef8bba99a8cc4e.woff) format("woff")}@font-face{font-display:swap;font-family:Montserrat;font-style:italic;font-weight:700;src:local("Montserrat Bold italic"),local("Montserrat-Bolditalic"),url(/static/montserrat-latin-700italic-c41ad6bdb4bd504a843d546d0a47958d.woff2) format("woff2"),url(/static/montserrat-latin-700italic-6779372f04095051c62ed36bc1dcc142.woff) format("woff")}@font-face{font-display:swap;font-family:Montserrat;font-style:normal;font-weight:800;src:local("Montserrat ExtraBold "),local("Montserrat-ExtraBold"),url(/static/montserrat-latin-800-db9a3e0ba7eaea32e5f55328ace6cf23.woff2) format("woff2"),url(/static/montserrat-latin-800-4e3c615967a2360f5db87d2f0fd2456f.woff) format("woff")}@font-face{font-display:swap;font-family:Montserrat;font-style:italic;font-weight:800;src:local("Montserrat ExtraBold italic"),local("Montserrat-ExtraBolditalic"),url(/static/montserrat-latin-800italic-bf45bfa14805969eda318973947bc42b.woff2) format("woff2"),url(/static/montserrat-latin-800italic-fe82abb0bcede51bf724254878e0c374.woff) format("woff")}@font-face{font-display:swap;font-family:Montserrat;font-style:normal;font-weight:900;src:local("Montserrat Black "),local("Montserrat-Black"),url(/static/montserrat-latin-900-e66c7edc609e24bacbb705175669d814.woff2) format("woff2"),url(/static/montserrat-latin-900-8211f418baeb8ec880b80ba3c682f957.woff) format("woff")}@font-face{font-display:swap;font-family:Montserrat;font-style:italic;font-weight:900;src:local("Montserrat Black italic"),local("Montserrat-Blackitalic"),url(/static/montserrat-latin-900italic-4454c775e48152c1a72510ceed3603e2.woff2) format("woff2"),url(/static/montserrat-latin-900italic-efcaa0f6a82ee0640b83a0916e6e8d68.woff) format("woff")}@font-face{font-display:swap;font-family:Merriweather;font-style:normal;font-weight:300;src:local("Merriweather Light "),local("Merriweather-Light"),url(/static/merriweather-latin-300-fc117160c69a8ea0851b26dd14748ee4.woff2) format("woff2"),url(/static/merriweather-latin-300-58b18067ebbd21fda77b67e73c241d3b.woff) format("woff")}@font-face{font-display:swap;font-family:Merriweather;font-style:italic;font-weight:300;src:local("Merriweather Light italic"),local("Merriweather-Lightitalic"),url(/static/merriweather-latin-300italic-fe29961474f8dbf77c0aa7b9a629e4bc.woff2) format("woff2"),url(/static/merriweather-latin-300italic-23c3f1f88683618a4fb8d265d33d383a.woff) format("woff")}@font-face{font-display:swap;font-family:Merriweather;font-style:normal;font-weight:400;src:local("Merriweather Regular "),local("Merriweather-Regular"),url(/static/merriweather-latin-400-d9479e8023bef9cbd9bf8d6eabd6bf36.woff2) format("woff2"),url(/static/merriweather-latin-400-040426f99ff6e00b86506452e0d1f10b.woff) format("woff")}@font-face{font-display:swap;font-family:Merriweather;font-style:italic;font-weight:400;src:local("Merriweather Regular italic"),local("Merriweather-Regularitalic"),url(/static/merriweather-latin-400italic-2de7bfeaf08fb03d4315d49947f062f7.woff2) format("woff2"),url(/static/merriweather-latin-400italic-79db67aca65f5285964ab332bd65f451.woff) format("woff")}@font-face{font-display:swap;font-family:Merriweather;font-style:normal;font-weight:700;src:local("Merriweather Bold "),local("Merriweather-Bold"),url(/static/merriweather-latin-700-4b08e01d805fa35d7bf777f1b24314ae.woff2) format("woff2"),url(/static/merriweather-latin-700-22fb8afba4ab1f093b6ef9e28a9b6e92.woff) format("woff")}@font-face{font-display:swap;font-family:Merriweather;font-style:italic;font-weight:700;src:local("Merriweather Bold italic"),local("Merriweather-Bolditalic"),url(/static/merriweather-latin-700italic-cd92541b177652fffb6e3b952f1c33f1.woff2) format("woff2"),url(/static/merriweather-latin-700italic-f87f3d87cea0dd0979bfc8ac9ea90243.woff) format("woff")}@font-face{font-display:swap;font-family:Merriweather;font-style:normal;font-weight:900;src:local("Merriweather Black "),local("Merriweather-Black"),url(/static/merriweather-latin-900-f813fc6a4bee46eda5224ac7ebf1b7be.woff2) format("woff2"),url(/static/merriweather-latin-900-5d4e42cb44410674acd99153d57df032.woff) format("woff")}@font-face{font-display:swap;font-family:Merriweather;font-style:italic;font-weight:900;src:local("Merriweather Black italic"),local("Merriweather-Blackitalic"),url(/static/merriweather-latin-900italic-b7901d85486871c1779c0e93ddd85656.woff2) format("woff2"),url(/static/merriweather-latin-900italic-9647f9fdab98756989a8a5550eb205c3.woff) format("woff")}
+<!DOCTYPE html>
+<html>
+    <head lang="pt-BR">
+        <title>Programação procedural orientada a classes - Parte 1 | Dias de Dev</title>
+        <meta charset="utf-8">
+        <meta name="theme-color" content="#ffffff">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <meta name="robots" content="index, follow">
+    <meta name="keywords" content="Programação procedural, Orientação a objetos, Dias de Dev">
+    <meta name="description" content="A programação orientada a objetos é muito citada e utilizada, mas será que você está fazendo da forma correta? Será que não está apenas usando classes na programação procedural?">
+        <link rel="stylesheet" href="https://dias.dev//build/app.css">
 
+        <!--<link rel="apple-touch-startup-image" href="https://dias.dev//build/2048x2048.png">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="shortcut icon" sizes="76x76" href="https://dias.dev//build/jackson/76x76.png">
+        <link rel="shortcut icon" sizes="120x120" href="https://dias.dev//build/jackson/120x120.png">
+        <link rel="shortcut icon" sizes="128x128" href="https://dias.dev//build/jackson/128x128.png">
+        <link rel="shortcut icon" sizes="152x152" href="https://dias.dev//build/jackson/152x152.png">
+        <link rel="shortcut icon" sizes="196x196" href="https://dias.dev//build/jackson/196x196.png">
+        <link rel="shortcut icon" sizes="512x512" href="https://dias.dev//build/jackson/512x512.png">
+        <link rel="shortcut icon" sizes="1024x1024" href="https://dias.dev//build/jackson/1024x1024.png">
+        <link rel="shortcut icon" sizes="2048x2048" href="https://dias.dev//build/jackson/2048x2048.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="https://dias.dev//build/jackson/76x76.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="https://dias.dev//build/jackson/120x120.png">
+        <link rel="apple-touch-icon" sizes="128x128" href="https://dias.dev//build/jackson/128x128.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="https://dias.dev//build/jackson/152x152.png">
+        <link rel="apple-touch-icon" sizes="196x196" href="https://dias.dev//build/jackson/196x196.png">
+        <link rel="apple-touch-icon" sizes="512x512" href="https://dias.dev//build/jackson/512x512.png">
+        <link rel="apple-touch-icon" sizes="1024x1024" href="https://dias.dev//build/jackson/1024x1024.png">
+        <link rel="apple-touch-icon" sizes="2048x2048" href="https://dias.dev//build/jackson/2048x2048.png">-->
 
-/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */html{-webkit-text-size-adjust:100%;line-height:1.15}body{margin:0}main{display:block}h1{font-size:2em;margin:.67em 0}hr{box-sizing:content-box;height:0;overflow:visible}pre{font-family:monospace,monospace;font-size:1em}a{background-color:transparent}abbr[title]{border-bottom:none;text-decoration:underline;-webkit-text-decoration:underline dotted;text-decoration:underline dotted}b,strong{font-weight:bolder}code,kbd,samp{font-family:monospace,monospace;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}img{border-style:none}button,input,optgroup,select,textarea{font-family:inherit;font-size:100%;line-height:1.15;margin:0}button,input{overflow:visible}button,select{text-transform:none}[type=button],[type=reset],[type=submit],button{-webkit-appearance:button}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner{border-style:none;padding:0}[type=button]:-moz-focusring,[type=reset]:-moz-focusring,[type=submit]:-moz-focusring,button:-moz-focusring{outline:1px dotted ButtonText}fieldset{padding:.35em .75em .625em}legend{box-sizing:border-box;color:inherit;display:table;max-width:100%;padding:0;white-space:normal}progress{vertical-align:baseline}textarea{overflow:auto}[type=checkbox],[type=radio]{box-sizing:border-box;padding:0}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}details{display:block}summary{display:list-item}[hidden]{display:none}:root{--maxWidth-none:"none";--maxWidth-xs:20rem;--maxWidth-sm:24rem;--maxWidth-md:28rem;--maxWidth-lg:32rem;--maxWidth-xl:36rem;--maxWidth-2xl:42rem;--maxWidth-3xl:48rem;--maxWidth-4xl:56rem;--maxWidth-full:"100%";--maxWidth-wrapper:var(--maxWidth-2xl);--spacing-px:"1px";--spacing-0:0;--spacing-1:0.25rem;--spacing-2:0.5rem;--spacing-3:0.75rem;--spacing-4:1rem;--spacing-5:1.25rem;--spacing-6:1.5rem;--spacing-8:2rem;--spacing-10:2.5rem;--spacing-12:3rem;--spacing-16:4rem;--spacing-20:5rem;--spacing-24:6rem;--spacing-32:8rem;--fontFamily-sans:Montserrat,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";--fontFamily-mainHeading:"Fugaz One",Roboto,sans-serif;--font-body:"Baloo 2",Georgia,Cambria,serif;--font-heading:var(--font-body);--fontWeight-normal:400;--fontWeight-medium:500;--fontWeight-semibold:600;--fontWeight-bold:700;--fontWeight-extrabold:800;--fontWeight-black:900;--fontSize-root:16px;--lineHeight-none:1;--lineHeight-tight:1.1;--lineHeight-normal:1.5;--lineHeight-relaxed:1.625;--fontSize-0:0.833rem;--fontSize-1:1rem;--fontSize-2:1.2rem;--fontSize-3:1.44rem;--fontSize-4:1.728rem;--fontSize-5:2.074rem;--fontSize-6:2.488rem;--fontSize-7:2.986rem;--color-primary:#005b99;--color-text:#2e353f;--color-text-light:#4f5969;--color-heading:#52c196;--color-heading-black:#550766;--color-accent:#f00696}*,:after,:before{box-sizing:border-box}html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-size:var(--fontSize-root);line-height:var(--lineHeight-normal)}body{color:var(--color-text);font-family:var(--font-body);font-size:var(--fontSize-1)}footer{padding:var(--spacing-6) var(--spacing-0)}hr{background:var(--color-accent);border:0;height:1px}h1,h2,h3,h4,h5,h6{font-family:var(--font-heading);letter-spacing:-.025em;line-height:var(--lineHeight-tight);margin-bottom:var(--spacing-6);margin-top:var(--spacing-12)}h2,h3,h4,h5,h6{color:var(--color-heading);font-weight:var(--fontWeight-bold)}h1{color:var(--color-accent);font-size:var(--fontSize-6);font-weight:var(--fontWeight-black)}h2{font-size:var(--fontSize-5)}h3{font-size:var(--fontSize-4)}h4{font-size:var(--fontSize-3)}h5{font-size:var(--fontSize-2)}h6{font-size:var(--fontSize-1)}h1>a,h2>a,h3>a,h4>a,h5>a,h6>a{color:inherit;text-decoration:none}p{--baseline-multiplier:0.179;--x-height-multiplier:0.35;line-height:var(--lineHeight-relaxed);margin:var(--spacing-0) var(--spacing-0) var(--spacing-8) var(--spacing-0)}ol,p,ul{padding:var(--spacing-0)}ol,ul{list-style-image:none;list-style-position:outside;margin-bottom:var(--spacing-8);margin-left:var(--spacing-0);margin-right:var(--spacing-0)}ol li,ul li{padding-left:var(--spacing-0)}li>p,ol li,ul li{margin-bottom:calc(var(--spacing-8)/2)}li :last-child{margin-bottom:var(--spacing-0)}li>ul{margin-left:var(--spacing-8);margin-top:calc(var(--spacing-8)/2)}blockquote{border-left:var(--spacing-1) solid var(--color-primary);color:var(--color-text-light);font-size:var(--fontSize-2);font-style:italic;margin-bottom:var(--spacing-8);margin-left:calc(var(--spacing-6)*-1);margin-right:var(--spacing-8);padding:var(--spacing-0) var(--spacing-0) var(--spacing-0) var(--spacing-6)}blockquote>:last-child{margin-bottom:var(--spacing-0)}blockquote>ol,blockquote>ul{list-style-position:inside}table{border-collapse:collapse;border-spacing:.25rem;margin-bottom:var(--spacing-8);width:100%}table thead tr th{border-bottom:1px solid var(--color-accent)}a{color:var(--color-primary)}a:focus,a:hover{text-decoration:none}.global-wrapper{margin:var(--spacing-0) auto;max-width:var(--maxWidth-wrapper);padding:var(--spacing-10) var(--spacing-5)}.global-wrapper[data-is-root-path=true] .bio{margin-bottom:var(--spacing-20)}.global-header{border-bottom:var(--spacing-2) solid var(--color-accent);border-left-style:solid;border-left-width:0;border-right-style:solid;border-right-width:0;border-top:var(--spacing-2) solid var(--color-heading);margin-bottom:var(--spacing-5);padding:var(--spacing-3) 0;text-align:center}.main-heading{color:var(--color-heading-black);font-family:var(--fontFamily-mainHeading);font-size:var(--fontSize-7);font-weight:var(--fontWeight-black);margin:0;text-transform:uppercase}nav.menu{background:var(--color-heading-black);display:flex;justify-content:space-evenly;padding:var(--spacing-1) 0}nav.menu a{align-items:flex-start;color:#fff;display:flex;font-family:var(--fontFamily-mainHeading);text-decoration:none}nav.menu a:hover{text-decoration:underline}.post-list-item{margin-bottom:var(--spacing-8);margin-top:var(--spacing-8)}.post-list-item p{margin-bottom:var(--spacing-0)}.post-list-item h2{font-size:var(--fontSize-4);margin-bottom:var(--spacing-2);margin-top:var(--spacing-0)}.post-list-item header{margin-bottom:var(--spacing-4)}.bio{display:flex;margin-bottom:var(--spacing-16)}.bio p{margin-bottom:var(--spacing-0)}.bio strong{color:var(--color-accent)}.bio-avatar{border-radius:100%;margin-bottom:var(--spacing-0);margin-right:var(--spacing-4);min-width:50px}.blog-post{margin-top:var(--spacing-8)}.blog-post header h1{margin:var(--spacing-0) var(--spacing-0) var(--spacing-4) var(--spacing-0)}.blog-post header p{font-family:var(--font-heading);font-size:var(--fontSize-2)}.blog-post-nav ul{margin:var(--spacing-0)}.gatsby-highlight{margin-bottom:var(--spacing-8)}@media (max-width:42rem){blockquote{margin-left:var(--spacing-0);padding:var(--spacing-0) var(--spacing-0) var(--spacing-0) var(--spacing-4)}ol,ul{list-style-position:inside}}section[itemprop=articleBody] img{display:block;margin:0 auto;max-width:100%}div.iframe{text-align:center}img.big-image{max-height:80vh}code[class*=language-],pre[class*=language-]{word-wrap:normal;background:none;color:#000;font-family:Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;font-size:1em;-webkit-hyphens:none;-ms-hyphens:none;hyphens:none;line-height:1.5;-moz-tab-size:4;-o-tab-size:4;tab-size:4;text-align:left;text-shadow:0 1px #fff;white-space:pre;word-break:normal;word-spacing:normal}code[class*=language-]::selection,code[class*=language-] ::selection,pre[class*=language-]::selection,pre[class*=language-] ::selection{background:#b3d4fc;text-shadow:none}@media print{code[class*=language-],pre[class*=language-]{text-shadow:none}}pre[class*=language-]{margin:.5em 0;overflow:auto;padding:1em}:not(pre)>code[class*=language-],pre[class*=language-]{background:#f5f2f0}:not(pre)>code[class*=language-]{border-radius:.3em;padding:.1em;white-space:normal}.token.cdata,.token.comment,.token.doctype,.token.prolog{color:#708090}.token.punctuation{color:#999}.token.namespace{opacity:.7}.token.boolean,.token.constant,.token.deleted,.token.number,.token.property,.token.symbol,.token.tag{color:#905}.token.attr-name,.token.builtin,.token.char,.token.inserted,.token.selector,.token.string{color:#690}.language-css .token.string,.style .token.string,.token.entity,.token.operator,.token.url{background:hsla(0,0%,100%,.5);color:#9a6e3a}.token.atrule,.token.attr-value,.token.keyword{color:#07a}.token.class-name,.token.function{color:#dd4a68}.token.important,.token.regex,.token.variable{color:#e90}.token.bold,.token.important{font-weight:700}.token.italic{font-style:italic}.token.entity{cursor:help}@font-face{font-display:swap;font-family:Fugaz One;font-style:normal;font-weight:400;src:local("Fugaz One"),local("FugazOne-Regular"),url(/static/FugazOne-Regular-bb916c7e293e03d98ac838ba18684a8b.ttf) format("truetype"),url(https://fonts.gstatic.com/s/fugazone/v10/rax_HiWKp9EAITukFsl8Axhf.woff2) format("woff2");unicode-range:U+00??,U+0131,U+0152-0153,U+02bb-02bc,U+02c6,U+02da,U+02dc,U+2000-206f,U+2074,U+20ac,U+2122,U+2191,U+2193,U+2212,U+2215,U+feff,U+fffd}@font-face{font-display:swap;font-family:Baloo\ 2;font-style:normal;font-weight:400;src:local("Baloo 2 Regular"),local("Baloo2-Regular"),url(/static/Baloo2-Regular-6208e6316eed6b9e1de0a022ace38958.ttf) format("truetype"),url(https://fonts.gstatic.com/s/baloo2/v1/wXKrE3kTposypRyd51jcAA.woff2) format("woff2");unicode-range:U+00??,U+0131,U+0152-0153,U+02bb-02bc,U+02c6,U+02da,U+02dc,U+2000-206f,U+2074,U+20ac,U+2122,U+2191,U+2193,U+2212,U+2215,U+feff,U+fffd}@font-face{font-display:swap;font-family:Baloo\ 2;font-style:normal;font-weight:500;src:local("Baloo 2 Medium"),local("Baloo2-Medium"),url(/static/Baloo2-Medium-1f413877aed565cf46d36eee02b2d808.ttf) format("truetype"),url(https://fonts.gstatic.com/s/baloo2/v1/wXKuE3kTposypRyd76v_FeMKmA.woff2) format("woff2");unicode-range:U+00??,U+0131,U+0152-0153,U+02bb-02bc,U+02c6,U+02da,U+02dc,U+2000-206f,U+2074,U+20ac,U+2122,U+2191,U+2193,U+2212,U+2215,U+feff,U+fffd}@font-face{font-display:swap;font-family:Baloo\ 2;font-style:normal;font-weight:600;src:local("Baloo 2 SemiBold"),local("Baloo2-SemiBold"),url(/static/Baloo2-SemiBold-ff177ef2da64b35e00a4a95d01cf370f.ttf) format("truetype"),url(https://fonts.gstatic.com/s/baloo2/v1/wXKuE3kTposypRyd74f4FeMKmA.woff2) format("woff2");unicode-range:U+00??,U+0131,U+0152-0153,U+02bb-02bc,U+02c6,U+02da,U+02dc,U+2000-206f,U+2074,U+20ac,U+2122,U+2191,U+2193,U+2212,U+2215,U+feff,U+fffd}@font-face{font-display:swap;font-family:Baloo\ 2;font-style:normal;font-weight:700;src:local("Baloo 2 Bold"),local("Baloo2-Bold"),url(/static/Baloo2-Bold-65719b39434b2c86bea54d53354cb10c.ttf) format("truetype"),url(https://fonts.gstatic.com/s/baloo2/v1/wXKuE3kTposypRyd7-P5FeMKmA.woff2) format("woff2");unicode-range:U+00??,U+0131,U+0152-0153,U+02bb-02bc,U+02c6,U+02da,U+02dc,U+2000-206f,U+2074,U+20ac,U+2122,U+2191,U+2193,U+2212,U+2215,U+feff,U+fffd}@font-face{font-display:swap;font-family:Baloo\ 2;font-style:normal;font-weight:800;src:local("Baloo 2 ExtraBold"),local("Baloo2-ExtraBold"),url(/static/Baloo2-ExtraBold-17c8015d558be1c57e591eba8d55287c.ttf) format("truetype"),url(https://fonts.gstatic.com/s/baloo2/v1/wXKuE3kTposypRyd7__6FeMKmA.woff2) format("woff2");unicode-range:U+00??,U+0131,U+0152-0153,U+02bb-02bc,U+02c6,U+02da,U+02dc,U+2000-206f,U+2074,U+20ac,U+2122,U+2191,U+2193,U+2212,U+2215,U+feff,U+fffd}</style><meta name="generator" content="Gatsby 3.12.0"/><link rel="alternate" type="application/rss+xml" href="/rss.xml"/><link rel="icon" href="/favicon-32x32.png?v=77d9c37a2f41228079811c3cc39ae141" type="image/png"/><link rel="manifest" href="/manifest.webmanifest" crossorigin="anonymous"/><meta name="theme-color" content="#550766"/><link rel="apple-touch-icon" sizes="48x48" href="/icons/icon-48x48.png?v=77d9c37a2f41228079811c3cc39ae141"/><link rel="apple-touch-icon" sizes="72x72" href="/icons/icon-72x72.png?v=77d9c37a2f41228079811c3cc39ae141"/><link rel="apple-touch-icon" sizes="96x96" href="/icons/icon-96x96.png?v=77d9c37a2f41228079811c3cc39ae141"/><link rel="apple-touch-icon" sizes="144x144" href="/icons/icon-144x144.png?v=77d9c37a2f41228079811c3cc39ae141"/><link rel="apple-touch-icon" sizes="192x192" href="/icons/icon-192x192.png?v=77d9c37a2f41228079811c3cc39ae141"/><link rel="apple-touch-icon" sizes="256x256" href="/icons/icon-256x256.png?v=77d9c37a2f41228079811c3cc39ae141"/><link rel="apple-touch-icon" sizes="384x384" href="/icons/icon-384x384.png?v=77d9c37a2f41228079811c3cc39ae141"/><link rel="apple-touch-icon" sizes="512x512" href="/icons/icon-512x512.png?v=77d9c37a2f41228079811c3cc39ae141"/><title data-react-helmet="true">Programação procedural orientada a classes - Parte 1 | Dias de Dev</title><meta data-react-helmet="true" name="description" content="A programação orientada a objetos é muito citada e utilizada, mas será que você está fazendo da forma correta? Será que não está apenas usando classes na programação procedural?"/><meta data-react-helmet="true" property="og:title" content="Programação procedural orientada a classes - Parte 1 | Dias de Dev"/><meta data-react-helmet="true" property="og:description" content="A programação orientada a objetos é muito citada e utilizada, mas será que você está fazendo da forma correta? Será que não está apenas usando classes na programação procedural?"/><meta data-react-helmet="true" property="og:type" content="website"/><meta data-react-helmet="true" property="og:image" content="https://s.gravatar.com/avatar/63579c5a873f3ab6abff10803e9a252f?s=600"/><meta data-react-helmet="true" property="og:image:width" content="600"/><meta data-react-helmet="true" property="og:image:height" content="600"/><meta data-react-helmet="true" name="twitter:card" content="summary"/><meta data-react-helmet="true" name="twitter:creator" content="cviniciussdias"/><meta data-react-helmet="true" name="twitter:title" content="Programação procedural orientada a classes - Parte 1 | Dias de Dev"/><meta data-react-helmet="true" name="twitter:description" content="A programação orientada a objetos é muito citada e utilizada, mas será que você está fazendo da forma correta? Será que não está apenas usando classes na programação procedural?"/><meta data-react-helmet="true" name="twitter:image" content="https://s.gravatar.com/avatar/63579c5a873f3ab6abff10803e9a252f?s=600"/><meta data-react-helmet="true" name="author" content="Vinicius Dias"/><script>window.dataLayer = window.dataLayer || [];window.dataLayer.push({"platform":"gatsby"}); (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl+'';f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer', 'GTM-5ZJJ977');</script><link rel="canonical" href="https://dias.dev/2020-04-13-programacao-procedural-orientada-a-classes-parte-1/" data-baseprotocol="https:" data-basehost="dias.dev"/><link as="script" rel="preload" href="/webpack-runtime-2e458592185173b755b7.js"/><link as="script" rel="preload" href="/framework-26912e4c097a2be780ad.js"/><link as="script" rel="preload" href="/app-2e8ae21195d0948243bc.js"/><link as="script" rel="preload" href="/commons-70f92c7cb9ff71476bea.js"/><link as="script" rel="preload" href="/component---src-templates-blog-post-js-e151ad291e6453a17222.js"/><link as="fetch" rel="preload" href="/page-data/2020-04-13-programacao-procedural-orientada-a-classes-parte-1/page-data.json" crossorigin="anonymous"/><link as="fetch" rel="preload" href="/page-data/sq/d/2841359383.json" crossorigin="anonymous"/><link as="fetch" rel="preload" href="/page-data/sq/d/3257411868.json" crossorigin="anonymous"/><link as="fetch" rel="preload" href="/page-data/app-data.json" crossorigin="anonymous"/></head><body><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5ZJJ977" height="0" width="0" style="display: none; visibility: hidden" aria-hidden="true"></iframe></noscript><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><div class="global-wrapper" data-is-root-path="false"><header class="global-header"><h3 class="main-heading"><a href="/">Dias de Dev</a></h3></header><nav class="menu"><a href="/">Home</a><a href="/sobre-mim/">Sobre Mim</a><a href="https://youtube.com/DiasDeDev?sub_confirmation=1" target="_blank">YouTube <img src="/img/external-link-symbol.svg" alt="Símbolo de link externo" aria-hidden="true" width="12" height="12"/></a><a href="https://github.com/PHPRio/CFP/issues?q=label%3APalestras+author%3Acviniciussdias" target="_blank">Palestras <img src="/img/external-link-symbol.svg" alt="Símbolo de link externo" aria-hidden="true" width="12" height="12"/></a></nav><main><article class="blog-post" itemscope="" itemType="http://schema.org/Article"><header><h1 itemProp="headline">Programação procedural orientada a classes - Parte 1</h1><p itemProp="dateCreated">13 de abril de 2020</p></header><section itemProp="articleBody"><h2>Farsa da programação Orientada a Objetos</h2>
+        <link rel="alternate" type="application/atom+xml" href="https://dias.dev//atom.xml" title="Dias de Dev activity feed" />
+                    <link rel="stylesheet" href="/build/post.css">
+                    </head>
+    <body>
+        <div class="global-container">
+            <header>
+                <div class="header-title">
+                    <h1 class="main-heading">
+                        <a aria-current="page" href="/">Dias de Dev</a>
+                    </h1>
+                </div>
+                <nav class="menu">
+                    <a aria-current="page" href="/">Home</a>
+                    <a href="/categorias">Categorias</a>
+                    <!--<a class="nav-link" href="https://dias.dev//blog">Posts Archive</a>
+                    <a class="nav-link" href="https://dias.dev//blog/tags">Tags</a>-->
+                    <a href="/sobre-mim/">Sobre Mim</a>
+                    <a href="https://youtube.com/DiasDeDev?sub_confirmation=1" target="_blank">
+                        YouTube
+                    </a>
+                </nav>
+            </header>
+            <main role="main">
+                    <article itemscope itemtype="https://schema.org/Article">
+        <header>
+            <h1 itemprop="headline" class="post-title">
+                Programação procedural orientada a classes - Parte 1
+            </h1>
+            <p class="post-date" itemprop="dateCreated">
+                10 de fevereiro de 2022
+            </p>
+        </header>
+        <div itemprop="articleBody">
+            <h2 id="farsa-da-programa%C3%A7%C3%A3o-orientada-a-objetos">Farsa da programação Orientada a Objetos</h2>
+
 <p>Acredito que todos concordamos que a programação Orientada a Objetos torna nosso código mais legível e permite arquiteturas mais interessantes do que a programação procedural, além de permitir recursos interessantes de reutilização de código.</p>
+
 <p>Partindo desse pressuposto, também acredito que seja intenção de qualquer pessoa que trabalhe com desenvolvimento aprender mais e mais as técnicas e boas práticas deste paradigma de programação.</p>
+
 <p>O problema acontece quando a gente vem de um aprendizado de programação procedural e tenta aplicar as mesmas técnicas fazendo uso de classes e objetos.</p>
-<h2>Exemplo clássico</h2>
+
+<h2 id="exemplo-cl%C3%A1ssico">Exemplo clássico</h2>
+
 <p>Há um exemplo muito clássico de um código que claramente, embora utilize classes e objetos, é procedural:</p>
-<h3>Definição de uma classe</h3>
-<div class="gatsby-highlight" data-language="php"><pre class="language-php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
 
-<span class="token keyword">class</span> <span class="token class-name-definition class-name">Pessoa</span>
-<span class="token punctuation">{</span>
-    <span class="token keyword">private</span> <span class="token keyword type-declaration">string</span> <span class="token variable">$primeiroNome</span><span class="token punctuation">;</span>
-    <span class="token keyword">private</span> <span class="token keyword type-declaration">string</span> <span class="token variable">$ultimoNome</span><span class="token punctuation">;</span>
-    <span class="token keyword">private</span> <span class="token class-name class-name-fully-qualified type-declaration"><span class="token punctuation">\</span>DateTimeInterface</span> <span class="token variable">$dataNascimento</span><span class="token punctuation">;</span>
+<h3 id="defini%C3%A7%C3%A3o-de-uma-classe">Definição de uma classe</h3>
 
-    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">setPrimeiroNome</span><span class="token punctuation">(</span><span class="token keyword type-hint">string</span> <span class="token variable">$primeiroNome</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword return-type">void</span>
-    <span class="token punctuation">{</span>
-        <span class="token variable">$this</span><span class="token operator">-></span><span class="token property">primeiroNome</span> <span class="token operator">=</span> <span class="token variable">$primeiroNome</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
+<pre><code class="php">&lt;?php
 
-    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">getPrimeiroNome</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword return-type">string</span>
-    <span class="token punctuation">{</span>
-        <span class="token keyword">return</span> <span class="token variable">$this</span><span class="token operator">-></span><span class="token property">primeiroNome</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
+class Pessoa
+{
+    private string $primeiroNome;
+    private string $ultimoNome;
+    private \DateTimeInterface $dataNascimento;
 
-    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">setUltimoNome</span><span class="token punctuation">(</span><span class="token keyword type-hint">string</span> <span class="token variable">$ultimoNome</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword return-type">void</span>
-    <span class="token punctuation">{</span>
-        <span class="token variable">$this</span><span class="token operator">-></span><span class="token property">ultimoNome</span> <span class="token operator">=</span> <span class="token variable">$ultimoNome</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
+    public function setPrimeiroNome(string $primeiroNome): void
+    {
+        $this-&gt;primeiroNome = $primeiroNome;
+    }
 
-    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">getUltimoNome</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword return-type">string</span>
-    <span class="token punctuation">{</span>
-        <span class="token keyword">return</span> <span class="token variable">$this</span><span class="token operator">-></span><span class="token property">ultimoNome</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
+    public function getPrimeiroNome(): string
+    {
+        return $this-&gt;primeiroNome;
+    }
 
-    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">setDataNascimento</span><span class="token punctuation">(</span><span class="token class-name class-name-fully-qualified type-declaration"><span class="token punctuation">\</span>DateTimeInterface</span> <span class="token variable">$dataNascimento</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword return-type">void</span>
-    <span class="token punctuation">{</span>
-        <span class="token variable">$this</span><span class="token operator">-></span><span class="token property">dataNascimento</span> <span class="token operator">=</span> <span class="token variable">$dataNascimento</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
+    public function setUltimoNome(string $ultimoNome): void
+    {
+        $this-&gt;ultimoNome = $ultimoNome;
+    }
 
-    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">getDataNascimento</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token class-name class-name-fully-qualified return-type"><span class="token punctuation">\</span>DateTimeInterface</span>
-    <span class="token punctuation">{</span>
-        <span class="token keyword">return</span> <span class="token variable">$this</span><span class="token operator">-></span><span class="token property">dataNascimento</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span></span></code></pre></div>
-<h3>Utilização dela</h3>
-<div class="gatsby-highlight" data-language="php"><pre class="language-php"><code class="language-php"><span class="token variable">$pessoa</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Pessoa</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token variable">$pessoa</span><span class="token operator">-></span><span class="token function">setPrimeiroNome</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'Vinicius'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token variable">$pessoa</span><span class="token operator">-></span><span class="token function">setUltimoNome</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'Dias'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token variable">$pessoa</span><span class="token operator">-></span><span class="token function">setDataNascimento</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name class-name-fully-qualified"><span class="token punctuation">\</span>DateTimeImmutable</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'1997-10-15'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// aceito presentes</span>
+    public function getUltimoNome(): string
+    {
+        return $this-&gt;ultimoNome;
+    }
 
-<span class="token variable">$idade</span> <span class="token operator">=</span> <span class="token variable">$pessoa</span><span class="token operator">-></span><span class="token function">getDataNascimento</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-></span><span class="token function">diff</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name class-name-fully-qualified"><span class="token punctuation">\</span>DateImmutable</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">-></span><span class="token property">y</span><span class="token punctuation">;</span>
+    public function setDataNascimento(\DateTimeInterface $dataNascimento): void
+    {
+        $this-&gt;dataNascimento = $dataNascimento;
+    }
 
-<span class="token keyword">echo</span> <span class="token string double-quoted-string">"<span class="token interpolation"><span class="token punctuation">{</span><span class="token variable">$pessoa</span><span class="token operator">-></span><span class="token function">getPrimeiroNome</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">}</span></span> <span class="token interpolation"><span class="token punctuation">{</span><span class="token variable">$pessoa</span><span class="token operator">-></span><span class="token function">getUltimoNome</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">}</span></span> tem <span class="token interpolation"><span class="token variable">$idade</span></span> anos"</span><span class="token punctuation">;</span></code></pre></div>
-<h3>Problema</h3>
+    public function getDataNascimento(): \DateTimeInterface
+    {
+        return $this-&gt;dataNascimento;
+    }
+}
+
+</code></pre>
+
+<h3 id="utiliza%C3%A7%C3%A3o-dela">Utilização dela</h3>
+
+<pre><code class="php">$pessoa = new Pessoa();
+$pessoa-&gt;setPrimeiroNome('Vinicius');
+$pessoa-&gt;setUltimoNome('Dias');
+$pessoa-&gt;setDataNascimento(new \DateTimeImmutable('1997-10-15')); // aceito presentes
+
+$idade = $pessoa-&gt;getDataNascimento()-&gt;diff(new \DateImmutable())-&gt;y;
+
+echo "{$pessoa-&gt;getPrimeiroNome()} {$pessoa-&gt;getUltimoNome()} tem $idade anos";
+</code></pre>
+
+<h3 id="problema">Problema</h3>
+
 <p>Olhando esse simples exemplo:</p>
+
 <ol>
 <li>Você nota algum problema?</li>
 <li>Identifica semelhança com algum pedaço de código que você tenha escrito recentemente?</li>
 </ol>
+
 <p>Depois de você refletir um pouco, vamos continuar.</p>
-<p>O código exemplificado utiliza uma classe <code class="language-text">Pessoa</code> e a partir desta classe, cria um objeto. Logo, está utilizando do paradigma de programação orientada a objetos, certo? Errado!</p>
+
+<p>O código exemplificado utiliza uma classe <code>Pessoa</code> e a partir desta classe, cria um objeto. Logo, está utilizando do paradigma de programação orientada a objetos, certo? Errado!</p>
+
 <p>Esse exemplo é claramente um código procedural que usa uma classe. Nada além disso.</p>
-<h2>Proposta</h2>
+
+<h2 id="proposta">Proposta</h2>
+
 <p>Se você possui uma classe, os objetos gerados através dela devem ter seus comportamentos descritos (através de métodos) e não apenas fornecer os dados para realizar essas ações.</p>
+
 <p>O código anterior poderia ser escrito da seguinte forma para usar o paradigma Orientado a Objetos:</p>
-<div class="gatsby-highlight" data-language="php"><pre class="language-php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
 
-<span class="token keyword">class</span> <span class="token class-name-definition class-name">Pessoa</span>
-<span class="token punctuation">{</span>
-    <span class="token keyword">private</span> <span class="token keyword type-declaration">string</span> <span class="token variable">$primeiroNome</span><span class="token punctuation">;</span>
-    <span class="token keyword">private</span> <span class="token keyword type-declaration">string</span> <span class="token variable">$ultimoNome</span><span class="token punctuation">;</span>
-    <span class="token keyword">private</span> <span class="token class-name class-name-fully-qualified type-declaration"><span class="token punctuation">\</span>DateTimeInterface</span> <span class="token variable">$dataNascimento</span><span class="token punctuation">;</span>
+<pre><code class="php">&lt;?php
 
-    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">__construct</span><span class="token punctuation">(</span>
-        <span class="token keyword type-hint">string</span> <span class="token variable">$primeiroNome</span><span class="token punctuation">,</span>
-        <span class="token keyword type-hint">string</span> <span class="token variable">$ultimoNome</span><span class="token punctuation">,</span>
-        <span class="token class-name class-name-fully-qualified type-declaration"><span class="token punctuation">\</span>DateTimeInterface</span> <span class="token variable">$dataNascimento</span>
-    <span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token variable">$this</span><span class="token operator">-></span><span class="token property">primeiroNome</span> <span class="token operator">=</span> <span class="token variable">$primeiroNome</span><span class="token punctuation">;</span>
-        <span class="token variable">$this</span><span class="token operator">-></span><span class="token property">ultimoNome</span> <span class="token operator">=</span> <span class="token variable">$ultimoNome</span><span class="token punctuation">;</span>
-        <span class="token variable">$this</span><span class="token operator">-></span><span class="token property">dataNascimento</span> <span class="token operator">=</span> <span class="token variable">$dataNascimento</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
+class Pessoa
+{
+    private string $primeiroNome;
+    private string $ultimoNome;
+    private \DateTimeInterface $dataNascimento;
 
-    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">nomeCompleto</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword return-type">string</span>
-    <span class="token punctuation">{</span>
-        <span class="token keyword">return</span> <span class="token string double-quoted-string">"<span class="token interpolation"><span class="token punctuation">{</span><span class="token variable">$this</span><span class="token operator">-></span><span class="token property">primeiroNome</span><span class="token punctuation">}</span></span> <span class="token interpolation"><span class="token punctuation">{</span><span class="token variable">$this</span><span class="token operator">-></span><span class="token property">ultimoNome</span><span class="token punctuation">}</span></span>"</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
+    public function __construct(
+        string $primeiroNome,
+        string $ultimoNome,
+        \DateTimeInterface $dataNascimento
+    ) {
+        $this-&gt;primeiroNome = $primeiroNome;
+        $this-&gt;ultimoNome = $ultimoNome;
+        $this-&gt;dataNascimento = $dataNascimento;
+    }
 
-    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">idade</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword return-type">int</span>
-    <span class="token punctuation">{</span>
-        <span class="token variable">$hoje</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">DateTimeImmutable</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        
-        <span class="token keyword">return</span> <span class="token variable">$this</span><span class="token operator">-></span><span class="token property">dataNascimento</span><span class="token operator">-></span><span class="token function">diff</span><span class="token punctuation">(</span><span class="token variable">$hoje</span><span class="token punctuation">)</span><span class="token operator">-></span><span class="token property">y</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span></span></code></pre></div>
+    public function nomeCompleto(): string
+    {
+        return "{$this-&gt;primeiroNome} {$this-&gt;ultimoNome}";
+    }
+
+    public function idade(): int
+    {
+        $hoje = new DateTimeImmutable();
+
+        return $this-&gt;dataNascimento-&gt;diff($hoje)-&gt;y;
+    }
+</code></pre>
+
 <p>E assim poderíamos utilizar esta classe:</p>
-<div class="gatsby-highlight" data-language="php"><pre class="language-php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
 
-<span class="token variable">$pessoa</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Pessoa</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'Vinicius'</span><span class="token punctuation">,</span> <span class="token string single-quoted-string">'Dias'</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name class-name-fully-qualified"><span class="token punctuation">\</span>DateTimeImmutable</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'1997-10-15'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<pre><code class="php">&lt;?php
 
-<span class="token keyword">echo</span> <span class="token string double-quoted-string">"<span class="token interpolation"><span class="token punctuation">{</span><span class="token variable">$pessoa</span><span class="token operator">-></span><span class="token function">nomeCompleto</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">}</span></span> tem <span class="token interpolation"><span class="token punctuation">{</span><span class="token variable">$pessoa</span><span class="token operator">-></span><span class="token function">idade</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">}</span></span> anos."</span><span class="token punctuation">;</span></span></code></pre></div>
-<h3>Motivação da mudança</h3>
-<p>Com essa simples modificação nós não temos mais instâncias inválidas, já que agora toda <code class="language-text">Pessoa</code> tem seu primeiro e último nome e sua data de nascimento. Antes, primeiro nós estávamos criando uma <code class="language-text">Pessoa</code> em um estado inconsistente, sem seus dados, para depois defini-los.</p>
-<p>Além disso, agora qualquer método que receba uma <code class="language-text">Pessoa</code> por parâmetro não precisa saber se nesse objeto o nome completo está separado em primeiro e segundo nome ou não. Não precisa saber como o cálculo da idade é feito.</p>
-<p>Caso a forma de apresentar o nome precise ser modificado (de “Vinicius Dias” para “Dias, Vinicius”, por exemplo), podemos ir direto no ponto correto: O método <code class="language-text">nomeCompleto</code>.</p>
+$pessoa = new Pessoa('Vinicius', 'Dias', new \DateTimeImmutable('1997-10-15'));
+
+echo "{$pessoa-&gt;nomeCompleto()} tem {$pessoa-&gt;idade()} anos.";
+</code></pre>
+
+<h3 id="motiva%C3%A7%C3%A3o-da-mudan%C3%A7a">Motivação da mudança</h3>
+
+<p>Com essa simples modificação nós não temos mais instâncias inválidas, já que agora toda <code>Pessoa</code> tem seu primeiro e último nome e sua data de nascimento. Antes, primeiro nós estávamos criando uma <code>Pessoa</code> em um estado inconsistente, sem seus dados, para depois defini-los.</p>
+
+<p>Além disso, agora qualquer método que receba uma <code>Pessoa</code> por parâmetro não precisa saber se nesse objeto o nome completo está separado em primeiro e segundo nome ou não. Não precisa saber como o cálculo da idade é feito.</p>
+
+<p>Caso a forma de apresentar o nome precise ser modificado (de "Vinicius Dias" para "Dias, Vinicius", por exemplo), podemos ir direto no ponto correto: O método <code>nomeCompleto</code>.</p>
+
 <p>Embora seja um exemplo muito simples, ele mostra com clareza como normalmente escrevemos código acreditando estar utilizando a programação orientada a objetos.</p>
+
 <p>Caso você tenha algum outro exemplo desse tipo em mente, já tenha visto algum código procedural com classes assim, ou tenha alguma outra sugestão de melhoria pra esse exemplo, que tal compartilhar com a gente aqui nos comentários?</p>
-<h2>Princípios e padrões</h2>
-<p>Para nos ajudar a utilizar de forma mais “correta” a orientação a objetos, existem diversos padrões e princípios. Uns mais simples como o <a href="https://youtu.be/7IXeLhpjk6g">Tell, Don’t ask</a>, outros mais completos e complexos como os <a href="https://amzn.to/2PAWL60">princípios SOLID</a>.</p>
+
+<h2 id="princ%C3%ADpios-e-padr%C3%B5es">Princípios e padrões</h2>
+
+<p>Para nos ajudar a utilizar de forma mais "correta" a orientação a objetos, existem diversos padrões e princípios. Uns mais simples como o <a href="https://youtu.be/7IXeLhpjk6g">Tell, Don't ask</a>, outros mais completos e complexos como os <a href="https://amzn.to/3Eplrm2">princípios SOLID</a>.</p>
+
 <p>Todos os princípios merecem uma atenção especial, porém isso foge do escopo deste artigo, mas uma rápida busca te mostra uma imensidão de conteúdo a respeito.</p>
-<h2>Conclusão</h2>
+
+<h2 id="conclus%C3%A3o">Conclusão</h2>
+
 <p>Muito frequentemente nós utilizamos o paradigma procedural em nosso código e só pelo fato de termos classes definidas no código, achamos que estamos utilizando a Orientação a Objetos.</p>
-<p>Este paradigma é muito mais do que apenas definir classes, atributos e métodos, logo, precisa de muito mais estudo do que apenas a leitura da documentação da sua linguagem favorita para aprender a sintaxe.</p></section><hr/><footer><div class="bio"><div style="margin-right:var(--spacing-4)"><img src="https://gravatar.com/avatar/63579c5a873f3ab6abff10803e9a252f.jpg?s=50" alt="Foto de Vinicius Dias segurando um microfone durante uma palestra" style="border-radius:50%;width:50.01px;height:50.01px"/></div><p>Escrito por <strong>Vinicius Dias</strong> <!-- -->que sempre tenta seguir a regra do bom escoteiro: &quot;Sempre deixe o código mais limpo do que quando você encontrou&quot;<!-- --> <a href="https://twitter.com/cviniciussdias">Que tal seguir ele no Twitter?</a></p></div><div id="disqus_thread"></div></footer></article><nav class="blog-post-nav"><ul style="display:flex;flex-wrap:wrap;justify-content:space-between;list-style:none;padding:0"><li><a rel="prev" href="/2020-04-10-o-que-e-arquitetura/">← <!-- -->O que é arquitetura</a></li><li><a rel="next" href="/2020-04-16-programacao-procedural-orientada-a-classes-parte-2/">Programação procedural orientada a classes - Parte 2<!-- --> →</a></li></ul></nav></main><footer>© <!-- -->2021<!-- -->, Dias de Dev</footer></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/2020-04-13-programacao-procedural-orientada-a-classes-parte-1/";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-e6b5355c9ecf751d8025.js"],"app":["/app-2e8ae21195d0948243bc.js"],"component---src-pages-404-js":["/component---src-pages-404-js-bb1698d01a7f9dde5caa.js"],"component---src-pages-index-js":["/component---src-pages-index-js-c72ca9be79004406d5c4.js"],"component---src-pages-sobre-mim-js":["/component---src-pages-sobre-mim-js-036dc2b6227c3ee44d67.js"],"component---src-templates-blog-post-js":["/component---src-templates-blog-post-js-e151ad291e6453a17222.js"]};/*]]>*/</script><script src="/polyfill-e6b5355c9ecf751d8025.js" nomodule=""></script><script src="/component---src-templates-blog-post-js-e151ad291e6453a17222.js" async=""></script><script src="/commons-70f92c7cb9ff71476bea.js" async=""></script><script src="/app-2e8ae21195d0948243bc.js" async=""></script><script src="/framework-26912e4c097a2be780ad.js" async=""></script><script src="/webpack-runtime-2e458592185173b755b7.js" async=""></script></body></html>
+
+<p>Este paradigma é muito mais do que apenas definir classes, atributos e métodos, logo, precisa de muito mais estudo do que apenas a leitura da documentação da sua linguagem favorita para aprender a sintaxe.</p>
+
+        </div>
+        <footer class="post-footer" itemprop="author" itemscope itemtype="https://schema.org/Person">
+            <img src="https://gravatar.com/avatar/63579c5a873f3ab6abff10803e9a252f.jpg?s=50"
+                 alt="Foto do Vinicius Dias com o microfone na mão durante uma palestra"
+                 itemprop="image" />
+            <p>
+                Escrito por <a href="https://twitter.com/cviniciussdias" itemprop="givenName">Vinicius Dias</a>
+            </p>
+        </footer>
+
+                    <nav class="article-navigation">
+                <ul>
+                    <li>
+                                                <a class="previous" href="/2020-04-10-o-que-e-arquitetura/" title="O que é arquitetura">
+                            ← <span class="title">O que é arquitetura</span>
+                        </a>
+                                            </li>
+                    <li>
+                                                <a class="next" href="/2020-04-16-programacao-procedural-orientada-a-classes-parte-2/" title="Programação procedural orientada a classes - Parte 2">
+                            <span class="title">Programação procedural orientada a classes - Parte 2</span> →
+                        </a>
+                                            </li>
+                </ul>
+            </nav>
+            </article>
+
+
+
+            </main>
+            <footer class="global-footer">&copy; 2022 Dias de Dev</footer>
+        </div>
+
+        <script src="https://dias.dev//build/app.js"></script>
+                
+        <!-- Google Tag Manager -->
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','GTM-5ZJJ977');</script>
+        <!-- End Google Tag Manager -->
+        <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5ZJJ977"
+                          height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <!-- End Google Tag Manager (noscript) -->
+                    </body>
+</html>
