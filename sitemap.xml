@@ -7,6 +7,12 @@
     <priority>0.8</priority>
   </url>
     <url>
+    <loc>https://dias.dev//2022-02-13-extensoes-php/</loc>
+    <lastmod>2022-02-13T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+    <url>
     <loc>https://dias.dev//2021-09-14-o-que-sao-pwas/</loc>
     <lastmod>2021-09-14T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>

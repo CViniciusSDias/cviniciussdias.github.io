@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+    <head lang="pt-BR">
+        <title>Extensões PHP | Dias de Dev</title>
+        <meta charset="utf-8">
+        <meta name="theme-color" content="#ffffff">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <meta name="robots" content="index, follow">
+    <meta name="keywords" content="PHP, Extensões PHP, Dias de Dev">
+    <meta name="description" content="">
+        <link rel="stylesheet" href="/build/app.css">
+
+        
+        <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Dias de Dev activity feed" />
+                    <link rel="stylesheet" href="/build/post.css">
+                    </head>
+    <body>
+        <div class="global-container">
+            <header>
+                <div class="header-title">
+                    <h1 class="main-heading">
+                        <a aria-current="page" href="/">Dias de Dev</a>
+                    </h1>
+                </div>
+                <nav class="menu">
+                    <a aria-current="page" href="/">Home</a>
+                    <a href="/categorias">Categorias</a>
+                    <!--<a class="nav-link" href="/blog">Posts Archive</a>
+                    <a class="nav-link" href="/blog/tags">Tags</a>-->
+                    <a href="/sobre-mim/">Sobre Mim</a>
+                    <a href="https://youtube.com/DiasDeDev?sub_confirmation=1" target="_blank">
+                        YouTube
+                    </a>
+                </nav>
+            </header>
+            <main role="main">
+                    <article itemscope itemtype="https://schema.org/Article">
+        <header>
+            <h1 itemprop="headline" class="post-title">
+                Extensões PHP
+            </h1>
+            <p class="post-date" itemprop="dateCreated">
+                13 de fevereiro de 2022
+            </p>
+        </header>
+        <div itemprop="articleBody">
+            <p>PHP é uma linguagem de programação que roda em uma espécie de "máquina virtual" chamada <em>Zend Engine</em>. Essa máquina
+virtual é escrita em C e permite que nós escrevamos código em C para embutir funcionalidades no PHP. Assim funcionam as
+extensões do PHP.</p>
+
+<h2 id="o-que-s%C3%A3o-extens%C3%B5es-do-php%3F">O que são extensões do PHP?</h2>
+
+<p>As extensões no PHP são códigos escritos em C que são, de certa forma, embutidos na linguagem, logo, se parecem com código
+nativo. É possível criarmos novas funções, classes e até criar sintaxe nova na linguagem a partir de extensões.</p>
+
+<p>Quem usa PHP no dia-a-dia com certeza usa alguma extensão. Alguns exemplos de extensões PHP bem comuns:</p>
+
+<ul>
+<li>PDO</li>
+<li>Sessions</li>
+<li>JSON</li>
+<li>cURL</li>
+</ul>
+
+<h2 id="tipos-de-extens%C3%B5es">Tipos de extensões</h2>
+
+<p>Além de existir um número enorme de extensões do PHP, existem também alguns tipos onde elas podem ser categorizadas.
+Estes tipos são: <em>Core Extensions</em>, <em>Bundled Extensions</em>, <em>External Extensions</em> e <em>PECL Extensions</em>.</p>
+
+<h3 id="core-extensions">Core Extensions</h3>
+
+<p>As extensões <em>Core</em>, como o nome já diz, fazem parte do <em>core</em> (núcleo) do PHP. O PHP não existe sem elas e é impossível
+ter uma instalação do PHP sem estas. Alguns exemplos deste tipo de extensões são: Arrays, Classes/Objects, Date/Time,
+JSON, OPCache etc.</p>
+
+<p>Estas extensões são mantidas pela própria equipe do PHP já que fazem parte da linguagem em si.</p>
+
+<h3 id="bundled-extensions">Bundled Extensions</h3>
+
+<p>As extensões empacotadas com o PHP, chamadas de <em>bundled extensions</em>, são extensões que já vêm junto com o PHP, mas é
+possível escolher habilitá-las ou não em sua instalação. Estas extensões também são mantidas pela equipe do PHP já que
+são empacotadas junto com o restante do código da linguagem.</p>
+
+<p>Alguns exemplos de extensões deste tipo: PDO, GD, FFI, intl, Sessions etc.</p>
+
+<h3 id="external-extensions">External Extensions</h3>
+
+<p>As extensões externas são idênticas às <em>bundled</em> em quase todos os aspectos. Elas vêm com o PHP, podem ser habilitadas
+ou não e são mantidas pela equipe do <em>core</em>, porém possuem uma diferença: elas possuem dependências externas.</p>
+
+<p>Para ter este tipo de extensão em sua instalação do PHP você vai precisar ter alguma outra biblioteca ou programa em seu
+sistema operacional. A extensão <em>cURL</em>, por exemplo, entra nessa categoria. Para ter essa extensão no PHP você precisa
+do software <em>cURL</em> instalado no sistema, já que a extensão faz uso do código disponibilizado por este software.</p>
+
+<p>Alguns exemplos de extensões externas são: cURL, DOM, OpenSSL, Sodium, Zip etc.</p>
+
+<h3 id="pecl-extensions">PECL Extensions</h3>
+
+<p>Por último nós temos as extensões disponibilizadas por terceiros usando <em>PECL</em>, que é basicamente um repositório para
+extensões PHP, como se fosse o <em>Packagist</em> de extensões. Se você pretende criar uma extensão para o PHP, vai utilizar
+este repositório.</p>
+
+<p>As extensões desta categoria são mantidas por terceiros e podem ou não possuir dependências externas. Nem todas as
+extensões desta categoria estão no manual da linguagem, afinal de contas é possível que qualquer pessoa crie uma
+extensão.</p>
+
+<p>Alguns exemplos interessantes de extensões disponibilizadas através do <em>PECL</em>: DS (Data Structures), EV, Memcached,
+Parallel, Swoole etc.</p>
+
+<h2 id="refer%C3%AAncias">Referências</h2>
+
+<p>Conhecer todas extensões do PHP é simplesmente impossível, mas conhecer bem algumas extensões mais importantes para seu
+dia-a-dia é de extrema importância.</p>
+
+<p><a href="https://www.php.net/manual/en/extensions.membership.php">Aqui</a> você pode conferir a lista completa de extensões do
+manual do PHP, todas classificadas por categoria.</p>
+
+<p>Se você tiver interesse em criar suas próprias extensões, existem alguns materiais interessantes disponíveis (embora
+não seja uma tarefa tão trivial). No tutorial <em><a href="https://flavioheleno.github.io/how-do-i/">How do I</a></em> do Flavio Heleno
+você pode conferir o início dessa jornada de criação de extensões além de conferir outras referências.</p>
+
+<h2 id="conclus%C3%A3o">Conclusão</h2>
+
+<p>A linguagem de programação PHP é escrita em C e possui diversas extensões que fazem parte ou não da linguagem. Nós
+fazemos uso de várias extensões no dia-a-dia e entender este funcionamento é bastante importante para devs PHP.</p>
+
+<p>Se além de entender sobre algumas extensões você quiser aprender mais sobre PHP em si, você pode usar esse
+<a href="https://www.alura.com.br/promocao/diasdedev">cupom</a> que fornece 10% de desconto na assinatura da Alura, plataforma onde
+eu mesmo gravei diversos cursos sobre o assunto.</p>
+
+        </div>
+        <footer class="post-footer" itemprop="author" itemscope itemtype="https://schema.org/Person">
+            <img src="https://gravatar.com/avatar/63579c5a873f3ab6abff10803e9a252f.jpg?s=50"
+                 alt="Foto do Vinicius Dias com o microfone na mão durante uma palestra"
+                 itemprop="image" />
+            <p>
+                Escrito por <a href="https://twitter.com/cviniciussdias" itemprop="givenName">Vinicius Dias</a>
+            </p>
+        </footer>
+
+                    <nav class="article-navigation">
+                <ul>
+                    <li>
+                                                <a class="previous" href="/2021-09-14-o-que-sao-pwas/" title="O que são PWAs?">
+                            ← <span class="title">O que são PWAs?</span>
+                        </a>
+                                            </li>
+                    <li>
+                                            </li>
+                </ul>
+            </nav>
+            </article>
+
+
+
+            </main>
+            <footer class="global-footer">&copy; 2022 Dias de Dev</footer>
+        </div>
+
+        <script src="/build/app.js"></script>
+                
+        <!-- Google Tag Manager -->
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','GTM-5ZJJ977');</script>
+        <!-- End Google Tag Manager -->
+        <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5ZJJ977"
+                          height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <!-- End Google Tag Manager (noscript) -->
+                    </body>
+</html>
