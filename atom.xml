@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <title><![CDATA[Dias de Dev]]></title>
-    <link href="https://dias.dev//atom.xml" rel="self"/>
-    <link href="https://dias.dev//"/>
-    <updated>2022-02-13T18:58:47+00:00</updated>
-    <id>https://dias.dev//</id>
+    <link href="https://dias.dev/atom.xml" rel="self"/>
+    <link href="https://dias.dev/"/>
+    <updated>2022-02-14T16:59:46+00:00</updated>
+    <id>https://dias.dev/</id>
         <generator uri="http://sculpin.io/">Sculpin</generator>
             <entry>
             <title type="html"><![CDATA[Extensões PHP]]></title>
             <link href="https://dias.dev//2022-02-13-extensoes-php/"/>
             <updated>2022-02-13T00:00:00+00:00</updated>
             <id>https://dias.dev//2022-02-13-extensoes-php/</id>
-            <content type="html"><![CDATA[<p>PHP é uma linguagem de programação que roda em uma espécie de "máquina virtual" chamada <em>Zend Engine</em>. Essa máquina
+            <content type="html"><![CDATA[<p>PHP é uma linguagem de programação que roda em uma máquina virtual chamada <em>Zend Engine</em>. Essa máquina
 virtual é escrita em C e permite que nós escrevamos código em C para embutir funcionalidades no PHP. Assim funcionam as
 extensões do PHP.</p>
 
