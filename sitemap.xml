@@ -2,9 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://dias.dev/</loc>
-    <lastmod>2022-03-24</lastmod>
+    <lastmod>2022-09-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  </url>
+    <url>
+    <loc>https://dias.dev//2022-09-16-paralelizar-testes-automatizados/</loc>
+    <lastmod>2022-09-16T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
   </url>
     <url>
     <loc>https://dias.dev//2022-02-13-extensoes-php/</loc>
