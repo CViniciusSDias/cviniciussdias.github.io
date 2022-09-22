@@ -3,7 +3,7 @@
     <title><![CDATA[Dias de Dev]]></title>
     <link href="https://dias.dev//categories/PHP.xml" rel="self"/>
     <link href="https://dias.dev//"/>
-    <updated>2022-09-22T15:56:56+00:00</updated>
+    <updated>2022-09-22T18:33:56+00:00</updated>
     <id>https://dias.dev//</id>
         <generator uri="http://sculpin.io/">Sculpin</generator>
             <entry>
@@ -33,6 +33,17 @@ nativo. É possível criarmos novas funções, classes e até criar sintaxe nova
 
 <p>Além de existir um número enorme de extensões do PHP, existem também alguns tipos onde elas podem ser categorizadas.
 Estes tipos são: <em>Core Extensions</em>, <em>Bundled Extensions</em>, <em>External Extensions</em> e <em>PECL Extensions</em>.</p>
+
+<p><ins class="adsbygoogle"
+style="display:block; text-align:center;"
+data-ad-layout="in-article"
+data-ad-format="fluid"
+data-ad-client="ca-pub-8918461095244552"
+data-ad-slot="2366637560"></ins></p>
+
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
 
 <h3 id="core-extensions">Core Extensions</h3>
 
@@ -131,6 +142,17 @@ eu mesmo gravei diversos cursos sobre o assunto.</p>
 
 <p>Esta é a forma mais rudimentar de se executar um código <em>server-side</em> e não é mais recomendada, pois há alternativas mais interessantes que veremos neste artigo.</p>
 
+<p><ins class="adsbygoogle"
+style="display:block; text-align:center;"
+data-ad-layout="in-article"
+data-ad-format="fluid"
+data-ad-client="ca-pub-8918461095244552"
+data-ad-slot="2366637560"></ins></p>
+
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
 <h2 id="apache-mod_php">Apache mod_php</h2>
 
 <p>Conforme o PHP (e a Web em si) foi evoluindo, a abordagem utilizando CGI foi se mostrando ineficaz, desperdiçando recursos de processamento.</p>
@@ -210,6 +232,17 @@ problemas do que solução.</p>
 <p>Antes de falarmos os motivos de não usar XAMPP, é importante entendermos o que é a ferramenta. XAMPP é uma sigla para
 <strong>A</strong>pache, <strong>M</strong>ySQL, <strong>P</strong>HP e <strong>P</strong>earl, sendo o <strong>X</strong> inicial para identificar que esta ferramenta é multiplataforma
 (funciona em Windows, Linux e Mac).</p>
+
+<p><ins class="adsbygoogle"
+style="display:block; text-align:center;"
+data-ad-layout="in-article"
+data-ad-format="fluid"
+data-ad-client="ca-pub-8918461095244552"
+data-ad-slot="2366637560"></ins></p>
+
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
 
 <h2 id="qual-o-problema-dessa-abordagem%3F">Qual o problema dessa abordagem?</h2>
 
@@ -348,6 +381,17 @@ que fornece informações sobre o universo <em>Star Wars</em>. Essa API é gratu
 
 <p>O que queremos fazer é buscar a lista de filmes (através da url https://swapi.dev/api/films/) e para cada filme buscar
 os seus detalhes em outra URL (https://swapi.dev/api/films/:id/).</p>
+
+<p><ins class="adsbygoogle"
+style="display:block; text-align:center;"
+data-ad-layout="in-article"
+data-ad-format="fluid"
+data-ad-client="ca-pub-8918461095244552"
+data-ad-slot="2366637560"></ins></p>
+
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
 
 <h3 id="solu%C3%A7%C3%A3o-bloqueante">Solução bloqueante</h3>
 
@@ -609,6 +653,17 @@ echo file_get_contents('file://arquivo.txt'); // lê um arquivo
 echo file_get_contents('http://google.com'); // faz uma requisição HTTP
 </code></pre>
 
+<p><ins class="adsbygoogle"
+style="display:block; text-align:center;"
+data-ad-layout="in-article"
+data-ad-format="fluid"
+data-ad-client="ca-pub-8918461095244552"
+data-ad-slot="2366637560"></ins></p>
+
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
 <h3 id="wrappers-dispon%C3%ADveis">Wrappers disponíveis</h3>
 
 <p>Por padrão o PHP já fornece diversos wrappers como</p>
@@ -772,6 +827,17 @@ de streams podemos compactar e descompactar arquivos, enviar dados por FTP, aces
 
 <p>Antes de sair da Web, acredito que seja muito importante citar que nem só de HTML vive a Web. É mais do que comum vermos URLs gerando dados nos mais diversos formatos como XML, JSON, etc. Você provavelmente conhece isso como API, correto? Obviamente o PHP está mais do que preparado para este tipo de trabalho e de forma muito simples. A ideia desse artigo é trazer as possibilidades realmente fora da Web.</p>
 
+<p><ins class="adsbygoogle"
+style="display:block; text-align:center;"
+data-ad-layout="in-article"
+data-ad-format="fluid"
+data-ad-client="ca-pub-8918461095244552"
+data-ad-slot="2366637560"></ins></p>
+
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
 <h2 id="por-que-usar-php-fora-da-web%3F">Por que usar PHP fora da web?</h2>
 
 <p>Antes de vermos as possibilidades, por que eu iria fazer isso? Se o PHP nasceu na Web, por que não mantê-lo lá? Bom, existem diversos motivos para trazermos o PHP para demais ambientes, mas acredito que o mais óbvio e o principal é a equipe. Se nós já temos uma equipe de pessoas que desenvolvem em PHP na Web, por que não utilizar esse conhecimento também fora da Web para processamento de dados assíncronos, leitura de filas, cronjobs, scripts da CLI em geral, etc? É justamente sobre essas possibilidades que quero tratar nesta publicação.</p>
@@ -845,6 +911,17 @@ de streams podemos compactar e descompactar arquivos, enviar dados por FTP, aces
 <p>Antes de falar sobre técnicas e funções que permitem a programação assíncrona, é importante saber como normalmente nós trabalhamos com I/O.</p>
 
 <p>Acesso a arquivos, requisições HTTP, sockets e muito mais pode ser feito através de <a href="https://php.net/streams">streams</a>. Um stream é basicamente um fluxo de dados, sendo que a origem desse fluxo pode variar (vide o início desse parágrafo). Quando utilizamos funções como <code>file_get_contents</code>, <code>fopen</code>, <code>fgets</code>, e as demais, estamos trabalhando com streams do PHP.</p>
+
+<p><ins class="adsbygoogle"
+style="display:block; text-align:center;"
+data-ad-layout="in-article"
+data-ad-format="fluid"
+data-ad-client="ca-pub-8918461095244552"
+data-ad-slot="2366637560"></ins></p>
+
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
 
 <h2 id="programa%C3%A7%C3%A3o-ass%C3%ADncrona">Programação assíncrona</h2>
 
