@@ -3,7 +3,7 @@
     <title><![CDATA[Dias de Dev]]></title>
     <link href="https://dias.dev//categories/Conceitos.xml" rel="self"/>
     <link href="https://dias.dev//"/>
-    <updated>2022-09-27T19:27:53+00:00</updated>
+    <updated>2022-09-27T19:39:23+00:00</updated>
     <id>https://dias.dev//</id>
         <generator uri="http://sculpin.io/">Sculpin</generator>
             <entry>
@@ -126,10 +126,10 @@ data-ad-slot="2366637560"></ins></p>
 
 <p>Repare que o uso correto dos parâmetros dos <em>cookies</em> já nos protege de diversos ataques. Obviamente apenas cuidar dos nossos <em>cookies</em> não é o suficiente para ter um sistema verdadeiramente seguro. Precisamos nos atentar a diversos outros fatores e possíveis vulnerabilidades. Além disso, <em>cookies</em> de sessão não são os únicos a serem cuidados. <em>Tokens</em> geralmente são armazenados como <em>cookies</em> também e todos esses cuidados devem ser tomados.</p>
 
-<p>Se segurança é um assunto que te interessa, recomendo essa <em>playlist</em> com alguns vídeos básicos sobre o assunto: https://www.youtube.com/playlist?list=PL3j2sfzg3FPuOOt13tOcNTx6hCFYcQls9</p>
+<p>Se segurança é um assunto que te interessa, recomendo essa <em>playlist</em> com alguns vídeos básicos sobre o assunto: <a href="https://www.youtube.com/playlist?list=PL3j2sfzg3FPuOOt13tOcNTx6hCFYcQls9">https://www.youtube.com/playlist?list=PL3j2sfzg3FPuOOt13tOcNTx6hCFYcQls9</a></p>
 
 <p>Se quiser se aprofundar, na Alura há diversos cursos e formações sobre o tema de segurança. Aqui está um cupom de desconto para assinar a plataforma:
-https://www.alura.com.br/promocao/diasdedev</p>
+<a href="https://www.alura.com.br/promocao/diasdedev">https://www.alura.com.br/promocao/diasdedev</a></p>
 ]]></content>
         </entry>
             <entry>
