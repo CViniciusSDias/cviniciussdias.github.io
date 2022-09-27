@@ -79,17 +79,23 @@ data-ad-slot="2366637560"></ins></p>
 
 <p>Entendido o funcionamento básico e onde encontrá-los, vamos analisar quais informações um <em>cookie</em> pode conter. Todo cookie possui, necessariamente, um nome e um valor. O nome é, como você deve imaginar, a forma que usamos para identificar a informação que esse cookie carrega em seu valor. Um <em>cookie</em> de sessão, por exemplo, geralmente possui a palavra <em>session</em> em seu nome enquanto seu valor será o ID da sessão.</p>
 
-<p>Além desses atributos "básicos", cookies podem possuir parâmetros extra. Alguns deles são:
-- <code>Expires</code>: Define a data e hora de expiração do cookie. Se esse parâmetro não for definido, o <em>cookie</em> será considerado como "<em>cookie</em> de sessão" e irá expirar quando o navegador for fechado.
-- <code>Max-Age</code>: Similar ao <code>Expires</code>, também define quando um <em>cookie</em> vai expirar, mas em segundos. Se os 2 parâmetros forem informados, <code>Max-Age</code> possui prioridade.
-- <code>Domain</code>: Define para qual host o <em>cookie</em> será enviado pelo navegador. Se esse parâmetro não for definido, o <em>cookie</em> será enviado somente para o host da URL atual, não incluindo sub-domínios. Se um valor como <code>example.com</code> for definido, o <em>cookie</em> será enviado nas requisições para <code>example.com</code> e todos os seus sub-domínios.
-- <code>Path</code>: Indica qual caminho deve existir na URL para que o <em>cookie</em> seja enviado pelo navegador. Se o valor for <code>/docs</code>, o <em>cookie</em> será enviado para URLs como <code>/docs</code>, <code>/docs/</code>, <code>/docs/web</code>, etc, mas não será enviado para URLs como <code>/</code>, <code>/documentos</code>, <code>/pt-br/docs</code>, etc.
-- <code>Secure</code>: Se esse parâmetro for definido, o <em>cookie</em> só será enviado em requisições HTTPS.
-- <code>HttpOnly</code>: Proibe o acesso ao <em>cookie</em> em questão através de JavaScript com <code>document.cookie</code>. 
-- <code>SameSite</code>: Com os possíveis valores sendo <code>Strict</code>, <code>Lax</code> e <code>None</code>, controla se o <em>cookie</em> pode ser enviado em requisições feitas a partir de outros sites para o do domínio do <em>cookie</em>.
-  - <code>Strict</code>: Apenas <em>cookies</em> para o endereço da URL que está sendo acessada são enviados. Isso faz com que a requisição inicial para um site não contenha os <em>cookies</em> com esse parâmetro, já que estão vindo de outro domínio.
-  - <code>Lax</code> (opção padrão): Semelhante ao <code>Strict</code>, mas permite o envio dos <em>cookies</em> na requisição inicial. Isso permite, por exemplo, manter o usuário logado ao chegar no sistema através de um link externo.
-  - <code>None</code>: Quer dizer que os <em>cookies</em> serão enviados mesmo se a requisição estiver vindo de outro endereço. Para usar essa opção, as versões mais recentes dos navegadores exigem que o parâmetro <code>Secure</code> seja definido.</p>
+<p>Além desses atributos "básicos", cookies podem possuir parâmetros extra. Alguns deles são:</p>
+
+<ul>
+<li><code>Expires</code>: Define a data e hora de expiração do cookie. Se esse parâmetro não for definido, o <em>cookie</em> será considerado como "<em>cookie</em> de sessão" e irá expirar quando o navegador for fechado.</li>
+<li><code>Max-Age</code>: Similar ao <code>Expires</code>, também define quando um <em>cookie</em> vai expirar, mas em segundos. Se os 2 parâmetros forem informados, <code>Max-Age</code> possui prioridade.</li>
+<li><code>Domain</code>: Define para qual host o <em>cookie</em> será enviado pelo navegador. Se esse parâmetro não for definido, o <em>cookie</em> será enviado somente para o host da URL atual, não incluindo sub-domínios. Se um valor como <code>example.com</code> for definido, o <em>cookie</em> será enviado nas requisições para <code>example.com</code> e todos os seus sub-domínios.</li>
+<li><code>Path</code>: Indica qual caminho deve existir na URL para que o <em>cookie</em> seja enviado pelo navegador. Se o valor for <code>/docs</code>, o <em>cookie</em> será enviado para URLs como <code>/docs</code>, <code>/docs/</code>, <code>/docs/web</code>, etc, mas não será enviado para URLs como <code>/</code>, <code>/documentos</code>, <code>/pt-br/docs</code>, etc.</li>
+<li><code>Secure</code>: Se esse parâmetro for definido, o <em>cookie</em> só será enviado em requisições HTTPS.</li>
+<li><code>HttpOnly</code>: Proibe o acesso ao <em>cookie</em> em questão através de JavaScript com <code>document.cookie</code>.</li>
+<li><code>SameSite</code>: Com os possíveis valores sendo <code>Strict</code>, <code>Lax</code> e <code>None</code>, controla se o <em>cookie</em> pode ser enviado em requisições feitas a partir de outros sites para o do domínio do <em>cookie</em>.
+
+<ul>
+<li><code>Strict</code>: Apenas <em>cookies</em> para o endereço da URL que está sendo acessada são enviados. Isso faz com que a requisição inicial para um site não contenha os <em>cookies</em> com esse parâmetro, já que estão vindo de outro domínio.</li>
+<li><code>Lax</code> (opção padrão): Semelhante ao <code>Strict</code>, mas permite o envio dos <em>cookies</em> na requisição inicial. Isso permite, por exemplo, manter o usuário logado ao chegar no sistema através de um link externo.</li>
+<li><code>None</code>: Quer dizer que os <em>cookies</em> serão enviados mesmo se a requisição estiver vindo de outro endereço. Para usar essa opção, as versões mais recentes dos navegadores exigem que o parâmetro <code>Secure</code> seja definido.</li>
+</ul></li>
+</ul>
 
 <h4 id="exemplos-de-defini%C3%A7%C3%B5es-de-_cookies_">Exemplos de definições de <em>cookies</em></h4>
 
