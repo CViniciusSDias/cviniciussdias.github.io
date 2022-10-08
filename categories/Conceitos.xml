@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <title><![CDATA[Dias de Dev]]></title>
-    <link href="https://dias.dev//categories/Conceitos.xml" rel="self"/>
-    <link href="https://dias.dev//"/>
-    <updated>2022-09-30T18:50:32+00:00</updated>
-    <id>https://dias.dev//</id>
+    <link href="https://dias.dev/categories/Conceitos.xml" rel="self"/>
+    <link href="https://dias.dev"/>
+    <updated>2022-10-08T04:25:42+00:00</updated>
+    <id>https://dias.dev/</id>
         <generator uri="http://sculpin.io/">Sculpin</generator>
             <entry>
             <title type="html"><![CDATA[Cookies e segurança]]></title>
-            <link href="https://dias.dev//2022-09-27-cookies-e-seguranca/"/>
+            <link href="https://dias.dev/2022-09-27-cookies-e-seguranca/"/>
             <updated>2022-09-27T00:00:00+00:00</updated>
-            <id>https://dias.dev//2022-09-27-cookies-e-seguranca/</id>
+            <id>https://dias.dev/2022-09-27-cookies-e-seguranca/</id>
             <content type="html"><![CDATA[<p><em>Cookies</em> são amplamente utilizados para armazenar informações em nossos navegadores e muitas vezes nós negligenciamos a segurança dessas informações. Cookies podem conter dados sensíveis como sua informação de sessão, por exemplo, por isso devemos nos preocupar com seu armazenamento.</p>
 
 <h2 id="o-que-s%C3%A3o-_cookies_%3F">O que são <em>cookies</em>?</h2>
@@ -134,9 +134,9 @@ data-ad-slot="2366637560"></ins></p>
         </entry>
             <entry>
             <title type="html"><![CDATA[Paralelizar testes automatizados]]></title>
-            <link href="https://dias.dev//2022-09-16-paralelizar-testes-automatizados/"/>
+            <link href="https://dias.dev/2022-09-16-paralelizar-testes-automatizados/"/>
             <updated>2022-09-16T00:00:00+00:00</updated>
-            <id>https://dias.dev//2022-09-16-paralelizar-testes-automatizados/</id>
+            <id>https://dias.dev/2022-09-16-paralelizar-testes-automatizados/</id>
             <content type="html"><![CDATA[<p>Testes automatizados podem levar um certo tempo para serem executados, principalmente se forem rodados um a um. Executar mais de um teste por vez pode ser uma boa alternativa para agilizar sua <em>pipeline</em>.</p>
 
 <h2 id="testes-automatizados">Testes automatizados</h2>
@@ -181,9 +181,9 @@ data-ad-slot="2366637560"></ins></p>
         </entry>
             <entry>
             <title type="html"><![CDATA[Charsets e Encodings: Como strings funcionam]]></title>
-            <link href="https://dias.dev//2021-08-24-charsets-e-encodings-como-strings-funcionam/"/>
+            <link href="https://dias.dev/2021-08-24-charsets-e-encodings-como-strings-funcionam/"/>
             <updated>2021-08-24T00:00:00+00:00</updated>
-            <id>https://dias.dev//2021-08-24-charsets-e-encodings-como-strings-funcionam/</id>
+            <id>https://dias.dev/2021-08-24-charsets-e-encodings-como-strings-funcionam/</id>
             <content type="html"><![CDATA[<p>É de conhecimento geral que computadores trabalham com números, especificamente números na base binária. Sabendo disso, como podemos representar o texto que eu estou escrevendo apenas com conjuntos de 0s e 1s? Como o computador, trabalhando apenas com números, consegue lidar com textos?</p>
 
 <h2 id="tabelas-de-caracteres-charsets">Tabelas de caracteres (Charsets)</h2>
@@ -257,9 +257,9 @@ data-ad-slot="2366637560"></ins></p>
         </entry>
             <entry>
             <title type="html"><![CDATA[Requisições HTTP paralelas com PHP]]></title>
-            <link href="https://dias.dev//2021-03-13-requisicoes-http-paralelas-com-php/"/>
+            <link href="https://dias.dev/2021-03-13-requisicoes-http-paralelas-com-php/"/>
             <updated>2021-03-13T00:00:00+00:00</updated>
-            <id>https://dias.dev//2021-03-13-requisicoes-http-paralelas-com-php/</id>
+            <id>https://dias.dev/2021-03-13-requisicoes-http-paralelas-com-php/</id>
             <content type="html"><![CDATA[<h2 id="i%2Fo-n%C3%A3o-bloqueante-programa%C3%A7%C3%A3o-ass%C3%ADncrona">I/O não bloqueante (programação assíncrona)</h2>
 
 <p>Em um <a href="/2020-09-16-php-assincrono-de-forma-nativa/">post anterior</a> falei bastante sobre como o PHP trabalha por baixo dos panos de forma nativa com I/O não
@@ -523,9 +523,9 @@ acontecer com a biblioteca, por exemplo, eu vou estar mais preparado para resolv
         </entry>
             <entry>
             <title type="html"><![CDATA[PHP assíncrono de forma nativa]]></title>
-            <link href="https://dias.dev//2020-09-16-php-assincrono-de-forma-nativa/"/>
+            <link href="https://dias.dev/2020-09-16-php-assincrono-de-forma-nativa/"/>
             <updated>2020-09-16T00:00:00+00:00</updated>
-            <id>https://dias.dev//2020-09-16-php-assincrono-de-forma-nativa/</id>
+            <id>https://dias.dev/2020-09-16-php-assincrono-de-forma-nativa/</id>
             <content type="html"><![CDATA[<p>Realizar acesso a streams é uma tarefa relativamente comum para devs PHP. Seja lendo e escrevendo em arquivos, fazendo requisições HTTP, etc.</p>
 
 <p>Operações de I/O são custosas e levam algum tempo para executar. Quando temos diversas operações desse tipo, uma técnica que pode ajudar (e muito) na performance da aplicação é realizá-las de forma assíncrona.</p>
@@ -764,9 +764,9 @@ array(3) {
         </entry>
             <entry>
             <title type="html"><![CDATA[Princípios ou Ferramentas - O que estudar]]></title>
-            <link href="https://dias.dev//2020-04-23-principios-ou-ferramentas-o-que-estudar/"/>
+            <link href="https://dias.dev/2020-04-23-principios-ou-ferramentas-o-que-estudar/"/>
             <updated>2020-04-23T00:00:00+00:00</updated>
-            <id>https://dias.dev//2020-04-23-principios-ou-ferramentas-o-que-estudar/</id>
+            <id>https://dias.dev/2020-04-23-principios-ou-ferramentas-o-que-estudar/</id>
             <content type="html"><![CDATA[<h2 id="o-mundo-de-desenvolvimento">O mundo de desenvolvimento</h2>
 
 <p>Quando decidimos entrar para o mundo de desenvolvimento, sofremos um bombardeio de informações e novos termos.</p>
@@ -905,9 +905,9 @@ Antes de aprender Orientação a Objetos, é importante conhecermos o paradigma 
         </entry>
             <entry>
             <title type="html"><![CDATA[Programação procedural orientada a classes - Parte 2]]></title>
-            <link href="https://dias.dev//2020-04-16-programacao-procedural-orientada-a-classes-parte-2/"/>
+            <link href="https://dias.dev/2020-04-16-programacao-procedural-orientada-a-classes-parte-2/"/>
             <updated>2020-04-16T00:00:00+00:00</updated>
-            <id>https://dias.dev//2020-04-16-programacao-procedural-orientada-a-classes-parte-2/</id>
+            <id>https://dias.dev/2020-04-16-programacao-procedural-orientada-a-classes-parte-2/</id>
             <content type="html"><![CDATA[<h2 id="design-de-c%C3%B3digo">Design de código</h2>
 
 <p>Uma vez eu ouvi uma frase mas não me lembro o autor: "Não existe código sem design. Existe código com design ruim". Inclusive adaptei esta frase para "arquitetura" na primeira parte desta publicação.</p>
@@ -1060,9 +1060,9 @@ class UserService
         </entry>
             <entry>
             <title type="html"><![CDATA[Programação procedural orientada a classes - Parte 1]]></title>
-            <link href="https://dias.dev//2020-04-13-programacao-procedural-orientada-a-classes-parte-1/"/>
+            <link href="https://dias.dev/2020-04-13-programacao-procedural-orientada-a-classes-parte-1/"/>
             <updated>2020-04-13T00:00:00+00:00</updated>
-            <id>https://dias.dev//2020-04-13-programacao-procedural-orientada-a-classes-parte-1/</id>
+            <id>https://dias.dev/2020-04-13-programacao-procedural-orientada-a-classes-parte-1/</id>
             <content type="html"><![CDATA[<h2 id="farsa-da-programa%C3%A7%C3%A3o-orientada-a-objetos">Farsa da programação Orientada a Objetos</h2>
 
 <p>Acredito que todos concordamos que a programação Orientada a Objetos torna nosso código mais legível e permite arquiteturas mais interessantes do que a programação procedural, além de permitir recursos interessantes de reutilização de código.</p>
@@ -1222,9 +1222,9 @@ echo "{$pessoa-&gt;nomeCompleto()} tem {$pessoa-&gt;idade()} anos.";
         </entry>
             <entry>
             <title type="html"><![CDATA[O que é arquitetura]]></title>
-            <link href="https://dias.dev//2020-04-10-o-que-e-arquitetura/"/>
+            <link href="https://dias.dev/2020-04-10-o-que-e-arquitetura/"/>
             <updated>2020-04-10T00:00:00+00:00</updated>
-            <id>https://dias.dev//2020-04-10-o-que-e-arquitetura/</id>
+            <id>https://dias.dev/2020-04-10-o-que-e-arquitetura/</id>
             <content type="html"><![CDATA[<h2 id="problema">Problema</h2>
 
 <p>Imagine que no momento da escrita desse artigo (ano de 2020) você esteja criando um sistema para a empresa que te contratou como desenvolvedor(a). Nesse sistema você pode utilizar todas as novas tecnologias, pode decidir como vai organizar o código, enfim, o sonho de qualquer pessoa que trabalha na área.</p>

@@ -2,15 +2,15 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <title><![CDATA[Dias de Dev]]></title>
     <link href="https://dias.dev/atom.xml" rel="self"/>
-    <link href="https://dias.dev/"/>
-    <updated>2022-09-30T18:50:32+00:00</updated>
-    <id>https://dias.dev/</id>
+    <link href="https://dias.dev"/>
+    <updated>2022-10-08T04:25:42+00:00</updated>
+    <id>https://dias.dev</id>
         <generator uri="http://sculpin.io/">Sculpin</generator>
             <entry>
             <title type="html"><![CDATA[Cookies e segurança]]></title>
-            <link href="https://dias.dev//2022-09-27-cookies-e-seguranca/"/>
+            <link href="https://dias.dev/2022-09-27-cookies-e-seguranca/"/>
             <updated>2022-09-27T00:00:00+00:00</updated>
-            <id>https://dias.dev//2022-09-27-cookies-e-seguranca/</id>
+            <id>https://dias.dev/2022-09-27-cookies-e-seguranca/</id>
             <content type="html"><![CDATA[<p><em>Cookies</em> são amplamente utilizados para armazenar informações em nossos navegadores e muitas vezes nós negligenciamos a segurança dessas informações. Cookies podem conter dados sensíveis como sua informação de sessão, por exemplo, por isso devemos nos preocupar com seu armazenamento.</p>
 
 <h2 id="o-que-s%C3%A3o-_cookies_%3F">O que são <em>cookies</em>?</h2>
@@ -134,9 +134,9 @@ data-ad-slot="2366637560"></ins></p>
         </entry>
             <entry>
             <title type="html"><![CDATA[Paralelizar testes automatizados]]></title>
-            <link href="https://dias.dev//2022-09-16-paralelizar-testes-automatizados/"/>
+            <link href="https://dias.dev/2022-09-16-paralelizar-testes-automatizados/"/>
             <updated>2022-09-16T00:00:00+00:00</updated>
-            <id>https://dias.dev//2022-09-16-paralelizar-testes-automatizados/</id>
+            <id>https://dias.dev/2022-09-16-paralelizar-testes-automatizados/</id>
             <content type="html"><![CDATA[<p>Testes automatizados podem levar um certo tempo para serem executados, principalmente se forem rodados um a um. Executar mais de um teste por vez pode ser uma boa alternativa para agilizar sua <em>pipeline</em>.</p>
 
 <h2 id="testes-automatizados">Testes automatizados</h2>
@@ -181,9 +181,9 @@ data-ad-slot="2366637560"></ins></p>
         </entry>
             <entry>
             <title type="html"><![CDATA[Extensões PHP]]></title>
-            <link href="https://dias.dev//2022-02-13-extensoes-php/"/>
+            <link href="https://dias.dev/2022-02-13-extensoes-php/"/>
             <updated>2022-02-13T00:00:00+00:00</updated>
-            <id>https://dias.dev//2022-02-13-extensoes-php/</id>
+            <id>https://dias.dev/2022-02-13-extensoes-php/</id>
             <content type="html"><![CDATA[<p>PHP é uma linguagem de programação que roda em uma máquina virtual chamada <em>Zend Engine</em>. Essa máquina
 virtual é escrita em C e permite que nós escrevamos código em C para embutir funcionalidades no PHP. Assim funcionam as
 extensões do PHP.</p>
@@ -282,9 +282,9 @@ eu mesmo gravei diversos cursos sobre o assunto.</p>
         </entry>
             <entry>
             <title type="html"><![CDATA[O que são PWAs?]]></title>
-            <link href="https://dias.dev//2021-09-14-o-que-sao-pwas/"/>
+            <link href="https://dias.dev/2021-09-14-o-que-sao-pwas/"/>
             <updated>2021-09-14T00:00:00+00:00</updated>
-            <id>https://dias.dev//2021-09-14-o-que-sao-pwas/</id>
+            <id>https://dias.dev/2021-09-14-o-que-sao-pwas/</id>
             <content type="html"><![CDATA[<p><em>Progressive Web Apps</em>, como o nome mesmo já diz, são aplicativos <em>web</em> progressivos. Vamos falar um pouco mais sobre a parte de "progressivos", mas o básico é isso: Um aplicativo que roda no "mundo <em>web</em>"</p>
 
 <h2 id="aplicativo-na-web%3F">Aplicativo na Web?</h2>
@@ -376,9 +376,9 @@ data-ad-slot="2366637560"></ins></p>
         </entry>
             <entry>
             <title type="html"><![CDATA[Charsets e Encodings: Como strings funcionam]]></title>
-            <link href="https://dias.dev//2021-08-24-charsets-e-encodings-como-strings-funcionam/"/>
+            <link href="https://dias.dev/2021-08-24-charsets-e-encodings-como-strings-funcionam/"/>
             <updated>2021-08-24T00:00:00+00:00</updated>
-            <id>https://dias.dev//2021-08-24-charsets-e-encodings-como-strings-funcionam/</id>
+            <id>https://dias.dev/2021-08-24-charsets-e-encodings-como-strings-funcionam/</id>
             <content type="html"><![CDATA[<p>É de conhecimento geral que computadores trabalham com números, especificamente números na base binária. Sabendo disso, como podemos representar o texto que eu estou escrevendo apenas com conjuntos de 0s e 1s? Como o computador, trabalhando apenas com números, consegue lidar com textos?</p>
 
 <h2 id="tabelas-de-caracteres-charsets">Tabelas de caracteres (Charsets)</h2>
@@ -452,9 +452,9 @@ data-ad-slot="2366637560"></ins></p>
         </entry>
             <entry>
             <title type="html"><![CDATA[Como o PHP funciona na Web?]]></title>
-            <link href="https://dias.dev//2021-06-15-como-o-php-funciona-na-web/"/>
+            <link href="https://dias.dev/2021-06-15-como-o-php-funciona-na-web/"/>
             <updated>2021-06-15T00:00:00+00:00</updated>
-            <id>https://dias.dev//2021-06-15-como-o-php-funciona-na-web/</id>
+            <id>https://dias.dev/2021-06-15-como-o-php-funciona-na-web/</id>
             <content type="html"><![CDATA[<p>O PHP é o que conhecemos como linguagem <em>server-side</em>, ou seja, ele roda nos servidores web, e não nos navegadores.</p>
 
 <p>Isso já é de conhecimento geral, mas nem todos entendem como uma requisição sai do navegador e chega em seu código PHP. É exatamente sobre isso que vamos tratar neste artigo.</p>
@@ -557,9 +557,9 @@ data-ad-slot="2366637560"></ins></p>
         </entry>
             <entry>
             <title type="html"><![CDATA[Por que não usar XAMPP]]></title>
-            <link href="https://dias.dev//2021-04-10-por-que-nao-usar-xampp/"/>
+            <link href="https://dias.dev/2021-04-10-por-que-nao-usar-xampp/"/>
             <updated>2021-04-10T00:00:00+00:00</updated>
-            <id>https://dias.dev//2021-04-10-por-que-nao-usar-xampp/</id>
+            <id>https://dias.dev/2021-04-10-por-que-nao-usar-xampp/</id>
             <content type="html"><![CDATA[<p>Umas das perguntas mais frequentes que vejo em comunidades de iniciantes em PHP são:
 - Como instalar o XAMPP?
 - Como configurar URLs amigáveis no XAMPP?
@@ -700,9 +700,9 @@ motivos válidos para uso do XAMPP nos dias atuais.</p>
         </entry>
             <entry>
             <title type="html"><![CDATA[Requisições HTTP paralelas com PHP]]></title>
-            <link href="https://dias.dev//2021-03-13-requisicoes-http-paralelas-com-php/"/>
+            <link href="https://dias.dev/2021-03-13-requisicoes-http-paralelas-com-php/"/>
             <updated>2021-03-13T00:00:00+00:00</updated>
-            <id>https://dias.dev//2021-03-13-requisicoes-http-paralelas-com-php/</id>
+            <id>https://dias.dev/2021-03-13-requisicoes-http-paralelas-com-php/</id>
             <content type="html"><![CDATA[<h2 id="i%2Fo-n%C3%A3o-bloqueante-programa%C3%A7%C3%A3o-ass%C3%ADncrona">I/O não bloqueante (programação assíncrona)</h2>
 
 <p>Em um <a href="/2020-09-16-php-assincrono-de-forma-nativa/">post anterior</a> falei bastante sobre como o PHP trabalha por baixo dos panos de forma nativa com I/O não
@@ -966,9 +966,9 @@ acontecer com a biblioteca, por exemplo, eu vou estar mais preparado para resolv
         </entry>
             <entry>
             <title type="html"><![CDATA[Wrapper de Streams php://]]></title>
-            <link href="https://dias.dev//2020-11-03-wraper-de-streams-php/"/>
+            <link href="https://dias.dev/2020-11-03-wraper-de-streams-php/"/>
             <updated>2020-11-03T00:00:00+00:00</updated>
-            <id>https://dias.dev//2020-11-03-wraper-de-streams-php/</id>
+            <id>https://dias.dev/2020-11-03-wraper-de-streams-php/</id>
             <content type="html"><![CDATA[<h2 id="streams">Streams</h2>
 
 <p>Antes de falarmos sobre um wrapper específico, é legal dar um certo contexto sobre streams.</p>
@@ -1159,9 +1159,9 @@ de streams podemos compactar e descompactar arquivos, enviar dados por FTP, aces
         </entry>
             <entry>
             <title type="html"><![CDATA[PHP além da Web]]></title>
-            <link href="https://dias.dev//2020-10-27-php-alem-da-web/"/>
+            <link href="https://dias.dev/2020-10-27-php-alem-da-web/"/>
             <updated>2020-10-27T00:00:00+00:00</updated>
-            <id>https://dias.dev//2020-10-27-php-alem-da-web/</id>
+            <id>https://dias.dev/2020-10-27-php-alem-da-web/</id>
             <content type="html"><![CDATA[<h2 id="php-%2B-web-%3D-">PHP + Web = &lt;3</h2>
 
 <p>Não é nenhum segredo que o PHP nasceu na web e para a web. Seu propósito inicial era servir páginas dinâmicas de forma simples e amigável, mas a Web evoluiu e o PHP também. Hoje em dia o PHP é uma linguagem de programação completa e pronta para ser executada nos mais diversos ambientes, e não só na Web.</p>

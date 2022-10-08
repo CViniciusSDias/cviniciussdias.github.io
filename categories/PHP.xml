@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <title><![CDATA[Dias de Dev]]></title>
-    <link href="https://dias.dev//categories/PHP.xml" rel="self"/>
-    <link href="https://dias.dev//"/>
-    <updated>2022-09-30T18:50:32+00:00</updated>
-    <id>https://dias.dev//</id>
+    <link href="https://dias.dev/categories/PHP.xml" rel="self"/>
+    <link href="https://dias.dev"/>
+    <updated>2022-10-08T04:25:42+00:00</updated>
+    <id>https://dias.dev/</id>
         <generator uri="http://sculpin.io/">Sculpin</generator>
             <entry>
             <title type="html"><![CDATA[Extensões PHP]]></title>
-            <link href="https://dias.dev//2022-02-13-extensoes-php/"/>
+            <link href="https://dias.dev/2022-02-13-extensoes-php/"/>
             <updated>2022-02-13T00:00:00+00:00</updated>
-            <id>https://dias.dev//2022-02-13-extensoes-php/</id>
+            <id>https://dias.dev/2022-02-13-extensoes-php/</id>
             <content type="html"><![CDATA[<p>PHP é uma linguagem de programação que roda em uma máquina virtual chamada <em>Zend Engine</em>. Essa máquina
 virtual é escrita em C e permite que nós escrevamos código em C para embutir funcionalidades no PHP. Assim funcionam as
 extensões do PHP.</p>
@@ -109,9 +109,9 @@ eu mesmo gravei diversos cursos sobre o assunto.</p>
         </entry>
             <entry>
             <title type="html"><![CDATA[Como o PHP funciona na Web?]]></title>
-            <link href="https://dias.dev//2021-06-15-como-o-php-funciona-na-web/"/>
+            <link href="https://dias.dev/2021-06-15-como-o-php-funciona-na-web/"/>
             <updated>2021-06-15T00:00:00+00:00</updated>
-            <id>https://dias.dev//2021-06-15-como-o-php-funciona-na-web/</id>
+            <id>https://dias.dev/2021-06-15-como-o-php-funciona-na-web/</id>
             <content type="html"><![CDATA[<p>O PHP é o que conhecemos como linguagem <em>server-side</em>, ou seja, ele roda nos servidores web, e não nos navegadores.</p>
 
 <p>Isso já é de conhecimento geral, mas nem todos entendem como uma requisição sai do navegador e chega em seu código PHP. É exatamente sobre isso que vamos tratar neste artigo.</p>
@@ -214,9 +214,9 @@ data-ad-slot="2366637560"></ins></p>
         </entry>
             <entry>
             <title type="html"><![CDATA[Por que não usar XAMPP]]></title>
-            <link href="https://dias.dev//2021-04-10-por-que-nao-usar-xampp/"/>
+            <link href="https://dias.dev/2021-04-10-por-que-nao-usar-xampp/"/>
             <updated>2021-04-10T00:00:00+00:00</updated>
-            <id>https://dias.dev//2021-04-10-por-que-nao-usar-xampp/</id>
+            <id>https://dias.dev/2021-04-10-por-que-nao-usar-xampp/</id>
             <content type="html"><![CDATA[<p>Umas das perguntas mais frequentes que vejo em comunidades de iniciantes em PHP são:
 - Como instalar o XAMPP?
 - Como configurar URLs amigáveis no XAMPP?
@@ -357,9 +357,9 @@ motivos válidos para uso do XAMPP nos dias atuais.</p>
         </entry>
             <entry>
             <title type="html"><![CDATA[Requisições HTTP paralelas com PHP]]></title>
-            <link href="https://dias.dev//2021-03-13-requisicoes-http-paralelas-com-php/"/>
+            <link href="https://dias.dev/2021-03-13-requisicoes-http-paralelas-com-php/"/>
             <updated>2021-03-13T00:00:00+00:00</updated>
-            <id>https://dias.dev//2021-03-13-requisicoes-http-paralelas-com-php/</id>
+            <id>https://dias.dev/2021-03-13-requisicoes-http-paralelas-com-php/</id>
             <content type="html"><![CDATA[<h2 id="i%2Fo-n%C3%A3o-bloqueante-programa%C3%A7%C3%A3o-ass%C3%ADncrona">I/O não bloqueante (programação assíncrona)</h2>
 
 <p>Em um <a href="/2020-09-16-php-assincrono-de-forma-nativa/">post anterior</a> falei bastante sobre como o PHP trabalha por baixo dos panos de forma nativa com I/O não
@@ -623,9 +623,9 @@ acontecer com a biblioteca, por exemplo, eu vou estar mais preparado para resolv
         </entry>
             <entry>
             <title type="html"><![CDATA[Wrapper de Streams php://]]></title>
-            <link href="https://dias.dev//2020-11-03-wraper-de-streams-php/"/>
+            <link href="https://dias.dev/2020-11-03-wraper-de-streams-php/"/>
             <updated>2020-11-03T00:00:00+00:00</updated>
-            <id>https://dias.dev//2020-11-03-wraper-de-streams-php/</id>
+            <id>https://dias.dev/2020-11-03-wraper-de-streams-php/</id>
             <content type="html"><![CDATA[<h2 id="streams">Streams</h2>
 
 <p>Antes de falarmos sobre um wrapper específico, é legal dar um certo contexto sobre streams.</p>
@@ -816,9 +816,9 @@ de streams podemos compactar e descompactar arquivos, enviar dados por FTP, aces
         </entry>
             <entry>
             <title type="html"><![CDATA[PHP além da Web]]></title>
-            <link href="https://dias.dev//2020-10-27-php-alem-da-web/"/>
+            <link href="https://dias.dev/2020-10-27-php-alem-da-web/"/>
             <updated>2020-10-27T00:00:00+00:00</updated>
-            <id>https://dias.dev//2020-10-27-php-alem-da-web/</id>
+            <id>https://dias.dev/2020-10-27-php-alem-da-web/</id>
             <content type="html"><![CDATA[<h2 id="php-%2B-web-%3D-">PHP + Web = &lt;3</h2>
 
 <p>Não é nenhum segredo que o PHP nasceu na web e para a web. Seu propósito inicial era servir páginas dinâmicas de forma simples e amigável, mas a Web evoluiu e o PHP também. Hoje em dia o PHP é uma linguagem de programação completa e pronta para ser executada nos mais diversos ambientes, e não só na Web.</p>
@@ -899,9 +899,9 @@ data-ad-slot="2366637560"></ins></p>
         </entry>
             <entry>
             <title type="html"><![CDATA[PHP assíncrono de forma nativa]]></title>
-            <link href="https://dias.dev//2020-09-16-php-assincrono-de-forma-nativa/"/>
+            <link href="https://dias.dev/2020-09-16-php-assincrono-de-forma-nativa/"/>
             <updated>2020-09-16T00:00:00+00:00</updated>
-            <id>https://dias.dev//2020-09-16-php-assincrono-de-forma-nativa/</id>
+            <id>https://dias.dev/2020-09-16-php-assincrono-de-forma-nativa/</id>
             <content type="html"><![CDATA[<p>Realizar acesso a streams é uma tarefa relativamente comum para devs PHP. Seja lendo e escrevendo em arquivos, fazendo requisições HTTP, etc.</p>
 
 <p>Operações de I/O são custosas e levam algum tempo para executar. Quando temos diversas operações desse tipo, uma técnica que pode ajudar (e muito) na performance da aplicação é realizá-las de forma assíncrona.</p>

@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <title><![CDATA[Dias de Dev]]></title>
-    <link href="https://dias.dev//categories/Web.xml" rel="self"/>
-    <link href="https://dias.dev//"/>
-    <updated>2022-09-30T18:50:32+00:00</updated>
-    <id>https://dias.dev//</id>
+    <link href="https://dias.dev/categories/Web.xml" rel="self"/>
+    <link href="https://dias.dev"/>
+    <updated>2022-10-08T04:25:42+00:00</updated>
+    <id>https://dias.dev/</id>
         <generator uri="http://sculpin.io/">Sculpin</generator>
             <entry>
             <title type="html"><![CDATA[Cookies e segurança]]></title>
-            <link href="https://dias.dev//2022-09-27-cookies-e-seguranca/"/>
+            <link href="https://dias.dev/2022-09-27-cookies-e-seguranca/"/>
             <updated>2022-09-27T00:00:00+00:00</updated>
-            <id>https://dias.dev//2022-09-27-cookies-e-seguranca/</id>
+            <id>https://dias.dev/2022-09-27-cookies-e-seguranca/</id>
             <content type="html"><![CDATA[<p><em>Cookies</em> são amplamente utilizados para armazenar informações em nossos navegadores e muitas vezes nós negligenciamos a segurança dessas informações. Cookies podem conter dados sensíveis como sua informação de sessão, por exemplo, por isso devemos nos preocupar com seu armazenamento.</p>
 
 <h2 id="o-que-s%C3%A3o-_cookies_%3F">O que são <em>cookies</em>?</h2>
@@ -134,9 +134,9 @@ data-ad-slot="2366637560"></ins></p>
         </entry>
             <entry>
             <title type="html"><![CDATA[O que são PWAs?]]></title>
-            <link href="https://dias.dev//2021-09-14-o-que-sao-pwas/"/>
+            <link href="https://dias.dev/2021-09-14-o-que-sao-pwas/"/>
             <updated>2021-09-14T00:00:00+00:00</updated>
-            <id>https://dias.dev//2021-09-14-o-que-sao-pwas/</id>
+            <id>https://dias.dev/2021-09-14-o-que-sao-pwas/</id>
             <content type="html"><![CDATA[<p><em>Progressive Web Apps</em>, como o nome mesmo já diz, são aplicativos <em>web</em> progressivos. Vamos falar um pouco mais sobre a parte de "progressivos", mas o básico é isso: Um aplicativo que roda no "mundo <em>web</em>"</p>
 
 <h2 id="aplicativo-na-web%3F">Aplicativo na Web?</h2>
@@ -228,9 +228,9 @@ data-ad-slot="2366637560"></ins></p>
         </entry>
             <entry>
             <title type="html"><![CDATA[Como o PHP funciona na Web?]]></title>
-            <link href="https://dias.dev//2021-06-15-como-o-php-funciona-na-web/"/>
+            <link href="https://dias.dev/2021-06-15-como-o-php-funciona-na-web/"/>
             <updated>2021-06-15T00:00:00+00:00</updated>
-            <id>https://dias.dev//2021-06-15-como-o-php-funciona-na-web/</id>
+            <id>https://dias.dev/2021-06-15-como-o-php-funciona-na-web/</id>
             <content type="html"><![CDATA[<p>O PHP é o que conhecemos como linguagem <em>server-side</em>, ou seja, ele roda nos servidores web, e não nos navegadores.</p>
 
 <p>Isso já é de conhecimento geral, mas nem todos entendem como uma requisição sai do navegador e chega em seu código PHP. É exatamente sobre isso que vamos tratar neste artigo.</p>

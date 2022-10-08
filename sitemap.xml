@@ -1,97 +1,97 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://dias.dev/</loc>
-    <lastmod>2022-09-30</lastmod>
+    <loc>https://dias.dev</loc>
+    <lastmod>2022-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
     <url>
-    <loc>https://dias.dev//2022-09-27-cookies-e-seguranca/</loc>
+    <loc>https://dias.dev/2022-09-27-cookies-e-seguranca/</loc>
     <lastmod>2022-09-27T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
     <url>
-    <loc>https://dias.dev//2022-09-16-paralelizar-testes-automatizados/</loc>
+    <loc>https://dias.dev/2022-09-16-paralelizar-testes-automatizados/</loc>
     <lastmod>2022-09-16T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
     <url>
-    <loc>https://dias.dev//2022-02-13-extensoes-php/</loc>
+    <loc>https://dias.dev/2022-02-13-extensoes-php/</loc>
     <lastmod>2022-02-13T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
     <url>
-    <loc>https://dias.dev//2021-09-14-o-que-sao-pwas/</loc>
+    <loc>https://dias.dev/2021-09-14-o-que-sao-pwas/</loc>
     <lastmod>2021-09-14T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
     <url>
-    <loc>https://dias.dev//2021-08-24-charsets-e-encodings-como-strings-funcionam/</loc>
+    <loc>https://dias.dev/2021-08-24-charsets-e-encodings-como-strings-funcionam/</loc>
     <lastmod>2021-08-24T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
     <url>
-    <loc>https://dias.dev//2021-06-15-como-o-php-funciona-na-web/</loc>
+    <loc>https://dias.dev/2021-06-15-como-o-php-funciona-na-web/</loc>
     <lastmod>2021-06-15T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
     <url>
-    <loc>https://dias.dev//2021-04-10-por-que-nao-usar-xampp/</loc>
+    <loc>https://dias.dev/2021-04-10-por-que-nao-usar-xampp/</loc>
     <lastmod>2021-04-10T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
     <url>
-    <loc>https://dias.dev//2021-03-13-requisicoes-http-paralelas-com-php/</loc>
+    <loc>https://dias.dev/2021-03-13-requisicoes-http-paralelas-com-php/</loc>
     <lastmod>2021-03-13T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
     <url>
-    <loc>https://dias.dev//2020-11-03-wraper-de-streams-php/</loc>
+    <loc>https://dias.dev/2020-11-03-wraper-de-streams-php/</loc>
     <lastmod>2020-11-03T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
     <url>
-    <loc>https://dias.dev//2020-10-27-php-alem-da-web/</loc>
+    <loc>https://dias.dev/2020-10-27-php-alem-da-web/</loc>
     <lastmod>2020-10-27T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
     <url>
-    <loc>https://dias.dev//2020-09-16-php-assincrono-de-forma-nativa/</loc>
+    <loc>https://dias.dev/2020-09-16-php-assincrono-de-forma-nativa/</loc>
     <lastmod>2020-09-16T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
     <url>
-    <loc>https://dias.dev//2020-04-23-principios-ou-ferramentas-o-que-estudar/</loc>
+    <loc>https://dias.dev/2020-04-23-principios-ou-ferramentas-o-que-estudar/</loc>
     <lastmod>2020-04-23T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
     <url>
-    <loc>https://dias.dev//2020-04-16-programacao-procedural-orientada-a-classes-parte-2/</loc>
+    <loc>https://dias.dev/2020-04-16-programacao-procedural-orientada-a-classes-parte-2/</loc>
     <lastmod>2020-04-16T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
     <url>
-    <loc>https://dias.dev//2020-04-13-programacao-procedural-orientada-a-classes-parte-1/</loc>
+    <loc>https://dias.dev/2020-04-13-programacao-procedural-orientada-a-classes-parte-1/</loc>
     <lastmod>2020-04-13T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
     <url>
-    <loc>https://dias.dev//2020-04-10-o-que-e-arquitetura/</loc>
+    <loc>https://dias.dev/2020-04-10-o-que-e-arquitetura/</loc>
     <lastmod>2020-04-10T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
