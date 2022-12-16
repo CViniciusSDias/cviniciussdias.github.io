@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+    <head lang="pt-BR">
+        <title>Enviando e-mails com PHP: uma introdução à função mail e ao SMTP | Dias de Dev</title>
+        <meta charset="utf-8">
+        <meta name="theme-color" content="#ffffff">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <meta name="robots" content="index, follow">
+    <meta name="keywords" content="PHP, ChatGPT, Dias de Dev">
+    <meta name="description" content="Enviar e-mails é uma tarefa muito comum em aplicações Web, e o PHP fornece maneiras muito simples de atingirmos esse objetivo. Nesse post, vamos explorar como enviar um e-mail com PHP indo desde o uso da função `mail` até o uso de componentes externos como PHPMailer">
+        <link rel="stylesheet" href="/build/app.css">
+
+        
+        <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Dias de Dev activity feed" />
+                    <link rel="stylesheet" href="/build/post.css">
+                    </head>
+    <body>
+        <div class="global-container">
+            <header>
+                <div class="header-title">
+                    <h1 class="main-heading">
+                        <a aria-current="page" href="/">Dias de Dev</a>
+                    </h1>
+                </div>
+                <nav class="menu">
+                    <a aria-current="page" href="/">Home</a>
+                    <a href="/categorias">Categorias</a>
+                    <!--<a class="nav-link" href="/blog">Posts Archive</a>
+                    <a class="nav-link" href="/blog/tags">Tags</a>-->
+                    <a href="/sobre-mim/">Sobre Mim</a>
+                    <a href="https://youtube.com/DiasDeDev?sub_confirmation=1" target="_blank">
+                        YouTube
+                    </a>
+                </nav>
+            </header>
+            <main role="main">
+                    <article itemscope itemtype="https://schema.org/Article">
+        <header>
+            <h1 itemprop="headline" class="post-title">
+                Enviando e-mails com PHP: uma introdução à função mail e ao SMTP
+            </h1>
+            <p class="post-date" itemprop="dateCreated">
+                27 de setembro de 2022
+            </p>
+        </header>
+        <div itemprop="articleBody">
+            <blockquote>
+  <p>Disclaimer: <em>Esse post foi escrito pela inteligência artificial do <a href="https://chat.openai.com/chat">ChatGPT</a> contendo apenas poucas alterações feitas por mim (Vinicius)</em></p>
+</blockquote>
+
+<p>Enviar e-mails é uma tarefa comum em muitos aplicativos web, e o PHP oferece uma função nativa chamada <code>mail</code> que pode ser usada para enviar mensagens de e-mail de forma relativamente simples. No entanto, a função <code>mail</code> tem algumas limitações e pode não ser a opção mais adequada para todos os casos de uso. Neste post, vamos explorar como a função <code>mail</code> funciona e quando é adequada usá-la, além de introduzir o conceito de Simple Mail Transfer Protocol (SMTP) e apresentar algumas opções de bibliotecas de envio de e-mails como PHPMailer e Symfony Mailer.</p>
+
+<h2 id="a-fun%C3%A7%C3%A3o-%60mail%60-do-php">A função <code>mail</code> do PHP</h2>
+
+<p>A função <code>mail</code> do PHP é uma forma simples de enviar e-mails usando a linguagem. Ela é chamada da seguinte maneira:</p>
+
+<pre><code class="php">mail($to, $subject, $message, $headers, $parameters);
+</code></pre>
+
+<p>Onde:</p>
+
+<ul>
+<li><code>$to</code> é o endereço de e-mail do destinatário</li>
+<li><code>$subject</code> é o assunto da mensagem</li>
+<li><code>$message</code> é o corpo da mensagem</li>
+<li><code>$headers</code> são cabeçalhos adicionais que podem ser incluídos na mensagem, como o endereço de e-mail do remetente ou o tipo de conteúdo da mensagem</li>
+<li><code>$parameters</code> são parâmetros adicionais que podem ser passados para a função</li>
+</ul>
+
+<p>A função retorna <code>true</code> se a mensagem for enviada com sucesso e <code>false</code> caso contrário.</p>
+
+<h3 id="como-a-fun%C3%A7%C3%A3o-%60mail%60-funciona-por-baixo-dos-panos">Como a função <code>mail</code> funciona por baixo dos panos</h3>
+
+<p>Quando você chama a função <code>mail</code> do PHP, ela usa o programa sendmail instalado no servidor para enviar a mensagem. Isso significa que, para que a função <code>mail</code> funcione, é necessário que o sendmail esteja configurado e funcionando corretamente no servidor. Além disso, o endereço de e-mail do remetente da mensagem precisa ser válido e o servidor precisa ter permissão para enviar e-mails em nome desse remetente.</p>
+
+<h3 id="limita%C3%A7%C3%B5es-da-fun%C3%A7%C3%A3o-%60mail%60">Limitações da função <code>mail</code></h3>
+
+<p>Apesar de ser uma opção conveniente para o envio de e-mails em alguns casos, a função <code>mail</code> do PHP tem algumas limitações que devem ser consideradas:</p>
+
+<ul>
+<li>Ela depende do sendmail, que precisa estar instalado e configurado corretamente no servidor. Isso pode ser um problema se você estiver hospedando o aplicativo em um serviço de nuvem ou em um servidor que não tenha o sendmail instalado.</li>
+<li>Ela não oferece muito controle sobre o envio de e-mails. Por exemplo, não é possível definir um servidor SMTP personalizado ou adicionar anexos à mensagem.</li>
+<li>Ela pode ter problemas de entrega de e-mails devido a problemas de configuração do sendmail ou de problemas de DNS.</li>
+<li>Ela não é muito confiável em aplicativos de produção, pois pode ser facilmente falsificada e pode ser bloqueada por provedores de e-mail.</li>
+</ul>
+
+<p>Essas limitações podem ser contornadas usando bibliotecas de envio de e-mails como o PHPMailer ou o Symfony Mailer, que são discutidas no próximo tópico.</p>
+
+<h2 id="o-que-%C3%A9-smtp">O que é SMTP</h2>
+
+<p>SMTP (Simple Mail Transfer Protocol) é um protocolo usado para enviar e-mails através da internet. Ele é responsável por transferir mensagens de e-mail de um servidor para outro, e também pode ser usado para enviar mensagens de e-mail de um cliente para um servidor.</p>
+
+<p>Quando você envia um e-mail usando um cliente de e-mail como o Microsoft Outlook ou o Gmail, o cliente se comunica com um servidor SMTP para enviar a mensagem. Esse servidor é responsável por encaminhar a mensagem para o servidor de e-mail do destinatário, que, por sua vez, entrega a mensagem ao cliente de e-mail do destinatário.</p>
+
+<h2 id="pacotes-de-envio-de-e-mails">Pacotes de envio de e-mails</h2>
+
+<p>Se você precisa de mais flexibilidade do que a função <code>mail</code> do PHP pode oferecer, existem algumas bibliotecas que podem ser usadas para enviar e-mails com PHP. Dois exemplos populares são o PHPMailer e o Symfony Mailer.</p>
+
+<p>O PHPMailer é uma das bibliotecas de envio de e-mail mais famosas do ecossistema PHP. Esse componente de código aberto que oferece uma interface de alto nível para o envio de e-mails usando PHP. Ele suporta vários métodos de envio, incluindo SMTP, e permite que você faça coisas como adicionar anexos e usar templates de e-mail.</p>
+
+<p>Um exemplo de código que envia um e-mail usando <code>PHPMailer</code> seria o seguinte:</p>
+
+<pre><code class="php">&lt;?php
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+$mail = new PHPMailer(exceptions: true);
+
+try {
+    $mail-&gt;isSMTP();
+
+    // Configurações do servidor
+    $mail-&gt;Host = 'smtp.example.com';
+    $mail-&gt;SMTPAuth = true;
+    $mail-&gt;Username = 'usuario@example.com';
+    $mail-&gt;Password = 'senha-secreta';
+    $mail-&gt;SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+    $mail-&gt;Port = 465;
+
+    // Remetente e Destinatários
+    $mail-&gt;setFrom('remetente@example.com', 'Nome do Remetente');
+    $mail-&gt;addAddress('destinatario@example.net', 'Primeiro Destinatário');
+    $mail-&gt;addAddress('destinatario2@example.com');
+    $mail-&gt;addReplyTo('responder@example.com', 'Nome de para quem responder');
+    $mail-&gt;addCC('cc@example.com');
+    $mail-&gt;addBCC('bcc@example.com');
+
+    // Anexos
+    $mail-&gt;addAttachment('/var/tmp/arquivo.tar.gz');
+    $mail-&gt;addAttachment('/tmp/imagem.jpg', 'novo-nome.jpg');
+
+    // Conteúdo
+    $mail-&gt;isHTML(true);
+    $mail-&gt;Subject = 'Assunto aqui';
+    $mail-&gt;Body = 'Esse é o corpo da mensagem em HTML &lt;b&gt;em negrito!&lt;/b&gt;';
+    $mail-&gt;AltBody = 'Esse é o corpo da mensagem em "texto puro" para clientes que não suportam HTML';
+
+    $mail-&gt;send();
+} catch (Exception $exception) {
+    echo "Erro ao enviar e-mail: {$mail-&gt;ErrorInfo}";
+}
+</code></pre>
+
+<h2 id="conclus%C3%A3o%3A">Conclusão:</h2>
+
+<p>Enviar e-mails com PHP é uma tarefa relativamente simples graças à função <code>mail</code> nativa da linguagem. No entanto, essa função tem algumas limitações e pode não ser a opção mais adequada para todos os casos de uso. Se você precisar de mais flexibilidade, pode usar bibliotecas como o PHPMailer ou o Symfony Mailer, que oferecem recursos avançados para o envio de e-mails.</p>
+
+<p>Espero que este post tenha sido útil para você entender as opções disponíveis para enviar e-mails com PHP e escolher a opção mais adequada para o seu projeto.</p>
+
+        </div>
+        <footer class="post-footer" itemprop="author" itemscope itemtype="https://schema.org/Person">
+            <img src="https://gravatar.com/avatar/63579c5a873f3ab6abff10803e9a252f.jpg?s=50"
+                 alt="Foto do Vinicius Dias com o microfone na mão durante uma palestra"
+                 itemprop="image" />
+            <p>
+                Escrito por <a href="https://twitter.com/cviniciussdias" itemprop="givenName">Vinicius Dias</a>
+            </p>
+        </footer>
+
+                    <nav class="article-navigation">
+                <ul>
+                    <li>
+                                                <a class="previous" href="/2022-09-27-cookies-e-seguranca/" title="Cookies e segurança">
+                            ← <span class="title">Cookies e segurança</span>
+                        </a>
+                                            </li>
+                    <li>
+                                            </li>
+                </ul>
+            </nav>
+            </article>
+
+
+
+            </main>
+            <footer class="global-footer">&copy; 2022 Dias de Dev</footer>
+        </div>
+
+        <script src="/build/app.js"></script>
+                
+        <!-- Google Tag Manager -->
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','GTM-5ZJJ977');</script>
+        <!-- End Google Tag Manager -->
+        <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5ZJJ977"
+                          height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <!-- End Google Tag Manager (noscript) -->
+                    </body>
+</html>
