@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+    <head lang="pt-BR">
+        <title>PHP.ini: Aprendendo a configurar o comportamento do PHP | Dias de Dev</title>
+        <meta charset="utf-8">
+        <meta name="theme-color" content="#ffffff">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <meta name="robots" content="index, follow">
+    <meta name="keywords" content="php.ini, php, configurações, arquivo de configuração, extensões, desempenho, segurança, erros, pdo_mysql, opcache">
+    <meta name="description" content="O arquivo php.ini é responsável por conter as configurações que afetam o comportamento do PHP. Aprenda sobre o que pode ser configurado no arquivo e onde encontrá-lo.">
+        <link rel="stylesheet" href="/build/app.css">
+
+        
+        <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Dias de Dev activity feed" />
+                    <link rel="stylesheet" href="/build/post.css">
+                    </head>
+    <body>
+        <div class="global-container">
+            <header>
+                <div class="header-title">
+                    <h1 class="main-heading">
+                        <a aria-current="page" href="/">Dias de Dev</a>
+                    </h1>
+                </div>
+                <nav class="menu">
+                    <a aria-current="page" href="/">Home</a>
+                    <a href="/categorias">Categorias</a>
+                    <!--<a class="nav-link" href="/blog">Posts Archive</a>
+                    <a class="nav-link" href="/blog/tags">Tags</a>-->
+                    <a href="/sobre-mim/">Sobre Mim</a>
+                    <a href="https://youtube.com/DiasDeDev?sub_confirmation=1" target="_blank">
+                        YouTube
+                    </a>
+                </nav>
+            </header>
+            <main role="main">
+                    <article itemscope itemtype="https://schema.org/Article">
+        <header>
+            <h1 itemprop="headline" class="post-title">
+                PHP.ini: Aprendendo a configurar o comportamento do PHP
+            </h1>
+            <p class="post-date" itemprop="dateCreated">
+                24 de fevereiro de 2023
+            </p>
+        </header>
+        <div itemprop="articleBody">
+            <h2 id="o-que-%C3%A9-o-php.ini%3F">O que é o php.ini?</h2>
+
+<p>O arquivo <code>php.ini</code> é o responsável por conter as configurações que afetam o comportamento do PHP onde ele for executado. O PHP lê as configurações deste arquivo sempre que um novo processo é iniciado.</p>
+
+<h3 id="todas-as-configura%C3%A7%C3%B5es-em-um-%C3%BAnico-arquivo%3F">Todas as configurações em um único arquivo?</h3>
+
+<p>Entendido (mesmo que por alto) o que é o <code>php.ini</code>, talvez você se pergunte: "mas todas as configurações do PHP vão ficar em um único arquivo? Esse arquivo vai ser gigante!".</p>
+
+<p>Esse questionamento é muito válido e a resposta é: não. Não é necessário manter todas as configurações em um único arquivo. É possível ter em sua instalação do PHP um diretório configurado onde outros arquivos de configuração (no mesmo formato) serão buscados e carregados.</p>
+
+<h3 id="onde-encontrar-o-php.ini%3F">Onde encontrar o php.ini?</h3>
+
+<p>A localização do arquivo <code>php.ini</code> (e dos demais arquivos de configuração) pode variar dependendo do sistema operacional e da forma como o PHP foi instalado, mas há um simples comando para te mostrar essa informação: <code>php --ini</code>. Executando esse comando você terá uma saída semelhante a seguinte:</p>
+
+<pre><code>Configuration File (php.ini) Path: /etc/php/8.2/cli
+Loaded Configuration File:         /etc/php/8.2/cli/php.ini
+Scan for additional .ini files in: /etc/php/8.2/cli/conf.d
+Additional .ini files parsed:      /etc/php/8.2/cli/conf.d/10-opcache.ini,
+/etc/php/8.2/cli/conf.d/10-pdo.ini,
+</code></pre>
+
+<p>Repare que no exemplo acima, o arquivo "principal" é o <code>php.ini</code> encontrado na pasta <code>/etc/php/8.2/cli</code>. Mas há também a definição (feita no momento da compilação do PHP) para buscar outros arquivos de configuração na pasta <code>/etc/php/8.2/cli/conf.d</code>. Lá estão os arquivos <code>10-opcache.ini</code> e <code>10-pdo.ini</code>.</p>
+
+<h4 id="prioridade-de-carregamento">Prioridade de carregamento</h4>
+
+<p>Você deve ter notado que os arquivos "extra" de configuração possuem um número como prefixo (<code>10-opcache.ini</code> e <code>10-pdo.ini</code>). Esse número <strong>não</strong> tem um significado especial para o PHP, mas nos permite ordenar os arquivos por de prioridade. O PHP vai carregar os arquivos <code>.ini</code> do diretório configurado em ordem alfabetica, sendo assim, números são adicionados para nós podermos definir a prioridade de carregamento de cada arquivo. Quanto maior o número, "mais depois" ele será carregado, fazendo com que suas definições sejam aplicadas por último, sobrescrevendo as anteriores caso hajam configurações duplicadas.</p>
+
+<h2 id="o-que-pode-ser-configurado-pelo-php.ini">O que pode ser configurado pelo php.ini</h2>
+
+<p>Existem muitas configurações diferentes que podem ser definidas no arquivo <code>php.ini</code>. Algumas das configurações mais comuns incluem:</p>
+
+<ul>
+<li>Configurações de exibição de erros</li>
+<li>Configurações de segurança</li>
+<li>Configurações de desempenho</li>
+<li>Configurações de extensões</li>
+</ul>
+
+<h3 id="exemplos">Exemplos</h3>
+
+<p>O formato <code>.ini</code> é bastante simples e consiste em uma chave (o nome da configuração) e um valor (o valor da configuração) separados pelo sinal de igualdade (<code>=</code>). Além disso, é possível adicionar comentários colocando um ponto e vírgula (<code>;</code>) em sua frente.</p>
+
+<p>Sendo assim, para termos um arquivo <code>php.ini</code> dizendo que todos os erros devem ser exibidos, habilitando a <a href="/2022-09-27-cookies-e-seguranca/">configuração <code>secure</code> do cookie de sessão</a>, tendo o <a href="https://youtu.be/6vEspHqjrkI">opcache</a> habilitado e a <a href="/2022-02-13-extensoes-php/">extensão</a> <code>pdo_mysql</code> também habilitada, nós teríamos o seguinte:</p>
+
+<pre><code class="ini">; comentário. O PHP não vai ler essa linha
+error_erporting=E_ALL
+display_errors=1
+session.cookie_secure=1
+extension=pdo_mysql
+opcache.enable=1
+</code></pre>
+
+<h3 id="configura%C3%A7%C3%B5es-poss%C3%ADvels">Configurações possívels</h3>
+
+<p>Você não precisa tentar memorizar a lista de configurações possíveis, pois isso está disponível na documentação do PHP. A documentação de cada <a href="/2022-02-13-extensoes-php/">extensão</a>, por exemplo, possui uma seção de configurações que mostra as possíveis configurações com a explicação de cada um de seus valores.</p>
+
+<h3 id="mais-detalhes-do-formato-ini">Mais detalhes do formato ini</h3>
+
+<p>Antes de finalizar, você também deve ter notado que em nosso exemplo, duas linhas possuem um ponto (<code>.</code>) no nome da configuração e duas linhas não. Geralmente as configurações de <a href="/2022-02-13-extensoes-php/">extensões</a> são nomeadas no formato <em>extensao.configuracao</em>, ou seja, a configuração <code>enable</code> da extensão <code>opcache</code> se torna <code>opcache.enable</code>. Já as configurações que não são de uma extensão do PHP não possuem esse ponto.</p>
+
+<p>Um outro detalhe do formato <code>ini</code> são suas <em>Sections</em>. Uma seção é identificada por um nome rodeado por colchetes. Então se eu quiser organizar meu arquivo e nomear uma seção nele com todas as configurações relacionadas a <a href="https://youtu.be/6vEspHqjrkI">opcache</a>, eu poderia ter o seguinte:</p>
+
+<pre><code class="ini">[opcache]
+opcache.enable=1
+opcache.validate_timestamps=0
+; demais configurações de opcache
+</code></pre>
+
+<p>Isso não vai ter nenhum significado especial para o PHP, mas nos permite deixar o arquivo mais organizado para nós lermos futuramente.</p>
+
+<h4 id="se%C3%A7%C3%B5es-especiais-do-php.ini">Seções especiais do php.ini</h4>
+
+<p>Entendido o conceito de seções do formato <code>ini</code>, há duas seções especiais que podemos ter em nosso <code>php.ini</code>, chamadas <code>HOST</code> e <code>PATH</code>. Elas são utilizadas para limitar configurações que serão carregadas em determinados endereços web (<code>HOST</code>) ou em determinados caminhos de arquivos (<code>PATH</code>).</p>
+
+<p>Para exibir todos os erros apenas em processos que respondem as requisições em <code>dev.example.com</code>, por exemplo, eu poderia ter o seguinte:</p>
+
+<pre><code class="ini">[HOST=dev.example.com]
+error_reporting=E_ALL
+display_errors=1
+</code></pre>
+
+<p>Caso eu queira desabilitar o <a href="https://youtu.be/6vEspHqjrkI">opcache</a> no projeto executado na pasta <code>/meu/projeto</code>, eu posso ter o seguinte:</p>
+
+<pre><code class="ini">[PATH=/meu/projeto]
+opcache.enable=0
+</code></pre>
+
+<h2 id="fun%C3%A7%C3%A3o-%60ini_set%60">Função <code>ini_set</code></h2>
+
+<p>Além dos arquivos <code>.ini</code>, também é possível realizar algumas configurações no código do PHP, que serão válidas apenas durante aquela execução do processo. Para, por exemplo, habilitar a exibição de erros somente durante a execução de um código, podemos fazer o seguinte:</p>
+
+<pre><code class="php">ini_set('display_errors', true);
+</code></pre>
+
+<p>Na documentação de cada configuração é informado se é possível realizá-la através da função <code>ini_set</code> ou apenas a partir de arquivos de configuração.</p>
+
+<h2 id="conclus%C3%A3o">Conclusão</h2>
+
+<p>Conhecer o <code>php.ini</code> é de suma importância para qualquer pessoa que vá trabalhar com PHP, seja como <em>dev</em> ou até em time de operações/sysadmin. Cada <a href="/2022-02-13-extensoes-php/">extensão</a> do PHP vai ter, em sua documentação, a lista de configurações possíveis. Sempre que você for utilizar uma extensão como <em>PDO</em>, <em>cURL</em> ou qualquer outra, analise as configurações possíveis para saber se há alguma possível otimização para seu caso.</p>
+
+<p>Durante o artigo eu deixei alguns links, mas aproveito para deixar algumas referências novamente aqui:</p>
+
+<ul>
+<li>Post aqui no blog sobre Extensões PHP: <a href="/2022-02-13-extensoes-php/">https://dias.dev/2022-02-13-extensoes-php/</a></li>
+<li>Vídeo no meu canal sobre <em>Opcache</em>: https://youtu.be/6vEspHqjrkI</li>
+<li>Documentação sobre as diretivas do <code>php.ini</code>: https://www.php.net/manual/en/ini.php</li>
+<li>Cupom de desconto na Alura para você se aprofundar em PHP: https://alura.com.br/promocao/diasdedev</li>
+</ul>
+
+        </div>
+        <footer class="post-footer" itemprop="author" itemscope itemtype="https://schema.org/Person">
+            <img src="https://gravatar.com/avatar/63579c5a873f3ab6abff10803e9a252f.jpg?s=50"
+                 alt="Foto do Vinicius Dias com o microfone na mão durante uma palestra"
+                 itemprop="image" />
+            <p>
+                Escrito por <a href="https://twitter.com/cviniciussdias" itemprop="givenName">Vinicius Dias</a>
+            </p>
+        </footer>
+
+                    <nav class="article-navigation">
+                <ul>
+                    <li>
+                                                <a class="previous" href="/2022-09-27-como-enviar-emails-com-php/" title="Enviando e-mails com PHP: uma introdução à função mail e ao SMTP">
+                            ← <span class="title">Enviando e-mails com PHP: uma introdução à função mail e ao SMTP</span>
+                        </a>
+                                            </li>
+                    <li>
+                                            </li>
+                </ul>
+            </nav>
+            </article>
+
+
+
+            </main>
+            <footer class="global-footer">&copy; 2023 Dias de Dev</footer>
+        </div>
+
+        <script src="/build/app.js"></script>
+                
+        <!-- Google Tag Manager -->
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','GTM-5ZJJ977');</script>
+        <!-- End Google Tag Manager -->
+        <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5ZJJ977"
+                          height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <!-- End Google Tag Manager (noscript) -->
+                    </body>
+</html>
