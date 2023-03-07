@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+    <head lang="pt-BR">
+        <title>Entenda o erro &quot;Cannot modify header information - headers already sent&quot; no PHP | Dias de Dev</title>
+        <meta charset="utf-8">
+        <meta name="theme-color" content="#ffffff">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <meta name="robots" content="index, follow">
+    <meta name="title" content="Entenda o erro &quot;Cannot modify header information - headers already sent&quot; no PHP | Dias de Dev">
+    <meta name="keywords" content="PHP, HTTP, cabeçalhos, erro, resposta, corpo, cabeçalhos já enviados, echo, header, session_start, setcookie">
+    <meta name="description" content="Entenda o erro &quot;Cannot modify header information - headers already sent&quot; no PHP e como evitá-lo em seu código. Saiba o que é HTTP e como funciona na web, além de funções PHP que podem enviar ou modificar cabeçalhos.">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:article:published_time" content="1678147200">
+    <meta property="og:url" content="/2023-03-07-entenda-o-erro-cannot-modify-header-information-php/">
+    <meta property="og:title" content="Entenda o erro &quot;Cannot modify header information - headers already sent&quot; no PHP | Dias de Dev">
+    <meta property="og:description" content="Entenda o erro &quot;Cannot modify header information - headers already sent&quot; no PHP e como evitá-lo em seu código. Saiba o que é HTTP e como funciona na web, além de funções PHP que podem enviar ou modificar cabeçalhos.">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary">
+    <meta property="twitter:url" content="/2023-03-07-entenda-o-erro-cannot-modify-header-information-php/">
+    <meta property="twitter:title" content="Entenda o erro &quot;Cannot modify header information - headers already sent&quot; no PHP | Dias de Dev">
+    <meta property="twitter:description" content="Entenda o erro &quot;Cannot modify header information - headers already sent&quot; no PHP e como evitá-lo em seu código. Saiba o que é HTTP e como funciona na web, além de funções PHP que podem enviar ou modificar cabeçalhos.">
+            <link rel="stylesheet" href="/build/app.css">
+
+        
+        <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Dias de Dev activity feed" />
+                    <link rel="stylesheet" href="/build/post.css">
+                    </head>
+    <body>
+        <div class="global-container">
+            <header>
+                <div class="header-title">
+                    <h1 class="main-heading">
+                        <a aria-current="page" href="/">Dias de Dev</a>
+                    </h1>
+                </div>
+                <nav class="menu">
+                    <a aria-current="page" href="/">Home</a>
+                    <a href="/categorias">Categorias</a>
+                                        <a href="/sobre-mim/">Sobre Mim</a>
+                    <a href="https://youtube.com/DiasDeDev?sub_confirmation=1" target="_blank">
+                        YouTube
+                    </a>
+                </nav>
+            </header>
+            <main role="main">
+                    <article itemscope itemtype="https://schema.org/Article">
+        <header>
+            <h1 itemprop="headline" class="post-title">
+                Entenda o erro &quot;Cannot modify header information - headers already sent&quot; no PHP
+            </h1>
+            <p class="post-date" itemprop="dateCreated">
+                07 de março de 2023
+            </p>
+        </header>
+        <div itemprop="articleBody">
+            <p>O famoso erro do PHP com o texto "<em>Cannot modify header information - headers already sent</em>" acontece quando tentamos enviar um cabeçalho <em>HTTP</em> após já termos enviado alguma saída no corpo da resposta. Nesse post nós vamos entender o que isso tudo significa e como evitar esse problema em seu código.</p>
+
+<h2 id="_http_"><em>HTTP</em></h2>
+
+<p><em>HTTP (HyperText Transfer Protocol)</em> é o protocolo usado na internet, então sempre que você acessa um site usando seu navegador, por exemplo, <em>HTTP</em> está sendo usado.</p>
+
+<p><em>HTTP</em> é um protocolo que segue uma arquitetura cliente-servidor, onde há duas partes na comunicação. De forma super simplificada: você, usando seu navegador, é o cliente. O site que você acessa é o servidor.</p>
+
+<p>Esse protocolo define mensagens de requisição (<em>request</em>) e resposta (<em>response</em>). Quando você acessa um site, seu navegador faz uma requisição para o servidor, que processa esse pedido e devolve uma resposta. Essas mensagens são divididas em duas grandes partes: <strong>cabeçalhos</strong> e <strong>corpo</strong>.</p>
+
+<p>O corpo de uma resposta, por exemplo, é o conteúdo que você vê na tela, enquanto cabeçalhos possuem informações adicionais como <a href="/2022-09-27-cookies-e-seguranca">cookies</a>, informações de redirecionamento, etc.</p>
+
+<p>Esse é um resumo bem conciso do protocolo <em>HTTP</em> e de <strong>como a internet funciona</strong>. Ainda sobre esse assunto, caso você tenha alguma dúvida ou queira entender melhor, eu tenho um vídeo no YouTube. Você pode conferí-lo antes de continuar lendo esse post:</p>
+
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/B2IWlnJ_dt0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+<h2 id="como-o-php-funciona">Como o PHP funciona</h2>
+
+<p>Entendido como a <em>web</em> funciona, é hora de entender o que o <strong>PHP</strong> faz na <em>web</em>. Aqui no blog há um post sobre <a href="/2021-06-15-como-o-php-funciona-na-web">como o PHP funciona na Web</a> onde você pode entender como o <strong>PHP</strong> é executado, mas aqui vou resumir o que você precisa saber para entender o problema de "<em>Cannot modify header information - headers already sent</em>".</p>
+
+<p>Quando você exibe algo em PHP, seja através de funções como <code>echo</code> ou até colocando <em>HTML</em> junto com seu PHP, esse conteúdo é enviado no corpo da resposta <em>HTTP</em> que o PHP gera. Isso tudo é feito de forma transparente para nós desenvolvedores.</p>
+
+<p>Como foi citado no parágrafo anterior, uma resposta <em>HTTP</em> é dividida entre <strong>cabeçalhos</strong> e <strong>corpo</strong>, sendo que os cabeçalhos vêm antes do corpo. Sendo assim, para nós adicionarmos algo ao corpo da resposta com PHP, os cabeçalhos precisam ser montados e enviados antes.</p>
+
+<p>Então quando você, em um sistema <em>Web</em> feito em PHP, executa um <code>echo</code>, por exemplo, os cabeçalhos da resposta <em>HTTP</em> são montados e enviados e depois o corpo é enviado com o conteúdo desse <code>echo</code>.</p>
+
+<p>Existem também funções no PHP que podem enviar ou modificar cabeçalhos. Algumas dessas funções são:</p>
+
+<ul>
+<li><code>header</code></li>
+<li><code>header_remove</code></li>
+<li><code>session_start</code></li>
+<li><code>setcookie</code></li>
+<li>etc</li>
+</ul>
+
+<h2 id="entendendo-o-problema">Entendendo o problema</h2>
+
+<p>Como foi dito logo na introdução desse <em>post</em>, o problema "<em>Cannot modify header information - headers already sent</em>" acontece quando tentamos enviar um cabeçalho <em>HTTP</em> após já termos enviado algo no corpo da resposta.</p>
+
+<p>Isso quer dizer que esse erro acontece quando nós tentamos usar alguma função que adiciona ou modifica cabeçalhos <em>HTTP</em> quando algum conteúdo já foi exibido. Se você executar o seguinte código em um contexto <em>web</em>, verá o erro em questão:</p>
+
+<pre><code class="php">&lt;?php
+
+echo 'Corpo da resposta';
+
+header('Location: /url-de-redirecionamento');
+</code></pre>
+
+<p>O que nós estamos tentando fazer é enviar o cabeçalho <code>Location</code>, mas o corpo da resposta já começou a ser enviado quando nós executamos <code>echo</code>, ou seja, os cabeçalhos já foram montados e enviados para o cliente.</p>
+
+<h3 id="problema-acontecendo-mesmo-sem-echo-ou-html">Problema acontecendo mesmo sem echo ou HTML</h3>
+
+<p>Você talvez esteja se perguntando o motivo de já ter se deparado com esse erro mesmo sem ter, antes de uma função <code>header</code>, por exemplo, nenhuma exibição de conteúdo. Sendo assim, teoricamente, nenhuma resposta deveria ter sido criada e os cabeçalhos ainda não teriam sido enviados.</p>
+
+<p>O que acontece é que não é incomum que nós geremos uma resposta mesmo sem querer. Se deixarmos espaços em branco antes da <em>tag</em> de abertura do PHP (<code>&lt;?php</code>) ou após a <em>tag</em> de fechamento do PHP (<code>?&gt;</code>), esses espaços serão exibidos e com isso os cabeçalhos serão enviados. Outro caso <strong>muito comum</strong> é se nossa aplicação gerar algum aviso (os famosos <em>warnings</em> do PHP). Esses avisos sendo exibidos também geram uma resposta e com isso, os cabeçalhos são enviados.</p>
+
+<h3 id="solu%C3%A7%C3%A3o">Solução</h3>
+
+<p>Para que o erro não ocorra mais, você precisa se certificar que qualquer função que adiciona ou modifica cabeçalhos <em>HTTP</em> (como <code>header</code> ou <code>session_start</code>) seja executada antes que qualquer coisa seja exibida, mesmo que de forma acidental.</p>
+
+<p>Para isso, você pode:</p>
+
+<ol>
+<li>Identificar e corrigir qualquer problema no código que gere algum erro ou aviso;</li>
+<li>Mover as funções que adicionam ou modificam cabeçalhos <em>HTTP</em> para o início da execução de sua aplicação, antes de qualquer exibição no corpo da resposta;</li>
+<li><a href="/2023-02-24-php-ini-conhecendo-as-configuracoes-do-php">Configurar o PHP</a> para não exibir os erros e avisos (Isso só deve ser feito em produção. Em ambiente de desenvolvimento precisamos ver e corrigir os avisos);</li>
+<li>Evitar o uso da <em>tag</em> de fechamento do PHP (<code>?&gt;</code>) em arquivos que contenham apenas código PHP;</li>
+<li>Garantir que não há espaços antes da <em>tag</em> de abertura (<code>&lt;?php</code>) ou depois da tag de fechamento (<code>?&gt;</code>) do PHP.</li>
+<li>Controlar o <a href="/2020-11-03-wraper-de-streams-php"><em>output buffer</em></a> do PHP, caso se depare com um caso mais específico.</li>
+</ol>
+
+<h2 id="conclus%C3%A3o">Conclusão</h2>
+
+<p>Um dos erros mais conhecidos do mundo PHP, embora assustador, não é tão difícil de resolver. Com esse post você deve ter as informações necessárias para não se deparar com ele novamente e para resolver o problema caso o encontre.</p>
+
+<p>Caso queira se aprofundar e conhecer ainda mais nos estudos sobre PHP, aqui tem um cupom de desconto para assinar a Alura, plataforma de cursos online onde eu sou o instrutor da maioria dos cursos de PHP: <a href="https://alura.com.br/promocao/diasdedev">https://alura.com.br/promocao/diasdedev</a></p>
+
+        </div>
+        <footer class="post-footer" itemprop="author" itemscope itemtype="https://schema.org/Person">
+            <img src="https://gravatar.com/avatar/63579c5a873f3ab6abff10803e9a252f.jpg?s=50"
+                 alt="Foto do Vinicius Dias com o microfone na mão durante uma palestra"
+                 itemprop="image" />
+            <p>
+                Escrito por
+                <a href="https://twitter.com/cviniciussdias" itemprop="url">
+                    <span itemprop="name">Vinicius Dias</span>
+                </a>
+            </p>
+        </footer>
+
+                    <nav class="article-navigation">
+                <ul>
+                    <li>
+                                                <a class="previous" href="/2023-02-24-php-ini-conhecendo-as-configuracoes-do-php/" title="PHP.ini: Aprendendo a configurar o comportamento do PHP">
+                            ← <span class="title">PHP.ini: Aprendendo a configurar o comportamento do PHP</span>
+                        </a>
+                                            </li>
+                    <li>
+                                            </li>
+                </ul>
+            </nav>
+            </article>
+
+
+
+            </main>
+            <footer class="global-footer">&copy; 2023 Dias de Dev</footer>
+        </div>
+
+        <script src="/build/app.js"></script>
+                
+        <!-- Google Tag Manager -->
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','GTM-5ZJJ977');</script>
+        <!-- End Google Tag Manager -->
+        <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5ZJJ977"
+                          height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <!-- End Google Tag Manager (noscript) -->
+                    </body>
+</html>
