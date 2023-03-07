@@ -3,7 +3,7 @@
     <title><![CDATA[Dias de Dev]]></title>
     <link href="https://dias.dev/atom.xml" rel="self"/>
     <link href="https://dias.dev"/>
-    <updated>2023-03-07T16:51:19+00:00</updated>
+    <updated>2023-03-07T16:53:27+00:00</updated>
     <id>https://dias.dev</id>
         <generator uri="http://sculpin.io/">Sculpin</generator>
             <entry>
@@ -46,6 +46,17 @@
 <li><code>setcookie</code></li>
 <li>etc</li>
 </ul>
+
+<p><ins class="adsbygoogle"
+style="display:block; text-align:center;"
+data-ad-layout="in-article"
+data-ad-format="fluid"
+data-ad-client="ca-pub-8918461095244552"
+data-ad-slot="2366637560"></ins></p>
+
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
 
 <h2 id="entendendo-o-problema">Entendendo o problema</h2>
 
@@ -121,6 +132,17 @@ Additional .ini files parsed:      /etc/php/8.2/cli/conf.d/10-opcache.ini,
 <h4 id="prioridade-de-carregamento">Prioridade de carregamento</h4>
 
 <p>Você deve ter notado que os arquivos "extra" de configuração possuem um número como prefixo (<code>10-opcache.ini</code> e <code>10-pdo.ini</code>). Esse número <strong>não</strong> tem um significado especial para o PHP, mas nos permite ordenar os arquivos por prioridade. O PHP vai carregar os arquivos <code>.ini</code> do diretório configurado em ordem alfabetica, sendo assim, números são adicionados para nós podermos definir a prioridade de carregamento de cada arquivo. Quanto maior o número, "mais depois" ele será carregado, fazendo com que suas definições sejam aplicadas por último, sobrescrevendo as anteriores caso hajam configurações duplicadas.</p>
+
+<p><ins class="adsbygoogle"
+style="display:block; text-align:center;"
+data-ad-layout="in-article"
+data-ad-format="fluid"
+data-ad-client="ca-pub-8918461095244552"
+data-ad-slot="2366637560"></ins></p>
+
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
 
 <h2 id="o-que-pode-ser-configurado-pelo-php.ini">O que pode ser configurado pelo php.ini</h2>
 
@@ -257,6 +279,17 @@ opcache.enable=0
 <p>SMTP (Simple Mail Transfer Protocol) é um protocolo usado para enviar e-mails através da internet. Ele é responsável por transferir mensagens de e-mail de um servidor para outro, e também pode ser usado para enviar mensagens de e-mail de um cliente para um servidor.</p>
 
 <p>Quando você envia um e-mail usando um cliente de e-mail como o Microsoft Outlook ou o Gmail, o cliente se comunica com um servidor SMTP para enviar a mensagem. Esse servidor é responsável por encaminhar a mensagem para o servidor de e-mail do destinatário, que, por sua vez, entrega a mensagem ao cliente de e-mail do destinatário.</p>
+
+<p><ins class="adsbygoogle"
+style="display:block; text-align:center;"
+data-ad-layout="in-article"
+data-ad-format="fluid"
+data-ad-client="ca-pub-8918461095244552"
+data-ad-slot="2366637560"></ins></p>
+
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
 
 <h2 id="pacotes-de-envio-de-e-mails">Pacotes de envio de e-mails</h2>
 
