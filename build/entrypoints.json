@@ -8,6 +8,11 @@
         "/build/app.js"
       ]
     },
+    "lite-yt-embed-script": {
+      "js": [
+        "/build/lite-yt-embed-script.js"
+      ]
+    },
     "index": {
       "css": [
         "/build/index.css"
@@ -16,6 +21,11 @@
     "post": {
       "css": [
         "/build/post.css"
+      ]
+    },
+    "lite-yt-embed-style": {
+      "css": [
+        "/build/lite-yt-embed-style.css"
       ]
     }
   }

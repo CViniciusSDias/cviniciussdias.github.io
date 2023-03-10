@@ -3,7 +3,7 @@
     <title><![CDATA[Dias de Dev]]></title>
     <link href="https://dias.dev/atom.xml" rel="self"/>
     <link href="https://dias.dev"/>
-    <updated>2023-03-07T16:53:27+00:00</updated>
+    <updated>2023-03-10T02:21:16+00:00</updated>
     <id>https://dias.dev</id>
         <generator uri="http://sculpin.io/">Sculpin</generator>
             <entry>
@@ -25,7 +25,11 @@
 
 <p>Esse é um resumo bem conciso do protocolo <em>HTTP</em> e de <strong>como a internet funciona</strong>. Ainda sobre esse assunto, caso você tenha alguma dúvida ou queira entender melhor, eu tenho um vídeo no YouTube. Você pode conferí-lo antes de continuar lendo esse post:</p>
 
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/B2IWlnJ_dt0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<p><lite-youtube videoid="B2IWlnJ_dt0" style="background-image: url('https://i.ytimg.com/vi/B2IWlnJ_dt0/hqdefault.jpg');">
+  <a href="https://youtube.com/watch?v=B2IWlnJ_dt0" class="lty-playbtn" title="Reproduzir vídeo">
+    <span class="lyt-visually-hidden">Play Video: Keynote (Google I/O '18)</span>
+  </a>
+</lite-youtube></p>
 
 <h2 id="como-o-php-funciona">Como o PHP funciona</h2>
 
@@ -362,7 +366,11 @@ try {
 
 <p>Se você não está familiarizado com o protocolo HTTP, pode conferir este vídeo antes de continuar a leitura:</p>
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/B2IWlnJ_dt0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<p><lite-youtube videoid="B2IWlnJ_dt0" style="background-image: url('https://i.ytimg.com/vi/B2IWlnJ_dt0/hqdefault.jpg');">
+    <a href="https://youtube.com/watch?v=B2IWlnJ_dt0" class="lty-playbtn" title="Reproduzir vídeo">
+        <span class="lyt-visually-hidden">Reproduzir vídeo: Como funciona a Web? - A internet por baixo dos panos | Dias de Dev</span>
+    </a>
+</lite-youtube></p>
 
 <p>Dessa forma um servidor pode, por exemplo, ao receber as credenciais do usuário, gerar um ID único e enviar através de cookies. A partir disso, todas as requisições futuras que o navegador fizer conterão essa identificação do usuário. Assim funciona o mecanismo de sessões que nos permite permanecer logados em sites.</p>
 
@@ -808,7 +816,11 @@ data-ad-slot="2366637560"></ins></p>
 
 <p>Neste vídeo eu expliquei um pouco de como funciona o processo desde quando damos <em>Enter</em> em nosso navegador até termos uma resposta em nossa tela. Vale a pena conferir antes de continuar lendo este artigo:</p>
 
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/B2IWlnJ_dt0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<p><lite-youtube videoid="B2IWlnJ_dt0" style="background-image: url('https://i.ytimg.com/vi/B2IWlnJ_dt0/hqdefault.jpg');">
+    <a href="https://youtube.com/watch?v=B2IWlnJ_dt0" class="lty-playbtn" title="Reproduzir vídeo">
+        <span class="lyt-visually-hidden">Reproduzir vídeo: Como funciona a Web? - A internet por baixo dos panos | Dias de Dev</span>
+    </a>
+</lite-youtube></p>
 
 <p>Existem várias outras referências (inclusive mais completas) para você conhecer as tecnologias por trás da Web. Vou deixar aqui algumas referências:
 - <a href="https://amzn.to/3lzFVkD">Desconstruindo a Web: As tecnologias por trás de uma requisição</a>

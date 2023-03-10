@@ -27,7 +27,8 @@
         
         <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Dias de Dev activity feed" />
                     <link rel="stylesheet" href="/build/post.css">
-                    </head>
+            <link rel="stylesheet" href="/build/lite-yt-embed-style.css">
+                        </head>
     <body>
         <div class="global-container">
             <header>
@@ -70,7 +71,11 @@
 
 <p>Esse é um resumo bem conciso do protocolo <em>HTTP</em> e de <strong>como a internet funciona</strong>. Ainda sobre esse assunto, caso você tenha alguma dúvida ou queira entender melhor, eu tenho um vídeo no YouTube. Você pode conferí-lo antes de continuar lendo esse post:</p>
 
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/B2IWlnJ_dt0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<p><lite-youtube videoid="B2IWlnJ_dt0" style="background-image: url('https://i.ytimg.com/vi/B2IWlnJ_dt0/hqdefault.jpg');">
+  <a href="https://youtube.com/watch?v=B2IWlnJ_dt0" class="lty-playbtn" title="Reproduzir vídeo">
+    <span class="lyt-visually-hidden">Play Video: Keynote (Google I/O '18)</span>
+  </a>
+</lite-youtube></p>
 
 <h2 id="como-o-php-funciona">Como o PHP funciona</h2>
 
@@ -190,5 +195,6 @@ header('Location: /url-de-redirecionamento');
         <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5ZJJ977"
                           height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <!-- End Google Tag Manager (noscript) -->
-                    </body>
+                    <script src="/build/lite-yt-embed-script.js" async></script>
+        </body>
 </html>
