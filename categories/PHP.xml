@@ -3,9 +3,92 @@
     <title><![CDATA[Dias de Dev]]></title>
     <link href="https://dias.dev/categories/PHP.xml" rel="self"/>
     <link href="https://dias.dev"/>
-    <updated>2023-03-10T02:55:07+00:00</updated>
+    <updated>2023-03-21T01:34:00+00:00</updated>
     <id>https://dias.dev/</id>
         <generator uri="http://sculpin.io/">Sculpin</generator>
+            <entry>
+            <title type="html"><![CDATA[Strings multibyte: o que são e por que você precisa da extensão mbstring do PHP]]></title>
+            <link href="https://dias.dev/2023-03-21-strings-multibyte-php-mbstring/"/>
+            <updated>2023-03-21T00:00:00+00:00</updated>
+            <id>https://dias.dev/2023-03-21-strings-multibyte-php-mbstring/</id>
+            <content type="html"><![CDATA[<p><em>Strings multibyte</em> são textos que possuem alguns caracteres que demandam mais de um <em>byte</em> para serem representados. Há um post aqui no blog onde nós falamos sobre <a href="(/2021-08-24-charsets-e-encodings-como-strings-funcionam/)">Charsets e Encodings: Como strings funcionam</a>. Agora nós vamos entender como lidar com <em>strings multibyte</em> em PHP usando a <a href="/2022-02-13-extensoes-php/">extensão</a> <code>mbstring</code>.</p>
+
+<h2 id="opera%C3%A7%C3%B5es-em-strings">Operações em strings</h2>
+
+<p>Quando trabalhamos com textos, é bastante comum precisarmos realizar algumas operações. Transformar todas as letras em maiúsculas ou minúsculas, por exemplo, é uma operação corriqueira. Até operações mais simples como contar o número de caracteres podem nos trazer algumas dores de cabeça se estivermos trabalhando com <em>strings multibyte</em>.</p>
+
+<p>Um exemplo bastante simples:</p>
+
+<pre><code class="php">&lt;?php
+
+echo strlen('Olá'); // Exibe 4
+echo strtoupper('olá'); // Exibe "OLá"
+</code></pre>
+
+<p><ins class="adsbygoogle"
+style="display:block; text-align:center;"
+data-ad-layout="in-article"
+data-ad-format="fluid"
+data-ad-client="ca-pub-8918461095244552"
+data-ad-slot="2366637560"></ins></p>
+
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<h2 id="strings-multibyte">Strings multibyte</h2>
+
+<p>Como foi exposto logo na introdução do post, uma <em>string multibyte</em> é um texto que possui caracteres que demandam mais de um <em>byte</em> para serem representados. Caracteres com acento são um ótimo exemplo desse cenário. É necessário mais de um <em>byte</em> para representá-los, já que em um único <em>byte</em> nós conseguimos representar apenas 256 caracteres, que são, não coincidentemente, os caracteres da tabela <em>ASCII</em>.</p>
+
+<p>As funções padrão de <em>strings</em> do PHP lidam assumindo que cada caractere da <em>string</em> possui um <em>byte</em>, por isso a contagem de caracteres é inválida com <code>strlen</code> e por isso que <strong>funções como <code>strtoupper</code> ou <code>strtolower</code> não conseguem modificar os caracteres acentuados</strong>.</p>
+
+<h2 id="extens%C3%A3o-mbstring">Extensão mbstring</h2>
+
+<p>Como nós cotidianamente trabalhamos com <em>strings</em> que contenham caracteres fora da tabela <em>ASCII</em>, obviamente o PHP não nos deixaria desamparados nessa situação. Para realizar operações em <em>strings multibyte</em> nós podemos usar a extensão <code>mbstring</code>. Nós já falamos sobre <a href="/2022-02-13-extensoes-php/">extensões PHP</a> aqui no blog, então vou partir do princípio que você já possui familiaridade com o assunto.</p>
+
+<p>A extensão <code>mbstring</code> nos fornece diversas funções que possibilitam a manipulação de <em>strings multibyte</em>, indo de operações simples como contar o número de caracteres de uma string até operações mais complexas como <strong>converter o encoding de uma string</strong>.</p>
+
+<p>A maioria das funções "padrão" de <em>strings</em> do PHP possui uma contraparte na <code>mbstring</code>, sendo apenas prefixada com <code>mb_</code>. O exemplo de código anteriormente exposto que nos gerava o resultado inesperado poderia ser escrito da seguinte forma:</p>
+
+<pre><code class="php">&lt;?php
+
+echo mb_strlen('Olá'); // Exibe 3
+echo mb_strtoupper('olá'); // Exibe "OLÁ"
+</code></pre>
+
+<p>Além disso, se eu possuo uma <em>string</em> que está no <em>encoding</em> <code>ISO-8859-1</code> ou <code>WINDOWS-1252</code>, eu posso converter facilmente para UTF-8 com o seguinte código:</p>
+
+<pre><code class="php"><br />echo mb_convert_encoding('string em ISO-8859-1', 'UTF-8', 'ISO-8859-1');
+</code></pre>
+
+<h2 id="%60utf8_encode%60-e-%60utf8_decode%60"><code>utf8_encode</code> e <code>utf8_decode</code></h2>
+
+<p>Quem me acompanha já sabe que as funções <code>utf8_encode</code> e <code>utf8_decode</code> serão marcadas como <strong>obsoletas</strong> no PHP 8.2. Quem ainda não sabia disso pode conferir o vídeo a seguir:</p>
+
+<p><lite-youtube videoid="B2IWlnJ_dt0" style="background-image: url('https://i.ytimg.com/vi/al47Lz_SWLc/hqdefault.jpg');">
+    <a href="https://youtube.com/watch?v=al47Lz_SWLc" class="lty-playbtn" title="Reproduzir vídeo">
+        <span class="lyt-visually-hidden">Novidades do PHP 8.2: Descontinuação de utf8_encode e utf8_decode | Dias de Dev</span>
+    </a>
+</lite-youtube></p>
+
+<p>Como foi explicado no vídeo, essas funções serão descontinuadas já que são confusas e o uso de <code>mbstring</code> é uma opção válida para chegar ao mesmo resultado. A seguir você pode conferir como seria realizada a conversão das <em>strings</em> sem as famosas funções de <code>utf8_</code>:</p>
+
+<pre><code class="php">&lt;?php
+
+// Equivalente a utf8_encode('string em ISO-8859-1');
+echo mb_convert_encoding('string em ISO-8859-1', 'UTF-8', 'ISO-8859-1');
+
+// Equivalente a utf8_decode('string em UTF-8');
+echo mb_convert_encoding('string em UTF-8', 'ISO-8859-1', 'UTF-8');
+</code></pre>
+
+<h2 id="conclus%C3%A3o">Conclusão</h2>
+
+<p>Tendo entendido o conceito de <em>strings multibyte</em>, fica bastante claro tanto o papel da extensão <code>mbstring</code> quanto vários problemas que nós já enfrentamos ao manipular caracteres acentuados, por exemplo.</p>
+
+<p>Se você quiser aprender mais sobre manipulações de strings, encodings, charsets, PHP e mais assuntos relacionados a tecnologia, aqui está um cupom de desconto para assinar a Alura, plataforma de cursos online onde eu sou o instrutor da maioria dos cursos de PHP: <a href="https://alura.com.br/promocao/diasdedev">https://alura.com.br/promocao/diasdedev</a></p>
+]]></content>
+        </entry>
             <entry>
             <title type="html"><![CDATA[Entenda o erro &quot;Cannot modify header information - headers already sent&quot; no PHP]]></title>
             <link href="https://dias.dev/2023-03-07-entenda-o-erro-cannot-modify-header-information-php/"/>
@@ -27,7 +110,8 @@
 
 <p><lite-youtube videoid="B2IWlnJ_dt0" style="background-image: url('https://i.ytimg.com/vi/B2IWlnJ_dt0/hqdefault.jpg');">
   <a href="https://youtube.com/watch?v=B2IWlnJ_dt0" class="lty-playbtn" title="Reproduzir vídeo">
-    <span class="lyt-visually-hidden">Play Video: Keynote (Google I/O '18)</span>
+    <span class="lyt-visually-hidden">Play Video: Como funciona a Web? - A internet por baixo dos panos | Dias de Dev
+</span>
   </a>
 </lite-youtube></p>
 
@@ -1246,247 +1330,6 @@ data-ad-slot="2366637560"></ins></p>
 <p>Além disso, com o advento do <a href="https://www.youtube.com/watch?v=WLx0z9kloro">JIT</a> que chegará no PHP 8, o uso do PHP fora da web se tornará ainda mais efetivo. Diversas otimizações de baixo nível que eu nem mesmo sei explicar vão acontecer, tornando possíveis aplicações que requerem ainda mais processamento como IoT, Machine Learning e vários outros nomes bonitos que não me arriscarei a citar.</p>
 
 <p>Se você ainda acha que PHP está preso na Web, acredito que não há momento melhor para abrir os olhos e conhecer este novo mundo!</p>
-]]></content>
-        </entry>
-            <entry>
-            <title type="html"><![CDATA[PHP assíncrono de forma nativa]]></title>
-            <link href="https://dias.dev/2020-09-16-php-assincrono-de-forma-nativa/"/>
-            <updated>2020-09-16T00:00:00+00:00</updated>
-            <id>https://dias.dev/2020-09-16-php-assincrono-de-forma-nativa/</id>
-            <content type="html"><![CDATA[<p>Realizar acesso a streams é uma tarefa relativamente comum para devs PHP. Seja lendo e escrevendo em arquivos, fazendo requisições HTTP, etc.</p>
-
-<p>Operações de I/O são custosas e levam algum tempo para executar. Quando temos diversas operações desse tipo, uma técnica que pode ajudar (e muito) na performance da aplicação é realizá-las de forma assíncrona.</p>
-
-<h2 id="acesso-a-streams">Acesso a streams</h2>
-
-<p>Antes de falar sobre técnicas e funções que permitem a programação assíncrona, é importante saber como normalmente nós trabalhamos com I/O.</p>
-
-<p>Acesso a arquivos, requisições HTTP, sockets e muito mais pode ser feito através de <a href="https://php.net/streams">streams</a>. Um stream é basicamente um fluxo de dados, sendo que a origem desse fluxo pode variar (vide o início desse parágrafo). Quando utilizamos funções como <code>file_get_contents</code>, <code>fopen</code>, <code>fgets</code>, e as demais, estamos trabalhando com streams do PHP.</p>
-
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
-<h2 id="programa%C3%A7%C3%A3o-ass%C3%ADncrona">Programação assíncrona</h2>
-
-<p>Se você não está familiarizado com o termo "programação assíncrona", recomendo assistir este vídeo antes de continuar o artigo:</p>
-
-<p><a href="https://youtu.be/zLfXPSeCkB8">Programação Assíncrona vs Programação Paralela</a></p>
-
-<p>Entendido o que é programação assíncrona, como podemos fazer acesso a streams de forma assíncrona utilizando PHP sem nenhuma extensão ou biblioteca externa? Será possível?</p>
-
-<h2 id="eventos">Eventos</h2>
-
-<p>Programação orientada a eventos não é novidade e nós utilizamos muito na web. Para agir quando um botão for clicado, ou quando um texto for digitado em um <code>input</code> nós utilizamos eventos no JavaScript. Eventos podem acontecer a qualquer momento então sua natureza é assíncrona. Mas será possível fazer algo parecido do lado do PHP?</p>
-
-<p>Antes de falar do PHP em si, acho válido citar que o sistema operacional já trabalha com chamadas assíncronas. Diversos eventos acontecem durante a execução do seu sistema, e há código reagindo a estes eventos o tempo todo. Utilizando PHP nós podemos acessar algumas dessas funcionalidades do sistema operacional</p>
-
-<h3 id="fun%C3%A7%C3%A3o-stream_select">Função stream_select</h3>
-
-<p>Uma função não muito comum para nós que trabalhamos com PHP é a <a href="https://php.net/stream_select">stream_select</a>. Essa função nos permite "observar" modificações que possam acontecer em streams. O probelma é que ela não é nada fácil de se entender, então vou tentar tornar este processo menos doloroso para você.</p>
-
-<h2 id="cen%C3%A1rio">Cenário</h2>
-
-<p>Imagine que para executar uma tarefa nós precisemos ler 5 arquivos distintos e depois realizar algum processamento. Normalmente utilizando PHP nós poderíamos fazer algo como:</p>
-
-<pre><code class="php">&lt;?php
-
-$conteudoDoArquivo1 = file_get_contents('arquivo1.txt');
-$conteudoDoArquivo2 = file_get_contents('arquivo2.txt');
-$conteudoDoArquivo3 = file_get_contents('arquivo3.txt');
-$conteudoDoArquivo4 = file_get_contents('arquivo4.txt');
-$conteudoDoArquivo5 = file_get_contents('arquivo5.txt');
-
-// Processar os 5 arquivos
-</code></pre>
-
-<p>O problema nessa abordagem é óbvio: Antes de ler o <code>arquivo2.txt</code> precisamos terminar de ler todo o conteúdo de <code>arquivo1.txt</code>. Enquanto o computador espera, nós já poderíamos estar sendo os demais arquivos e os processando de forma individual.</p>
-
-<p>Quando temos uma operação de I/O (acesso a arquivos, rede, etc) sendo realizada de forma síncrona, o processador fica ocioso enquanto a operação não é executada. Ou seja, enquanto o arquivo estiver sendo carregado, o processador fica esperando, sem fazer nada. É exatamente isso que queremos evitar. Queremos garantir que ele continue trabalhando enquanto o arquivo não estiver pronto para leitura.</p>
-
-<h2 id="solu%C3%A7%C3%A3o-com-assincronicidade">Solução com assincronicidade</h2>
-
-<p>Para resolver essa situação, podemos utilizar a função <code>stream_select</code> que observa alterações no status de uma lista de streams, ou seja, quando algum dos arquivos estiver pronto para leitura, essa função nos avisará. E é interessante citar que a leitura não necessariamente vai acontecer em ordem. O sistema operacional pode abrir o <code>arquivo3.txt</code> mais rápido do que o <code>arquivo1.txt</code>, por exemplo. Neste cenário, vamos processá-lo logo, sem ficar esperando os arquivos anteriores.</p>
-
-<pre><code class="php">&lt;?php
-
-$listaDeStreamsDeArquivos = [
-    fopen('arquivo1.txt', 'r'),
-    fopen('arquivo2.txt', 'r'),
-    fopen('arquivo3.txt', 'r'),
-    fopen('arquivo4.txt', 'r'),
-    fopen('arquivo5.txt', 'r'),
-];
-
-foreach ($listaDeStreamsDeArquivos as $streamDeArquivo) {
-    stream_set_blocking($streamDeArquivo, false);
-}
-
-do {
-    $streamsParaLer = $listaDeStreamsDeArquivos;
-    $streamsComNovidades = stream_select($streamsParaLer, $write, $except, 1, 0);
-
-    if ($streamsComNovidades === false) {
-        echo 'Erro inesperado';
-        exit(1);
-    }
-
-    if ($streamsComNovidades === 0) {
-        continue;
-    }
-
-    foreach ($streamsParaLer as $indice =&gt; $streamDeArquivo) {
-        $conteudo = stream_get_contents($streamDeArquivo);
-        // processa o conteúdo do arquivo
-        if (feof($streamDeArquivo)) {
-            fclose($streamDeArquivo);
-            unset($listaDeStreamsDeArquivos[$indice]);
-        }
-    }
-} while ($listaDeStreamsDeArquivos !== []);
-</code></pre>
-
-<h3 id="explica%C3%A7%C3%A3o">Explicação</h3>
-
-<h4 id="prepara%C3%A7%C3%A3o">Preparação</h4>
-
-<p>Como eu disse, não é muito fácil, então vamos por partes. Primeiro abrimos todos os arquivos que queremos ler com o <code>fopen</code>. Até aí sem segredo. Depois, informamos com a função <code>stream_set_blocking</code> que o recurso deve ser aberto em modo não-bloqueante - assim, o processo que acessa o arquivo não bloqueará a CPU por causar um estado de espera ao tentar acessar os arquivos.</p>
-
-<p>Nesse ponto, temos um array com 5 recursos abertos para podermos trabalhar com estes streams. Então analisando o este pedaço de código:</p>
-
-<pre><code class="php">$listaDeStreamsDeArquivos = [
-    fopen('arquivo1.txt', 'r'),
-    fopen('arquivo2.txt', 'r'),
-    fopen('arquivo3.txt', 'r'),
-    fopen('arquivo4.txt', 'r'),
-    fopen('arquivo5.txt', 'r'),
-];
-
-var_dump($listaDeStreamsDeArquivos);
-</code></pre>
-
-<p>Teríamos a seguinte saída:</p>
-
-<pre><code class="php">array(5) {
-  [0]=&gt;
-  resource(5) of type (stream)
-  [1]=&gt;
-  resource(6) of type (stream)
-  [2]=&gt;
-  resource(7) of type (stream)
-  [3]=&gt;
-  resource(8) of type (stream)
-  [4]=&gt;
-  resource(9) of type (stream)
-}
-</code></pre>
-
-<p>Depois disso que começa a parte difícil. A chamada para a função <code>stream_select</code> deve estar em um loop, porque pode acontecer de nem todos os streams estarem prontos para leitura logo de cara.</p>
-
-<h4 id="par%C3%A2metros">Parâmetros</h4>
-
-<p>Segundo detalhe importante: os parâmetros. O 3 primeiros parâmetros dessa função são passados por referência. Por isso o segundo e terceiro são variáveis que nós nem tínhamos definido ainda. O primeiro parâmetro é a lista de streams que queremos observar para ler. O segundo é para escrita. Já o terceiro, menos comum, é para dados excepcionais que possuem maior prioridade. Os 2 últimos parâmetros são sobre timeout.</p>
-
-<p>O parâmetro passado como 1 indica o número de segundos que essa função deve esperar receber uma notificação de novidade nos streams até "desistir", ou seja, o timeout. Esse é o motivo pelo qual ela deve estar em um loop. Se esse tempo passar e nós não tivermos novidade, devemos tentar de novo depois. Caso algum (não necessariamente todos) stream esteja pronto antes desse 1 segundo, a função retornará. O último parâmetro, que informamos como 0, indica o tempo em microsegundos para timeout.</p>
-
-<h4 id="retorno-e-leitura">Retorno e leitura</h4>
-
-<p>Agora vamos falar do retorno. Essa função retorna o número de streams que contém modificações. No nosso caso, vai informar quantos arquivos estão prontos para leitura. Porém em caso de erro essa função nos retorna o valor <code>false</code>.</p>
-
-<p>Além disso, os parâmetros que nós passamos podem ter sido modificados. Por isso eu realizo uma cópia da lista original de streams em <code>$arquivosParaLer = $listaDeArquivos;</code>. Após o retorno da função, o parâmetro passado vai conter apenas os streams que possuem novidades, ou seja, no nosso caso, os arquivos que estão prontos para leitura.</p>
-
-<p>Para exemplificar, vamos supor que na primeira execução do loop todos os arquivos já estejam disponíveis. Nesse caso, analisando os valores das variáveis, podemos entender o que está acontecendo. Analisando então o valor de <code>$streamsComNovidades</code>, teríamos <code>int(5)</code> como resultado deste cenário.</p>
-
-<p>Já analisando ambos arrays de streams (<code>$listaDeStreamsDeArquivos</code> e <code>$streamsParaLer</code>), teríamos exatamente o mesmo resultado:</p>
-
-<pre><code class="php">array(5) {
-  [0]=&gt;
-  resource(5) of type (stream)
-  [1]=&gt;
-  resource(6) of type (stream)
-  [2]=&gt;
-  resource(7) of type (stream)
-  [3]=&gt;
-  resource(8) of type (stream)
-  [4]=&gt;
-  resource(9) of type (stream)
-}
-array(5) {
-  [0]=&gt;
-  resource(5) of type (stream)
-  [1]=&gt;
-  resource(6) of type (stream)
-  [2]=&gt;
-  resource(7) of type (stream)
-  [3]=&gt;
-  resource(8) of type (stream)
-  [4]=&gt;
-  resource(9) of type (stream)
-}
-</code></pre>
-
-<p>Agora caso na primeira execução tivéssemos apenas 3 dos 5 arquivos prontos, e analisássemos os 3 valores anteriores, teríamos ter algo como:</p>
-
-<pre><code class="php">var_dump($streamsComNovidades, $listaDeStreamsDeArquivos, $streamsParaLer);
-</code></pre>
-
-<pre><code class="php">int(3)
-array(5) {
-  [0]=&gt;
-  resource(5) of type (stream)
-  [1]=&gt;
-  resource(6) of type (stream)
-  [2]=&gt;
-  resource(7) of type (stream)
-  [3]=&gt;
-  resource(8) of type (stream)
-  [4]=&gt;
-  resource(9) of type (stream)
-}
-array(3) {
-  [0]=&gt;
-  resource(5) of type (stream)
-  [2]=&gt;
-  resource(7) of type (stream)
-  [4]=&gt;
-  resource(9) of type (stream)
-}
-</code></pre>
-
-<p>Onde, nesse caso, o segundo array exibido é o de <code>$streamsParaLer</code>, e possui apenas os 3 arquivos prontos para leitura.</p>
-
-<p>Sendo assim, posso percorrer este array tendo a certeza de que há dados para ler e processar. Mas não há garantia de que todo o conteúdo do arquivo estará lá, por isso verifico se cheguei ao fim do arquivo com <code>feof</code>. Para arquivos pequenos, via de regra, todo o conteúdo virá de uma vez só, mas não conte com isso e prepare seu código para ler até mesmo um único byte por vez.</p>
-
-<p>Após ler todo o arquivo, devemos fechá-lo. Mas um outro detalhe importante é que eu também o removo da lista original de streams que queremos ler. Faço isso para que caso seja necessária uma nova iteração no loop, ou seja, caso nem todos os arquivos tenham sido lidos, eu não tente ler novamente os arquivos que já foram lidos e fechados.</p>
-
-<p>Com isso temos nossa condição de saída do loop. Quando todos os arquivos tiverem sido removidos e minha lista estiver vazia, sei que processei todos os arquivos.</p>
-
-<p>PS.: A função <code>stream_set_blocking</code> só surte efeito com arquivos e sockets. Os outros wrappers, com esta técnica, não podem ser lidos de forma assíncrona e não bloqueante.</p>
-
-<h2 id="conceitos">Conceitos</h2>
-
-<p>Esse código obviamente pode ser refatorado para torná-lo um pouco mais legível, mas acredito que a lógica por trás dele tenha ficado clara. Caso contrário, você pode usar a sessão de comentários dessa página para fazer perguntas.</p>
-
-<p>O que nós escrevemos de forma rudimentar aqui pode ser visto como uma implementação do que é conhecido como <em>Event Loop</em>, ou loop de eventos. Você provavelmente já ouviu esse termo se estuda sobre a runtime Node.js.</p>
-
-<p>Claro que essa implementação não é completa ou otimizada, mas atende nosso propósito: ler arquivos conforme eles fiquem prontos para leitura. Dessa forma nós vamos pedir para que o sistema operacional prepare todos os arquivos para leitura de uma só vez.</p>
-
-<p>As vantagens nessa abordagem assíncrona são mais perceptíveis quando temos operações mais lentas como chamadas HTTP, por exemplo. Mas isso aumentaria a complexidade do código para este artigo.</p>
-
-<h2 id="conclus%C3%A3o">Conclusão</h2>
-
-<p>Claro que o PHP já possui ferramentas que realizam este trabalho de forma muito mais simples. ReactPHP com seu pacote de Streams é um ótimo exemplo.</p>
-
-<p>Mas seguindo o que citei no post sobre aprendizado, eu penso como <a href="https://pt.wikipedia.org/wiki/Richard_Feynman">Richard Feynman</a> (Nobel de física): "O que eu não consigo criar, eu não entendo". Então antes de utilizar uma ferramenta que realiza o trabalho para mim, eu gosto de saber como realizar este trabalho sem ela. Com isso, se algum problema acontecer com a biblioteca, por exemplo, eu vou estar mais preparado para resolvê-lo já que eu entendo um pouco melhor como as coisas funcionam.</p>
-
-<p>Se você quiser aprender mais sobre algum desses assuntos, pode considerar assinar a Alura. Lá existem treinamentos (gravados por mim) sobre PHP Streams, ReactPHP e muito mais. Caso pretenda estudar na Alura, <a href="https://www.alura.com.br/promocao/diasdedev">neste link</a> você tem um desconto de 10%.</p>
 ]]></content>
         </entry>
     </feed>

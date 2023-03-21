@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <title>Strings multibyte: o que são e por que você precisa da extensão mbstring do PHP | Dias de Dev</title>
+        <meta charset="utf-8">
+        <meta name="theme-color" content="#ffffff">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <meta name="robots" content="index, follow">
+    <meta name="title" content="Strings multibyte: o que são e por que você precisa da extensão mbstring do PHP | Dias de Dev">
+    <meta name="keywords" content="PHP, mbstring, strings multibyte, caracteres acentuados">
+    <meta name="description" content="Entenda o que são strings multibyte em PHP e como a extensão mbstring pode te ajudr a lidar com caracteres acentuados em suas operações de strings.">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:article:published_time" content="1679356800">
+    <meta property="og:url" content="https://dias.dev/2023-03-21-strings-multibyte-php-mbstring/">
+    <meta property="og:title" content="Strings multibyte: o que são e por que você precisa da extensão mbstring do PHP | Dias de Dev">
+    <meta property="og:description" content="Entenda o que são strings multibyte em PHP e como a extensão mbstring pode te ajudr a lidar com caracteres acentuados em suas operações de strings.">
+    <meta property="og:image" content="https://dias.dev/assets/img/thumbs/2023-03-21-strings-multibyte-php-mbstring.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary">
+    <meta property="twitter:url" content="https://dias.dev/2023-03-21-strings-multibyte-php-mbstring/">
+    <meta property="twitter:title" content="Strings multibyte: o que são e por que você precisa da extensão mbstring do PHP | Dias de Dev">
+    <meta property="twitter:description" content="Entenda o que são strings multibyte em PHP e como a extensão mbstring pode te ajudr a lidar com caracteres acentuados em suas operações de strings.">
+            <link rel="preload" href="/build/Baloo2-Bold.ttf" as="font" type="font/ttf" crossorigin>
+        <link rel="preload" href="/build/Baloo2-ExtraBold.ttf" as="font" type="font/ttf" crossorigin>
+        <link rel="preload" href="/build/Baloo2-Medium.ttf" as="font" type="font/ttf" crossorigin>
+        <link rel="preload" href="/build/Baloo2-Regular.ttf" as="font" type="font/ttf" crossorigin>
+        <link rel="preload" href="/build/Baloo2-SemiBold.ttf" as="font" type="font/ttf" crossorigin>
+        <link rel="preload" href="/build/FugazOne-Regular.ttf" as="font" type="font/ttf" crossorigin>
+        <link rel="stylesheet" href="/build/app.css">
+
+        
+        <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Dias de Dev activity feed" />
+                    <link rel="stylesheet" href="/build/post.css">
+            <link rel="stylesheet" href="/build/lite-yt-embed-style.css">
+                        </head>
+    <body>
+        <div class="global-container">
+            <header>
+                <div class="header-title">
+                    <h1 class="main-heading">
+                        <a aria-current="page" href="/">Dias de Dev</a>
+                    </h1>
+                </div>
+                <nav class="menu">
+                    <a aria-current="page" href="/">Home</a>
+                    <a href="/categorias">Categorias</a>
+                                        <a href="/sobre-mim/">Sobre Mim</a>
+                    <a href="https://youtube.com/DiasDeDev?sub_confirmation=1" target="_blank">
+                        YouTube
+                    </a>
+                </nav>
+            </header>
+            <main role="main">
+                    <article itemscope itemtype="https://schema.org/Article">
+        <header>
+            <h1 itemprop="headline" class="post-title">
+                Strings multibyte: o que são e por que você precisa da extensão mbstring do PHP
+            </h1>
+            <p class="post-date" itemprop="dateCreated">
+                21 de março de 2023
+            </p>
+        </header>
+        <div itemprop="articleBody">
+            <p><em>Strings multibyte</em> são textos que possuem alguns caracteres que demandam mais de um <em>byte</em> para serem representados. Há um post aqui no blog onde nós falamos sobre <a href="(/2021-08-24-charsets-e-encodings-como-strings-funcionam/)">Charsets e Encodings: Como strings funcionam</a>. Agora nós vamos entender como lidar com <em>strings multibyte</em> em PHP usando a <a href="/2022-02-13-extensoes-php/">extensão</a> <code>mbstring</code>.</p>
+
+<h2 id="opera%C3%A7%C3%B5es-em-strings">Operações em strings</h2>
+
+<p>Quando trabalhamos com textos, é bastante comum precisarmos realizar algumas operações. Transformar todas as letras em maiúsculas ou minúsculas, por exemplo, é uma operação corriqueira. Até operações mais simples como contar o número de caracteres podem nos trazer algumas dores de cabeça se estivermos trabalhando com <em>strings multibyte</em>.</p>
+
+<p>Um exemplo bastante simples:</p>
+
+<pre><code class="php">&lt;?php
+
+echo strlen('Olá'); // Exibe 4
+echo strtoupper('olá'); // Exibe "OLá"
+</code></pre>
+
+<p><ins class="adsbygoogle"
+style="display:block; text-align:center;"
+data-ad-layout="in-article"
+data-ad-format="fluid"
+data-ad-client="ca-pub-8918461095244552"
+data-ad-slot="2366637560"></ins></p>
+
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<h2 id="strings-multibyte">Strings multibyte</h2>
+
+<p>Como foi exposto logo na introdução do post, uma <em>string multibyte</em> é um texto que possui caracteres que demandam mais de um <em>byte</em> para serem representados. Caracteres com acento são um ótimo exemplo desse cenário. É necessário mais de um <em>byte</em> para representá-los, já que em um único <em>byte</em> nós conseguimos representar apenas 256 caracteres, que são, não coincidentemente, os caracteres da tabela <em>ASCII</em>.</p>
+
+<p>As funções padrão de <em>strings</em> do PHP lidam assumindo que cada caractere da <em>string</em> possui um <em>byte</em>, por isso a contagem de caracteres é inválida com <code>strlen</code> e por isso que <strong>funções como <code>strtoupper</code> ou <code>strtolower</code> não conseguem modificar os caracteres acentuados</strong>.</p>
+
+<h2 id="extens%C3%A3o-mbstring">Extensão mbstring</h2>
+
+<p>Como nós cotidianamente trabalhamos com <em>strings</em> que contenham caracteres fora da tabela <em>ASCII</em>, obviamente o PHP não nos deixaria desamparados nessa situação. Para realizar operações em <em>strings multibyte</em> nós podemos usar a extensão <code>mbstring</code>. Nós já falamos sobre <a href="/2022-02-13-extensoes-php/">extensões PHP</a> aqui no blog, então vou partir do princípio que você já possui familiaridade com o assunto.</p>
+
+<p>A extensão <code>mbstring</code> nos fornece diversas funções que possibilitam a manipulação de <em>strings multibyte</em>, indo de operações simples como contar o número de caracteres de uma string até operações mais complexas como <strong>converter o encoding de uma string</strong>.</p>
+
+<p>A maioria das funções "padrão" de <em>strings</em> do PHP possui uma contraparte na <code>mbstring</code>, sendo apenas prefixada com <code>mb_</code>. O exemplo de código anteriormente exposto que nos gerava o resultado inesperado poderia ser escrito da seguinte forma:</p>
+
+<pre><code class="php">&lt;?php
+
+echo mb_strlen('Olá'); // Exibe 3
+echo mb_strtoupper('olá'); // Exibe "OLÁ"
+</code></pre>
+
+<p>Além disso, se eu possuo uma <em>string</em> que está no <em>encoding</em> <code>ISO-8859-1</code> ou <code>WINDOWS-1252</code>, eu posso converter facilmente para UTF-8 com o seguinte código:</p>
+
+<pre><code class="php"><br />echo mb_convert_encoding('string em ISO-8859-1', 'UTF-8', 'ISO-8859-1');
+</code></pre>
+
+<h2 id="%60utf8_encode%60-e-%60utf8_decode%60"><code>utf8_encode</code> e <code>utf8_decode</code></h2>
+
+<p>Quem me acompanha já sabe que as funções <code>utf8_encode</code> e <code>utf8_decode</code> serão marcadas como <strong>obsoletas</strong> no PHP 8.2. Quem ainda não sabia disso pode conferir o vídeo a seguir:</p>
+
+<p><lite-youtube videoid="B2IWlnJ_dt0" style="background-image: url('https://i.ytimg.com/vi/al47Lz_SWLc/hqdefault.jpg');">
+    <a href="https://youtube.com/watch?v=al47Lz_SWLc" class="lty-playbtn" title="Reproduzir vídeo">
+        <span class="lyt-visually-hidden">Novidades do PHP 8.2: Descontinuação de utf8_encode e utf8_decode | Dias de Dev</span>
+    </a>
+</lite-youtube></p>
+
+<p>Como foi explicado no vídeo, essas funções serão descontinuadas já que são confusas e o uso de <code>mbstring</code> é uma opção válida para chegar ao mesmo resultado. A seguir você pode conferir como seria realizada a conversão das <em>strings</em> sem as famosas funções de <code>utf8_</code>:</p>
+
+<pre><code class="php">&lt;?php
+
+// Equivalente a utf8_encode('string em ISO-8859-1');
+echo mb_convert_encoding('string em ISO-8859-1', 'UTF-8', 'ISO-8859-1');
+
+// Equivalente a utf8_decode('string em UTF-8');
+echo mb_convert_encoding('string em UTF-8', 'ISO-8859-1', 'UTF-8');
+</code></pre>
+
+<h2 id="conclus%C3%A3o">Conclusão</h2>
+
+<p>Tendo entendido o conceito de <em>strings multibyte</em>, fica bastante claro tanto o papel da extensão <code>mbstring</code> quanto vários problemas que nós já enfrentamos ao manipular caracteres acentuados, por exemplo.</p>
+
+<p>Se você quiser aprender mais sobre manipulações de strings, encodings, charsets, PHP e mais assuntos relacionados a tecnologia, aqui está um cupom de desconto para assinar a Alura, plataforma de cursos online onde eu sou o instrutor da maioria dos cursos de PHP: <a href="https://alura.com.br/promocao/diasdedev">https://alura.com.br/promocao/diasdedev</a></p>
+
+        </div>
+        <footer class="post-footer" itemprop="author" itemscope itemtype="https://schema.org/Person">
+            <img src="https://gravatar.com/avatar/63579c5a873f3ab6abff10803e9a252f.jpg?s=50"
+                 alt="Foto do Vinicius Dias com o microfone na mão durante uma palestra"
+                 width="50"
+                 height="50"
+                 itemprop="image" />
+            <p>
+                Escrito por
+                <a href="https://twitter.com/cviniciussdias" itemprop="url">
+                    <span itemprop="name">Vinicius Dias</span>
+                </a>
+            </p>
+        </footer>
+
+                    <nav class="article-navigation">
+                <ul>
+                    <li>
+                                                <a class="previous" href="/2023-03-07-entenda-o-erro-cannot-modify-header-information-php/" title="Entenda o erro &quot;Cannot modify header information - headers already sent&quot; no PHP">
+                            ← <span class="title">Entenda o erro &quot;Cannot modify header information - headers already sent&quot; no PHP</span>
+                        </a>
+                                            </li>
+                    <li>
+                                            </li>
+                </ul>
+            </nav>
+            </article>
+
+
+
+            </main>
+            <footer class="global-footer">&copy; 2023 Dias de Dev</footer>
+        </div>
+
+        <script src="/build/app.js"></script>
+                
+        <!-- Google Tag Manager -->
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','GTM-5ZJJ977');</script>
+        <!-- End Google Tag Manager -->
+        <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5ZJJ977"
+                          height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <!-- End Google Tag Manager (noscript) -->
+                    <script src="/build/lite-yt-embed-script.js" async></script>
+        </body>
+</html>
