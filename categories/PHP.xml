@@ -3,7 +3,7 @@
     <title><![CDATA[Dias de Dev]]></title>
     <link href="https://dias.dev/categories/PHP.xml" rel="self"/>
     <link href="https://dias.dev"/>
-    <updated>2023-03-21T01:34:00+00:00</updated>
+    <updated>2023-03-23T20:47:46+00:00</updated>
     <id>https://dias.dev/</id>
         <generator uri="http://sculpin.io/">Sculpin</generator>
             <entry>
@@ -11,7 +11,7 @@
             <link href="https://dias.dev/2023-03-21-strings-multibyte-php-mbstring/"/>
             <updated>2023-03-21T00:00:00+00:00</updated>
             <id>https://dias.dev/2023-03-21-strings-multibyte-php-mbstring/</id>
-            <content type="html"><![CDATA[<p><em>Strings multibyte</em> são textos que possuem alguns caracteres que demandam mais de um <em>byte</em> para serem representados. Há um post aqui no blog onde nós falamos sobre <a href="(/2021-08-24-charsets-e-encodings-como-strings-funcionam/)">Charsets e Encodings: Como strings funcionam</a>. Agora nós vamos entender como lidar com <em>strings multibyte</em> em PHP usando a <a href="/2022-02-13-extensoes-php/">extensão</a> <code>mbstring</code>.</p>
+            <content type="html"><![CDATA[<p><em>Strings multibyte</em> são textos que possuem alguns caracteres que demandam mais de um <em>byte</em> para serem representados. Há um post aqui no blog onde nós falamos sobre <a href="/2021-08-24-charsets-e-encodings-como-strings-funcionam/">Charsets e Encodings: Como strings funcionam</a>. Agora nós vamos entender como lidar com <em>strings multibyte</em> em PHP usando a <a href="/2022-02-13-extensoes-php/">extensão</a> <code>mbstring</code>.</p>
 
 <h2 id="opera%C3%A7%C3%B5es-em-strings">Operações em strings</h2>
 
