@@ -3,7 +3,7 @@
     <title><![CDATA[Dias de Dev]]></title>
     <link href="https://dias.dev/categories/Conceitos.xml" rel="self"/>
     <link href="https://dias.dev"/>
-    <updated>2023-07-18T23:48:09+00:00</updated>
+    <updated>2023-07-18T23:57:46+00:00</updated>
     <id>https://dias.dev/</id>
         <generator uri="http://sculpin.io/">Sculpin</generator>
             <entry>
@@ -1386,7 +1386,7 @@ echo "{$pessoa-&gt;nomeCompleto()} tem {$pessoa-&gt;idade()} anos.";
 ]]></content>
         </entry>
             <entry>
-            <title type="html"><![CDATA[O que é arquitetura]]></title>
+            <title type="html"><![CDATA[O que é arquitetura de software]]></title>
             <link href="https://dias.dev/2020-04-10-o-que-e-arquitetura/"/>
             <updated>2020-04-10T00:00:00+00:00</updated>
             <id>https://dias.dev/2020-04-10-o-que-e-arquitetura/</id>
