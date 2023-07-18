@@ -3,9 +3,162 @@
     <title><![CDATA[Dias de Dev]]></title>
     <link href="https://dias.dev/atom.xml" rel="self"/>
     <link href="https://dias.dev"/>
-    <updated>2023-07-18T20:41:38+00:00</updated>
+    <updated>2023-07-18T23:27:26+00:00</updated>
     <id>https://dias.dev</id>
         <generator uri="http://sculpin.io/">Sculpin</generator>
+            <entry>
+            <title type="html"><![CDATA[Programação assíncrona, concorrente e paralela]]></title>
+            <link href="https://dias.dev/2023-07-18-programacao-concorrente-assincrona-e-paralela/"/>
+            <updated>2023-07-18T00:00:00+00:00</updated>
+            <id>https://dias.dev/2023-07-18-programacao-concorrente-assincrona-e-paralela/</id>
+            <content type="html"><![CDATA[<p>Existem diversas definições para os termos programação assíncrona e programação concorrente, enquanto programação paralela seja um consenso. Vamos tentar, neste texto, definir de forma mais objetiva e prática o que esses termos significam e quando nós devemos usar cada uma dessas práticas.</p>
+
+<h2 id="programa%C3%A7%C3%A3o-ass%C3%ADncrona">Programação assíncrona</h2>
+
+<p>O termo programação assíncrona pode se referir a mais de uma coisa na computação e permeia o mundo da programação há muito tempo, mas houve um aumento no uso dessas palavras desde a vinda das <em>Promises</em> para o <em>JavaScript</em>.</p>
+
+<h3 id="rede-e-comunica%C3%A7%C3%A3o">Rede e comunicação</h3>
+
+<p>Quando programação assíncrona é citada no assunto sobre comunicação em rede, isso significa que as partes envolvidas na troca de mensagens lidarão com essas mensagens quando for possível e não necessariamente imediatamente.</p>
+
+<p>Essa definição parece bastante vaga e nada clara, não é mesmo? Então vamos tentar usar um exemplo prático, usando uma linguagem bastante comum na <em>Web</em> (embora esse conceito seja válido para qualquer ecossistema). Quando você usa a função <code>fetch</code> do <em>JavaScript</em>, a requisição <em>HTTP</em> será feita, mas a resposta, quando disponível, não vai ser tratada imediatamente. O motor de execução do <em>JavaScript</em> vai executar o código que lida com essa resposta o mais rápido possível, mas não será de forma síncrona ou imediata.</p>
+
+<p>O que isso quer dizer? Ao receber a resposta, o motor de execução do <em>JavaScript</em> vai colocar a função que lida com essa resposta em uma fila e, assim que possível, essa função será executada. Enquanto a resposta não está disponível, ou até mesmo após a resposta chegar, mas antes da função que lida com ela ter sua vez de ser rodada, outros pedaços de código podem ser executados.</p>
+
+<p><ins class="adsbygoogle"
+style="display:block; text-align:center;"
+data-ad-layout="in-article"
+data-ad-format="fluid"
+data-ad-client="ca-pub-8918461095244552"
+data-ad-slot="2366637560"></ins></p>
+
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<p>No exemplo a seguir, usamos <em>Promises</em> para informar qual é a função que será adicionada na fila quando a resposta estiver pronta, e até lá, outras linhas de código vão sendo executadas.</p>
+
+<pre><code class="js">fetch('https://example.com')
+  .then(res =&gt; {
+    // Essa função pode lidar com a resposta
+  });
+
+// Aqui, outros códigos podem ser executados
+// antes mesmo da função que lida com a resposta
+console.log("Outras funções");
+</code></pre>
+
+<p>Essa "fila de funções" e delegação de execução para um momento futuro é possível graças a um padrão chamado <em>Event Loop</em>. O uso de um <em>Event Loop</em> permite que você alcance a programação assíncrona, ou usando um termo menos confuso, <strong>I/O não bloqueante</strong>.</p>
+
+<p>O termo I/O não bloqueante é muito importante porque é o que realmente queremos dizer quando nos referimos a programação assíncrona no contexto de comunicação em rede. Nós estamos realizando alguma operação de I/O (seja comunicação em rede, como no exemplo, ou outras coisas como leitura de arquivos, etc) de forma que o processador não precise ficar esperando pela resposta dessa operação.</p>
+
+<p>Há outro <a href="/2020-09-16-php-assincrono-de-forma-nativa/">texto aqui no blog</a> explicando como I/O não bloqueante pode ser implementado "na unha" com PHP. Ferramentas como <em>ReactPHP</em> ou <em>Swoole</em> trazem implementações de <em>Event Loops</em> para o mundo PHP, mas bibliotecas mais "simples" como cURL já possuem I/O não bloqueante, permitindo a famosa programação assíncrona.</p>
+
+<h3 id="arquitetura-de-sistemas">Arquitetura de sistemas</h3>
+
+<p>Outro tema que pode receber menções do termo programação assíncrona é o de <strong>Arquitetura de sistemas</strong>, ou <em>System Design</em>.</p>
+
+<p>Aqui eu vou partir direto para um exemplo para tentar explicar a ideia. Em uma aplicação <em>Web</em>, podemos ter tarefas demoradas como geração de relatórios, envios de e-mails, etc. Essas tarefas, se feitas durante uma requisição, podem fazer com que o tempo de resposta seja bem alto, prendendo o cliente <em>HTTP</em> por mais tempo do que necessário.</p>
+
+<p>Uma solução para esse caso é salvar as tarefas que você quer executar em uma fila de mensagens, e ter outro processo executando em plano de fundo essas tarefas, de forma que a resposta <em>HTTP</em> possa ser entregue rapidamente ao usuário e as tarefas demoradas serão feitas no futuro, logo, de forma assíncrona.</p>
+
+<p>O motivo de eu fazer essa explicação de forma mais simples e resumida é que eu já gravei um vídeo explicando a ideia de processamento assíncrono e <strong>mensageria</strong>. Você pode conferir a ideia de programação assíncrona nesse contexto no vídeo abaixo.</p>
+
+<p><lite-youtube videoid="Rx80QRZRgHc" style="background-image: url('https://i.ytimg.com/vi/al47Lz_SWLc/hqdefault.jpg');">
+    <a href="https://youtube.com/watch?v=Rx80QRZRgHc" class="lty-playbtn" title="Reproduzir vídeo">
+        <span class="lyt-visually-hidden">
+            Processamento assíncrono com mensageria - Escalando aplicações Web | Dias de Dev
+        </span>
+    </a>
+</lite-youtube></p>
+
+<h2 id="programa%C3%A7%C3%A3o-paralela">Programação paralela</h2>
+
+<p>Agora vamos à explicação do termo onde há um maior consenso: programação paralela.</p>
+
+<p>Como o próprio nome deixa claro, programação paralela é o que permite a execução de mais de um pedaço de código <strong>ao mesmo tempo</strong>, ou seja, de forma paralela. Nos dias atuais, a ênfase precisa ser nas palavras <strong>ao mesmo tempo</strong> pois é possível ter uma função sendo executada em cada núcleo da CPU, por exemplo, ou até mesmo em CPUs diferentes.</p>
+
+<h3 id="multithreading">Multithreading</h3>
+
+<p>Uma das principais formas de atingir a programação paralela é criando <em>Threads</em> (não, não é o clone do Twitter que a Meta criou hahaha). Uma <em>thread</em> é uma linha de execução de um programa, que pode ser executada em um núcleo da sua CPU (seu processador). Sendo assim, se eu crio múltiplas threads, eu posso executar funções ao mesmo tempo em núcleos diferentes do meu processador.</p>
+
+<p>Cada linguagem pode (ou não) fornecer uma forma de você criar <em>threads</em>. Em PHP, por exemplo, você pode usar a <a href="/2022-02-13-extensoes-php/">extensão</a> parallel para atingir esse objetivo. A seguir há um exemplo de como ter uma <em>thread</em> adicional em seu programa para executar tarefas em paralelo:</p>
+
+<pre><code class="php">&lt;?php
+
+use function \parallel\run;
+
+run(function(){
+    echo "Esse código é executado em uma thread separada" . PHP_EOL;
+});
+
+echo "Já esse código é executado na thread principal" . PHP_EOL;
+</code></pre>
+
+<h3 id="multiprocessing">Multiprocessing</h3>
+
+<p>Outra forma muito comum de atingir a programação paralela é a criação de processos ao invés de <em>threads</em>. Um processo é basicamente um programa em execução no seu sistema operacional. Todo processo possui pelo menos uma <em>thread</em>. Ao criar um novo processo, como há pelo menos uma <em>thread</em> criada também, se torna possível a execução paralela novamente, porém há algumas diferenças importantes.</p>
+
+<p>Todo processo no sistema operacional possui um endereço de memória separado. Ao criar <em>threads</em>, esse endereço de memória é compartilhado (já que as <em>threads</em> fazem parte do mesmo processo), logo, compartilhar dados entre threads é uma tarefa fácil. Agora ao criar um novo processo, um novo endereço de memória é separado. Compartilhar memória entre processos é uma tarefa mais trabalhosa.</p>
+
+<p>Para criar um novo processo, há uma função em <code>C</code> chamada <code>fork</code>, que clona o processo atual e continua a execução no processo filho a partir da linha seguinte. Exemplo.:</p>
+
+<pre><code class="c">#include &lt;stdio.h&gt;
+#include &lt;unistd.h&gt;
+
+int main()
+{
+    printf("Até aqui, apenas o processo 'pai' é executado\n");
+    fork();
+
+    printf("Essa linha será executada 2 vezes. Uma pelo processo pai e outra pelo processo filho\n");
+
+    return 0;
+}
+</code></pre>
+
+<h2 id="programa%C3%A7%C3%A3o-concorrente">Programação concorrente</h2>
+
+<p>Agora que entendemos (mesmo que por alto) os conceitos de programação assíncrona e programação paralela, vamos ao termo mais "difícil" de definir: programação concorrente.</p>
+
+<p>O termo programação concorrente possui "problemas" em sua definição porque há vários autores que usam essas palavras para definir coisas bem diferentes. Uma das definições possíveis, inclusive, é que programação concorrente é o conceito explicado no texto de programação assíncrona na comunicação em rede, ou seja, I/O não bloqueante.</p>
+
+<p>Outros autores definem programação concorrente como qualquer técnica de programação que leva à concorrência entre recursos. Por exemplo, se você possui duas funções paralelas que acessam o mesmo arquivo e por isso ambas não podem ser executadas simultaneamente, as técnicas de programação concorrente (como <em>mutex</em>) são o que permitem a execução do programa sem erros.</p>
+
+<p>Há ainda outros autores que usam programação concorrente como sinônimo de programação paralela, já que diferentes <em>threads</em> ou processos estão concorrendo pelo processamento da CPU.</p>
+
+<p>Quem já me acompanha há algum tempo sabe que eu sou uma pessoa prática e pragmática, então para mim é muito simples: sempre que alguém se refere a programação concorrente, se pelo contexto não é óbvio o que ela quer dizer, eu pergunto e peço um exemplo. Dessa forma consigo entender exatamente o que a pessoa quer dizer e posso prosseguir com a conversa.</p>
+
+<h2 id="quando-usar-cada-uma%3F">Quando usar cada uma?</h2>
+
+<p>Então, resumindo, quando o assunto é realmente código, nós temos I/O não bloqueante e programação paralela. Essas duas técnicas permitem, de forma muito diferente, executar código que pode aumentar a performance de nossa aplicação, por exemplo. Então quando devo usar cada uma dessas técnicas?</p>
+
+<p>Acredito que pelo uso do termo I/O não bloqueante, a resposta já tenha ficado clara. Sempre que a operação demorada envolver I/O, sua resposta estará na programação assíncrona. Com isso você consegue executar tarefas enquanto operações como chamadas de rede e leitura de arquivos estão sendo realizadas, mas sem o custo adicional de criar novas <em>threads</em> ou processos.</p>
+
+<p>Já a programação paralela é usada quando você possui tarefas demoradas que demandam computação intensa e muito uso da CPU. Cálculos matemáticos complexos, manipulações de imagem e vídeo são alguns exemplos onde programação paralela se fazem necessárias.</p>
+
+<p>No mundo <em>Web</em> é muito mais comum você precisar de I/O não bloqueante (ou programação assíncrona), por isso o <em>JavaScript</em> possui <em>Promises</em> nativamente e ferramentas como <em>ReactPHP</em> e <em>Swoole</em> existem no ecossistema PHP para trazerem implementações de <em>Event Loops</em>. Já ao realizar o processamento assíncrono usando mensageria, suas tarefas de plano de fundo podem realizar processamentos pesados, onde talvez o uso de programação paralela possa ser vantajoso.</p>
+
+<h2 id="refer%C3%AAncias">Referências</h2>
+
+<p>Durante o texto eu deixei alguns links que podem ajudar a entender alguns conceitos específicos, mas quero deixar aqui mais duas referências muito importantes. A seguir possui um dos primeiros vídeos que gravei para meu canal, explicando justamente a diferença entre os termos e quando nós devemos usar cada uma dessas técnicas:</p>
+
+<p><lite-youtube videoid="zLfXPSeCkB8" style="background-image: url('https://i.ytimg.com/vi/al47Lz_SWLc/hqdefault.jpg');">
+    <a href="https://youtube.com/watch?v=zLfXPSeCkB8" class="lty-playbtn" title="Reproduzir vídeo">
+        <span class="lyt-visually-hidden">
+            Programação assíncrona vs Programação paralela - Entenda a diferença
+        </span>
+    </a>
+</lite-youtube></p>
+
+<p>Já no link a seguir eu deixo um cupom de 10% de desconto para você assinar a Alura, plataforma onde há cursos completos (alguns comigo, inclusive) sobre programação paralela e programação assíncrona (dentre vários outros assuntos de tecnologia):
+https://alura.tv/diasdedev</p>
+
+<h2 id="conclus%C3%A3o">Conclusão</h2>
+
+<p>Programação paralela é o que permite a execução simultânea de mais de uma porção de código, podendo cada uma estar em um núcleo da CPU, por exemplo. Essa técnica é muito útil quando temos tarefas intensas em processamento como cálculos complexos e manipulação de imagens. Já programação assíncrona é extremamente importante ao lidar com entrada e saída (I/O), já que permite que executemos tarefas sem bloquear a CPU esperando por respostas de I/O. Programação concorrente é um termo que pode ser definido de diversas formas, onde cada autor descreve essa ideia de forma diferente, indo desde um sinônimo para programação assíncrona até técnicas de compartilhamento de recursos em programação paralela.</p>
+]]></content>
+        </entry>
             <entry>
             <title type="html"><![CDATA[Strings multibyte: o que são e por que você precisa da extensão mbstring do PHP]]></title>
             <link href="https://dias.dev/2023-03-21-strings-multibyte-php-mbstring/"/>
@@ -883,115 +1036,6 @@ data-ad-slot="2366637560"></ins></p>
 <p>Creio que seja seguro afirmar que a grande maioria dos textos que tratamos como desenvolvedores utiliza UTF-8 como encoding e neste artigo nós entendemos o motivo disso e como o tratamento de textos evoluiu até chegar a esse ponto.</p>
 
 <p>Se você quiser aprender mais sobre esse assunto, pode considerar assinar a Alura. Lá existem treinamentos que tratam sobre charsets, encoding, manipulação de <em>strings</em>    e muito mais. Caso pretenda estudar na Alura, <a href="https://www.alura.com.br/promocao/diasdedev">neste link</a> você tem um desconto de 10%.</p>
-]]></content>
-        </entry>
-            <entry>
-            <title type="html"><![CDATA[Como o PHP funciona na Web?]]></title>
-            <link href="https://dias.dev/2021-06-15-como-o-php-funciona-na-web/"/>
-            <updated>2021-06-15T00:00:00+00:00</updated>
-            <id>https://dias.dev/2021-06-15-como-o-php-funciona-na-web/</id>
-            <content type="html"><![CDATA[<p>O PHP é o que conhecemos como linguagem <em>server-side</em>, ou seja, ele roda nos servidores web, e não nos navegadores.</p>
-
-<p>Isso já é de conhecimento geral, mas nem todos entendem como uma requisição sai do navegador e chega em seu código PHP. É exatamente sobre isso que vamos tratar neste artigo.</p>
-
-<h2 id="como-funciona-a-web%3F">Como funciona a Web?</h2>
-
-<p>Antes de falarmos sobre o papel do PHP na Web, é muito importante entendermos como a Web funciona. O protocolo HTTP é o que torna toda a comunicação entre nosso navegador e servidores, possível, então é de suma importância que a gente estude ele.</p>
-
-<p>Neste vídeo eu expliquei um pouco de como funciona o processo desde quando damos <em>Enter</em> em nosso navegador até termos uma resposta em nossa tela. Vale a pena conferir antes de continuar lendo este artigo:</p>
-
-<p><lite-youtube videoid="B2IWlnJ_dt0" style="background-image: url('https://i.ytimg.com/vi/B2IWlnJ_dt0/hqdefault.jpg');">
-    <a href="https://youtube.com/watch?v=B2IWlnJ_dt0" class="lty-playbtn" title="Reproduzir vídeo">
-        <span class="lyt-visually-hidden">Reproduzir vídeo: Como funciona a Web? - A internet por baixo dos panos | Dias de Dev</span>
-    </a>
-</lite-youtube></p>
-
-<p>Existem várias outras referências (inclusive mais completas) para você conhecer as tecnologias por trás da Web. Vou deixar aqui algumas referências:
-- <a href="https://amzn.to/3lzFVkD">Desconstruindo a Web: As tecnologias por trás de uma requisição</a>
-- <a href="https://amzn.to/35k9rT1">HTTP: The Definitive Guide</a>
-- <a href="https://amzn.to/3gEgz22">Learning Http/2: A Practical Guide for Beginners</a>
-- <a href="https://www.alura.com.br/promocao/diasdedev">Cursos de HTTP na Alura</a></p>
-
-<p>Com esse conhecimento, já podemos partir para o foco deste artigo: como o <strong>PHP</strong> funciona na Web?</p>
-
-<h2 id="cgi-_common-gateway-interface_">CGI (<em>Common Gateway Interface</em>)</h2>
-
-<p>A primeira forma de se executar código em servidores ao receber uma requisição HTTP foi através de uma técnica chamada CGI (<em>Common Gateway Interface</em>).</p>
-
-<p>Esta técnica consistia em basicamente um servidor Web (como Apache, por exemplo) receber uma requisição HTTP e executar um processo enviando os dados da requisição através da entrada padrão. A saída do processo era lida pelo servidor Web e devolvida em uma resposta HTTP.</p>
-
-<p>Assim o PHP nasceu, sendo uma espécie de <em>framework</em> C. O Apache executava um programa escrito em C, onde PHP era um conjunto de ferramentas para facilitar a escrita, principalmente de <em>templates</em> (para não misturar C e HTML).</p>
-
-<p>Esta é a forma mais rudimentar de se executar um código <em>server-side</em> e não é mais recomendada, pois há alternativas mais interessantes que veremos neste artigo.</p>
-
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
-<h2 id="apache-mod_php">Apache mod_php</h2>
-
-<p>Conforme o PHP (e a Web em si) foi evoluindo, a abordagem utilizando CGI foi se mostrando ineficaz, desperdiçando recursos de processamento.</p>
-
-<p>Neste momento surgiu um módulo do PHP para Apache, o famoso <code>mod_php</code>. Esse módulo "anexava" um executável do PHP em cada processo do Apache, ou seja, a cada processo que o Apache criava para servir uma requisição, o executável do PHP era também inicializado, mesmo que a requisição fosse apenas para servir arquivos estáticos e o PHP não fosse necessário.</p>
-
-<p>Isso era muito mais rápido do que utilizar CGI, mas ainda havia muito desperdício de recursos. O apache evoluiu a ponto de não precisar criar um processo a cada nova requisição e passou a trabalhar com <em>threads</em>, mas além dessa evolução ter demorado para acontecer, esse modelo não funciona bem com o <code>mod_php</code>.</p>
-
-<h2 id="fastcgi-e-php-fpm">FastCGI e PHP-FPM</h2>
-
-<p>Com a nova solução do <code>mod_php</code> também se mostrando ineficaz perante a tantas evoluções do PHP e da Web (ambos sempre cresceram juntos), o protocolo FastCGI passou a ser utilizado. Com isso, um servidor Web recebia as requisições e apenas se fosse necessário algum processamento, executaria o PHP.</p>
-
-<p>Porém, essa execução não era como no CGI. Um conceito de "processos persistentes" foi utilizado, diminuindo muito a quantidade de recursos necessários para processar cada requisição. Um único processo agora passa a ser capaz de tratar diversas requisições e não apenas uma. Com isso todo o <em>overhead</em> de criar e matar processos a cada requisição foi drasticamente reduzido.</p>
-
-<p>Para extrair o máximo do protocolo FastCGI, foi desenvolvida uma ferramenta chamada PHP-FPM (<em>FastCGI Process Manager</em>). Este servidor de aplicação permite que realizemos diversas configurações como o número de processos <em>workers</em>, a quantidade de recursos liberada para cada processo e muito mais. Este é o software utilizado atualmente para termos um servidor FastCGI em produção com PHP.</p>
-
-<p>Atualmente, qualquer servidor web que saiba se comunicar através do protocolo FastCGI pode ser utilizado em conjunto com PHP, mas o <em>Nginx</em> ganhou muita força por prometer (e segundo benchmarks, cumprir) entregar diversas melhorias de performance em relação ao Apache. Os recursos são mais bem gerenciados e o uso de programação assíncrona através de <em>multiplexing</em> de I/O trazem ganhos expressivos quando comparamos com o ainda amplamente utilizado Apache.</p>
-
-<h2 id="arquitetura-_share-nothing_">Arquitetura <em>share-nothing</em></h2>
-
-<p>Em qualquer uma das abordagens citadas até agora, uma das principais filosofias do PHP se mantém: a <em>share-nothing architecture</em>.</p>
-
-<p>A ideia por trás disso é não compartilhar nenhum recurso entre uma requisição e outra. Por mais que o mesmo processo possa ser utilizado para servir múltiplas requisições, em nosso código, cada execução é como um novo processo. Ao finalizar a execução de um código PHP, todas as variáveis são excluídas, todos os recursos são liberados. Praticamente nada é armazenado entre uma requisição e outra.</p>
-
-<p>Isso permitiu e ainda permite que o PHP tenha uma arquitetura muito simples de escalar e isso é um dos fatores que contribuíram para a ampla adoção do PHP como linguagem back-end Web.</p>
-
-<p>A abordagem utilizando Nginx + PHP-FPM é a ideal para grande parte das aplicações que usam PHP, porém existem cenários onde ainda mais performance é necessária.</p>
-
-<h2 id="servidores-auto-contidos">Servidores auto-contidos</h2>
-
-<p>Quando temos milhões de requisições chegando ou comunicação em tempo real acontecendo, o fato de ser necessária a inicialização de todas as variáveis novamente e o início do código de toda nossa aplicação ter que ser realizada a cada requisição pode ser um peso. Imagine que a cada requisição seu <em>framework</em> favorito (que provavelmente é bem pesado) precisa ser inicializado novamente.</p>
-
-<p>Para resolver os problemas deste tipo de aplicação que demanda um nível a mais de performance, servidores auto-contidos podem ser utilizados. Um servidor auto-contido é um serivdor web exposto pela própria aplicação, ou seja, seu próprio código PHP recebe diretamente as requisições.</p>
-
-<p>Com isso a inicialização da sua aplicação pode ser feita uma única vez e a cada nova requisição, podemos somente executar o código necessário, sem necessidade de levantar de novo o <em>framework</em>, buscar as configurações, ler variáveis de ambiente, processar as dependências, definir as rotas, etc.</p>
-
-<p>Essa abordagem já é possível há muito tempo. Um dos precursores desta técnica é o <a href="https://github.com/php-pm/php-pm">PHP-PM</a> que usa o <a href="https://reactphp.org/">ReactPHP</a> por baixo dos panos. O ReactPHP facilita a execução de código assíncrono e não bloqueante no PHP através de um <em>Event Loop</em>. Nós falamos um pouco sobre programação assíncrona <a href="/2020-09-16-php-assincrono-de-forma-nativa/">neste post</a>. O ReactPHP torna esta tarefa MUITO mais fácil, por isso ferramentas como PHP-PM puderam surgir.</p>
-
-<p>Outros <em>frameworks</em> como <a href="https://amphp.org/">Amp PHP</a> têm a mesma proposta, porém uma ferramenta um pouco diferente tem chamado muita atenção nos últimos anos e levado essa proposta para outro nível</p>
-
-<h2 id="swoole">Swoole</h2>
-
-<p>É impossível falar de servidores auto-contidos PHP e não citar o <a href="https://www.swoole.co.uk/">Swoole</a>.</p>
-
-<p>A principal diferença entre o Swoole e as demais ferramentas citadas de servidores auto-contidos é que o Swoole não é um componente em PHP e sim uma extensão, ou seja, o Swoole foi escrito em C e compilado para ser "integrado" ao PHP. Isso além de conceder ainda mais performance para o código, ainda dá poderes a mais para o Swoole como lidar de forma assíncrona com código que originalmente seria síncrono (como com PDO e curl, por exemplo).</p>
-
-<p>Já existe material por aí sobre Swoole, inclusive <a href="https://youtu.be/GCECSLtT49U">esse vídeo</a> no meu canal e o <a href="https://amzn.to/3gxamov">livro</a> escrito por um dos criadores da ferramenta, por isso não vou transformar esse artigo em um tutorial, mas vale a pena pesquisar mais a fundo.</p>
-
-<h2 id="conclus%C3%A3o">Conclusão</h2>
-
-<p>Vimos neste artigo que há várias formas para fazer com que uma requisição chegue no PHP. Algumas bem antigas, outras bem modernas.</p>
-
-<p>Atualmente as 2 opções aceitáveis são utilizando PHP-FPM ou algum servidor auto-contido. Nenhuma das 2 abordagens tira o papel de servidores Web como o amado Apache ou o moderno Nginx.</p>
-
-<p>No caso do PHP-FPM precisamos de um servidor para receber as requisições HTTP e enviar as chamadas para o PHP com FastCGI. No caso de um servidor auto-contido, podemos ter um proxy reverso servindo os arquivos estáticos e realizando cache, por exemplo, enquanto o servidor auto-contido responde apenas as requisições realmente necessárias.</p>
-
-<p>Se você quiser aprender mais sobre algum desses assuntos, pode considerar assinar a Alura. Lá existem treinamentos (gravados por mim) sobre Nginx, ReactPHP, Swoole e muito mais. Caso pretenda estudar na Alura, <a href="https://www.alura.com.br/promocao/diasdedev">neste link</a> você tem um desconto de 10%.</p>
 ]]></content>
         </entry>
     </feed>

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <title>Programação assíncrona, concorrente e paralela | Dias de Dev</title>
+        <meta charset="utf-8">
+        <meta name="theme-color" content="#ffffff">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <meta name="robots" content="index, follow">
+    <meta name="title" content="Programação assíncrona, concorrente e paralela | Dias de Dev">
+    <meta name="keywords" content="Assíncrono, Paralelo, I/O Não bloqueante, Dias de Dev">
+    <meta name="description" content="Os temos programação assíncrona, programação concorrente e programação paralela trazem muitas confusões. Entenda nesse texto o que os termos significam na prática e quando cada um dos conceitos é necessário.">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:article:published_time" content="1689638400">
+    <meta property="og:url" content="https://dias.dev/2023-07-18-programacao-concorrente-assincrona-e-paralela/">
+    <meta property="og:title" content="Programação assíncrona, concorrente e paralela | Dias de Dev">
+    <meta property="og:description" content="Os temos programação assíncrona, programação concorrente e programação paralela trazem muitas confusões. Entenda nesse texto o que os termos significam na prática e quando cada um dos conceitos é necessário.">
+    <meta property="og:image" content="https://dias.dev/assets/img/thumbs/2023-07-18-programacao-concorrente-assincrona-e-paralela.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary">
+    <meta property="twitter:url" content="https://dias.dev/2023-07-18-programacao-concorrente-assincrona-e-paralela/">
+    <meta property="twitter:title" content="Programação assíncrona, concorrente e paralela | Dias de Dev">
+    <meta property="twitter:description" content="Os temos programação assíncrona, programação concorrente e programação paralela trazem muitas confusões. Entenda nesse texto o que os termos significam na prática e quando cada um dos conceitos é necessário.">
+            <link rel="preload" href="/build/Baloo2-Bold.ttf" as="font" type="font/ttf" crossorigin>
+        <link rel="preload" href="/build/Baloo2-ExtraBold.ttf" as="font" type="font/ttf" crossorigin>
+        <link rel="preload" href="/build/Baloo2-Medium.ttf" as="font" type="font/ttf" crossorigin>
+        <link rel="preload" href="/build/Baloo2-Regular.ttf" as="font" type="font/ttf" crossorigin>
+        <link rel="preload" href="/build/Baloo2-SemiBold.ttf" as="font" type="font/ttf" crossorigin>
+        <link rel="preload" href="/build/FugazOne-Regular.ttf" as="font" type="font/ttf" crossorigin>
+        <link rel="stylesheet" href="/build/app.css">
+
+        
+        <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Dias de Dev activity feed" />
+                    <link rel="stylesheet" href="/build/post.css">
+            <link rel="stylesheet" href="/build/lite-yt-embed-style.css">
+                        </head>
+    <body>
+        <div class="global-container">
+            <header>
+                <div class="header-title">
+                    <h1 class="main-heading">
+                        <a aria-current="page" href="/">Dias de Dev</a>
+                    </h1>
+                </div>
+                <nav class="menu">
+                    <a aria-current="page" href="/">Home</a>
+                    <a href="/categorias">Categorias</a>
+                                        <a href="/sobre-mim/">Sobre Mim</a>
+                    <a href="https://youtube.com/DiasDeDev?sub_confirmation=1" target="_blank">
+                        YouTube
+                    </a>
+                </nav>
+            </header>
+            <main role="main">
+                    <article itemscope itemtype="https://schema.org/Article">
+        <header>
+            <h1 itemprop="headline" class="post-title">
+                Programação assíncrona, concorrente e paralela
+            </h1>
+            <p class="post-date" itemprop="dateCreated">
+                18 de julho de 2023
+            </p>
+        </header>
+        <div itemprop="articleBody">
+            <p>Existem diversas definições para os termos programação assíncrona e programação concorrente, enquanto programação paralela seja um consenso. Vamos tentar, neste texto, definir de forma mais objetiva e prática o que esses termos significam e quando nós devemos usar cada uma dessas práticas.</p>
+
+<h2 id="programa%C3%A7%C3%A3o-ass%C3%ADncrona">Programação assíncrona</h2>
+
+<p>O termo programação assíncrona pode se referir a mais de uma coisa na computação e permeia o mundo da programação há muito tempo, mas houve um aumento no uso dessas palavras desde a vinda das <em>Promises</em> para o <em>JavaScript</em>.</p>
+
+<h3 id="rede-e-comunica%C3%A7%C3%A3o">Rede e comunicação</h3>
+
+<p>Quando programação assíncrona é citada no assunto sobre comunicação em rede, isso significa que as partes envolvidas na troca de mensagens lidarão com essas mensagens quando for possível e não necessariamente imediatamente.</p>
+
+<p>Essa definição parece bastante vaga e nada clara, não é mesmo? Então vamos tentar usar um exemplo prático, usando uma linguagem bastante comum na <em>Web</em> (embora esse conceito seja válido para qualquer ecossistema). Quando você usa a função <code>fetch</code> do <em>JavaScript</em>, a requisição <em>HTTP</em> será feita, mas a resposta, quando disponível, não vai ser tratada imediatamente. O motor de execução do <em>JavaScript</em> vai executar o código que lida com essa resposta o mais rápido possível, mas não será de forma síncrona ou imediata.</p>
+
+<p>O que isso quer dizer? Ao receber a resposta, o motor de execução do <em>JavaScript</em> vai colocar a função que lida com essa resposta em uma fila e, assim que possível, essa função será executada. Enquanto a resposta não está disponível, ou até mesmo após a resposta chegar, mas antes da função que lida com ela ter sua vez de ser rodada, outros pedaços de código podem ser executados.</p>
+
+<p><ins class="adsbygoogle"
+style="display:block; text-align:center;"
+data-ad-layout="in-article"
+data-ad-format="fluid"
+data-ad-client="ca-pub-8918461095244552"
+data-ad-slot="2366637560"></ins></p>
+
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<p>No exemplo a seguir, usamos <em>Promises</em> para informar qual é a função que será adicionada na fila quando a resposta estiver pronta, e até lá, outras linhas de código vão sendo executadas.</p>
+
+<pre><code class="js">fetch('https://example.com')
+  .then(res =&gt; {
+    // Essa função pode lidar com a resposta
+  });
+
+// Aqui, outros códigos podem ser executados
+// antes mesmo da função que lida com a resposta
+console.log("Outras funções");
+</code></pre>
+
+<p>Essa "fila de funções" e delegação de execução para um momento futuro é possível graças a um padrão chamado <em>Event Loop</em>. O uso de um <em>Event Loop</em> permite que você alcance a programação assíncrona, ou usando um termo menos confuso, <strong>I/O não bloqueante</strong>.</p>
+
+<p>O termo I/O não bloqueante é muito importante porque é o que realmente queremos dizer quando nos referimos a programação assíncrona no contexto de comunicação em rede. Nós estamos realizando alguma operação de I/O (seja comunicação em rede, como no exemplo, ou outras coisas como leitura de arquivos, etc) de forma que o processador não precise ficar esperando pela resposta dessa operação.</p>
+
+<p>Há outro <a href="/2020-09-16-php-assincrono-de-forma-nativa/">texto aqui no blog</a> explicando como I/O não bloqueante pode ser implementado "na unha" com PHP. Ferramentas como <em>ReactPHP</em> ou <em>Swoole</em> trazem implementações de <em>Event Loops</em> para o mundo PHP, mas bibliotecas mais "simples" como cURL já possuem I/O não bloqueante, permitindo a famosa programação assíncrona.</p>
+
+<h3 id="arquitetura-de-sistemas">Arquitetura de sistemas</h3>
+
+<p>Outro tema que pode receber menções do termo programação assíncrona é o de <strong>Arquitetura de sistemas</strong>, ou <em>System Design</em>.</p>
+
+<p>Aqui eu vou partir direto para um exemplo para tentar explicar a ideia. Em uma aplicação <em>Web</em>, podemos ter tarefas demoradas como geração de relatórios, envios de e-mails, etc. Essas tarefas, se feitas durante uma requisição, podem fazer com que o tempo de resposta seja bem alto, prendendo o cliente <em>HTTP</em> por mais tempo do que necessário.</p>
+
+<p>Uma solução para esse caso é salvar as tarefas que você quer executar em uma fila de mensagens, e ter outro processo executando em plano de fundo essas tarefas, de forma que a resposta <em>HTTP</em> possa ser entregue rapidamente ao usuário e as tarefas demoradas serão feitas no futuro, logo, de forma assíncrona.</p>
+
+<p>O motivo de eu fazer essa explicação de forma mais simples e resumida é que eu já gravei um vídeo explicando a ideia de processamento assíncrono e <strong>mensageria</strong>. Você pode conferir a ideia de programação assíncrona nesse contexto no vídeo abaixo.</p>
+
+<p><lite-youtube videoid="Rx80QRZRgHc" style="background-image: url('https://i.ytimg.com/vi/al47Lz_SWLc/hqdefault.jpg');">
+    <a href="https://youtube.com/watch?v=Rx80QRZRgHc" class="lty-playbtn" title="Reproduzir vídeo">
+        <span class="lyt-visually-hidden">
+            Processamento assíncrono com mensageria - Escalando aplicações Web | Dias de Dev
+        </span>
+    </a>
+</lite-youtube></p>
+
+<h2 id="programa%C3%A7%C3%A3o-paralela">Programação paralela</h2>
+
+<p>Agora vamos à explicação do termo onde há um maior consenso: programação paralela.</p>
+
+<p>Como o próprio nome deixa claro, programação paralela é o que permite a execução de mais de um pedaço de código <strong>ao mesmo tempo</strong>, ou seja, de forma paralela. Nos dias atuais, a ênfase precisa ser nas palavras <strong>ao mesmo tempo</strong> pois é possível ter uma função sendo executada em cada núcleo da CPU, por exemplo, ou até mesmo em CPUs diferentes.</p>
+
+<h3 id="multithreading">Multithreading</h3>
+
+<p>Uma das principais formas de atingir a programação paralela é criando <em>Threads</em> (não, não é o clone do Twitter que a Meta criou hahaha). Uma <em>thread</em> é uma linha de execução de um programa, que pode ser executada em um núcleo da sua CPU (seu processador). Sendo assim, se eu crio múltiplas threads, eu posso executar funções ao mesmo tempo em núcleos diferentes do meu processador.</p>
+
+<p>Cada linguagem pode (ou não) fornecer uma forma de você criar <em>threads</em>. Em PHP, por exemplo, você pode usar a <a href="/2022-02-13-extensoes-php/">extensão</a> parallel para atingir esse objetivo. A seguir há um exemplo de como ter uma <em>thread</em> adicional em seu programa para executar tarefas em paralelo:</p>
+
+<pre><code class="php">&lt;?php
+
+use function \parallel\run;
+
+run(function(){
+    echo "Esse código é executado em uma thread separada" . PHP_EOL;
+});
+
+echo "Já esse código é executado na thread principal" . PHP_EOL;
+</code></pre>
+
+<h3 id="multiprocessing">Multiprocessing</h3>
+
+<p>Outra forma muito comum de atingir a programação paralela é a criação de processos ao invés de <em>threads</em>. Um processo é basicamente um programa em execução no seu sistema operacional. Todo processo possui pelo menos uma <em>thread</em>. Ao criar um novo processo, como há pelo menos uma <em>thread</em> criada também, se torna possível a execução paralela novamente, porém há algumas diferenças importantes.</p>
+
+<p>Todo processo no sistema operacional possui um endereço de memória separado. Ao criar <em>threads</em>, esse endereço de memória é compartilhado (já que as <em>threads</em> fazem parte do mesmo processo), logo, compartilhar dados entre threads é uma tarefa fácil. Agora ao criar um novo processo, um novo endereço de memória é separado. Compartilhar memória entre processos é uma tarefa mais trabalhosa.</p>
+
+<p>Para criar um novo processo, há uma função em <code>C</code> chamada <code>fork</code>, que clona o processo atual e continua a execução no processo filho a partir da linha seguinte. Exemplo.:</p>
+
+<pre><code class="c">#include &lt;stdio.h&gt;
+#include &lt;unistd.h&gt;
+
+int main()
+{
+    printf("Até aqui, apenas o processo 'pai' é executado\n");
+    fork();
+
+    printf("Essa linha será executada 2 vezes. Uma pelo processo pai e outra pelo processo filho\n");
+
+    return 0;
+}
+</code></pre>
+
+<h2 id="programa%C3%A7%C3%A3o-concorrente">Programação concorrente</h2>
+
+<p>Agora que entendemos (mesmo que por alto) os conceitos de programação assíncrona e programação paralela, vamos ao termo mais "difícil" de definir: programação concorrente.</p>
+
+<p>O termo programação concorrente possui "problemas" em sua definição porque há vários autores que usam essas palavras para definir coisas bem diferentes. Uma das definições possíveis, inclusive, é que programação concorrente é o conceito explicado no texto de programação assíncrona na comunicação em rede, ou seja, I/O não bloqueante.</p>
+
+<p>Outros autores definem programação concorrente como qualquer técnica de programação que leva à concorrência entre recursos. Por exemplo, se você possui duas funções paralelas que acessam o mesmo arquivo e por isso ambas não podem ser executadas simultaneamente, as técnicas de programação concorrente (como <em>mutex</em>) são o que permitem a execução do programa sem erros.</p>
+
+<p>Há ainda outros autores que usam programação concorrente como sinônimo de programação paralela, já que diferentes <em>threads</em> ou processos estão concorrendo pelo processamento da CPU.</p>
+
+<p>Quem já me acompanha há algum tempo sabe que eu sou uma pessoa prática e pragmática, então para mim é muito simples: sempre que alguém se refere a programação concorrente, se pelo contexto não é óbvio o que ela quer dizer, eu pergunto e peço um exemplo. Dessa forma consigo entender exatamente o que a pessoa quer dizer e posso prosseguir com a conversa.</p>
+
+<h2 id="quando-usar-cada-uma%3F">Quando usar cada uma?</h2>
+
+<p>Então, resumindo, quando o assunto é realmente código, nós temos I/O não bloqueante e programação paralela. Essas duas técnicas permitem, de forma muito diferente, executar código que pode aumentar a performance de nossa aplicação, por exemplo. Então quando devo usar cada uma dessas técnicas?</p>
+
+<p>Acredito que pelo uso do termo I/O não bloqueante, a resposta já tenha ficado clara. Sempre que a operação demorada envolver I/O, sua resposta estará na programação assíncrona. Com isso você consegue executar tarefas enquanto operações como chamadas de rede e leitura de arquivos estão sendo realizadas, mas sem o custo adicional de criar novas <em>threads</em> ou processos.</p>
+
+<p>Já a programação paralela é usada quando você possui tarefas demoradas que demandam computação intensa e muito uso da CPU. Cálculos matemáticos complexos, manipulações de imagem e vídeo são alguns exemplos onde programação paralela se fazem necessárias.</p>
+
+<p>No mundo <em>Web</em> é muito mais comum você precisar de I/O não bloqueante (ou programação assíncrona), por isso o <em>JavaScript</em> possui <em>Promises</em> nativamente e ferramentas como <em>ReactPHP</em> e <em>Swoole</em> existem no ecossistema PHP para trazerem implementações de <em>Event Loops</em>. Já ao realizar o processamento assíncrono usando mensageria, suas tarefas de plano de fundo podem realizar processamentos pesados, onde talvez o uso de programação paralela possa ser vantajoso.</p>
+
+<h2 id="refer%C3%AAncias">Referências</h2>
+
+<p>Durante o texto eu deixei alguns links que podem ajudar a entender alguns conceitos específicos, mas quero deixar aqui mais duas referências muito importantes. A seguir possui um dos primeiros vídeos que gravei para meu canal, explicando justamente a diferença entre os termos e quando nós devemos usar cada uma dessas técnicas:</p>
+
+<p><lite-youtube videoid="zLfXPSeCkB8" style="background-image: url('https://i.ytimg.com/vi/al47Lz_SWLc/hqdefault.jpg');">
+    <a href="https://youtube.com/watch?v=zLfXPSeCkB8" class="lty-playbtn" title="Reproduzir vídeo">
+        <span class="lyt-visually-hidden">
+            Programação assíncrona vs Programação paralela - Entenda a diferença
+        </span>
+    </a>
+</lite-youtube></p>
+
+<p>Já no link a seguir eu deixo um cupom de 10% de desconto para você assinar a Alura, plataforma onde há cursos completos (alguns comigo, inclusive) sobre programação paralela e programação assíncrona (dentre vários outros assuntos de tecnologia):
+https://alura.tv/diasdedev</p>
+
+<h2 id="conclus%C3%A3o">Conclusão</h2>
+
+<p>Programação paralela é o que permite a execução simultânea de mais de uma porção de código, podendo cada uma estar em um núcleo da CPU, por exemplo. Essa técnica é muito útil quando temos tarefas intensas em processamento como cálculos complexos e manipulação de imagens. Já programação assíncrona é extremamente importante ao lidar com entrada e saída (I/O), já que permite que executemos tarefas sem bloquear a CPU esperando por respostas de I/O. Programação concorrente é um termo que pode ser definido de diversas formas, onde cada autor descreve essa ideia de forma diferente, indo desde um sinônimo para programação assíncrona até técnicas de compartilhamento de recursos em programação paralela.</p>
+
+        </div>
+        <footer class="post-footer" itemprop="author" itemscope itemtype="https://schema.org/Person">
+            <img src="https://gravatar.com/avatar/63579c5a873f3ab6abff10803e9a252f.jpg?s=50"
+                 alt="Foto do Vinicius Dias com o microfone na mão durante uma palestra"
+                 width="50"
+                 height="50"
+                 itemprop="image" />
+            <p>
+                Escrito por
+                <a href="https://twitter.com/cviniciussdias" itemprop="url">
+                    <span itemprop="name">Vinicius Dias</span>
+                </a>
+            </p>
+        </footer>
+
+                    <nav class="article-navigation">
+                <ul>
+                    <li>
+                                                <a class="previous" href="/2023-03-21-strings-multibyte-php-mbstring/" title="Strings multibyte: o que são e por que você precisa da extensão mbstring do PHP">
+                            ← <span class="title">Strings multibyte: o que são e por que você precisa da extensão mbstring do PHP</span>
+                        </a>
+                                            </li>
+                    <li>
+                                            </li>
+                </ul>
+            </nav>
+            </article>
+
+
+
+            </main>
+            <footer class="global-footer">&copy; 2023 Dias de Dev</footer>
+        </div>
+
+        <script src="/build/app.js"></script>
+                
+        <!-- Google Tag Manager -->
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','GTM-5ZJJ977');</script>
+        <!-- End Google Tag Manager -->
+        <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5ZJJ977"
+                          height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <!-- End Google Tag Manager (noscript) -->
+                    <script src="/build/lite-yt-embed-script.js" async></script>
+        </body>
+</html>

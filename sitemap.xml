@@ -13,6 +13,12 @@
     <priority>0.7</priority>
   </url>
     <url>
+    <loc>https://dias.dev/2023-07-18-programacao-concorrente-assincrona-e-paralela/</loc>
+    <lastmod>2023-07-18T00:00:00+00:00</lastmod>
+    <changefreq>Never</changefreq>
+    <priority>1.0</priority>
+  </url>
+    <url>
     <loc>https://dias.dev/2023-03-21-strings-multibyte-php-mbstring/</loc>
     <lastmod>2023-03-21T00:00:00+00:00</lastmod>
     <changefreq>Never</changefreq>
