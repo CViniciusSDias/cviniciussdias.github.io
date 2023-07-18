@@ -3,7 +3,7 @@
     <title><![CDATA[Dias de Dev]]></title>
     <link href="https://dias.dev/categories/Conceitos.xml" rel="self"/>
     <link href="https://dias.dev"/>
-    <updated>2023-07-18T23:33:02+00:00</updated>
+    <updated>2023-07-18T23:48:09+00:00</updated>
     <id>https://dias.dev/</id>
         <generator uri="http://sculpin.io/">Sculpin</generator>
             <entry>
@@ -64,7 +64,7 @@ console.log("Outras funções");
 
 <p>O motivo de eu fazer essa explicação de forma mais simples e resumida é que eu já gravei um vídeo explicando a ideia de processamento assíncrono e <strong>mensageria</strong>. Você pode conferir a ideia de programação assíncrona nesse contexto no vídeo abaixo.</p>
 
-<p><lite-youtube videoid="Rx80QRZRgHc" style="background-image: url('https://i.ytimg.com/vi/Rx80QRZRgHc/hqdefault.jpg');">
+<p><lite-youtube videoid="Rx80QRZRgHc">
     <a href="https://youtube.com/watch?v=Rx80QRZRgHc" class="lty-playbtn" title="Reproduzir vídeo">
         <span class="lyt-visually-hidden">
             Processamento assíncrono com mensageria - Escalando aplicações Web | Dias de Dev
@@ -143,7 +143,7 @@ int main()
 
 <p>Durante o texto eu deixei alguns links que podem ajudar a entender alguns conceitos específicos, mas quero deixar aqui mais duas referências muito importantes. A seguir possui um dos primeiros vídeos que gravei para meu canal, explicando justamente a diferença entre os termos e quando nós devemos usar cada uma dessas técnicas:</p>
 
-<p><lite-youtube videoid="zLfXPSeCkB8" style="background-image: url('https://i.ytimg.com/vi/zLfXPSeCkB8/hqdefault.jpg');">
+<p><lite-youtube videoid="zLfXPSeCkB8">
     <a href="https://youtube.com/watch?v=zLfXPSeCkB8" class="lty-playbtn" title="Reproduzir vídeo">
         <span class="lyt-visually-hidden">
             Programação assíncrona vs Programação paralela - Entenda a diferença
