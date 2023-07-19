@@ -3,7 +3,7 @@
     <title><![CDATA[Dias de Dev]]></title>
     <link href="https://dias.dev/categories/Conceitos.xml" rel="self"/>
     <link href="https://dias.dev"/>
-    <updated>2023-07-18T23:57:46+00:00</updated>
+    <updated>2023-07-19T00:02:16+00:00</updated>
     <id>https://dias.dev/</id>
         <generator uri="http://sculpin.io/">Sculpin</generator>
             <entry>
@@ -737,7 +737,7 @@ $conteudoDoArquivo5 = file_get_contents('arquivo5.txt');
 // Processar os 5 arquivos
 </code></pre>
 
-<p>O problema nessa abordagem é óbvio: Antes de ler o <code>arquivo2.txt</code> precisamos terminar de ler todo o conteúdo de <code>arquivo1.txt</code>. Enquanto o computador espera, nós já poderíamos estar sendo os demais arquivos e os processando de forma individual.</p>
+<p>O problema nessa abordagem é óbvio: Antes de ler o <code>arquivo2.txt</code> precisamos terminar de ler todo o conteúdo de <code>arquivo1.txt</code>. Enquanto o computador espera, nós já poderíamos estar lendo os demais arquivos e os processando de forma individual.</p>
 
 <p>Quando temos uma operação de I/O (acesso a arquivos, rede, etc) sendo realizada de forma síncrona, o processador fica ocioso enquanto a operação não é executada. Ou seja, enquanto o arquivo estiver sendo carregado, o processador fica esperando, sem fazer nada. É exatamente isso que queremos evitar. Queremos garantir que ele continue trabalhando enquanto o arquivo não estiver pronto para leitura.</p>
 
