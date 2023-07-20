@@ -96,7 +96,7 @@ nav.menu {
 
         &[href^=http]::after {
             content: '';
-            background-image: url('/build/external-link-symbol.svg');
+            background-image: url('../img/external-link-symbol.svg');
             background-size: 12px;
             width: 12px;
             height: 12px;

@@ -22,11 +22,6 @@
       "css": [
         "/build/post.css"
       ]
-    },
-    "lite-yt-embed-style": {
-      "css": [
-        "/build/lite-yt-embed-style.css"
-      ]
     }
   }
 }
