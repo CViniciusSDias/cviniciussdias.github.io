@@ -3,7 +3,7 @@
     <title><![CDATA[Dias de Dev]]></title>
     <link href="https://dias.dev/categories/PHP.xml" rel="self"/>
     <link href="https://dias.dev"/>
-    <updated>2023-07-25T17:37:26+00:00</updated>
+    <updated>2023-07-26T22:19:45+00:00</updated>
     <id>https://dias.dev/</id>
         <generator uri="http://sculpin.io/">Sculpin</generator>
             <entry>
@@ -86,7 +86,7 @@ echo mb_convert_encoding('string em UTF-8', 'ISO-8859-1', 'UTF-8');
 
 <p>Tendo entendido o conceito de <em>strings multibyte</em>, fica bastante claro tanto o papel da extensão <code>mbstring</code> quanto vários problemas que nós já enfrentamos ao manipular caracteres acentuados, por exemplo.</p>
 
-<p>Se você quiser aprender mais sobre manipulações de strings, encodings, charsets, PHP e mais assuntos relacionados a tecnologia, aqui está um cupom de desconto para assinar a Alura, plataforma de cursos online onde eu sou o instrutor da maioria dos cursos de PHP: <a href="https://alura.com.br/promocao/diasdedev">https://alura.com.br/promocao/diasdedev</a></p>
+<p>Se você quiser aprender mais sobre manipulações de strings, encodings, charsets, PHP e mais assuntos relacionados a tecnologia, aqui está um cupom de desconto para assinar a Alura, plataforma de cursos online onde eu sou o instrutor da maioria dos cursos de PHP: <a href="https://alura.tv/diasdedev">https://alura.tv/diasdedev</a></p>
 ]]></content>
         </entry>
             <entry>
@@ -186,7 +186,7 @@ header('Location: /url-de-redirecionamento');
 
 <p>Um dos erros mais conhecidos do mundo PHP, embora assustador, não é tão difícil de resolver. Com esse post você deve ter as informações necessárias para não se deparar com ele novamente e para resolver o problema caso o encontre.</p>
 
-<p>Caso queira se aprofundar e conhecer ainda mais nos estudos sobre PHP, aqui tem um cupom de desconto para assinar a Alura, plataforma de cursos online onde eu sou o instrutor da maioria dos cursos de PHP: <a href="https://alura.com.br/promocao/diasdedev">https://alura.com.br/promocao/diasdedev</a></p>
+<p>Caso queira se aprofundar e conhecer ainda mais nos estudos sobre PHP, aqui tem um cupom de desconto para assinar a Alura, plataforma de cursos online onde eu sou o instrutor da maioria dos cursos de PHP: <a href="https://alura.tv/diasdedev">https://alura.tv/diasdedev</a></p>
 ]]></content>
         </entry>
             <entry>
@@ -311,7 +311,7 @@ opcache.enable=0
 <li>Post aqui no blog sobre Extensões PHP: <a href="/2022-02-13-extensoes-php/">https://dias.dev/2022-02-13-extensoes-php/</a></li>
 <li>Vídeo no meu canal sobre <em>Opcache</em>: <a href="https://youtu.be/6vEspHqjrkI">https://youtu.be/6vEspHqjrkI</a></li>
 <li>Documentação sobre as diretivas do <code>php.ini</code>: <a href="https://www.php.net/manual/en/ini.php">https://www.php.net/manual/en/ini.php</a></li>
-<li>Cupom de desconto na Alura para você se aprofundar em PHP: <a href="https://alura.com.br/promocao/diasdedev">https://alura.com.br/promocao/diasdedev</a></li>
+<li>Cupom de desconto na Alura para você se aprofundar em PHP: <a href="https://alura.tv/diasdedev">https://alura.tv/diasdedev</a></li>
 </ul>
 ]]></content>
         </entry>
@@ -534,7 +534,7 @@ você pode conferir o início dessa jornada de criação de extensões além de 
 fazemos uso de várias extensões no dia-a-dia e entender este funcionamento é bastante importante para devs PHP.</p>
 
 <p>Se além de entender sobre algumas extensões você quiser aprender mais sobre PHP em si, você pode usar esse
-<a href="https://www.alura.com.br/promocao/diasdedev">cupom</a> que fornece 10% de desconto na assinatura da Alura, plataforma onde
+<a href="https://alura.tv/diasdedev">cupom</a> que fornece 10% de desconto na assinatura da Alura, plataforma onde
 eu mesmo gravei diversos cursos sobre o assunto.</p>
 ]]></content>
         </entry>
@@ -563,7 +563,7 @@ eu mesmo gravei diversos cursos sobre o assunto.</p>
 - <a href="https://amzn.to/3lzFVkD">Desconstruindo a Web: As tecnologias por trás de uma requisição</a>
 - <a href="https://amzn.to/35k9rT1">HTTP: The Definitive Guide</a>
 - <a href="https://amzn.to/3gEgz22">Learning Http/2: A Practical Guide for Beginners</a>
-- <a href="https://www.alura.com.br/promocao/diasdedev">Cursos de HTTP na Alura</a></p>
+- <a href="https://alura.tv/diasdedev">Cursos de HTTP na Alura</a></p>
 
 <p>Com esse conhecimento, já podemos partir para o foco deste artigo: como o <strong>PHP</strong> funciona na Web?</p>
 
@@ -644,7 +644,7 @@ data-ad-slot="2366637560"></ins></p>
 
 <p>No caso do PHP-FPM precisamos de um servidor para receber as requisições HTTP e enviar as chamadas para o PHP com FastCGI. No caso de um servidor auto-contido, podemos ter um proxy reverso servindo os arquivos estáticos e realizando cache, por exemplo, enquanto o servidor auto-contido responde apenas as requisições realmente necessárias.</p>
 
-<p>Se você quiser aprender mais sobre algum desses assuntos, pode considerar assinar a Alura. Lá existem treinamentos (gravados por mim) sobre Nginx, ReactPHP, Swoole e muito mais. Caso pretenda estudar na Alura, <a href="https://www.alura.com.br/promocao/diasdedev">neste link</a> você tem um desconto de 10%.</p>
+<p>Se você quiser aprender mais sobre algum desses assuntos, pode considerar assinar a Alura. Lá existem treinamentos (gravados por mim) sobre Nginx, ReactPHP, Swoole e muito mais. Caso pretenda estudar na Alura, <a href="https://alura.tv/diasdedev">neste link</a> você tem um desconto de 10%.</p>
 ]]></content>
         </entry>
             <entry>
@@ -776,7 +776,7 @@ Se preferir em Português, <a href="https://amzn.to/3dLk4lx">PHP Moderno</a>. Es
 trata da evolução da linguagem sem entrar nos detalhes de sintaxes de 2016 pra cá.</p>
 
 <p>A partir daí, caso você tenha aprendido a usar o PHP 5, se atualize nas novidades da linguagem. No momento da escrita
-deste post nós estamos na <a href="https://www.youtube.com/playlist?list=PL3j2sfzg3FPuQXklYI2LumuG7jgZsj7cK">versão 8</a>.</p>
+deste post nós estamos na <a href="https://youtube.com/playlist?list=PL3j2sfzg3FPuQXklYI2LumuG7jgZsj7cK">versão 8</a>.</p>
 
 <h2 id="conclus%C3%A3o">Conclusão</h2>
 
@@ -787,7 +787,7 @@ simples antes de 2011, já que ele facilitava a instalação da praticamente a �
 for um servidor de produção, XAMPP nunca foi uma alternativa viável. Sendo assim, para desenvolvedores PHP, não há
 motivos válidos para uso do XAMPP nos dias atuais.</p>
 
-<p>Se você quiser aprender mais sobre algum desses assuntos, pode considerar assinar a Alura. Lá existem treinamentos (gravados por mim) sobre PHP, Nginx e muito mais. Caso pretenda estudar na Alura, <a href="https://www.alura.com.br/promocao/diasdedev">neste link</a> você tem um desconto de 10%.</p>
+<p>Se você quiser aprender mais sobre algum desses assuntos, pode considerar assinar a Alura. Lá existem treinamentos (gravados por mim) sobre PHP, Nginx e muito mais. Caso pretenda estudar na Alura, <a href="https://alura.tv/diasdedev">neste link</a> você tem um desconto de 10%.</p>
 ]]></content>
         </entry>
             <entry>
@@ -1226,7 +1226,7 @@ de streams podemos compactar e descompactar arquivos, enviar dados por FTP, aces
 <p>Conforme prometido, vou deixar aqui alguns links para que você possa se aprofundar nesse assunto tão rico e importante.</p>
 
 <ul>
-<li>https://www.youtube.com/watch?v=ZRYMzS97HVQ
+<li>https://youtube.com/watch?v=ZRYMzS97HVQ
 
 <ul>
 <li>Nessa palestra o <a href="https://twitter.com/alganet">Alexandre Gaigalas</a> mostra um pouco do poder dos streams</li>
@@ -1239,7 +1239,7 @@ de streams podemos compactar e descompactar arquivos, enviar dados por FTP, aces
 <li>https://cursos.alura.com.br/course/php-io-arquivos-streams
 
 <ul>
-<li>Na Alura existe um curso específico de streams usando filtros, contextos e muito mais. Se quiser 10% de desconto na sua assinatura, confere <a href="https://www.alura.com.br/promocao/diasdedev">esse link aqui</a>.</li>
+<li>Na Alura existe um curso específico de streams usando filtros, contextos e muito mais. Se quiser 10% de desconto na sua assinatura, confere <a href="https://alura.tv/diasdedev">esse link aqui</a>.</li>
 </ul></li>
 <li><a href="/2020-09-16-php-assincrono-de-forma-nativa/">PHP Assíncrono de Forma Nativa</a>
 
@@ -1319,7 +1319,15 @@ data-ad-slot="2366637560"></ins></p>
 
 <p>Já se muito processamento é utilizado, com calculos complexos, manipulação de imagens e qualquer outra coisa que consuma muita CPU, paralelização é a resposta. Podemos criar processos através da extensão <a href="https://php.net/pcntl">pcntl</a> ou threads através da extensão <a href="https://php.net/parallel">parallel</a>. Ambas as opções requerem um estudo mais aprofundado sobre conceitos de sistemas operacionais e programação paralela, mas o resultado é muito gratificante.</p>
 
-<p>Se você quiser entender um pouco melhor sobre a diferença entre Programação Assíncrona e Programação Paralela, pode conferir este vídeo: https://www.youtube.com/watch?v=zLfXPSeCkB8</p>
+<p>Se você quiser entender um pouco melhor sobre a diferença entre Programação Assíncrona e Programação Paralela, pode conferir este vídeo:</p>
+
+<p><lite-youtube videoid="zLfXPSeCkB8">
+    <a href="https://youtube.com/watch?v=zLfXPSeCkB8" class="lty-playbtn" title="Reproduzir vídeo">
+        <span class="lyt-visually-hidden">
+            Programação assíncrona vs Programação paralela - Entenda a diferença | Programando com Vinicius Dias
+        </span>
+    </a>
+</lite-youtube></p>
 
 <h2 id="conclus%C3%A3o">Conclusão</h2>
 
@@ -1327,7 +1335,7 @@ data-ad-slot="2366637560"></ins></p>
 
 <p>Por ser uma linguagem de programação completa e madura, diversas bibliotecas, extensões e componentes já surgiram para resolver problemas comuns e cabe a nós, devs e amantes do PHP, aprendê-las e utilizá-las.</p>
 
-<p>Além disso, com o advento do <a href="https://www.youtube.com/watch?v=WLx0z9kloro">JIT</a> que chegará no PHP 8, o uso do PHP fora da web se tornará ainda mais efetivo. Diversas otimizações de baixo nível que eu nem mesmo sei explicar vão acontecer, tornando possíveis aplicações que requerem ainda mais processamento como IoT, Machine Learning e vários outros nomes bonitos que não me arriscarei a citar.</p>
+<p>Além disso, com o advento do <a href="https://youtube.com/watch?v=WLx0z9kloro">JIT</a> que chegará no PHP 8, o uso do PHP fora da web se tornará ainda mais efetivo. Diversas otimizações de baixo nível que eu nem mesmo sei explicar vão acontecer, tornando possíveis aplicações que requerem ainda mais processamento como IoT, Machine Learning e vários outros nomes bonitos que não me arriscarei a citar.</p>
 
 <p>Se você ainda acha que PHP está preso na Web, acredito que não há momento melhor para abrir os olhos e conhecer este novo mundo!</p>
 ]]></content>

@@ -3,7 +3,7 @@
     <title><![CDATA[Dias de Dev]]></title>
     <link href="https://dias.dev/atom.xml" rel="self"/>
     <link href="https://dias.dev"/>
-    <updated>2023-07-25T17:37:26+00:00</updated>
+    <updated>2023-07-26T22:19:45+00:00</updated>
     <id>https://dias.dev</id>
         <generator uri="http://sculpin.io/">Sculpin</generator>
             <entry>
@@ -239,7 +239,7 @@ echo mb_convert_encoding('string em UTF-8', 'ISO-8859-1', 'UTF-8');
 
 <p>Tendo entendido o conceito de <em>strings multibyte</em>, fica bastante claro tanto o papel da extensão <code>mbstring</code> quanto vários problemas que nós já enfrentamos ao manipular caracteres acentuados, por exemplo.</p>
 
-<p>Se você quiser aprender mais sobre manipulações de strings, encodings, charsets, PHP e mais assuntos relacionados a tecnologia, aqui está um cupom de desconto para assinar a Alura, plataforma de cursos online onde eu sou o instrutor da maioria dos cursos de PHP: <a href="https://alura.com.br/promocao/diasdedev">https://alura.com.br/promocao/diasdedev</a></p>
+<p>Se você quiser aprender mais sobre manipulações de strings, encodings, charsets, PHP e mais assuntos relacionados a tecnologia, aqui está um cupom de desconto para assinar a Alura, plataforma de cursos online onde eu sou o instrutor da maioria dos cursos de PHP: <a href="https://alura.tv/diasdedev">https://alura.tv/diasdedev</a></p>
 ]]></content>
         </entry>
             <entry>
@@ -339,7 +339,7 @@ header('Location: /url-de-redirecionamento');
 
 <p>Um dos erros mais conhecidos do mundo PHP, embora assustador, não é tão difícil de resolver. Com esse post você deve ter as informações necessárias para não se deparar com ele novamente e para resolver o problema caso o encontre.</p>
 
-<p>Caso queira se aprofundar e conhecer ainda mais nos estudos sobre PHP, aqui tem um cupom de desconto para assinar a Alura, plataforma de cursos online onde eu sou o instrutor da maioria dos cursos de PHP: <a href="https://alura.com.br/promocao/diasdedev">https://alura.com.br/promocao/diasdedev</a></p>
+<p>Caso queira se aprofundar e conhecer ainda mais nos estudos sobre PHP, aqui tem um cupom de desconto para assinar a Alura, plataforma de cursos online onde eu sou o instrutor da maioria dos cursos de PHP: <a href="https://alura.tv/diasdedev">https://alura.tv/diasdedev</a></p>
 ]]></content>
         </entry>
             <entry>
@@ -464,7 +464,7 @@ opcache.enable=0
 <li>Post aqui no blog sobre Extensões PHP: <a href="/2022-02-13-extensoes-php/">https://dias.dev/2022-02-13-extensoes-php/</a></li>
 <li>Vídeo no meu canal sobre <em>Opcache</em>: <a href="https://youtu.be/6vEspHqjrkI">https://youtu.be/6vEspHqjrkI</a></li>
 <li>Documentação sobre as diretivas do <code>php.ini</code>: <a href="https://www.php.net/manual/en/ini.php">https://www.php.net/manual/en/ini.php</a></li>
-<li>Cupom de desconto na Alura para você se aprofundar em PHP: <a href="https://alura.com.br/promocao/diasdedev">https://alura.com.br/promocao/diasdedev</a></li>
+<li>Cupom de desconto na Alura para você se aprofundar em PHP: <a href="https://alura.tv/diasdedev">https://alura.tv/diasdedev</a></li>
 </ul>
 ]]></content>
         </entry>
@@ -670,7 +670,7 @@ data-ad-slot="2366637560"></ins></p>
 
 <h3 id="_cookies_-e-xss"><em>Cookies</em> e XSS</h3>
 
-<p>Como já foi citado, sessões são um uso muito comum para <em>cookies</em>. As linguagens de back-end, inclusive, já lidam com esse detalhe de forma transparente na maioria das vezes. Agora imagine o seguinte cenário: através de um ataque de <a href="https://www.youtube.com/watch?v=lntsVxPZibw">XSS</a> um usuário malicioso consegue acesso ao seu <em>cookie</em> de sessão. Com isso ele conseguirá se passar por você e o estrago pode ser enorme.</p>
+<p>Como já foi citado, sessões são um uso muito comum para <em>cookies</em>. As linguagens de back-end, inclusive, já lidam com esse detalhe de forma transparente na maioria das vezes. Agora imagine o seguinte cenário: através de um ataque de <a href="https://youtube.com/watch?v=lntsVxPZibw">XSS</a> um usuário malicioso consegue acesso ao seu <em>cookie</em> de sessão. Com isso ele conseguirá se passar por você e o estrago pode ser enorme.</p>
 
 <p>Para prevenir que ataques XSS consigam acessar seus <em>cookies</em> sensíveis (como o de sessão), podemos marcá-lo como <code>HttpOnly</code>. Dessa forma, código JavaScript nenhum terá acesso ao mesmo.</p>
 
@@ -714,10 +714,10 @@ data-ad-slot="2366637560"></ins></p>
 
 <p>Repare que o uso correto dos parâmetros dos <em>cookies</em> já nos protege de diversos ataques. Obviamente apenas cuidar dos nossos <em>cookies</em> não é o suficiente para ter um sistema verdadeiramente seguro. Precisamos nos atentar a diversos outros fatores e possíveis vulnerabilidades. Além disso, <em>cookies</em> de sessão não são os únicos a serem cuidados. <em>Tokens</em> geralmente são armazenados como <em>cookies</em> também e todos esses cuidados devem ser tomados.</p>
 
-<p>Se segurança é um assunto que te interessa, recomendo essa <em>playlist</em> com alguns vídeos básicos sobre o assunto: <a href="https://www.youtube.com/playlist?list=PL3j2sfzg3FPuOOt13tOcNTx6hCFYcQls9">https://www.youtube.com/playlist?list=PL3j2sfzg3FPuOOt13tOcNTx6hCFYcQls9</a></p>
+<p>Se segurança é um assunto que te interessa, recomendo essa <em>playlist</em> com alguns vídeos básicos sobre o assunto: <a href="https://youtube.com/playlist?list=PL3j2sfzg3FPuOOt13tOcNTx6hCFYcQls9">https://youtube.com/playlist?list=PL3j2sfzg3FPuOOt13tOcNTx6hCFYcQls9</a></p>
 
 <p>Se quiser se aprofundar, na Alura há diversos cursos e formações sobre o tema de segurança. Aqui está um cupom de desconto para assinar a plataforma:
-<a href="https://www.alura.com.br/promocao/diasdedev">https://www.alura.com.br/promocao/diasdedev</a></p>
+<a href="https://alura.tv/diasdedev">https://alura.tv/diasdedev</a></p>
 ]]></content>
         </entry>
             <entry>
@@ -764,7 +764,7 @@ data-ad-slot="2366637560"></ins></p>
 
 <p>Cada ecossistema e ferramenta resolve esse problema de uma maneira diferente, mas todos eles possuem alguma solução. Vale a pesquisa para saber mais sobre a linguagem com a qual você trabalha.</p>
 
-<p>Se não estiver familiarizado com conceitos de testes, sugiro assistir <a href="https://www.youtube.com/playlist?list=PL3j2sfzg3FPsPiaDUmDDKNvco49YMdj8f">esta playlist</a> de testes automatizados. E se quiser se aprofundar em testes e programação em geral, aqui tem um cupom de desconto para você assinar Alura: <a href="https://www.alura.com.br/promocao/diasdedev">https://www.alura.com.br/promocao/diasdedev</a></p>
+<p>Se não estiver familiarizado com conceitos de testes, sugiro assistir <a href="https://youtube.com/playlist?list=PL3j2sfzg3FPsPiaDUmDDKNvco49YMdj8f">esta playlist</a> de testes automatizados. E se quiser se aprofundar em testes e programação em geral, aqui tem um cupom de desconto para você assinar Alura: <a href="https://alura.tv/diasdedev">https://alura.tv/diasdedev</a></p>
 ]]></content>
         </entry>
             <entry>
@@ -864,7 +864,7 @@ você pode conferir o início dessa jornada de criação de extensões além de 
 fazemos uso de várias extensões no dia-a-dia e entender este funcionamento é bastante importante para devs PHP.</p>
 
 <p>Se além de entender sobre algumas extensões você quiser aprender mais sobre PHP em si, você pode usar esse
-<a href="https://www.alura.com.br/promocao/diasdedev">cupom</a> que fornece 10% de desconto na assinatura da Alura, plataforma onde
+<a href="https://alura.tv/diasdedev">cupom</a> que fornece 10% de desconto na assinatura da Alura, plataforma onde
 eu mesmo gravei diversos cursos sobre o assunto.</p>
 ]]></content>
         </entry>
@@ -959,7 +959,7 @@ data-ad-slot="2366637560"></ins></p>
 </div>
 
 <p>Agora se você prefere estudar através de cursos e vídeos, super recomendo os treinamentos de front-end e de PWA da Alura. Lá você consegue toda a base para desenvolver uma PWA de forma profissional, aprendendo desde a base, passando por <em>JavaScript</em> avançado e <em>APIs Web</em>, até <em>PWAs</em> de fato. Se for o seu caso, aqui tenho um cupom de 10% de desconto para estudar na Alura:
-<a href="https://www.alura.com.br/promocao/diasdedev">https://www.alura.com.br/promocao/diasdedev</a></p>
+<a href="https://alura.tv/diasdedev">https://alura.tv/diasdedev</a></p>
 ]]></content>
         </entry>
             <entry>
@@ -1035,7 +1035,7 @@ data-ad-slot="2366637560"></ins></p>
 
 <p>Creio que seja seguro afirmar que a grande maioria dos textos que tratamos como desenvolvedores utiliza UTF-8 como encoding e neste artigo nós entendemos o motivo disso e como o tratamento de textos evoluiu até chegar a esse ponto.</p>
 
-<p>Se você quiser aprender mais sobre esse assunto, pode considerar assinar a Alura. Lá existem treinamentos que tratam sobre charsets, encoding, manipulação de <em>strings</em>    e muito mais. Caso pretenda estudar na Alura, <a href="https://www.alura.com.br/promocao/diasdedev">neste link</a> você tem um desconto de 10%.</p>
+<p>Se você quiser aprender mais sobre esse assunto, pode considerar assinar a Alura. Lá existem treinamentos que tratam sobre charsets, encoding, manipulação de <em>strings</em>    e muito mais. Caso pretenda estudar na Alura, <a href="https://alura.tv/diasdedev">neste link</a> você tem um desconto de 10%.</p>
 ]]></content>
         </entry>
     </feed>
