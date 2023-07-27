@@ -3,7 +3,7 @@
     <title><![CDATA[Dias de Dev]]></title>
     <link href="https://dias.dev/categories/Conceitos.xml" rel="self"/>
     <link href="https://dias.dev"/>
-    <updated>2023-07-26T22:19:45+00:00</updated>
+    <updated>2023-07-27T21:50:48+00:00</updated>
     <id>https://dias.dev/</id>
         <generator uri="http://sculpin.io/">Sculpin</generator>
             <entry>
@@ -685,7 +685,7 @@ acontecer com a biblioteca, por exemplo, eu vou estar mais preparado para resolv
             <id>https://dias.dev/2020-09-16-php-assincrono-de-forma-nativa/</id>
             <content type="html"><![CDATA[<p>Realizar acesso a streams é uma tarefa relativamente comum para devs PHP. Seja lendo e escrevendo em arquivos, fazendo requisições HTTP, etc.</p>
 
-<p>Operações de I/O são custosas e levam algum tempo para executar. Quando temos diversas operações desse tipo, uma técnica que pode ajudar (e muito) na performance da aplicação é realizá-las de forma assíncrona.</p>
+<p>Operações de I/O são custosas e levam algum tempo para serem executadas. Quando temos diversas operações desse tipo, uma técnica que pode ajudar (e muito) na performance da aplicação é realizá-las de forma assíncrona.</p>
 
 <h2 id="acesso-a-streams">Acesso a streams</h2>
 
@@ -708,7 +708,13 @@ data-ad-slot="2366637560"></ins></p>
 
 <p>Se você não está familiarizado com o termo "programação assíncrona", recomendo assistir este vídeo antes de continuar o artigo:</p>
 
-<p><a href="https://youtu.be/zLfXPSeCkB8">Programação Assíncrona vs Programação Paralela</a></p>
+<p><lite-youtube videoid="zLfXPSeCkB8">
+    <a href="https://youtube.com/watch?v=zLfXPSeCkB8" class="lty-playbtn" title="Reproduzir vídeo">
+        <span class="lyt-visually-hidden">
+            Programação assíncrona vs Programação paralela - Entenda a diferença | Programando com Vinicius Dias
+        </span>
+    </a>
+</lite-youtube></p>
 
 <p>Entendido o que é programação assíncrona, como podemos fazer acesso a streams de forma assíncrona utilizando PHP sem nenhuma extensão ou biblioteca externa? Será possível?</p>
 
@@ -720,7 +726,7 @@ data-ad-slot="2366637560"></ins></p>
 
 <h3 id="fun%C3%A7%C3%A3o-stream_select">Função stream_select</h3>
 
-<p>Uma função não muito comum para nós que trabalhamos com PHP é a <a href="https://php.net/stream_select">stream_select</a>. Essa função nos permite "observar" modificações que possam acontecer em streams. O probelma é que ela não é nada fácil de se entender, então vou tentar tornar este processo menos doloroso para você.</p>
+<p>Uma função não muito comum para nós que trabalhamos com PHP é a <a href="https://php.net/stream_select">stream_select</a>. Essa função nos permite "observar" modificações que possam acontecer em streams. O problema é que ela não é nada fácil de se entender, então vou tentar tornar este processo menos doloroso para você.</p>
 
 <h2 id="cen%C3%A1rio">Cenário</h2>
 
@@ -822,7 +828,7 @@ var_dump($listaDeStreamsDeArquivos);
 
 <h4 id="par%C3%A2metros">Parâmetros</h4>
 
-<p>Segundo detalhe importante: os parâmetros. O 3 primeiros parâmetros dessa função são passados por referência. Por isso o segundo e terceiro são variáveis que nós nem tínhamos definido ainda. O primeiro parâmetro é a lista de streams que queremos observar para ler. O segundo é para escrita. Já o terceiro, menos comum, é para dados excepcionais que possuem maior prioridade. Os 2 últimos parâmetros são sobre timeout.</p>
+<p>Segundo detalhe importante: os parâmetros. Os 3 primeiros parâmetros dessa função são passados por referência. Por isso o segundo e terceiro são variáveis que nós nem tínhamos definido ainda. O primeiro parâmetro é a lista de streams que queremos observar para ler. O segundo é para escrita. Já o terceiro, menos comum, é para dados excepcionais que possuem maior prioridade. Os 2 últimos parâmetros são sobre timeout.</p>
 
 <p>O parâmetro passado como 1 indica o número de segundos que essa função deve esperar receber uma notificação de novidade nos streams até "desistir", ou seja, o timeout. Esse é o motivo pelo qual ela deve estar em um loop. Se esse tempo passar e nós não tivermos novidade, devemos tentar de novo depois. Caso algum (não necessariamente todos) stream esteja pronto antes desse 1 segundo, a função retornará. O último parâmetro, que informamos como 0, indica o tempo em microsegundos para timeout.</p>
 
@@ -1004,9 +1010,9 @@ data-ad-slot="2366637560"></ins></p>
 <p>Princípios muito comuns da programação orientada a objetos (paradigma que estudo mais a fundo) são:</p>
 
 <ul>
-<li><a href="https://youtu.be/7IXeLhpjk6g">Tell, don't ask</a>;</li>
+<li><a href="https://youtube.com/watch?v=7IXeLhpjk6g">Tell, don't ask</a>;</li>
 <li>Least astonishment;</li>
-<li>*<a href="https://youtu.be/6mfX6863SAk">Fail fast</a>;</li>
+<li>*<a href="https://youtube.com/watch?v=6mfX6863SAk">Fail fast</a>;</li>
 <li>*Early return;</li>
 <li><a href="https://amzn.to/3Eplrm2">SOLID</a> (conjunto de princípios);</li>
 <li>etc.</li>
@@ -1030,7 +1036,7 @@ data-ad-slot="2366637560"></ins></p>
 <ul>
 <li>24 padrões (super famosos) separados em 3 categorias</li>
 </ul></li>
-<li><a href="https://youtu.be/z4fxFU5MoAA">Object calisthenics</a>
+<li><a href="https://youtube.com/watch?v=z4fxFU5MoAA">Object calisthenics</a>
 
 <ul>
 <li>9 regras para exercitar em seus códigos</li>
@@ -1374,7 +1380,7 @@ echo "{$pessoa-&gt;nomeCompleto()} tem {$pessoa-&gt;idade()} anos.";
 
 <h2 id="princ%C3%ADpios-e-padr%C3%B5es">Princípios e padrões</h2>
 
-<p>Para nos ajudar a utilizar de forma mais "correta" a orientação a objetos, existem diversos padrões e princípios. Uns mais simples como o <a href="https://youtu.be/7IXeLhpjk6g">Tell, Don't ask</a>, outros mais completos e complexos como os <a href="https://amzn.to/3Eplrm2">princípios SOLID</a>.</p>
+<p>Para nos ajudar a utilizar de forma mais "correta" a orientação a objetos, existem diversos padrões e princípios. Uns mais simples como o <a href="https://www.youtube.com/watch?v=7IXeLhpjk6g">Tell, Don't ask</a>, outros mais completos e complexos como os <a href="https://amzn.to/3Eplrm2">princípios SOLID</a>.</p>
 
 <p>Todos os princípios merecem uma atenção especial, porém isso foge do escopo deste artigo, mas uma rápida busca te mostra uma imensidão de conteúdo a respeito.</p>
 

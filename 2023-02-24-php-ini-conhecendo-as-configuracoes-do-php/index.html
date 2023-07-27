@@ -116,7 +116,7 @@ data-ad-slot="2366637560"></ins></p>
 
 <p>O formato <code>.ini</code> é bastante simples e consiste em uma chave (o nome da configuração) e um valor (o valor da configuração) separados pelo sinal de igualdade (<code>=</code>). Além disso, é possível adicionar comentários colocando um ponto e vírgula (<code>;</code>) em sua frente.</p>
 
-<p>Sendo assim, para termos um arquivo <code>php.ini</code> dizendo que todos os erros devem ser exibidos, habilitando a <a href="/2022-09-27-cookies-e-seguranca/">configuração <code>secure</code> do cookie de sessão</a>, tendo o <a href="https://youtu.be/6vEspHqjrkI">opcache</a> habilitado e a <a href="/2022-02-13-extensoes-php/">extensão</a> <code>pdo_mysql</code> também habilitada, nós teríamos o seguinte:</p>
+<p>Sendo assim, para termos um arquivo <code>php.ini</code> dizendo que todos os erros devem ser exibidos, habilitando a <a href="/2022-09-27-cookies-e-seguranca/">configuração <code>secure</code> do cookie de sessão</a>, tendo o <a href="https://youtube.com/watch?v=6vEspHqjrkI">opcache</a> habilitado e a <a href="/2022-02-13-extensoes-php/">extensão</a> <code>pdo_mysql</code> também habilitada, nós teríamos o seguinte:</p>
 
 <pre><code class="ini">; comentário. O PHP não vai ler essa linha
 error_erporting=E_ALL
@@ -134,7 +134,7 @@ opcache.enable=1
 
 <p>Antes de finalizar, você também deve ter notado que em nosso exemplo, duas linhas possuem um ponto (<code>.</code>) no nome da configuração e duas linhas não. Geralmente as configurações de <a href="/2022-02-13-extensoes-php/">extensões</a> são nomeadas no formato <em>extensao.configuracao</em>, ou seja, a configuração <code>enable</code> da extensão <code>opcache</code> se torna <code>opcache.enable</code>. Já as configurações que não são de uma extensão do PHP não possuem esse ponto.</p>
 
-<p>Um outro detalhe do formato <code>ini</code> são suas <em>Sections</em>. Uma seção é identificada por um nome rodeado por colchetes. Então se eu quiser organizar meu arquivo e nomear uma seção nele com todas as configurações relacionadas a <a href="https://youtu.be/6vEspHqjrkI">opcache</a>, eu poderia ter o seguinte:</p>
+<p>Um outro detalhe do formato <code>ini</code> são suas <em>Sections</em>. Uma seção é identificada por um nome rodeado por colchetes. Então se eu quiser organizar meu arquivo e nomear uma seção nele com todas as configurações relacionadas a <a href="https://youtube.com/watch?v=6vEspHqjrkI">opcache</a>, eu poderia ter o seguinte:</p>
 
 <pre><code class="ini">[opcache]
 opcache.enable=1
@@ -155,7 +155,7 @@ error_reporting=E_ALL
 display_errors=1
 </code></pre>
 
-<p>Caso eu queira desabilitar o <a href="https://youtu.be/6vEspHqjrkI">opcache</a> no projeto executado na pasta <code>/meu/projeto</code>, eu posso ter o seguinte:</p>
+<p>Caso eu queira desabilitar o <a href="https://youtube.com/watch?v=6vEspHqjrkI">opcache</a> no projeto executado na pasta <code>/meu/projeto</code>, eu posso ter o seguinte:</p>
 
 <pre><code class="ini">[PATH=/meu/projeto]
 opcache.enable=0
@@ -178,7 +178,7 @@ opcache.enable=0
 
 <ul>
 <li>Post aqui no blog sobre Extensões PHP: <a href="/2022-02-13-extensoes-php/">https://dias.dev/2022-02-13-extensoes-php/</a></li>
-<li>Vídeo no meu canal sobre <em>Opcache</em>: <a href="https://youtu.be/6vEspHqjrkI">https://youtu.be/6vEspHqjrkI</a></li>
+<li>Vídeo no meu canal sobre <em>Opcache</em>: <a href="https://youtube.com/watch?v=6vEspHqjrkI">https://youtube.com/watch?v=6vEspHqjrkI</a></li>
 <li>Documentação sobre as diretivas do <code>php.ini</code>: <a href="https://www.php.net/manual/en/ini.php">https://www.php.net/manual/en/ini.php</a></li>
 <li>Cupom de desconto na Alura para você se aprofundar em PHP: <a href="https://alura.tv/diasdedev">https://alura.tv/diasdedev</a></li>
 </ul>

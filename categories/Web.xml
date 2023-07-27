@@ -3,7 +3,7 @@
     <title><![CDATA[Dias de Dev]]></title>
     <link href="https://dias.dev/categories/Web.xml" rel="self"/>
     <link href="https://dias.dev"/>
-    <updated>2023-07-26T22:19:45+00:00</updated>
+    <updated>2023-07-27T21:50:48+00:00</updated>
     <id>https://dias.dev/</id>
         <generator uri="http://sculpin.io/">Sculpin</generator>
             <entry>
@@ -326,7 +326,7 @@ data-ad-slot="2366637560"></ins></p>
 
 <p>A principal diferença entre o Swoole e as demais ferramentas citadas de servidores auto-contidos é que o Swoole não é um componente em PHP e sim uma extensão, ou seja, o Swoole foi escrito em C e compilado para ser "integrado" ao PHP. Isso além de conceder ainda mais performance para o código, ainda dá poderes a mais para o Swoole como lidar de forma assíncrona com código que originalmente seria síncrono (como com PDO e curl, por exemplo).</p>
 
-<p>Já existe material por aí sobre Swoole, inclusive <a href="https://youtu.be/GCECSLtT49U">esse vídeo</a> no meu canal e o <a href="https://amzn.to/3gxamov">livro</a> escrito por um dos criadores da ferramenta, por isso não vou transformar esse artigo em um tutorial, mas vale a pena pesquisar mais a fundo.</p>
+<p>Já existe material por aí sobre Swoole, inclusive <a href="https://youtube.com/watch?v=GCECSLtT49U">esse vídeo</a> no meu canal e o <a href="https://amzn.to/3gxamov">livro</a> escrito por um dos criadores da ferramenta, por isso não vou transformar esse artigo em um tutorial, mas vale a pena pesquisar mais a fundo.</p>
 
 <h2 id="conclus%C3%A3o">Conclusão</h2>
 
