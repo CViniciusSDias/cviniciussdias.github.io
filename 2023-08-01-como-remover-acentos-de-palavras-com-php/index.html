@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <title>Como remover acentos de palavras com PHP | Dias de Dev</title>
+        <meta charset="utf-8">
+        <meta name="theme-color" content="#ffffff">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <meta name="robots" content="index, follow">
+    <meta name="title" content="Como remover acentos de palavras com PHP | Dias de Dev">
+    <meta name="keywords" content="PHP, acentos, string, normalização, Dias de Dev">
+    <meta name="description" content="Remover acentos de palavras usando PHP é uma tarefa bastante comum, principalmente para gerar _slugs_ ou links amigáveis. Entenda nesse texto como você pode usar PHP para remover acentos de textos.">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:article:published_time" content="1690848000">
+    <meta property="og:url" content="https://dias.dev/2023-08-01-como-remover-acentos-de-palavras-com-php/">
+    <meta property="og:title" content="Como remover acentos de palavras com PHP | Dias de Dev">
+    <meta property="og:description" content="Remover acentos de palavras usando PHP é uma tarefa bastante comum, principalmente para gerar _slugs_ ou links amigáveis. Entenda nesse texto como você pode usar PHP para remover acentos de textos.">
+    <meta property="og:image" content="https://dias.dev/assets/img/thumbs/2023-08-01-como-remover-acentos-de-palavras-com-php.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary">
+    <meta property="twitter:url" content="https://dias.dev/2023-08-01-como-remover-acentos-de-palavras-com-php/">
+    <meta property="twitter:title" content="Como remover acentos de palavras com PHP | Dias de Dev">
+    <meta property="twitter:description" content="Remover acentos de palavras usando PHP é uma tarefa bastante comum, principalmente para gerar _slugs_ ou links amigáveis. Entenda nesse texto como você pode usar PHP para remover acentos de textos.">
+            <link rel="preload" href="/build/Baloo2-Bold.ttf" as="font" type="font/ttf" crossorigin>
+        <link rel="preload" href="/build/Baloo2-ExtraBold.ttf" as="font" type="font/ttf" crossorigin>
+        <link rel="preload" href="/build/Baloo2-Medium.ttf" as="font" type="font/ttf" crossorigin>
+        <link rel="preload" href="/build/Baloo2-Regular.ttf" as="font" type="font/ttf" crossorigin>
+        <link rel="preload" href="/build/Baloo2-SemiBold.ttf" as="font" type="font/ttf" crossorigin>
+        <link rel="preload" href="/build/FugazOne-Regular.ttf" as="font" type="font/ttf" crossorigin>
+        <link rel="stylesheet" href="/build/app.css">
+
+        
+        <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Dias de Dev activity feed" />
+                    <link rel="stylesheet" href="/build/post.css">
+                        </head>
+    <body>
+        <div class="global-container">
+            <header>
+                <div class="header-title">
+                    <h1 class="main-heading">
+                        <a aria-current="page" href="/">Dias de Dev</a>
+                    </h1>
+                </div>
+                <nav class="menu">
+                    <a aria-current="page" href="/">Home</a>
+                    <a href="/categorias">Categorias</a>
+                                        <a href="/sobre-mim/">Sobre Mim</a>
+                    <a href="https://youtube.com/@DiasDeDev" target="_blank">
+                        YouTube
+                    </a>
+                </nav>
+            </header>
+            <main role="main">
+                    <article itemscope itemtype="https://schema.org/Article">
+        <header>
+            <h1 itemprop="headline" class="post-title">
+                Como remover acentos de palavras com PHP
+            </h1>
+            <p class="post-date" itemprop="dateCreated">
+                01 de agosto de 2023
+            </p>
+        </header>
+        <div itemprop="articleBody">
+            <p>Remover acentos de palavras usando PHP é uma tarefa bastante comum, principalmente para gerar <em>slugs</em> ou links amigáveis. Nesse texto nós vamos aprender a utilizar a extensão <em>intl</em> para realizar essa tarefa com 2 simples linhas de código.</p>
+
+<h3 id="tl%3Bdr-me-mostre-logo-o-c%C3%B3digo">TL;DR Me mostre logo o código</h3>
+
+<pre><code class="php">&lt;?php
+
+$string = 'Ãéïòû';
+
+$normalized = Normalizer::normalize($string, Normalizer::NFD);
+echo preg_replace('/[\x{0300}-\x{036F}]/u', '', $normalized); // Exibe: Aeiou
+
+</code></pre>
+
+<p>O código PHP acima remove os acentos, logo, o texto <code>Ãéïòû</code> vai se tornar <code>Aeiou</code>. Agora vamos entender o que o código faz.</p>
+
+<h2 id="normaliza%C3%A7%C3%A3o-de-texto">Normalização de texto</h2>
+
+<p>A primeira parte desse simples algoritmo consiste em <strong>normalizar</strong> o texto. Normalizar um texto consiste em transformá-lo de alguma forma pré-determinada, seguindo algumas normas ou regras.</p>
+
+<p>O código acima pega a string <code>"Ãéïòû"</code> e a normaliza utilizando a forma de normalização D (<code>NFD</code>), conhecida também como decomposição canônica (<em>Canonical Decomposition</em>). Essa regra consiste em separar os caracteres de acentuação dos demais, ou seja, caracteres como crase (&#96;) ou til (~) são separados das letras. O caractere <code>Ã</code>, por exemplo, se torna <code>A~</code>.</p>
+
+<p>Essa forma de normalização foi definida e nomeada pelo <a href="/2021-08-24-charsets-e-encodings-como-strings-funcionam/"><em>Unicode Consortium</em></a>, mas não é a única. Você pode conferir mais detalhes sobre cada uma das "regras" no site oficial: <a href="https://unicode.org/reports/tr15/">https://unicode.org/reports/tr15/</a>.</p>
+
+<p><ins class="adsbygoogle"
+style="display:block; text-align:center;"
+data-ad-layout="in-article"
+data-ad-format="fluid"
+data-ad-client="ca-pub-8918461095244552"
+data-ad-slot="2366637560"></ins></p>
+
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<h3 id="extens%C3%A3o-php">Extensão PHP</h3>
+
+<p>Tendo entendido o que é normalizar um texto, como é possível atingir esse objetivo com PHP? Através de uma <a href="/2022-02-13-extensoes-php/">extensão</a> externa chamada <code>intl</code>.</p>
+
+<p>Essa extensão fornece acesso a uma biblioteca famosa chamada <em>ICU (International Components for Unicode)</em>, que traz diversas operações referentes a <em>locale</em>. O termo <em>locale</em> em inglês não tem uma boa tradução (pelo menos eu não conheço), mas basicamente se refere a informações como formatos de data e hora, moedas, textos, etc. Repare que não é apenas relacionado ao idioma, mas tudo que envolve formatos internacionais.</p>
+
+<p>A extensão <code>intl</code> traz, dentre várias outras, a classe <code>Normalizer</code> que tem como único propósito realizar a normalização de textos. Com isso, o código a seguir separa cada caractere de seu respectivo acento, caso haja algum:</p>
+
+<pre><code class="php">$normalized = Normalizer::normalize('Ãéïòû', Normalizer::NFD);
+</code></pre>
+
+<p>Isso vai devolver uma string com o conteúdo semelhante ao seguinte: <code>A~e´i¨o`u^</code>. "Semelhante" porque os caracteres individuais e separados de acentos (como o <code>^</code>) não são os mesmos que vemos quando são adicionados a uma letra, então o real caractere não vai ser visível de forma individual ao tentar exibir a string resultante. Mas nós não queremos exibir a string normalizada, e sim manipulá-la. E é justamente sobre essa manipulação que vamos falar agora.</p>
+
+<h2 id="express%C3%A3o-regular">Expressão regular</h2>
+
+<p>Após separar os caracteres de seus respectivos acentos, a tarefa de remover os acentos se torna bastante simples. Basta utilizarmos uma expressão regular (a temida <em>regex</em>) para remover qualquer caractere que seja um acento. Os caracteres com código <em>Unicode</em> entre U+0300 e U+036F são acentos, logo, podemos removê-los com o seguinte código:</p>
+
+<pre><code class="php">preg_replace('/[\x{0300}-\x{036F}]/u', '', $normalized);
+</code></pre>
+
+<p>O modificador <code>/u</code>, ao final da <em>regex</em>, indica ao PHP que estamos trabalhando com UTF-8 nessa expressão regular, o que nos permite utilizar <code>\x</code>, que é o que nos dá o poder de identificar os caracteres <em>Unicode</em>.</p>
+
+<p>Isso garante não haver alteração da string original, mantendo números, caracteres especiais, etc. Claro que você pode mudar a expressão regular para remover tudo que não sejam letras, números e espaços, por exemplo. O código ficaria assim:</p>
+
+<pre><code class="php">preg_replace('/[^a-zA-Z0-9\s]/', '', $normalized);
+</code></pre>
+
+<p>O código acima é geralmente utilizado para gerar URLs amigáveis, ou os famosos <em>slugs</em>. Mas após entender o processo de normalização, modificar a <em>regex</em> para atingir objetivos diferentes e mais específicos se torna uma tarefa trivial.</p>
+
+<h2 id="conclus%C3%A3o">Conclusão</h2>
+
+<p>Embora seja uma tarefa bastante comum, remover acentos com PHP pode não parecer tão fácil quando uma rápida pesquisa é feita na internet. Diversas listas enormes de caracteres a serem substituídos são sugeridas, dentre outras práticas ainda mais "questionáveis".</p>
+
+<p>O simples uso de uma extensão apropriada faz com que essa complexa tarefa seja imensamente facilitada. Recomendo acessar os links que deixei durante o post como referência para se aprofundar em cada um dos assuntos aqui abordados.</p>
+
+<p>Já no link a seguir eu deixo um cupom de 10% de desconto para você assinar a Alura, plataforma onde há cursos completos (alguns comigo, inclusive) sobre manipulação de strings (dentre vários outros assuntos de tecnologia):
+<a href="https://alura.tv/diasdedev">https://alura.tv/diasdedev</a></p>
+
+        </div>
+        <footer class="post-footer" itemprop="author" itemscope itemtype="https://schema.org/Person">
+            <img src="https://gravatar.com/avatar/63579c5a873f3ab6abff10803e9a252f.jpg?s=50"
+                 alt="Foto do Vinicius Dias com o microfone na mão durante uma palestra"
+                 width="50"
+                 height="50"
+                 itemprop="image" />
+            <p>
+                Escrito por
+                <a href="https://twitter.com/cviniciussdias" itemprop="url">
+                    <span itemprop="name">Vinicius Dias</span>
+                </a>
+            </p>
+        </footer>
+
+                    <nav class="article-navigation">
+                <ul>
+                    <li>
+                                                <a class="previous" href="/2023-07-18-programacao-concorrente-assincrona-e-paralela/" title="Programação assíncrona, concorrente e paralela">
+                            ← <span class="title">Programação assíncrona, concorrente e paralela</span>
+                        </a>
+                                            </li>
+                    <li>
+                                            </li>
+                </ul>
+            </nav>
+            </article>
+
+
+
+            </main>
+            <footer class="global-footer">&copy; 2023 Dias de Dev</footer>
+        </div>
+
+        <script src="/build/app.js"></script>
+                
+        <!-- Google AdSense -->
+        <script async
+                src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8918461095244552"
+                crossorigin="anonymous"></script>
+        <!-- Simple Analytics -->
+        <script async defer src="https://sa.dias.dev/latest.js"></script>
+        <script async defer src="https://sa.dias.dev/auto-events.js"></script>
+        <noscript>
+            <img src="https://sa.dias.dev/noscript.gif"
+                 alt=""
+                 referrerpolicy="no-referrer-when-downgrade" />
+        </noscript>
+                </body>
+</html>

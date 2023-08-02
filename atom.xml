@@ -3,9 +3,87 @@
     <title><![CDATA[Dias de Dev]]></title>
     <link href="https://dias.dev/atom.xml" rel="self"/>
     <link href="https://dias.dev"/>
-    <updated>2023-07-31T21:37:36+00:00</updated>
+    <updated>2023-08-02T00:02:42+00:00</updated>
     <id>https://dias.dev</id>
         <generator uri="http://sculpin.io/">Sculpin</generator>
+            <entry>
+            <title type="html"><![CDATA[Como remover acentos de palavras com PHP]]></title>
+            <link href="https://dias.dev/2023-08-01-como-remover-acentos-de-palavras-com-php/"/>
+            <updated>2023-08-01T00:00:00+00:00</updated>
+            <id>https://dias.dev/2023-08-01-como-remover-acentos-de-palavras-com-php/</id>
+            <content type="html"><![CDATA[<p>Remover acentos de palavras usando PHP é uma tarefa bastante comum, principalmente para gerar <em>slugs</em> ou links amigáveis. Nesse texto nós vamos aprender a utilizar a extensão <em>intl</em> para realizar essa tarefa com 2 simples linhas de código.</p>
+
+<h3 id="tl%3Bdr-me-mostre-logo-o-c%C3%B3digo">TL;DR Me mostre logo o código</h3>
+
+<pre><code class="php">&lt;?php
+
+$string = 'Ãéïòû';
+
+$normalized = Normalizer::normalize($string, Normalizer::NFD);
+echo preg_replace('/[\x{0300}-\x{036F}]/u', '', $normalized); // Exibe: Aeiou
+
+</code></pre>
+
+<p>O código PHP acima remove os acentos, logo, o texto <code>Ãéïòû</code> vai se tornar <code>Aeiou</code>. Agora vamos entender o que o código faz.</p>
+
+<h2 id="normaliza%C3%A7%C3%A3o-de-texto">Normalização de texto</h2>
+
+<p>A primeira parte desse simples algoritmo consiste em <strong>normalizar</strong> o texto. Normalizar um texto consiste em transformá-lo de alguma forma pré-determinada, seguindo algumas normas ou regras.</p>
+
+<p>O código acima pega a string <code>"Ãéïòû"</code> e a normaliza utilizando a forma de normalização D (<code>NFD</code>), conhecida também como decomposição canônica (<em>Canonical Decomposition</em>). Essa regra consiste em separar os caracteres de acentuação dos demais, ou seja, caracteres como crase (&#96;) ou til (~) são separados das letras. O caractere <code>Ã</code>, por exemplo, se torna <code>A~</code>.</p>
+
+<p>Essa forma de normalização foi definida e nomeada pelo <a href="/2021-08-24-charsets-e-encodings-como-strings-funcionam/"><em>Unicode Consortium</em></a>, mas não é a única. Você pode conferir mais detalhes sobre cada uma das "regras" no site oficial: <a href="https://unicode.org/reports/tr15/">https://unicode.org/reports/tr15/</a>.</p>
+
+<p><ins class="adsbygoogle"
+style="display:block; text-align:center;"
+data-ad-layout="in-article"
+data-ad-format="fluid"
+data-ad-client="ca-pub-8918461095244552"
+data-ad-slot="2366637560"></ins></p>
+
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<h3 id="extens%C3%A3o-php">Extensão PHP</h3>
+
+<p>Tendo entendido o que é normalizar um texto, como é possível atingir esse objetivo com PHP? Através de uma <a href="/2022-02-13-extensoes-php/">extensão</a> externa chamada <code>intl</code>.</p>
+
+<p>Essa extensão fornece acesso a uma biblioteca famosa chamada <em>ICU (International Components for Unicode)</em>, que traz diversas operações referentes a <em>locale</em>. O termo <em>locale</em> em inglês não tem uma boa tradução (pelo menos eu não conheço), mas basicamente se refere a informações como formatos de data e hora, moedas, textos, etc. Repare que não é apenas relacionado ao idioma, mas tudo que envolve formatos internacionais.</p>
+
+<p>A extensão <code>intl</code> traz, dentre várias outras, a classe <code>Normalizer</code> que tem como único propósito realizar a normalização de textos. Com isso, o código a seguir separa cada caractere de seu respectivo acento, caso haja algum:</p>
+
+<pre><code class="php">$normalized = Normalizer::normalize('Ãéïòû', Normalizer::NFD);
+</code></pre>
+
+<p>Isso vai devolver uma string com o conteúdo semelhante ao seguinte: <code>A~e´i¨o`u^</code>. "Semelhante" porque os caracteres individuais e separados de acentos (como o <code>^</code>) não são os mesmos que vemos quando são adicionados a uma letra, então o real caractere não vai ser visível de forma individual ao tentar exibir a string resultante. Mas nós não queremos exibir a string normalizada, e sim manipulá-la. E é justamente sobre essa manipulação que vamos falar agora.</p>
+
+<h2 id="express%C3%A3o-regular">Expressão regular</h2>
+
+<p>Após separar os caracteres de seus respectivos acentos, a tarefa de remover os acentos se torna bastante simples. Basta utilizarmos uma expressão regular (a temida <em>regex</em>) para remover qualquer caractere que seja um acento. Os caracteres com código <em>Unicode</em> entre U+0300 e U+036F são acentos, logo, podemos removê-los com o seguinte código:</p>
+
+<pre><code class="php">preg_replace('/[\x{0300}-\x{036F}]/u', '', $normalized);
+</code></pre>
+
+<p>O modificador <code>/u</code>, ao final da <em>regex</em>, indica ao PHP que estamos trabalhando com UTF-8 nessa expressão regular, o que nos permite utilizar <code>\x</code>, que é o que nos dá o poder de identificar os caracteres <em>Unicode</em>.</p>
+
+<p>Isso garante não haver alteração da string original, mantendo números, caracteres especiais, etc. Claro que você pode mudar a expressão regular para remover tudo que não sejam letras, números e espaços, por exemplo. O código ficaria assim:</p>
+
+<pre><code class="php">preg_replace('/[^a-zA-Z0-9\s]/', '', $normalized);
+</code></pre>
+
+<p>O código acima é geralmente utilizado para gerar URLs amigáveis, ou os famosos <em>slugs</em>. Mas após entender o processo de normalização, modificar a <em>regex</em> para atingir objetivos diferentes e mais específicos se torna uma tarefa trivial.</p>
+
+<h2 id="conclus%C3%A3o">Conclusão</h2>
+
+<p>Embora seja uma tarefa bastante comum, remover acentos com PHP pode não parecer tão fácil quando uma rápida pesquisa é feita na internet. Diversas listas enormes de caracteres a serem substituídos são sugeridas, dentre outras práticas ainda mais "questionáveis".</p>
+
+<p>O simples uso de uma extensão apropriada faz com que essa complexa tarefa seja imensamente facilitada. Recomendo acessar os links que deixei durante o post como referência para se aprofundar em cada um dos assuntos aqui abordados.</p>
+
+<p>Já no link a seguir eu deixo um cupom de 10% de desconto para você assinar a Alura, plataforma onde há cursos completos (alguns comigo, inclusive) sobre manipulação de strings (dentre vários outros assuntos de tecnologia):
+<a href="https://alura.tv/diasdedev">https://alura.tv/diasdedev</a></p>
+]]></content>
+        </entry>
             <entry>
             <title type="html"><![CDATA[Programação assíncrona, concorrente e paralela]]></title>
             <link href="https://dias.dev/2023-07-18-programacao-concorrente-assincrona-e-paralela/"/>
@@ -960,82 +1038,6 @@ data-ad-slot="2366637560"></ins></p>
 
 <p>Agora se você prefere estudar através de cursos e vídeos, super recomendo os treinamentos de front-end e de PWA da Alura. Lá você consegue toda a base para desenvolver uma PWA de forma profissional, aprendendo desde a base, passando por <em>JavaScript</em> avançado e <em>APIs Web</em>, até <em>PWAs</em> de fato. Se for o seu caso, aqui tenho um cupom de 10% de desconto para estudar na Alura:
 <a href="https://alura.tv/diasdedev">https://alura.tv/diasdedev</a></p>
-]]></content>
-        </entry>
-            <entry>
-            <title type="html"><![CDATA[Charsets e Encodings: Como strings funcionam]]></title>
-            <link href="https://dias.dev/2021-08-24-charsets-e-encodings-como-strings-funcionam/"/>
-            <updated>2021-08-24T00:00:00+00:00</updated>
-            <id>https://dias.dev/2021-08-24-charsets-e-encodings-como-strings-funcionam/</id>
-            <content type="html"><![CDATA[<p>É de conhecimento geral que computadores trabalham com números, especificamente números na base binária. Sabendo disso, como podemos representar o texto que eu estou escrevendo apenas com conjuntos de 0s e 1s? Como o computador, trabalhando apenas com números, consegue lidar com textos?</p>
-
-<h2 id="tabelas-de-caracteres-charsets">Tabelas de caracteres (Charsets)</h2>
-
-<p>Para realizar essa tarefa, tabelas de caracteres (<em>charsets</em>) são utilizadas. Com essas tabelas, algum caractere pode ser mapeado para algum número. Esse número que será armazenado e manipulado pelos programas que lidam com textos. Mas como esse mapeamento é feito?</p>
-
-<h2 id="ascii">ASCII</h2>
-
-<p>Uma das tabelas de caracteres mais antigas que se tem conhecimento é a ASCII (<em>American Standard Code for Information Interchange</em>). Esta tabela contém todos os números e os caracteres usados pelo idioma inglês, onde cada um desses caracteres é mapeado para um número e esse número é convertido diretamente para a base binária, sendo uma representação bastante simples. Os números vão de 0 a 127, ou seja, qualquer caractere da tabela ASCII pode ser representado em até 7 <em>bits</em>, o que é menos que 1 <em>byte</em> (1 <em>byte</em> = 8 <em>bits</em>).</p>
-
-<p><img src="https://raw.githubusercontent.com/wiki/tomgibara/ascii-table/tables/ascii-table-1.1.png" alt="Tabela ASCII" /></p>
-
-<p>Isso funcionava muito bem para textos que usavam inglês como idioma (ou algum idioma com o mesmo conjunto de caracteres). Porém, diversos outros idiomas possuem caracteres que não estão representados nesta tabela. Caracteres acentuados, por exemplo, não estão na tabela ASCII. Como representar textos em português, por exemplo?</p>
-
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
-<h2 id="extended-ascii">Extended ASCII</h2>
-
-<p>Como pudemos ver na imagem da tabela ASCII, os valores vão de 0 a 127. Isso pode ser representado com 7 <em>bits</em>.</p>
-
-<p>Como foi citado no capítulo anterior, todos os caracteres da tabela ASCII podem ser representados com até 7 <em>bits</em>. Sendo assim, temos 1 bit "sobrando" para cada caractere completar 1 <em>byte</em>.</p>
-
-<p>Pensando nisso, surgiram diversas outras tabelas de caracteres fazendo uso deste bit adicional para representar outros caracteres. Desta forma é criada a tabela ASCII estendida: <em>Extended ASCII</em> ou <em>EASCII</em></p>
-
-<p><img src="https://files.passeidireto.com/0b57a2e8-7fae-4e06-ac73-a7004f09a741/0b57a2e8-7fae-4e06-ac73-a7004f09a741.gif" alt="Tabela ASCII Estendida" /></p>
-
-<p>Ao mesmo tempo, outros idiomas que possuem seu alfabeto sem nenhuma semelhança com o inglês (como japonês ou russo) utilizavam tabelas completamente diferentes para representar seus caracteres.</p>
-
-<h2 id="ascens%C3%A3o-da-web">Ascensão da Web</h2>
-
-<p>O uso de tabelas diferentes funcionou muito bem enquanto os arquivos ficavam apenas em um computador ou eram compartilhados em redes locais (como de universidades). Porém, conforme a Web nasceu e cresceu, o compartilhamento de arquivos se tornou uma tarefa trivial. Como eu, no Brasil, poderia enviar um documento para o Egito, usando o alfabeto grego? Essa tarefa era simplesmente impossível.</p>
-
-<h2 id="unicode">Unicode</h2>
-
-<p>Pensando em ter uma forma unificada de representar todos os caracteres conhecidos no mundo, em 1991 foi criada o <em>Unicode Consortium</em>. Essa iniciativa trabalha e tem encontros frequentes para garantir que há suporte a todos os idiomas e caracteres conhecidos pela humanidade, incluindo <em>emojis</em>. Parece um trabalho enorme e realmente é.</p>
-
-<p><em>Emojis</em>, por exemplo, foram sugeridos à iniciativa em meados de 2000, porém apenas após 2007 eles foram incorporados ao <em>Unicode</em>.</p>
-
-<p>Então, se formos supersimplificar (muito), podemos dizer que o <em>Unicode Consortium</em> criou um grande <em>charset</em>, ou seja, uma grande tabela de caracteres. Porém, essa "tabela" é gigante! Como representar estes números enormes de forma eficiente?</p>
-
-<h2 id="encodings">Encodings</h2>
-
-<p>Aqui entram os encodings. O número <strong>128 512</strong> (em hexadecimal, 1F600) representa o emoji de sorriso (😀). Esse número <strong>128 512</strong> pode ser representado de várias formas dependendo do encoding selecionado para tal arquivo. Alguns encodings compatíveis com <em>Unicode</em> são:
-- UTF-8
-- UTF-16
-- UTF-32</p>
-
-<p>Inicialmente eu acreditava que a diferença entre eles era apenas o número de <em>bits</em> utilizado, sendo assim UTF-8 poderia representar menos caracteres já que usa menos bits. Não é o caso. Todos eles podem consumir um número variável de <em>bits</em> os organizando de forma diferente. Cada encoding pode ser mais vantajoso dependendo do cenário. Para representar textos (como esse que escrevo) e mensagens transferidas pela rede, UTF-8 é o mais recomendado e utilizado, visto que sua organização permite que os caracteres mais comuns ocupem o menor espaço possível. Já UTF-16 ocupa menos espaço representando caracteres com números maiores na "tabela" unicode.</p>
-
-<h2 id="conclus%C3%A3o">Conclusão</h2>
-
-<p>É comum utilizarmos funções de conversão de encoding sem entender bem o que estamos fazendo e muito provavelmente todo mundo que desenvolve <em>software</em> para a <em>web</em> já se deparou com o seguinte problema:</p>
-
-<p><img src="https://i.stack.imgur.com/590Tg.png" alt="Texto com caracteres mal codificados" /></p>
-
-<p>Entender como funcionam charsets e encodings de texto além de ser interessante e divertido, pode nos ajudar a compreender melhor problemas deste tipo e principalmente encontrar a solução de forma mais simples.</p>
-
-<p>Creio que seja seguro afirmar que a grande maioria dos textos que tratamos como desenvolvedores utiliza UTF-8 como encoding e neste artigo nós entendemos o motivo disso e como o tratamento de textos evoluiu até chegar a esse ponto.</p>
-
-<p>Se você quiser aprender mais sobre esse assunto, pode considerar assinar a Alura. Lá existem treinamentos que tratam sobre charsets, encoding, manipulação de <em>strings</em>    e muito mais. Caso pretenda estudar na Alura, <a href="https://alura.tv/diasdedev">neste link</a> você tem um desconto de 10%.</p>
 ]]></content>
         </entry>
     </feed>

@@ -3,9 +3,87 @@
     <title><![CDATA[Dias de Dev]]></title>
     <link href="https://dias.dev/categories/PHP.xml" rel="self"/>
     <link href="https://dias.dev"/>
-    <updated>2023-07-31T21:37:36+00:00</updated>
+    <updated>2023-08-02T00:02:42+00:00</updated>
     <id>https://dias.dev/</id>
         <generator uri="http://sculpin.io/">Sculpin</generator>
+            <entry>
+            <title type="html"><![CDATA[Como remover acentos de palavras com PHP]]></title>
+            <link href="https://dias.dev/2023-08-01-como-remover-acentos-de-palavras-com-php/"/>
+            <updated>2023-08-01T00:00:00+00:00</updated>
+            <id>https://dias.dev/2023-08-01-como-remover-acentos-de-palavras-com-php/</id>
+            <content type="html"><![CDATA[<p>Remover acentos de palavras usando PHP é uma tarefa bastante comum, principalmente para gerar <em>slugs</em> ou links amigáveis. Nesse texto nós vamos aprender a utilizar a extensão <em>intl</em> para realizar essa tarefa com 2 simples linhas de código.</p>
+
+<h3 id="tl%3Bdr-me-mostre-logo-o-c%C3%B3digo">TL;DR Me mostre logo o código</h3>
+
+<pre><code class="php">&lt;?php
+
+$string = 'Ãéïòû';
+
+$normalized = Normalizer::normalize($string, Normalizer::NFD);
+echo preg_replace('/[\x{0300}-\x{036F}]/u', '', $normalized); // Exibe: Aeiou
+
+</code></pre>
+
+<p>O código PHP acima remove os acentos, logo, o texto <code>Ãéïòû</code> vai se tornar <code>Aeiou</code>. Agora vamos entender o que o código faz.</p>
+
+<h2 id="normaliza%C3%A7%C3%A3o-de-texto">Normalização de texto</h2>
+
+<p>A primeira parte desse simples algoritmo consiste em <strong>normalizar</strong> o texto. Normalizar um texto consiste em transformá-lo de alguma forma pré-determinada, seguindo algumas normas ou regras.</p>
+
+<p>O código acima pega a string <code>"Ãéïòû"</code> e a normaliza utilizando a forma de normalização D (<code>NFD</code>), conhecida também como decomposição canônica (<em>Canonical Decomposition</em>). Essa regra consiste em separar os caracteres de acentuação dos demais, ou seja, caracteres como crase (&#96;) ou til (~) são separados das letras. O caractere <code>Ã</code>, por exemplo, se torna <code>A~</code>.</p>
+
+<p>Essa forma de normalização foi definida e nomeada pelo <a href="/2021-08-24-charsets-e-encodings-como-strings-funcionam/"><em>Unicode Consortium</em></a>, mas não é a única. Você pode conferir mais detalhes sobre cada uma das "regras" no site oficial: <a href="https://unicode.org/reports/tr15/">https://unicode.org/reports/tr15/</a>.</p>
+
+<p><ins class="adsbygoogle"
+style="display:block; text-align:center;"
+data-ad-layout="in-article"
+data-ad-format="fluid"
+data-ad-client="ca-pub-8918461095244552"
+data-ad-slot="2366637560"></ins></p>
+
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<h3 id="extens%C3%A3o-php">Extensão PHP</h3>
+
+<p>Tendo entendido o que é normalizar um texto, como é possível atingir esse objetivo com PHP? Através de uma <a href="/2022-02-13-extensoes-php/">extensão</a> externa chamada <code>intl</code>.</p>
+
+<p>Essa extensão fornece acesso a uma biblioteca famosa chamada <em>ICU (International Components for Unicode)</em>, que traz diversas operações referentes a <em>locale</em>. O termo <em>locale</em> em inglês não tem uma boa tradução (pelo menos eu não conheço), mas basicamente se refere a informações como formatos de data e hora, moedas, textos, etc. Repare que não é apenas relacionado ao idioma, mas tudo que envolve formatos internacionais.</p>
+
+<p>A extensão <code>intl</code> traz, dentre várias outras, a classe <code>Normalizer</code> que tem como único propósito realizar a normalização de textos. Com isso, o código a seguir separa cada caractere de seu respectivo acento, caso haja algum:</p>
+
+<pre><code class="php">$normalized = Normalizer::normalize('Ãéïòû', Normalizer::NFD);
+</code></pre>
+
+<p>Isso vai devolver uma string com o conteúdo semelhante ao seguinte: <code>A~e´i¨o`u^</code>. "Semelhante" porque os caracteres individuais e separados de acentos (como o <code>^</code>) não são os mesmos que vemos quando são adicionados a uma letra, então o real caractere não vai ser visível de forma individual ao tentar exibir a string resultante. Mas nós não queremos exibir a string normalizada, e sim manipulá-la. E é justamente sobre essa manipulação que vamos falar agora.</p>
+
+<h2 id="express%C3%A3o-regular">Expressão regular</h2>
+
+<p>Após separar os caracteres de seus respectivos acentos, a tarefa de remover os acentos se torna bastante simples. Basta utilizarmos uma expressão regular (a temida <em>regex</em>) para remover qualquer caractere que seja um acento. Os caracteres com código <em>Unicode</em> entre U+0300 e U+036F são acentos, logo, podemos removê-los com o seguinte código:</p>
+
+<pre><code class="php">preg_replace('/[\x{0300}-\x{036F}]/u', '', $normalized);
+</code></pre>
+
+<p>O modificador <code>/u</code>, ao final da <em>regex</em>, indica ao PHP que estamos trabalhando com UTF-8 nessa expressão regular, o que nos permite utilizar <code>\x</code>, que é o que nos dá o poder de identificar os caracteres <em>Unicode</em>.</p>
+
+<p>Isso garante não haver alteração da string original, mantendo números, caracteres especiais, etc. Claro que você pode mudar a expressão regular para remover tudo que não sejam letras, números e espaços, por exemplo. O código ficaria assim:</p>
+
+<pre><code class="php">preg_replace('/[^a-zA-Z0-9\s]/', '', $normalized);
+</code></pre>
+
+<p>O código acima é geralmente utilizado para gerar URLs amigáveis, ou os famosos <em>slugs</em>. Mas após entender o processo de normalização, modificar a <em>regex</em> para atingir objetivos diferentes e mais específicos se torna uma tarefa trivial.</p>
+
+<h2 id="conclus%C3%A3o">Conclusão</h2>
+
+<p>Embora seja uma tarefa bastante comum, remover acentos com PHP pode não parecer tão fácil quando uma rápida pesquisa é feita na internet. Diversas listas enormes de caracteres a serem substituídos são sugeridas, dentre outras práticas ainda mais "questionáveis".</p>
+
+<p>O simples uso de uma extensão apropriada faz com que essa complexa tarefa seja imensamente facilitada. Recomendo acessar os links que deixei durante o post como referência para se aprofundar em cada um dos assuntos aqui abordados.</p>
+
+<p>Já no link a seguir eu deixo um cupom de 10% de desconto para você assinar a Alura, plataforma onde há cursos completos (alguns comigo, inclusive) sobre manipulação de strings (dentre vários outros assuntos de tecnologia):
+<a href="https://alura.tv/diasdedev">https://alura.tv/diasdedev</a></p>
+]]></content>
+        </entry>
             <entry>
             <title type="html"><![CDATA[Strings multibyte: o que são e por que você precisa da extensão mbstring do PHP]]></title>
             <link href="https://dias.dev/2023-03-21-strings-multibyte-php-mbstring/"/>
@@ -1247,97 +1325,6 @@ de streams podemos compactar e descompactar arquivos, enviar dados por FTP, aces
 <li>Aqui mesmo no blog tem um post onde uso streams para realizar programação assíncrona através de I/O não bloqueante.</li>
 </ul></li>
 </ul>
-]]></content>
-        </entry>
-            <entry>
-            <title type="html"><![CDATA[PHP além da Web]]></title>
-            <link href="https://dias.dev/2020-10-27-php-alem-da-web/"/>
-            <updated>2020-10-27T00:00:00+00:00</updated>
-            <id>https://dias.dev/2020-10-27-php-alem-da-web/</id>
-            <content type="html"><![CDATA[<h2 id="php-%2B-web-%3D-">PHP + Web = &lt;3</h2>
-
-<p>Não é nenhum segredo que o PHP nasceu na web e para a web. Seu propósito inicial era servir páginas dinâmicas de forma simples e amigável, mas a Web evoluiu e o PHP também. Hoje em dia o PHP é uma linguagem de programação completa e pronta para ser executada nos mais diversos ambientes, e não só na Web.</p>
-
-<h3 id="web-al%C3%A9m-do-html">Web além do HTML</h3>
-
-<p>Antes de sair da Web, acredito que seja muito importante citar que nem só de HTML vive a Web. É mais do que comum vermos URLs gerando dados nos mais diversos formatos como XML, JSON, etc. Você provavelmente conhece isso como API, correto? Obviamente o PHP está mais do que preparado para este tipo de trabalho e de forma muito simples. A ideia desse artigo é trazer as possibilidades realmente fora da Web.</p>
-
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
-<h2 id="por-que-usar-php-fora-da-web%3F">Por que usar PHP fora da web?</h2>
-
-<p>Antes de vermos as possibilidades, por que eu iria fazer isso? Se o PHP nasceu na Web, por que não mantê-lo lá? Bom, existem diversos motivos para trazermos o PHP para demais ambientes, mas acredito que o mais óbvio e o principal é a equipe. Se nós já temos uma equipe de pessoas que desenvolvem em PHP na Web, por que não utilizar esse conhecimento também fora da Web para processamento de dados assíncronos, leitura de filas, cronjobs, scripts da CLI em geral, etc? É justamente sobre essas possibilidades que quero tratar nesta publicação.</p>
-
-<h2 id="existe-vida-al%C3%A9m-da-web%3F">Existe vida além da Web?</h2>
-
-<p>Agora que já entendemos o motivo de possivelmente utilizar PHP fora da Web, vamos falar sobre... o que seria esse "fora da Web". Em uma equipe de desenvolvimento Web, o que poderia estar fora da Web para nós precisarmos utilizar PHP?</p>
-
-<h3 id="processos-ass%C3%ADncronos">Processos assíncronos</h3>
-
-<p>Uma requisição web deve acontecer da forma mais rápida possível para que o usuário/cliente não fique esperando uma resposta, e uma das técnicas muito conhecidas para evitar essa espera é tornar alguns processos assíncronos.</p>
-
-<p>Se ao cadastrar um usuário no banco de dados nós precisamos enviar um e-mail, por exemplo, não há necessidade de fazê-lo esperar até nós conseguirmos enviar este e-mail para só depois entregar a resposta. Nós podemos armazenar em algum lugar a informação de que um e-mail deverá ser enviado, e fazer isso depois, fora da web, sem que o usuário fique esperando.</p>
-
-<p>Existem inúmeras formas de atingir este objetivo. Uma das mais comuns é através de filas de processos. Nós armazenamos as informações sobre o processo que deve ser executado em algum local específico para isso, e futuramente, fora da web, recuperamos esta informação para processá-la. Banco de dados, mensagerias, onde for. O importante é que a tarefa demorada não faça com que o usuário nos espere.</p>
-
-<h3 id="scripts-cli">Scripts CLI</h3>
-
-<p>Um cenário também muito comum, principalmente em empresas de médio e grande porte, é ter processos que devem ser executados periodicamente de forma manual ou automatica. Sincronização de dados, processamento de informações, o que for... Essas tarefas não precisam ser executadas em um ambiente web, e normalmente são executadas na linha de comando. Os processos automáticos são conhecidos como <em>cronjobs</em> ou tarefas agendadas. Já os processos executados manualmente são simples scripts ou programas de linha de comando (CLI).</p>
-
-<p>O PHP é um executável capaz de rodar na linha de comando e não há dificuldade nenhuma em utilizá-lo para estes casos. Inclusive há diversos recursos da linguagem que nos permitem acessar detalhes interessantes deste novo mundo fora da grande rede mundial.</p>
-
-<h4 id="features-fora-da-web">Features fora da web</h4>
-
-<p>Com PHP nós conseguimos ler parâmetros da linha de comando através de variáveis "mágicas" como <a href="https://php.net/argv">$argv</a> e <a href="https://php.net/argc">$argc</a>. Isso nos permite interatividade de forma semelhante ao que a Web nos traria com formulários, parâmetros via URL, etc.</p>
-
-<p>Além de argumentos, podemos receber algumas opções para personalizar a execução de nossos códigos. A função <a href="https://php.net/getopt">getopt</a> consegue nos ajudar a fazer isso de forma simples e profissional, exatamente como os mais famosos comandos que estamos habituados a utilizar já fazem.</p>
-
-<h3 id="ferramentas">Ferramentas</h3>
-
-<p>O mundo de componentes PHP é fantástico. Temos ferramentas mágicas como Symfony para criar aplicações Web, Doctrine para acessar o banco de dados com mais facilidade, PHPUnit para realizar testes automatizados... Mas será que existem ferramentas específicas para facilitar nosso mundo fora da Web? A resposta felizmente é SIM!</p>
-
-<h4 id="cria%C3%A7%C3%A3o-de-programas">Criação de programas</h4>
-
-<p>O próprio Symfony possui uma das ferramentas mais conhecidas para criação de programas na CLI: O <a href="https://symfony.com/doc/current/components/console.html">Symfony Console</a>. Com ele nós podemos criar aplicações de forma semelhantes com a que criamos na Web, mas ao invés de <em>Controllers</em> criamos <em>Commands</em>, por exemplo. Todas as facilidades de um framework moderno podem ser utilizadas fora da Web sem maiores problemas.</p>
-
-<p>Obviamente está não é a única opção, mas diversas outras ferramentas fazem uso do <em>Symfony Console</em>. Algumas alternativas são <em>Laravel Zero</em>, CLImate, Aura.CLI, etc.</p>
-
-<h4 id="performance">Performance</h4>
-
-<p>Tarefas que são executadas por trás das cortinas tendem a ser mais pesadas, exigir mais I/O ou mais processamento. Nesses casos podemos recorrer a ferramentas específicas para resolver tais problemas.</p>
-
-<p>Se temos um cenários de muitas requisições para servidores externos, seja em chamadas HTTP, STMP ou outros protocolos, devemos fazer bom uso dos streams do PHP e trabalhar com programação assíncrona. Uma ótima ferramenta que pode nos ajudar muito com isso é a <a href="https://reactphp.org/#core-components">ReactPHP</a> que fornece diversos componentes com os mais diversos propósitos.</p>
-
-<p>Já se muito processamento é utilizado, com calculos complexos, manipulação de imagens e qualquer outra coisa que consuma muita CPU, paralelização é a resposta. Podemos criar processos através da extensão <a href="https://php.net/pcntl">pcntl</a> ou threads através da extensão <a href="https://php.net/parallel">parallel</a>. Ambas as opções requerem um estudo mais aprofundado sobre conceitos de sistemas operacionais e programação paralela, mas o resultado é muito gratificante.</p>
-
-<p>Se você quiser entender um pouco melhor sobre a diferença entre Programação Assíncrona e Programação Paralela, pode conferir este vídeo:</p>
-
-<p><lite-youtube videoid="zLfXPSeCkB8">
-    <a href="https://youtube.com/watch?v=zLfXPSeCkB8" class="lty-playbtn" title="Reproduzir vídeo">
-        <span class="lyt-visually-hidden">
-            Programação assíncrona vs Programação paralela - Entenda a diferença | Programando com Vinicius Dias
-        </span>
-    </a>
-</lite-youtube></p>
-
-<h2 id="conclus%C3%A3o">Conclusão</h2>
-
-<p>Nesta rápida leitura já conseguimos notar que não só é possível utilizar PHP fora da Web como também ele está muito preparado para este ambiente.</p>
-
-<p>Por ser uma linguagem de programação completa e madura, diversas bibliotecas, extensões e componentes já surgiram para resolver problemas comuns e cabe a nós, devs e amantes do PHP, aprendê-las e utilizá-las.</p>
-
-<p>Além disso, com o advento do <a href="https://youtube.com/watch?v=WLx0z9kloro">JIT</a> que chegará no PHP 8, o uso do PHP fora da web se tornará ainda mais efetivo. Diversas otimizações de baixo nível que eu nem mesmo sei explicar vão acontecer, tornando possíveis aplicações que requerem ainda mais processamento como IoT, Machine Learning e vários outros nomes bonitos que não me arriscarei a citar.</p>
-
-<p>Se você ainda acha que PHP está preso na Web, acredito que não há momento melhor para abrir os olhos e conhecer este novo mundo!</p>
 ]]></content>
         </entry>
     </feed>
