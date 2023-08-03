@@ -3,7 +3,7 @@
     <title><![CDATA[Dias de Dev]]></title>
     <link href="https://dias.dev/categories/PHP.xml" rel="self"/>
     <link href="https://dias.dev"/>
-    <updated>2023-08-02T00:11:02+00:00</updated>
+    <updated>2023-08-03T03:32:44+00:00</updated>
     <id>https://dias.dev/</id>
         <generator uri="http://sculpin.io/">Sculpin</generator>
             <entry>
@@ -11,7 +11,60 @@
             <link href="https://dias.dev/2023-08-01-como-remover-acentos-de-palavras-com-php/"/>
             <updated>2023-08-01T00:00:00+00:00</updated>
             <id>https://dias.dev/2023-08-01-como-remover-acentos-de-palavras-com-php/</id>
-            <content type="html"><![CDATA[<p>Remover acentos de palavras usando PHP é uma tarefa bastante comum, principalmente para gerar <em>slugs</em> ou links amigáveis. Nesse texto nós vamos aprender a utilizar a extensão <em>intl</em> para realizar essa tarefa com 2 simples linhas de código.</p>
+            <content type="html"><![CDATA[<p><em>Edit: <a href="https://www.linkedin.com/feed/update/urn:li:activity:7092531957842026499/">Neste comentário</a> o Wanderson me apontou outra solução para resolver o mesmo problema, então estou adicionando-a ao início do post.</em></p>
+
+<h2 id="extens%C3%A3o-iconv">Extensão iconv</h2>
+
+<pre><code class="php">&lt;?php
+
+$string = 'Ãéïòû';
+echo iconv('UTF-8', 'ASCII//TRANSLIT', $string); // Exibe: Aeiou
+</code></pre>
+
+<p>O código PHP acima remove os acentos, logo, o texto <code>Ãéïòû</code> vai se tornar <code>Aeiou</code>. Esse trabalho é realizado pela <a href="/2022-02-13-extensoes-php/">extensão</a> <code>iconv</code> que vem instalada por padrão no PHP. Ela permite a conversão entre <em><a href="/2021-08-24-charsets-e-encodings-como-strings-funcionam/">encodings</a></em>.</p>
+
+<p>Ao converter uma string para <em>ASCII</em>, nós podemos escolher ignorar os caracteres não existentes nesse <em>charset</em> ou realizar uma transliteração (mapeamento) dos caracteres que não fazem parte da tabela para o mais próximo possível. Para isso, utilizamos o sufixo <code>//TRANSLIT</code> ao segundo parâmetro. Isso transforma, por exemplo, o caractere <code>Ã</code> em <code>A</code>.</p>
+
+<p>Essa abordagem vai funcionar na maioria dos cenários, mas há algumas observações que devem ser consideradas.</p>
+
+<p><ins class="adsbygoogle"
+style="display:block; text-align:center;"
+data-ad-layout="in-article"
+data-ad-format="fluid"
+data-ad-client="ca-pub-8918461095244552"
+data-ad-slot="2366637560"></ins></p>
+
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<h3 id="locale">Locale</h3>
+
+<p>A conversão com <code>iconv</code> não vai funcionar caso a categoria <code>LC_CTYPE</code> do <code>locale</code> esteja definida como <code>C</code> ou <code>POSIX</code>.</p>
+
+<p>Exemplo:</p>
+
+<pre><code class="php">&lt;?php
+
+setlocale(LC_CTYPE, 'POSIX');
+echo iconv('UTF-8', 'ASCII//TRANSLIT', 'Ãéïòû'); // Exibe ?????
+</code></pre>
+
+<h3 id="implementa%C3%A7%C3%A3o-do-iconv">Implementação do iconv</h3>
+
+<p>Outro problema é que o sufixo <code>//TRANSLIT</code> tem seu funcionamento dependente da implementação do <code>iconv</code> que seu sistema operacional possui. Algumas implementações são conhecidas por ignorar <code>//TRANSLIT</code>, então a conversão provavelmente falhará.</p>
+
+<p>Para esses cenários uma de suas opções é instalar outra implementação do <code>iconv</code>. Você pode verificar qual a implementação do seu sistema operacional lendo o conteúdo da constante <code>ICONV_IMPL</code>. A implementação <code>glibc</code> é segura e funciona conforme exemplificado nesse post.</p>
+
+<h3 id="solu%C3%A7%C3%A3o">Solução</h3>
+
+<p>Caso você, por algum motivo, não possa alterar o <code>locale</code> em seu servidor e o padrão for <code>C</code> ou <code>POSIX</code>, a solução descrita não é válida para seu caso. Se sua implementação do <code>iconv</code> no sistema operacional for uma incompatível com <code>//TRANSLIT</code> e você não puder ou preferir não instalar outra implementação, essa dica também não foi para você.</p>
+
+<p>Uma solução para os problemas previamente citados é utilizar outra abordagem, com outra extensão. Para estes raros cenários, deixo a seguir o conteúdo original desse post, onde mostro como utilizar a normalização de strings com PHP para remover acentos.</p>
+
+<h2 id="post-original">Post original</h2>
+
+<p>Remover acentos de palavras usando PHP é uma tarefa bastante comum, principalmente para gerar <em>slugs</em> ou links amigáveis. Nesse texto nós vamos aprender a utilizar a extensão <em>intl</em> para realizar essa tarefa com 2 simples linhas de código.</p>
 
 <h3 id="tl%3Bdr-me-mostre-logo-o-c%C3%B3digo">TL;DR Me mostre logo o código</h3>
 
