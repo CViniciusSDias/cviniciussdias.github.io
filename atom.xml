@@ -3,7 +3,7 @@
     <title><![CDATA[Dias de Dev]]></title>
     <link href="https://dias.dev/atom.xml" rel="self"/>
     <link href="https://dias.dev"/>
-    <updated>2023-08-03T03:32:44+00:00</updated>
+    <updated>2023-08-03T03:34:53+00:00</updated>
     <id>https://dias.dev</id>
         <generator uri="http://sculpin.io/">Sculpin</generator>
             <entry>
@@ -23,7 +23,7 @@ echo iconv('UTF-8', 'ASCII//TRANSLIT', $string); // Exibe: Aeiou
 
 <p>O código PHP acima remove os acentos, logo, o texto <code>Ãéïòû</code> vai se tornar <code>Aeiou</code>. Esse trabalho é realizado pela <a href="/2022-02-13-extensoes-php/">extensão</a> <code>iconv</code> que vem instalada por padrão no PHP. Ela permite a conversão entre <em><a href="/2021-08-24-charsets-e-encodings-como-strings-funcionam/">encodings</a></em>.</p>
 
-<p>Ao converter uma string para <em>ASCII</em>, nós podemos escolher ignorar os caracteres não existentes nesse <em>charset</em> ou realizar uma transliteração (mapeamento) dos caracteres que não fazem parte da tabela para o mais próximo possível. Para isso, utilizamos o sufixo <code>//TRANSLIT</code> ao segundo parâmetro. Isso transforma, por exemplo, o caractere <code>Ã</code> em <code>A</code>.</p>
+<p>Ao converter uma string para <em>ASCII</em>, nós podemos escolher ignorar os caracteres não existentes nesse <em>charset</em> ou realizar uma transliteração (mapeamento) dos caracteres que não fazem parte da tabela para o mais próximo possível. Para isso, adicionamos o sufixo <code>//TRANSLIT</code> ao segundo parâmetro. Isso transforma, por exemplo, o caractere <code>Ã</code> em <code>A</code>.</p>
 
 <p>Essa abordagem vai funcionar na maioria dos cenários, mas há algumas observações que devem ser consideradas.</p>
 
