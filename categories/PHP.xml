@@ -3,9 +3,233 @@
     <title><![CDATA[Dias de Dev]]></title>
     <link href="https://dias.dev/categories/PHP.xml" rel="self"/>
     <link href="https://dias.dev"/>
-    <updated>2023-08-12T02:26:56+00:00</updated>
+    <updated>2023-08-12T02:33:46+00:00</updated>
     <id>https://dias.dev/</id>
         <generator uri="http://sculpin.io/">Sculpin</generator>
+            <entry>
+            <title type="html"><![CDATA[Explorando Métodos Mágicos no PHP: Conceitos e Exemplos Práticos]]></title>
+            <link href="https://dias.dev/2023-08-11-metodos-magicos-php/"/>
+            <updated>2023-08-11T00:00:00+00:00</updated>
+            <id>https://dias.dev/2023-08-11-metodos-magicos-php/</id>
+            <content type="html"><![CDATA[<p>Os métodos mágicos no PHP são métodos "especiais" que são invocadas implicitamente quando certas ações ocorrem. Neste post, exploraremos esses métodos, como eles funcionam e como podem ser úteis.</p>
+
+<h3 id="m%C3%A9todos-m%C3%A1gicos%3A-uma-vis%C3%A3o-geral">Métodos mágicos: Uma visão geral</h3>
+
+<p>PHP é uma linguagem de programação que suporta, dentre outros, o paradigma de programação orientada a objetos. Sendo assim, podemos definir métodos dentro das nossas classes, ou seja, funções que operam no contexto de um objeto. Métodos mágicos são aqueles que podemos definir em nosso código e são acionados automaticamente pelo PHP em situações específicas.</p>
+
+<p>Alguns exemplos de quando os métodos mágicos podem ser acionados incluem tentativas de acesso a membros inexistentes ou inacessíveis de uma classe, conversões de objetos e verificações especiais.</p>
+
+<h2 id="exemplo-pr%C3%A1tico">Exemplo prático</h2>
+
+<p>Um exemplo claro dos métodos mágicos em ação é o caso do framework Laravel. Considere uma classe de modelo (<em>Model</em>) que lida com a persistência de um usuário:</p>
+
+<pre><code class="php">&lt;?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class User extends Model
+{ }
+</code></pre>
+
+<p>Apesar de não definir nenhuma propriedade explicitamente, podemos atribuir valores a propriedades como se elas existissem:</p>
+
+<pre><code class="php">&lt;?php
+
+use App\Models\User;
+
+$user = new User();
+$user-&gt;name = 'Vinicius Dias';
+$user-&gt;email = 'email@example.com';
+$user-&gt;save();
+</code></pre>
+
+<p>O método <code>save</code> é entendido como parte da classe base <code>Model</code>, mas e quanto às propriedades? Para cenários como esse, os métodos mágicos foram concebidos.</p>
+
+<p><ins class="adsbygoogle"
+style="display:block; text-align:center;"
+data-ad-layout="in-article"
+data-ad-format="fluid"
+data-ad-client="ca-pub-8918461095244552"
+data-ad-slot="2366637560"></ins></p>
+
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<h2 id="implementa%C3%A7%C3%A3o-de-m%C3%A9todos-m%C3%A1gicos">Implementação de métodos mágicos</h2>
+
+<p>O nome de todo método mágico no PHP começa com dois underscores (<code>__</code>). Por exemplo, o método <code>__set</code> é invocado quando tentamos atribuir um valor a uma propriedade inexistente ou inacessível. Ele recebe o nome da propriedade e o valor como parâmetros:</p>
+
+<pre><code class="php">&lt;?php
+
+class NossaModel
+{
+    /**
+     * @var array&lt;string, mixed&gt; Array associativo contendo todos os valores que definirmos
+     */
+    private array $atributos;
+
+    /**
+     * @param string $name Nome da propriedade inacessível que estamos tentando definir
+     * @param mixed $value Valor que estamos tentando atribuir a essa propriedade
+     * @return void
+     */
+    public function __set(string $name, mixed $value): void
+    {
+        /*
+         * Aqui, se fizermos $model-&gt;teste = 'Valor', criaremos a chave 'teste'
+         * na propriedade $atributos com o valor 'Valor'
+         */
+        $this-&gt;atributos[$name] = $value;
+    }
+}
+</code></pre>
+
+<p>Repare que o código que escrevemos no método é código PHP como qualquer outro. Ali nós poderíamos realizar qualquer tipo de lógica.</p>
+
+<h3 id="como-acessar-esse-valor%3F">Como acessar esse valor?</h3>
+
+<p>Aprendemos a definir um valor a partir de uma propriedade inexistente, mas se tentarmos ler esse valor, receberemos um erro. O código a seguir, por exemplo, falha:</p>
+
+<pre><code class="php">$teste = new NossaModel();
+$teste-&gt;nome = 'Vinicius';
+
+/*
+ * Na linha a seguir, o retorno será nulo e um _Warning_ será emitido
+ * dizendo que a propriedade NossaModel::$nome não existe.
+ */
+echo $teste-&gt;nome;
+</code></pre>
+
+<p>Para escrever em propriedades inexistentes, usamos o <code>__set</code>. Já para ler de propriedades inexistentes ou inacessíveis, utilizamos o método <code>__get</code>. Então poderíamos ter o seguinte método na classe <code>NossaModel</code>:</p>
+
+<pre><code class="php">/**
+ * @param string $name Nome da propriedade inexistente que estamos tentando ler
+ * @return mixed Aqui devemos retornar o valor que corresponderá a essa propriedade 
+ */
+public function __get(string $name): mixed
+{
+    // O valor retornado pelo método __get é utilizado onde tentamos acessar a propriedade 
+    return $this-&gt;atributos[$name];
+}
+</code></pre>
+
+<p>Com isso, o código a seguir funcionaria sem problemas:</p>
+
+<pre><code class="php">$teste = new NossaModel();
+// Chamada implícita a $teste-&gt;__set('nome', 'Vinicius');
+$teste-&gt;nome = 'Vinicius';
+
+// Chamada implícita a $teste-&gt;__get('nome'), que vai retornar 'Vinicius'
+echo $teste-&gt;nome;
+</code></pre>
+
+<h2 id="mais-m%C3%A9todos">Mais métodos</h2>
+
+<p>Até aqui nós citamos apenas 2 métodos mágicos, mas o PHP fornece diversos outros. Vou deixar a seguir uma lista deles:</p>
+
+<h3 id="construtor-e-destrutor">Construtor e destrutor</h3>
+
+<p>O método construtor, chamado de <code>__construct</code>, é executado quando criamos um novo objeto (utilizando <code>new</code>). Normalmente utilizamos o método construtor para receber dependências e inicializar as propriedades.</p>
+
+<p>Já o método destrutor, <code>__destruct</code>, é executado quando um objeto sai de escopo ou quando o objeto é passado para a função <code>unset</code>. Normalmente ele é utilizado para liberar recursos que tenham sido alocados no construtor, como fechar arquivos, conexões, etc. Com a natureza <em>stateless</em> do PHP, esse método não é tão utilizado.</p>
+
+<h3 id="convers%C3%B5es">Conversões</h3>
+
+<p>Em alguns cenários nós podemos querer utilizar nossos objetos como um tipo diferente. Se quisermos usar nosso objeto como uma string, por exemplo, podemos utilizar o método <code>__toString</code>. O que nós retornarmos nesse método é utilizado se nosso objeto for convertido para string de forma implícita ou explícita. Objetos de resposta HTTP, por exemplo, geralmente implementam esse método retornando o corpo da resposta.</p>
+
+<pre><code class="php">&lt;?php
+
+class Response
+{
+    private string $body;
+    // Outras propriedades
+
+    public function __toString() : string
+    {
+        return $this-&gt;body;
+    }
+}
+
+$response = new Response();
+// Definição dos valores
+
+echo $response; // Isso usa o objeto como string, logo, chama o __toString
+</code></pre>
+
+<p>Há também casos onde queremos utilizar nosso objeto como se ele fosse uma função. Para isso existe o método <code>__invoke</code>. Se nós passarmos nosso objeto por parâmetro em algum lugar que espera um <code>callable</code>, o método <code>__invoke</code> será executado. Exemplo:</p>
+
+<pre><code class="php">&lt;?php
+
+class ControllerDeExemplo
+{
+    public function __invoke(int $parametro1, string $parametro2): void
+    {
+        // Execução de exemplo
+    }
+}
+
+$controller = new ControllerDeExemplo();
+
+$controller(1, 'Teste'); // Isso executará o método __invoke
+</code></pre>
+
+<h3 id="chamada-de-m%C3%A9todos">Chamada de métodos</h3>
+
+<p>Assim como nós podemos acessar propriedades inexistentes (ou inacessíveis) com métodos mágicos, o mesmo serve para métodos. Se você tentar chamar um método não existente de um objeto, o método <code>__call</code> será executado, recebendo o nome do método que tentou ser executado e todos os seus parâmetros. Já o <code>__callStatic</code> funciona da mesma forma, mas caso um método <strong>estático</strong> inexistente seja chamado a partir de uma classe.</p>
+
+<pre><code class="php">class Exemplo
+{
+    public function __call(string $name, array $arguments): mixed
+    {
+        /*
+         * $name possui o nome do método inexistente que foi executado,
+         * enquanto $arguments possui todos os parâmetros que foram passados para esse método
+         */
+    }
+
+    public static function __callStatic(string $name, array $arguments): mixed
+    {
+        // Equivalente estático ao __call
+    }
+}
+
+// Chama implicitamente Exemplo::__callStatic(1, 2):
+Exemplo::qualquerCoisa(1, 2);
+
+$objeto = new Exemplo();
+
+// Chama implicitamente $objeto-&gt;__call(1, 2):
+$objeto-&gt;qualquerCoisa(1, 2);
+</code></pre>
+
+<h3 id="restante-dos-m%C3%A9todos">Restante dos métodos</h3>
+
+<p>Para que esse post não fique ainda maior, vou deixar a seguir uma lista dos demais métodos mágicos com uma breve descrição, mas caso você queira ver mais exemplos e detalhes, pode conferir a <a href="https://www.php.net/manual/en/language.oop5.magic.php">documentação do PHP</a>.</p>
+
+<ul>
+<li><code>__isset</code>: Método executado caso passemos alguma propriedade inacessível do nosso objeto para a função <code>isset</code> ou <code>empty</code>;</li>
+<li><code>__unset</code>: Método executado caso passemos alguma propriedade inacessível do nosso objeto para a função <code>unset</code>;</li>
+<li><code>__sleep</code>: Ao chamar a função <code>serialize</code> passando nosso objeto, esse método é executado <strong>antes</strong> da serialização. Seu retorno deve ser um array contendo os nomes das propriedades do objeto em questão que serão serializadas. Normalmente é utilizado para remover propriedades que não devem ser serializadas com conexões com o banco, arquivos abertos, etc;</li>
+<li><code>__wakeup</code>: Esse método não recebe parâmetros e é executado <strong>após</strong> um dado ser desserializado e o objeto ser criado. Esse método geralmente reconstrói os recursos como conexões com o banco;</li>
+<li><code>__serialize</code>: Similar ao <code>__sleep</code>. Se ambos estiverem definidos, apenas <code>__serialize</code> é chamado e <code>__sleep</code> é ignorado. A diferença é que o <code>__serialize</code> deve retornar um array associativo que será serializado ao invés de retornar os nomes das propriedades do objeto;</li>
+<li><code>__unserialize</code>: Similar ao <code>__wakeup</code>. Se ambos estiverem definidos, apenas <code>__unserialize</code> é chamado e <code>__wakeup</code> é ignorado. <code>__unserialize</code> recebe por parâmetro o array que foi serializado e com isso, deve reconstruir o objeto;</li>
+<li><code>static __set_state</code>: Esse método é o mais raro. Ele é utilizado para criar um objeto da classe em questão a partir da função <code>var_export</code>;</li>
+<li><code>__clone</code>: Método chamado quando um clone de um objeto é criado. <code>$this</code> nesse método vai se referir ao novo objeto criado. Normalmente esse método é definido para evitar <em>shallow copies</em> e realizar os clones de todas as propriedades também;</li>
+<li><code>__debugInfo</code>: O retorno desse método deve conter os dados que serão exibidos pela função <code>var_dump</code>. Geralmente é um array associativo;</li>
+</ul>
+
+<h2 id="conclus%C3%A3o">Conclusão</h2>
+
+<p>O PHP possui um grande número de métodos mágicos. Alguns são bastante fáceis de entender como <code>__get</code>, <code>__set</code> e <code>__call</code>, enquanto outros são mais confusos como as diferenças entre <code>__sleep</code> e <code>__serialize</code>. Há ainda aqueles bem pouco usados como o <code>__set_state</code>.</p>
+
+<p>Lembrar de todos os métodos (e suas assinaturas) e o que cada um deles faz não é necessário, mas é importante saber da existência deles para saber o que pesquisar quando for necessário.</p>
+
+<p>Se quiser aprender mais sobre PHP como um todo e sobre tecnologia em geral, vou deixar aqui um cupom de 10% de desconto na Alura, plataforma onde eu gravei inúmeros cursos: <a href="https://alura.tv/diasdedev">https://alura.tv/diasdedev</a>.</p>
+]]></content>
+        </entry>
             <entry>
             <title type="html"><![CDATA[Como remover acentos de palavras com PHP]]></title>
             <link href="https://dias.dev/2023-08-01-como-remover-acentos-de-palavras-com-php/"/>
@@ -1185,199 +1409,6 @@ opção para isso.</p>
 Richard Feynman (Nobel de física): “O que eu não consigo criar, eu não entendo”. Então antes de utilizar uma ferramenta
 que realiza o trabalho para mim, eu gosto de saber como realizar este trabalho sem ela. Com isso, se algum problema
 acontecer com a biblioteca, por exemplo, eu vou estar mais preparado para resolvê-lo já que entendo um pouco melhor como as coisas funcionam.</p>
-]]></content>
-        </entry>
-            <entry>
-            <title type="html"><![CDATA[Wrapper de Streams php://]]></title>
-            <link href="https://dias.dev/2020-11-03-wraper-de-streams-php/"/>
-            <updated>2020-11-03T00:00:00+00:00</updated>
-            <id>https://dias.dev/2020-11-03-wraper-de-streams-php/</id>
-            <content type="html"><![CDATA[<h2 id="streams">Streams</h2>
-
-<p>Antes de falarmos sobre um wrapper específico, é legal dar um certo contexto sobre streams.</p>
-
-<p>Um stream basicamente é um fluxo de dados. Usando streams podemos realizar operações de I/O como leitura de arquivos,
-acessos a rede, comunicação por sockets e muito mais.</p>
-
-<p>Existem muitas funcionalidades que giram em torno dos streams do PHP como filtros, contextos, etc,
-mas neste artigo meu foco vai ser em um wrapper específico.</p>
-
-<h2 id="wrappers">Wrappers</h2>
-
-<p>Wrappers de streams em PHP são o código que diz como aquele determinado protocolo vai ser usado e gerenciado.</p>
-
-<p>Ler um arquivo é diferente de realizar uma requisição HTTP que é diferente de se conectar com um Unix socket.
-Para que todas essas diferenças sejam abstraídas para nós devs, o PHP fornece wrappers.</p>
-
-<p>Quando você abre um arquivo para leitura em PHP, usa o wrapper <code>file://</code>.
-Quando faz uma requisição HTTP, usa o wrapper <code>http://</code>.
-Com wrappers diferentes, podemos utilizar o mesmo código para realizar tarefas completamente diferentes. Ex.:</p>
-
-<pre><code class="php">&lt;?php
-
-echo file_get_contents('file://arquivo.txt'); // lê um arquivo
-echo file_get_contents('http://google.com'); // faz uma requisição HTTP
-</code></pre>
-
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
-<h3 id="wrappers-dispon%C3%ADveis">Wrappers disponíveis</h3>
-
-<p>Por padrão o PHP já fornece diversos wrappers como</p>
-
-<ul>
-<li><code>file://</code></li>
-<li><code>http://</code> e <code>https://</code></li>
-<li><code>ftp://</code></li>
-<li><code>zlib://</code></li>
-<li><code>ssh2://</code></li>
-<li><code>rar://</code></li>
-<li>etc</li>
-</ul>
-
-<p>Existem outros wrappers fornecidos por padrão e além disso nós podemos criar nossos próprios wrappers.
-Mas isso foge do escopo desse artigo e no final dele vou deixar alguns links de referências.</p>
-
-<h2 id="wrapper-php%3A%2F%2F">Wrapper php://</h2>
-
-<p>Um dos wrappers mais interessantes e que menos vejo material sobre é o <code>php://</code>.
-Através dele temos acesso a diversos recursos de I/O como a entrada e saída padrão do sistema, streams temporários em
-disco e em memória, etc.</p>
-
-<p>Vamos ver de forma resumida algumas das possibilidades deste wrapper</p>
-
-<h3 id="php%3A%2F%2Finput">php://input</h3>
-
-<p>Este provavelmente é o stream mais utilizado fornecido por este wrapper. Através dele nós conseguimos acessar diretamente
-o corpo de uma requisição. Então se uma requisição <code>POST</code> é feita para seu sistema enviando o corpo em JSON, por exemplo,
-o seguinte código pode fazer o parse:</p>
-
-<pre><code class="php">&lt;?php
-
-$corpo = file_get_contents('php://input'); // recupera o corpo todo da requisição, como string
-$json = json_decode($corpo); // decodifica a string em json
-
-echo $json-&gt;algumValor; // acessa um valor já parseado
-</code></pre>
-
-<p>É válido citar que este stream permite apenas a leitura, logo, não podemos escrever nada nele.</p>
-
-<h3 id="php%3A%2F%2Fmemory-e-php%3A%2F%2Ftemp">php://memory e php://temp</h3>
-
-<p>Ambos streams são de leitura e escrita, e nos permitem acesso a um espaço que pode ser no disco ou na RAM para manipular
-dados temporários. São interessantes para realizar processamentos em dados já existentes usando a interface de streams,
-por exemplo.</p>
-
-<p><code>php://memory</code> vai manter todo o dado na RAM enquanto <code>php://temp</code> vai utilizar um arquivo quando o conteúdo do stream
-atingir um limite de tamanho pré-definido (2MB por padrão).</p>
-
-<h3 id="php%3A%2F%2Ffilter">php://filter</h3>
-
-<p>Aplicar filtros de streams pode trazer grandes poderes para sua aplicação e até poupar bastante uso de memória.
-Mas para utilizar filtros, teoricamente nós precisaríamos de um recurso de stream aberto. Qual o problema disso?
-Não poderíamos usar filtros com funções como <code>file_get_contents</code> que ao invés de um recurso, recebe uma string por
-parâmetro.</p>
-
-<p>Usando o stream <code>php://filter</code> nós podemos especificar filtros para esse tipo de função sem nenhum problema. Exemplo:</p>
-
-<pre><code class="php">&lt;?php
-
-echo file_get_contents("php://filter/read=string.toupper|string.rot13/resource=http://www.example.com");
-
-</code></pre>
-
-<p>Isso vai aplicar os filtros <code>string.toupper</code> e <code>string.rot13</code> ao ler de <em>http://www.example.com</em>.</p>
-
-<p>Se você não conhece os filtros de streams, vale a pena conferir as referências no final do artigo. ;-)</p>
-
-<h3 id="php%3A%2F%2Fstdin%2C-php%3A%2F%2Fstdout-e-php%3A%2F%2Fstderr">php://stdin, php://stdout e php://stderr</h3>
-
-<p>Estes streams fornecem acesso aos streams correspondentes do próprio processo do PHP.
-<code>php://stdin</code> fornece acesso à entrada padrão do processo (que pode ser o teclado ou um pipe, por exemplo).
-<code>php://stdout</code> permite acessar a saída padrão, que pode ser o terminal em uma aplicação CLI.
-<code>php://stderr</code> nos deixa escrever na saída de erro do processo.</p>
-
-<p>O primeiro stream é apenas para leitura, enquanto os 2 outros são apenas para escrita. Não é possível escrever em
-<code>php://stdin</code> por exemplo.</p>
-
-<h3 id="php%3A%2F%2Foutput">php://output</h3>
-
-<p>Este stream permite escrever no mecanismo de buffer de saída do PHP, assim como <code>echo</code> e <code>print</code> fazem.</p>
-
-<h3 id="php%3A%2F%2Foutput-vs-php%3A%2F%2Fstdout">php://output vs php://stdout</h3>
-
-<p>Você talvez esteja se perguntando a diferença entre <code>php://output</code> e <code>php://stdout</code>.
-Basicamente o primeiro escreve no mecanismo de buffer de saída do PHP, o que permite o controle através de funções
-como <code>ob_start</code>. Já o segundo escreve direto na saída do processo, não passando pelo controle de buffer do PHP.</p>
-
-<p>Para entender melhor:</p>
-
-<pre><code class="php">&lt;?php
-
-$stdout = fopen('php://stdout', 'w');
-$output = fopen('php://output', 'w');
-
-ob_start();
-
-fwrite($output, 'Escrevendo no output' . PHP_EOL);
-fwrite($stdout, 'Escrevendo na saída padrão' . PHP_EOL);
-
-ob_end_flush();
-</code></pre>
-
-<p>Ao executar este script em um terminal, o primeiro <code>fwrite</code> envia a string para o mecanismo de buffer do PHP, e devido
-ao <code>ob_start()</code>, não vai ser imprimido ainda. O segundo <code>fwrite</code> manda o conteúdo direto para a saída (tela do terminal).
-Ao executar <code>ob_end_flush()</code> o buffer é enviado para a saída do processo, então o resultado é:</p>
-
-<pre><code>Escrevendo na saída padrão
-Escrevendo no output
-</code></pre>
-
-<h3 id="buffer-de-sa%C3%ADda">Buffer de saída</h3>
-
-<p>Se você não entendeu bem essa parte de buffer de saída e quiser que eu faça um artigo específico sobre isso, é só me
-contar nos comentários que eu preparo pra você! :-D</p>
-
-<h2 id="conclus%C3%A3o">Conclusão</h2>
-
-<p>Analisando apenas um dos possíveis wrappers dá pra ter uma breve noção de como essa feature do PHP é poderosa. Através
-de streams podemos compactar e descompactar arquivos, enviar dados por FTP, acessar servidores via SSH e muito mais.</p>
-
-<h3 id="refer%C3%AAncias">Referências</h3>
-
-<p>Conforme prometido, vou deixar aqui alguns links para que você possa se aprofundar nesse assunto tão rico e importante.</p>
-
-<ul>
-<li>https://youtube.com/watch?v=ZRYMzS97HVQ
-
-<ul>
-<li>Nessa palestra o <a href="https://twitter.com/alganet">Alexandre Gaigalas</a> mostra um pouco do poder dos streams</li>
-</ul></li>
-<li>https://www.php.net/manual/en/book.stream.php
-
-<ul>
-<li>A documentação oficial é sempre um ótimo lugar para recorrer e entender a fundo as funcionalidades</li>
-</ul></li>
-<li>https://cursos.alura.com.br/course/php-io-arquivos-streams
-
-<ul>
-<li>Na Alura existe um curso específico de streams usando filtros, contextos e muito mais. Se quiser 10% de desconto na sua assinatura, confere <a href="https://alura.tv/diasdedev">esse link aqui</a>.</li>
-</ul></li>
-<li><a href="/2020-09-16-php-assincrono-de-forma-nativa/">PHP Assíncrono de Forma Nativa</a>
-
-<ul>
-<li>Aqui mesmo no blog tem um post onde uso streams para realizar programação assíncrona através de I/O não bloqueante.</li>
-</ul></li>
-</ul>
 ]]></content>
         </entry>
     </feed>

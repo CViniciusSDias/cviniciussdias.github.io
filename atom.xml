@@ -3,9 +3,233 @@
     <title><![CDATA[Dias de Dev]]></title>
     <link href="https://dias.dev/atom.xml" rel="self"/>
     <link href="https://dias.dev"/>
-    <updated>2023-08-12T02:26:56+00:00</updated>
+    <updated>2023-08-12T02:33:46+00:00</updated>
     <id>https://dias.dev</id>
         <generator uri="http://sculpin.io/">Sculpin</generator>
+            <entry>
+            <title type="html"><![CDATA[Explorando Métodos Mágicos no PHP: Conceitos e Exemplos Práticos]]></title>
+            <link href="https://dias.dev/2023-08-11-metodos-magicos-php/"/>
+            <updated>2023-08-11T00:00:00+00:00</updated>
+            <id>https://dias.dev/2023-08-11-metodos-magicos-php/</id>
+            <content type="html"><![CDATA[<p>Os métodos mágicos no PHP são métodos "especiais" que são invocadas implicitamente quando certas ações ocorrem. Neste post, exploraremos esses métodos, como eles funcionam e como podem ser úteis.</p>
+
+<h3 id="m%C3%A9todos-m%C3%A1gicos%3A-uma-vis%C3%A3o-geral">Métodos mágicos: Uma visão geral</h3>
+
+<p>PHP é uma linguagem de programação que suporta, dentre outros, o paradigma de programação orientada a objetos. Sendo assim, podemos definir métodos dentro das nossas classes, ou seja, funções que operam no contexto de um objeto. Métodos mágicos são aqueles que podemos definir em nosso código e são acionados automaticamente pelo PHP em situações específicas.</p>
+
+<p>Alguns exemplos de quando os métodos mágicos podem ser acionados incluem tentativas de acesso a membros inexistentes ou inacessíveis de uma classe, conversões de objetos e verificações especiais.</p>
+
+<h2 id="exemplo-pr%C3%A1tico">Exemplo prático</h2>
+
+<p>Um exemplo claro dos métodos mágicos em ação é o caso do framework Laravel. Considere uma classe de modelo (<em>Model</em>) que lida com a persistência de um usuário:</p>
+
+<pre><code class="php">&lt;?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class User extends Model
+{ }
+</code></pre>
+
+<p>Apesar de não definir nenhuma propriedade explicitamente, podemos atribuir valores a propriedades como se elas existissem:</p>
+
+<pre><code class="php">&lt;?php
+
+use App\Models\User;
+
+$user = new User();
+$user-&gt;name = 'Vinicius Dias';
+$user-&gt;email = 'email@example.com';
+$user-&gt;save();
+</code></pre>
+
+<p>O método <code>save</code> é entendido como parte da classe base <code>Model</code>, mas e quanto às propriedades? Para cenários como esse, os métodos mágicos foram concebidos.</p>
+
+<p><ins class="adsbygoogle"
+style="display:block; text-align:center;"
+data-ad-layout="in-article"
+data-ad-format="fluid"
+data-ad-client="ca-pub-8918461095244552"
+data-ad-slot="2366637560"></ins></p>
+
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<h2 id="implementa%C3%A7%C3%A3o-de-m%C3%A9todos-m%C3%A1gicos">Implementação de métodos mágicos</h2>
+
+<p>O nome de todo método mágico no PHP começa com dois underscores (<code>__</code>). Por exemplo, o método <code>__set</code> é invocado quando tentamos atribuir um valor a uma propriedade inexistente ou inacessível. Ele recebe o nome da propriedade e o valor como parâmetros:</p>
+
+<pre><code class="php">&lt;?php
+
+class NossaModel
+{
+    /**
+     * @var array&lt;string, mixed&gt; Array associativo contendo todos os valores que definirmos
+     */
+    private array $atributos;
+
+    /**
+     * @param string $name Nome da propriedade inacessível que estamos tentando definir
+     * @param mixed $value Valor que estamos tentando atribuir a essa propriedade
+     * @return void
+     */
+    public function __set(string $name, mixed $value): void
+    {
+        /*
+         * Aqui, se fizermos $model-&gt;teste = 'Valor', criaremos a chave 'teste'
+         * na propriedade $atributos com o valor 'Valor'
+         */
+        $this-&gt;atributos[$name] = $value;
+    }
+}
+</code></pre>
+
+<p>Repare que o código que escrevemos no método é código PHP como qualquer outro. Ali nós poderíamos realizar qualquer tipo de lógica.</p>
+
+<h3 id="como-acessar-esse-valor%3F">Como acessar esse valor?</h3>
+
+<p>Aprendemos a definir um valor a partir de uma propriedade inexistente, mas se tentarmos ler esse valor, receberemos um erro. O código a seguir, por exemplo, falha:</p>
+
+<pre><code class="php">$teste = new NossaModel();
+$teste-&gt;nome = 'Vinicius';
+
+/*
+ * Na linha a seguir, o retorno será nulo e um _Warning_ será emitido
+ * dizendo que a propriedade NossaModel::$nome não existe.
+ */
+echo $teste-&gt;nome;
+</code></pre>
+
+<p>Para escrever em propriedades inexistentes, usamos o <code>__set</code>. Já para ler de propriedades inexistentes ou inacessíveis, utilizamos o método <code>__get</code>. Então poderíamos ter o seguinte método na classe <code>NossaModel</code>:</p>
+
+<pre><code class="php">/**
+ * @param string $name Nome da propriedade inexistente que estamos tentando ler
+ * @return mixed Aqui devemos retornar o valor que corresponderá a essa propriedade 
+ */
+public function __get(string $name): mixed
+{
+    // O valor retornado pelo método __get é utilizado onde tentamos acessar a propriedade 
+    return $this-&gt;atributos[$name];
+}
+</code></pre>
+
+<p>Com isso, o código a seguir funcionaria sem problemas:</p>
+
+<pre><code class="php">$teste = new NossaModel();
+// Chamada implícita a $teste-&gt;__set('nome', 'Vinicius');
+$teste-&gt;nome = 'Vinicius';
+
+// Chamada implícita a $teste-&gt;__get('nome'), que vai retornar 'Vinicius'
+echo $teste-&gt;nome;
+</code></pre>
+
+<h2 id="mais-m%C3%A9todos">Mais métodos</h2>
+
+<p>Até aqui nós citamos apenas 2 métodos mágicos, mas o PHP fornece diversos outros. Vou deixar a seguir uma lista deles:</p>
+
+<h3 id="construtor-e-destrutor">Construtor e destrutor</h3>
+
+<p>O método construtor, chamado de <code>__construct</code>, é executado quando criamos um novo objeto (utilizando <code>new</code>). Normalmente utilizamos o método construtor para receber dependências e inicializar as propriedades.</p>
+
+<p>Já o método destrutor, <code>__destruct</code>, é executado quando um objeto sai de escopo ou quando o objeto é passado para a função <code>unset</code>. Normalmente ele é utilizado para liberar recursos que tenham sido alocados no construtor, como fechar arquivos, conexões, etc. Com a natureza <em>stateless</em> do PHP, esse método não é tão utilizado.</p>
+
+<h3 id="convers%C3%B5es">Conversões</h3>
+
+<p>Em alguns cenários nós podemos querer utilizar nossos objetos como um tipo diferente. Se quisermos usar nosso objeto como uma string, por exemplo, podemos utilizar o método <code>__toString</code>. O que nós retornarmos nesse método é utilizado se nosso objeto for convertido para string de forma implícita ou explícita. Objetos de resposta HTTP, por exemplo, geralmente implementam esse método retornando o corpo da resposta.</p>
+
+<pre><code class="php">&lt;?php
+
+class Response
+{
+    private string $body;
+    // Outras propriedades
+
+    public function __toString() : string
+    {
+        return $this-&gt;body;
+    }
+}
+
+$response = new Response();
+// Definição dos valores
+
+echo $response; // Isso usa o objeto como string, logo, chama o __toString
+</code></pre>
+
+<p>Há também casos onde queremos utilizar nosso objeto como se ele fosse uma função. Para isso existe o método <code>__invoke</code>. Se nós passarmos nosso objeto por parâmetro em algum lugar que espera um <code>callable</code>, o método <code>__invoke</code> será executado. Exemplo:</p>
+
+<pre><code class="php">&lt;?php
+
+class ControllerDeExemplo
+{
+    public function __invoke(int $parametro1, string $parametro2): void
+    {
+        // Execução de exemplo
+    }
+}
+
+$controller = new ControllerDeExemplo();
+
+$controller(1, 'Teste'); // Isso executará o método __invoke
+</code></pre>
+
+<h3 id="chamada-de-m%C3%A9todos">Chamada de métodos</h3>
+
+<p>Assim como nós podemos acessar propriedades inexistentes (ou inacessíveis) com métodos mágicos, o mesmo serve para métodos. Se você tentar chamar um método não existente de um objeto, o método <code>__call</code> será executado, recebendo o nome do método que tentou ser executado e todos os seus parâmetros. Já o <code>__callStatic</code> funciona da mesma forma, mas caso um método <strong>estático</strong> inexistente seja chamado a partir de uma classe.</p>
+
+<pre><code class="php">class Exemplo
+{
+    public function __call(string $name, array $arguments): mixed
+    {
+        /*
+         * $name possui o nome do método inexistente que foi executado,
+         * enquanto $arguments possui todos os parâmetros que foram passados para esse método
+         */
+    }
+
+    public static function __callStatic(string $name, array $arguments): mixed
+    {
+        // Equivalente estático ao __call
+    }
+}
+
+// Chama implicitamente Exemplo::__callStatic(1, 2):
+Exemplo::qualquerCoisa(1, 2);
+
+$objeto = new Exemplo();
+
+// Chama implicitamente $objeto-&gt;__call(1, 2):
+$objeto-&gt;qualquerCoisa(1, 2);
+</code></pre>
+
+<h3 id="restante-dos-m%C3%A9todos">Restante dos métodos</h3>
+
+<p>Para que esse post não fique ainda maior, vou deixar a seguir uma lista dos demais métodos mágicos com uma breve descrição, mas caso você queira ver mais exemplos e detalhes, pode conferir a <a href="https://www.php.net/manual/en/language.oop5.magic.php">documentação do PHP</a>.</p>
+
+<ul>
+<li><code>__isset</code>: Método executado caso passemos alguma propriedade inacessível do nosso objeto para a função <code>isset</code> ou <code>empty</code>;</li>
+<li><code>__unset</code>: Método executado caso passemos alguma propriedade inacessível do nosso objeto para a função <code>unset</code>;</li>
+<li><code>__sleep</code>: Ao chamar a função <code>serialize</code> passando nosso objeto, esse método é executado <strong>antes</strong> da serialização. Seu retorno deve ser um array contendo os nomes das propriedades do objeto em questão que serão serializadas. Normalmente é utilizado para remover propriedades que não devem ser serializadas com conexões com o banco, arquivos abertos, etc;</li>
+<li><code>__wakeup</code>: Esse método não recebe parâmetros e é executado <strong>após</strong> um dado ser desserializado e o objeto ser criado. Esse método geralmente reconstrói os recursos como conexões com o banco;</li>
+<li><code>__serialize</code>: Similar ao <code>__sleep</code>. Se ambos estiverem definidos, apenas <code>__serialize</code> é chamado e <code>__sleep</code> é ignorado. A diferença é que o <code>__serialize</code> deve retornar um array associativo que será serializado ao invés de retornar os nomes das propriedades do objeto;</li>
+<li><code>__unserialize</code>: Similar ao <code>__wakeup</code>. Se ambos estiverem definidos, apenas <code>__unserialize</code> é chamado e <code>__wakeup</code> é ignorado. <code>__unserialize</code> recebe por parâmetro o array que foi serializado e com isso, deve reconstruir o objeto;</li>
+<li><code>static __set_state</code>: Esse método é o mais raro. Ele é utilizado para criar um objeto da classe em questão a partir da função <code>var_export</code>;</li>
+<li><code>__clone</code>: Método chamado quando um clone de um objeto é criado. <code>$this</code> nesse método vai se referir ao novo objeto criado. Normalmente esse método é definido para evitar <em>shallow copies</em> e realizar os clones de todas as propriedades também;</li>
+<li><code>__debugInfo</code>: O retorno desse método deve conter os dados que serão exibidos pela função <code>var_dump</code>. Geralmente é um array associativo;</li>
+</ul>
+
+<h2 id="conclus%C3%A3o">Conclusão</h2>
+
+<p>O PHP possui um grande número de métodos mágicos. Alguns são bastante fáceis de entender como <code>__get</code>, <code>__set</code> e <code>__call</code>, enquanto outros são mais confusos como as diferenças entre <code>__sleep</code> e <code>__serialize</code>. Há ainda aqueles bem pouco usados como o <code>__set_state</code>.</p>
+
+<p>Lembrar de todos os métodos (e suas assinaturas) e o que cada um deles faz não é necessário, mas é importante saber da existência deles para saber o que pesquisar quando for necessário.</p>
+
+<p>Se quiser aprender mais sobre PHP como um todo e sobre tecnologia em geral, vou deixar aqui um cupom de 10% de desconto na Alura, plataforma onde eu gravei inúmeros cursos: <a href="https://alura.tv/diasdedev">https://alura.tv/diasdedev</a>.</p>
+]]></content>
+        </entry>
             <entry>
             <title type="html"><![CDATA[Como remover acentos de palavras com PHP]]></title>
             <link href="https://dias.dev/2023-08-01-como-remover-acentos-de-palavras-com-php/"/>
@@ -997,100 +1221,6 @@ fazemos uso de várias extensões no dia-a-dia e entender este funcionamento é 
 <p>Se além de entender sobre algumas extensões você quiser aprender mais sobre PHP em si, você pode usar esse
 <a href="https://alura.tv/diasdedev">cupom</a> que fornece 10% de desconto na assinatura da Alura, plataforma onde
 eu mesmo gravei diversos cursos sobre o assunto.</p>
-]]></content>
-        </entry>
-            <entry>
-            <title type="html"><![CDATA[O que são PWAs?]]></title>
-            <link href="https://dias.dev/2021-09-14-o-que-sao-pwas/"/>
-            <updated>2021-09-14T00:00:00+00:00</updated>
-            <id>https://dias.dev/2021-09-14-o-que-sao-pwas/</id>
-            <content type="html"><![CDATA[<p><em>Progressive Web Apps</em>, como o nome mesmo já diz, são aplicativos <em>web</em> progressivos. Vamos falar um pouco mais sobre a parte de "progressivos", mas o básico é isso: Um aplicativo que roda no "mundo <em>web</em>"</p>
-
-<h2 id="aplicativo-na-web%3F">Aplicativo na Web?</h2>
-
-<p>Quando falamos de aplicativos, principalmente móveis, pensamos logo em acessar uma loja de aplicativos, escolher um disponível e instalar. Pensamos em todo o poder que estes aplicativos têm de controlar o <em>hardware</em> de nossos dispositivos. Mas será que precisa ser assim?</p>
-
-<p>Primeiro, precisamos mesmo de uma loja? Por que não pesquisar diretamente no Google um serviço ao invés de pesquisar em uma loja de aplicativos? Segundo, será que só aplicativos móveis "nativos" são capazes de controlar o <em>hardware</em> dos dispositivos onde eles rodam?</p>
-
-<p><img src="https://web-dev.imgix.net/image/tcFciHGuF3MxnTr1y5ue01OGLBn2/1DKtUFjXLJbiiruKA9P1.svg" alt="Gráfico mostrando a relação entre capacidade e alcance de PWAs e aplicações nativas e serviços web, onde PWAs possuem tanta capacidade quanto um aplicativo nativo e tanto alcance quanto um serviço Web" class="big-image" /></p>
-
-<h2 id="o-poder-da-web">O poder da Web</h2>
-
-<p>A <em>Web</em> evoluiu absurdamente nas últimas décadas e trouxe muito poder para nós <em>devs</em>. Coisas que antigamente seriam impensáveis sem instalar de forma "nativa" uma aplicação, hoje é trivial de ser feito diretamente no navegador. Alguns exemplos:</p>
-
-<ul>
-<li>Acessar à câmera;</li>
-<li>Disponibilidade offline;</li>
-<li>Acesso ao GPS;</li>
-<li>Execução de tarefas no plano de fundo;</li>
-<li>etc.</li>
-</ul>
-
-<p>Hoje em dia é perfeitamente possível que após acessar um aplicativo <em>web</em>, os próximos acessos possam ser feitos sem uma conexão ativa com a <em>internet</em>. Além disso é muito comum aplicativos <em>web</em> acessarem recursos nativos como localização, sistema de sons, baterias, etc.</p>
-
-<p>Aqui você pode conferir algumas <em>APIs Web</em> para ter acesso a recursos que antigamente só eram possíveis através de aplicações nativas: https://developer.mozilla.org/en-US/docs/Web/API</p>
-
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
-<h2 id="aplica%C3%A7%C3%B5es-progressivas">Aplicações progressivas</h2>
-
-<p>Já vimos que através da <em>Web</em> podemos ter acesso a recursos muito poderosos, mas o que significa o <strong>P</strong> de PWA?</p>
-
-<p>PWAs são aplicações progressivas, ou seja, se adaptam a diferentes cenários e dispositivos.</p>
-
-<p>Um exemplo já citado de cenário adverso: dispositivo sem conexão com a <em>internet</em>. Quando você acessa o aplicativo móvel do Twitter sem estar conectado a <em>internet</em>, ele te mostra os <em>tweets</em> que já foram carregados anteriormente. Ou seja, a sua experiência é degradada, mas o aplicativo continua funcionando. A ideia de PWAs é exatamente essa.</p>
-
-<p>Se você tentar acessar uma PWA que precisa da localização do usuário a partir de um dispositivo sem GPS, a aplicação deve estar preparada para buscar a localização menos precisa (através da rede) ou solicitar o endereço ao usuário. Com isso, quanto mais recursos o dispositivo tiver, melhor será a experiência. Em outras palavras, teremos uma experiência <strong>progressiva</strong>.</p>
-
-<h2 id="posso-instalar-%22sites%22%3F">Posso instalar "sites"?</h2>
-
-<p>Uma dúvida comum ao aprender sobre PWAs é sobre a instalação da aplicação. Não seria prático que um usuário precisasse abrir o navegador e digitar a URL da nossa aplicação sempre que quisesse acessá-la. Com aplicativos nativos nós temos os ícones na tela inicial do dispositivo.</p>
-
-<p>Outro ponto é que um aplicativo possui uma experiência mais imersiva, sem interferências de outras abas do navegador, além de barras de ferramentas, etc.</p>
-
-<p><img src="/build/pwa/pwa-ifood.jpg" alt="Tela da PWA do ifood, que é exatamente igual ao aplicativo nativo" class="big-image" /></p>
-
-<p>Como podemos ver, uma PWA pode se comportar visualmente exatamente como uma aplicação nativa. As barras do navegador podem sumir, a cor da barra de notificação pode ser personalizada, etc.</p>
-
-<p>Além do mais, podemos optar por criar um atalho para essa aplicação web direto em nossa tela inicial:</p>
-
-<p><img src="/build/pwa/menu-instalar-ifood.jpg" alt='Tela do navegador com o menu aberto, mostrando a opção de "Adicionar à tela inicial"' class="big-image" /></p>
-
-<p>Mas claro, nem todo usuário vai abrir o menu do navegador para adicionar um atalho à tela inicial. O ideal seria poder ter um botão de instalar essa aplicação para que o usuário não tenha esse "esforço".</p>
-
-<p><img src="/build/pwa/tela-instalacao-uber.jpg" alt="Mensagem sugerindo a instalação da PWA do uber sem precisar abrir o menu do navegador" class="big-image" /></p>
-
-<p>Conforme podemos ver na imagem anterior, isso também é perfeitamente possível. Além de termos um botão na aplicação para instalá-la, o próprio navegador ao identificar uma PWA pode sugerir sua instalação. A ideia é que isso fiquei cada vez mais natural, inclusive, com os navegadores tomando decisões mais assertivas ao fazer tais sugestões.</p>
-
-<h2 id="como-desenvolver-pwas%3F">Como desenvolver PWAs?</h2>
-
-<p>Como sou um desenvolvedor Web, o assunto de PWAs me anima bastante. A ideia deste post não é te ensinar a desenvolver PWAs, mas sim te apresentar ao conceito. Caso você tenha interesse na parte prática, vou deixar aqui algumas referências.</p>
-
-<p>Se você aprende melhor lendo, esse livro é um ótimo início:</p>
-
-<div class="iframe">
-    <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//ws-na.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&OneJS=1&Operation=GetAdHtml&MarketPlace=BR&source=ss&ref=as_ss_li_til&ad_type=product_link&tracking_id=cviniciussd06-20&language=pt_BR&marketplace=amazon&region=BR&placement=B07BZK71NV&asins=B07BZK71NV&linkId=39b9fcf31f08c2d76b0d6f4284cb6a60&show_border=true&link_opens_in_new_window=true"></iframe>
-</div>
-
-<p>Porém uma desvantagem (na minha opinião) deste livro é o uso de React para a criação da aplicação. Eu gosto mais de conteúdos conceituais, que explicam a base sem o uso de muitas ferramentas.</p>
-
-<p>Se você também prefere esse tipo de conteúdo, pode dar uma olhada nesse livro (um pouco mais caro):</p>
-
-<div class="iframe" style="margin-bottom: 1rem;">
-    <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//ws-na.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&OneJS=1&Operation=GetAdHtml&MarketPlace=BR&source=ss&ref=as_ss_li_til&ad_type=product_link&tracking_id=cviniciussd06-20&language=pt_BR&marketplace=amazon&region=BR&placement=B075HP52WY&asins=B075HP52WY&linkId=955ce63a435057d47ccd0bd81620193c&show_border=true&link_opens_in_new_window=true"></iframe>
-</div>
-
-<p>Agora se você prefere estudar através de cursos e vídeos, super recomendo os treinamentos de front-end e de PWA da Alura. Lá você consegue toda a base para desenvolver uma PWA de forma profissional, aprendendo desde a base, passando por <em>JavaScript</em> avançado e <em>APIs Web</em>, até <em>PWAs</em> de fato. Se for o seu caso, aqui tenho um cupom de 10% de desconto para estudar na Alura:
-<a href="https://alura.tv/diasdedev">https://alura.tv/diasdedev</a></p>
 ]]></content>
         </entry>
     </feed>
