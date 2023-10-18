@@ -1,5 +1,5 @@
 require('../css/app.scss');
 
-var hljs = require('highlightjs');
+const hljs = require('highlight.js');
 
-hljs.initHighlightingOnLoad();
+hljs.highlightAll();

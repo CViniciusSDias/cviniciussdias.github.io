@@ -3,7 +3,7 @@
     <title><![CDATA[Dias de Dev]]></title>
     <link href="https://dias.dev/categories/Conceitos.xml" rel="self"/>
     <link href="https://dias.dev"/>
-    <updated>2023-10-18T20:26:48+00:00</updated>
+    <updated>2023-10-18T20:53:36+00:00</updated>
     <id>https://dias.dev/</id>
         <generator uri="http://sculpin.io/">Sculpin</generator>
             <entry>
@@ -225,12 +225,12 @@ data-ad-slot="2366637560"></ins></p>
 
 <p>Para enviar um <em>cookie</em> de sessão, o seguinte cabeçalho pode ser enviado:</p>
 
-<pre><code>Set-Cookie: sessionId=123456
+<pre><code class="http">Set-Cookie: sessionId=123456
 </code></pre>
 
 <p>Já para um <em>cookie</em> permanente com duração de 1 semana:</p>
 
-<pre><code>Set-Cookie: nome=valor; Max-Age=604800
+<pre><code class="http">Set-Cookie: nome=valor; Max-Age=604800
 </code></pre>
 
 <h2 id="_cookies_-e-seguran%C3%A7a"><em>Cookies</em> e Segurança</h2>
@@ -249,7 +249,7 @@ data-ad-slot="2366637560"></ins></p>
 
 <p>Cada linguagem back-end pode fornecer suas facilidades para definir o <em>cookie</em> de sessão como <code>HttpOnly</code>. No PHP, por exemplo, além da função <code>session_set_cookie_params</code>, há configurações como a <code>session.cookie_httponly</code>. O cabeçalho de um <em>cookie</em> <code>HttpOnly</code> seria parecido com:</p>
 
-<pre><code>Set-Cookie: sessionId=123456; HttpOnly
+<pre><code class="http">Set-Cookie: sessionId=123456; HttpOnly
 </code></pre>
 
 <h3 id="_cookies_-e-csrf"><em>Cookies</em> e CSRF</h3>
@@ -265,7 +265,7 @@ data-ad-slot="2366637560"></ins></p>
 
 <p>Para impedir que a partir de um site, <em>cookies</em> sejam enviados para outro, podemos (dentre outras coisas), definir a política de <code>SameSite</code> como <code>Lax</code> (o que via de regra é o padrão) ou <code>Strict</code>:</p>
 
-<pre><code>Set-Cookie: sessionId=123456; HttpOnly; SameSite=Lax
+<pre><code class="http">Set-Cookie: sessionId=123456; HttpOnly; SameSite=Lax
 </code></pre>
 
 <p>Agora nosso <em>cookie</em> além de não ser mais acessível via JavaScript, só é enviado em requisições realizadas a partir do nosso próprio site. Talvez você esteja se perguntando: se <code>Lax</code> já é o padrão, por que me preocupar? Acontece que algumas linguagens ou frameworks back-end podem alterar esse padrão por diversos motivos. Por isso é importante saber como usar esse parâmetro.</p>
@@ -276,7 +276,7 @@ data-ad-slot="2366637560"></ins></p>
 
 <p>Para impedir que um <em>cookie</em> seja enviado em requisições não criptografadas, basta definir o parâmetro <code>Secure</code>. Quando uma requisição sem HTTPS acontecer, esse <em>cookie</em> não será enviado. Com isso, nosso <code>header</code> ficaria:</p>
 
-<pre><code>Set-Cookie: sessionId=123456; HttpOnly; SameSite=Lax; Secure
+<pre><code class="http">Set-Cookie: sessionId=123456; HttpOnly; SameSite=Lax; Secure
 </code></pre>
 
 <h2 id="conclus%C3%A3o">Conclusão</h2>
@@ -640,7 +640,7 @@ como essas.</p>
 
 <p>A primeira versão do nosso código (bloqueante) gera essa informação quando executo o seguinte comando (sendo <code>star-wars.php</code>o nome do nosso arquivo):</p>
 
-<pre><code class="bash">$ time php star-wars.php
+<pre><code class="console">$ time php star-wars.php
 
 php star-wars.php  0.14s user 0.04s system 2% cpu 7.186 total
 </code></pre>
@@ -649,7 +649,7 @@ php star-wars.php  0.14s user 0.04s system 2% cpu 7.186 total
 
 <p>Já com a versão final do código, temos a seguinte saída:</p>
 
-<pre><code class="bash">$ time php star-wars.php
+<pre><code class="console">$ time php star-wars.php
 
 php star-wars.php  0.14s user 0.04s system 6% cpu 2.387 total
 </code></pre>
@@ -658,7 +658,7 @@ php star-wars.php  0.14s user 0.04s system 6% cpu 2.387 total
 
 <p>Agora um último teste, comentando a parte referente ao <code>curl_multi_select</code>:</p>
 
-<pre><code class="bash">$ time php star-wars.php
+<pre><code class="console">$ time php star-wars.php
 
 php star-wars.php  0.50s user 0.70s system 49% cpu 2.421 total
 </code></pre>

@@ -286,7 +286,7 @@ como essas.</p>
 
 <p>A primeira versão do nosso código (bloqueante) gera essa informação quando executo o seguinte comando (sendo <code>star-wars.php</code>o nome do nosso arquivo):</p>
 
-<pre><code class="bash">$ time php star-wars.php
+<pre><code class="console">$ time php star-wars.php
 
 php star-wars.php  0.14s user 0.04s system 2% cpu 7.186 total
 </code></pre>
@@ -295,7 +295,7 @@ php star-wars.php  0.14s user 0.04s system 2% cpu 7.186 total
 
 <p>Já com a versão final do código, temos a seguinte saída:</p>
 
-<pre><code class="bash">$ time php star-wars.php
+<pre><code class="console">$ time php star-wars.php
 
 php star-wars.php  0.14s user 0.04s system 6% cpu 2.387 total
 </code></pre>
@@ -304,7 +304,7 @@ php star-wars.php  0.14s user 0.04s system 6% cpu 2.387 total
 
 <p>Agora um último teste, comentando a parte referente ao <code>curl_multi_select</code>:</p>
 
-<pre><code class="bash">$ time php star-wars.php
+<pre><code class="console">$ time php star-wars.php
 
 php star-wars.php  0.50s user 0.70s system 49% cpu 2.421 total
 </code></pre>
