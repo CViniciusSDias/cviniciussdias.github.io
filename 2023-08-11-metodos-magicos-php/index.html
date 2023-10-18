@@ -248,13 +248,13 @@ $controller(1, 'Teste'); // Isso executará o método __invoke
     }
 }
 
-// Chama implicitamente Exemplo::__callStatic(1, 2):
+// Chama implicitamente Exemplo::__callStatic('qualquerCoisa', 1, 2):
 Exemplo::qualquerCoisa(1, 2);
 
 $objeto = new Exemplo();
 
 // Chama implicitamente $objeto-&gt;__call(1, 2):
-$objeto-&gt;qualquerCoisa(1, 2);
+$objeto-&gt;qualquerCoisa('qualquerCoisa', 1, 2);
 </code></pre>
 
 <h3 id="restante-dos-m%C3%A9todos">Restante dos métodos</h3>
