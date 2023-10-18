@@ -3,7 +3,7 @@
     <title><![CDATA[Dias de Dev]]></title>
     <link href="https://dias.dev/categories/PHP.xml" rel="self"/>
     <link href="https://dias.dev"/>
-    <updated>2023-10-18T20:56:09+00:00</updated>
+    <updated>2023-10-18T20:58:30+00:00</updated>
     <id>https://dias.dev/</id>
         <generator uri="http://sculpin.io/">Sculpin</generator>
             <entry>
@@ -196,13 +196,13 @@ $controller(1, 'Teste'); // Isso executará o método __invoke
     }
 }
 
-// Chama implicitamente Exemplo::__callStatic('qualquerCoisa', 1, 2):
+// Chama implicitamente Exemplo::__callStatic('qualquerCoisa', [1, 2]):
 Exemplo::qualquerCoisa(1, 2);
 
 $objeto = new Exemplo();
 
-// Chama implicitamente $objeto-&gt;__call(1, 2):
-$objeto-&gt;qualquerCoisa('qualquerCoisa', 1, 2);
+// Chama implicitamente $objeto-&gt;__call('qualquerCoisa', [1, 2]):
+$objeto-&gt;qualquerCoisa(1, 2);
 </code></pre>
 
 <h3 id="restante-dos-m%C3%A9todos">Restante dos métodos</h3>
