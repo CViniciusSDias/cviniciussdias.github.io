@@ -3,9 +3,271 @@
     <title><![CDATA[Dias de Dev]]></title>
     <link href="https://dias.dev/atom.xml" rel="self"/>
     <link href="https://dias.dev"/>
-    <updated>2023-10-18T22:00:36+00:00</updated>
+    <updated>2023-11-17T21:36:51+00:00</updated>
     <id>https://dias.dev</id>
         <generator uri="http://sculpin.io/">Sculpin</generator>
+            <entry>
+            <title type="html"><![CDATA[Novidades do PHP 8.3: O que há de novo nessa versão do PHP]]></title>
+            <link href="https://dias.dev/2023-10-18-criptografia-o-minimo-de-encriptacao-que-todo-dev-precisa-saber/"/>
+            <updated>2023-10-18T00:00:00+00:00</updated>
+            <id>https://dias.dev/2023-10-18-criptografia-o-minimo-de-encriptacao-que-todo-dev-precisa-saber/</id>
+            <content type="html"><![CDATA[<p>A versão final do PHP 8.3 está agendada para ser lançada no dia <a href="https://wiki.php.net/todo/php83">23 de novembro de 2023</a> e traz algumas novidades bem interessantes, contando com novas funções, novas classes e código que passa a ser considerado obsoleto.</p>
+
+<h2 id="modifica%C3%A7%C3%B5es-sobre-%60readonly%60">Modificações sobre <code>readonly</code></h2>
+
+<p>Uma <em>RFC</em> intitulada <em>Readonly amendments</em> propõe duas mudanças em como a palavra-chave <code>readonly</code> se comporta, porém apenas uma dessas mudanças foi aceita. A partir da versão 8.3 do PHP, é possível reinicializar propriedades <code>readonly</code> ao clonar objetos, ou seja, dentro do <a href="/2023-08-11-metodos-magicos-php">método mágico</a> <code>__clone</code>.</p>
+
+<p>Isso torna o seguinte código, que no PHP 8.2 causaria um erro, possível:</p>
+
+<pre><code class="php">&lt;?php
+
+readonly class Usuario
+{
+    public function __construct(
+        public \DateTimeImmutable $nascimento, 
+    ) {}
+
+    public function __clone() : void
+    {
+        $this-&gt;nascimento = clone $this-&gt;nascimento;
+    }
+}
+</code></pre>
+
+<p>Essa funcionalidade, embora pareça pequena, permite que realizemos <em>deep copy</em> de objetos que possuam propriedades <code>readonly</code>.</p>
+
+<p>Se quiser ver mais sobre essa nova funcionalidade, eu tenho um vídeo sobre ela em meu canal do YouTube:</p>
+
+<p><lite-youtube videoid="yE2Ei9xsJnk">
+    <a href="https://youtube.com/watch?v=yE2Ei9xsJnk" class="lty-playbtn" title="Reproduzir vídeo">
+        <span class="lyt-visually-hidden">
+            Novidades do PHP 8.3: Modificações sobre readonly | Dias de Dev
+        </span>
+    </a>
+</lite-youtube></p>
+
+<h2 id="constantes-tipadas-em-classes">Constantes tipadas em classes</h2>
+
+<p>A partir do PHP 8.3 é possível definirmos os tipos de constantes em nossas classes. Essa possibilidade nos traz mais segurança de tipos principalmente quando há herança entre classes ou implementação de interfaces que possuem constantes. Até o PHP 8.2, uma classe poderia sobrescrever uma constante herdada adicionando qualquer valor, sem checagem de tipo. Isso poderia trazer problemas como o seguinte:</p>
+
+<pre><code class="php">interface InterfaceTeste {
+    const TEST = "Test";
+}
+
+class ClasseBase implements InterfaceTeste {
+    const TEST = []; // Mudamos o tipo aqui
+}
+
+class ClasseDerivada extends ClasseBase {
+    const TEST = null; // Mais uma vez, outro tipo
+}
+</code></pre>
+
+<p>Ao acessar a constante <code>TEST</code> de algum objeto do tipo <code>InterfaceTeste</code>, não havia nenhuma garantia que seu tipo sempre seria <code>string</code>. Com o PHP 8.3, o seguinte é possível:</p>
+
+<pre><code class="php">interface InterfaceTeste {
+    const string TEST = "Test";
+}
+
+class ClasseBase implements InterfaceTeste {
+    const array TEST = []; // Isso falharia, pois muda o tipo da constante
+}
+</code></pre>
+
+<p><ins class="adsbygoogle"
+style="display:block; text-align:center;"
+data-ad-layout="in-article"
+data-ad-format="fluid"
+data-ad-client="ca-pub-8918461095244552"
+data-ad-slot="2366637560"></ins></p>
+
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<h2 id="retorno-nulo-em-ffi">Retorno nulo em FFI</h2>
+
+<p>Ao chamar uma função que não retorna nada, ou seja, <code>void</code>, via <code>FFI</code>, o PHP retornava um tipo específico chamado <code>FFI\CData</code> com o valor <code>void</code>. Agora, assim como em uma função PHP com o retorno <code>void</code>, nós receberemos <code>null</code> dessa função. Exemplo:</p>
+
+<pre><code class="php">$ffi = FFI::cdef(
+    "void free(void *ptr);",
+    "libc.so.6"
+);
+// Até o PHP 8.2, isso retornaria `FFI\CData`, agora retorna `null`
+$ffi-&gt;free(/* ponteiro*/);
+</code></pre>
+
+<h2 id="atributo-%60%23%5Coverride%60-para-sobrescrita-de-m%C3%A9todos">Atributo <code>#[\Override]</code> para sobrescrita de métodos</h2>
+
+<p>Um novo atributo chega ao PHP 8.3. O atributo <code>#[Override]</code> permite que o código deixe claro que o método anotado com ele está sobrescrevendo um método da classe base, ou seja, caso haja alguma inconsistência na herança (como nome do método escrito errado) um erro de compilação será exibido.</p>
+
+<p>Isso permite encontrar erros como o seguinte:</p>
+
+<pre><code class="php">&lt;?php
+class Conta
+{
+    public function saca(int $valor): void { /* implementação */ }
+}
+
+class ContaCorrente
+{
+    public function sacar(int $valor): void { /* implementação modificada */ }
+}
+</code></pre>
+
+<p>O código acima possui um erro sutil no nome do método. Ao chamar <code>(new ContaCorrente())-&gt;saca($valor)</code>, embora a intenção seja chamar o método da classe <code>ContaCorrente</code> que sobrescreve o método da classe <code>Conta</code>, nós na verdade estamos chamando o método da classe <code>Conta</code> mesmo. Esse novo atributo nos permite descobrir esse erro com mais facilidade, exibindo uma mensagem de erro bastante clara:</p>
+
+<pre><code class="php">&lt;?php
+class Conta
+{
+    public function saca(int $valor): void { /* implementação */ }
+}
+
+class ContaCorrente
+{
+    #[Override]
+    public function sacar(int $valor): void { /* implementação modificada */ }
+}
+</code></pre>
+
+<p>Isso geraria o seguinte erro:</p>
+
+<blockquote>
+  <p>Fatal error: ContaCorrente::sacar() has #[\Override] attribute, but no matching parent method exists</p>
+</blockquote>
+
+<p>Essa é mais uma novidade do PHP 8.3 sobre a qual eu gravei um vídeo específico em meu canal do YouTube. Aqui você pode conferí-lo:</p>
+
+<p><lite-youtube videoid="OO2fMqTAwZE">
+    <a href="https://youtube.com/watch?v=OO2fMqTAwZE" class="lty-playbtn" title="Reproduzir vídeo">
+        <span class="lyt-visually-hidden">
+            Novidades do PHP 8.3 - Novo atributo (Override) para sobrescrita de métodos | Dias de Dev
+        </span>
+    </a>
+</lite-youtube></p>
+
+<h2 id="exce%C3%A7%C3%B5es-de-datetime-mais-adequadas-e-espec%C3%ADficas">Exceções de DateTime mais adequadas e específicas</h2>
+
+<p>Algumas novas classes de exceção são introduzidas no PHP 8.3. Se tratando de <code>DateTime</code>, essas são as novas exceções:</p>
+
+<ul>
+<li><code>DateException</code>
+
+<ul>
+<li><code>DateInvalidOperationException</code></li>
+<li><code>DateInvalidTimezoneException</code></li>
+<li><code>DateMalformedIntervalStringException</code></li>
+<li><code>DateMalformedPeriodStringException</code></li>
+<li><code>DateMalformedStringException</code></li>
+</ul></li>
+<li><code>DateError</code>
+
+<ul>
+<li><code>DateObjectError</code></li>
+<li><code>DateRangeError</code></li>
+</ul></li>
+</ul>
+
+<p>Com isso, algumas exceções lançadas anteriormente ao instanciar objetos do tipo <code>DateTime</code>, <code>DateTimeImmutable</code>, <code>DateInterval</code> e <code>DatePeriod</code> podem ser diferentes agora. Um exemplo:</p>
+
+<pre><code class="php">// Até o PHP 8.2, uma exceção do tipo `Exception` seria lançada
+// A partir do 8.3, `DateMalformedStringException` será lançada
+new DateTime('data inválida');
+</code></pre>
+
+<p>Essa é uma <em>RFC</em> simples, mas com um grande número de modificações. Se quiser saber mais sobre cada caso que pode lançar uma das novas exceções, você pode conferir a <a href="https://wiki.php.net/rfc/datetime-exceptions">página da <em>RFC</em></a>.</p>
+
+<h2 id="nova-fun%C3%A7%C3%A3o-%60json_validate%60">Nova função <code>json_validate</code></h2>
+
+<p>Em alguns cenários nós precisamos garantir que uma <em>string</em> é um <em>json</em> válido, mas não necessariamente precisamos realizar a transformação dessa <em>string</em> em um objeto ou <em>array</em> em PHP. Se nós precisamos armazenar no banco de dados um <em>json</em> recebido na requisição, por exemplo, não há necessidade de realizar todo o trabalho de transformar esse <em>json</em> com a função <code>json_decode</code>.</p>
+
+<p>Porém, até o PHP 8.2, a única forma de descobrirmos se uma <em>string</em> é um <em>json</em> válido em PHP era através da função <code>json_decode</code>. Esse desperdício de recursos foi resolvido no PHP 8.3 com a chegada da função <code>json_validate</code>.</p>
+
+<p>Essa nova função garante que o <em>json</em> é válido, mas sem precisar alocar memória para salvar seu conteúdo transformado já que ela simplesmente retorna um booleano.</p>
+
+<p>Eu gravei um vídeo curto no YouTube (no formato de <em>shorts</em>) falando sobre essa nova função. Você pode conferir aqui:</p>
+
+<p><lite-youtube videoid="7rnKavIf67w">
+    <a href="https://youtube.com/watch?v=7rnKavIf67w" class="lty-playbtn" title="Reproduzir vídeo">
+        <span class="lyt-visually-hidden">
+            Novidades do PHP 8.3: Nova função json_validate | Dias de Dev #shorts
+        </span>
+    </a>
+</lite-youtube></p>
+
+<p><ins class="adsbygoogle"
+style="display:block; text-align:center;"
+data-ad-layout="in-article"
+data-ad-format="fluid"
+data-ad-client="ca-pub-8918461095244552"
+data-ad-slot="2366637560"></ins></p>
+
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<h2 id="comando-%60php--l%60-agora-suporta-m%C3%BAltiplos-arquivos">Comando <code>php -l</code> agora suporta múltiplos arquivos</h2>
+
+<p>Um comando muito útil é o <code>php -l</code> que permite verificar se um arquivo possui algum erro de sintaxe. Até a versão 8.2 do PHP apenas um arquivo podia ser analisado por vez. Agora, a partir do PHP 8.3, nós podemos passar diversos arquivos para o <code>php -l</code> analisar. Exemplo:</p>
+
+<pre><code class="shell">php -l arquivo1.php arquivo2.php
+</code></pre>
+
+<p>O comando exibirá, caso nenhum dos arquivos possua erros de sintaxe:</p>
+
+<blockquote>
+  <p>No syntax errors detected in arquivo1.php</p>
+  
+  <p>No syntax errors detected in arquivo2.php</p>
+</blockquote>
+
+<h2 id="fun%C3%A7%C3%B5es-array_sum-e-array_product-mais-consistentes">Funções array_sum e array_product mais consistentes</h2>
+
+<p>As funções <code>array_sum</code> e <code>array_product</code> possuiam um comportamento menos previsível quando valores não numéricos eram encontrados nos arrays a serem processados. Essa novidade traz uma maior consistência e previsibilidade para seu comportamento.</p>
+
+<p>Por exemplo:</p>
+
+<pre><code class="php">$input = [true, STDERR, new stdClass(), []];
+var_dump(array_sum($input));
+var_dump(array_product($input));
+</code></pre>
+
+<p>Tanto até o PHP 8.2 quanto no PHP 8.3, os resultados serão 4 e 3, porém no PHP 8.3 diversos alertas serão exibidos informando que não é possível realizar operações matemáticas em <code>resource</code>, em <code>stdClass</code> e em <code>array</code> (<code>true</code> vira 1 em operações matemáticas no PHP e isso não muda nessa versão).</p>
+
+<p>Isso faz com que nós sejamos notificados pela aplicação caso operações matemáticas estejam sendo realizadas onde não deveriam.</p>
+
+<p>Há mais pontos de melhoria trazidos por essa <em>RFC</em> e por isso eu também tenho um vídeo completo sobre ela:</p>
+
+<p><lite-youtube videoid="cpJAwte1xZU">
+    <a href="https://youtube.com/watch?v=cpJAwte1xZU" class="lty-playbtn" title="Reproduzir vídeo">
+        <span class="lyt-visually-hidden">
+            Novidades do PHP 8.3 - Funções array_sum e array_product mais consistentes | Dias de Dev
+        </span>
+    </a>
+</lite-youtube></p>
+
+<h2 id="mais-novidades">Mais novidades</h2>
+
+<p>Você já deve ter reparado que esse post começou a ficar bem grande, não é mesmo? O PHP 8.3 realmente está trazendo algumas novidades bem interessantes e nesse post eu quis destacar algumas delas.</p>
+
+<p>Mas se você quiser saber sobre <strong>todas</strong> as novidades que o PHP 8.3 traz, pode conferir a <a href="https://wiki.php.net/rfc#php_83">página oficial das <em>RFCs</em></a> ou conferir a seguinte lista:</p>
+
+<ul>
+<li><a href="https://wiki.php.net/rfc/deprecations_php_8_3">Descontinuações do PHP 8.3</a></li>
+<li><a href="https://wiki.php.net/rfc/saner-inc-dec-operators">Modificações nos operadores de incremento e decremento</a></li>
+<li><a href="https://wiki.php.net/rfc/arbitrary_static_variable_initializers">Possibilidade de usar expressões em variáveis estáticas</a></li>
+<li><a href="https://wiki.php.net/rfc/unserialize_warn_on_trailing_data">Aviso quando <code>unserialize()</code> encontrar dados remanescentes</a></li>
+<li><a href="https://www.youtube.com/watch?v=h3dZlJrpvi0">Acesso dinâmico a constantes de classes</a></li>
+<li><a href="https://wiki.php.net/rfc/improve_unserialize_error_handling">Melhoria de tratativa de erros da função <code>unserialize()</code></a></li>
+<li><a href="https://wiki.php.net/rfc/assert-string-eval-cleanup">Descontinuações relacionadas às funções de <code>assert</code></a></li>
+<li><a href="https://wiki.php.net/rfc/mb_str_pad">Nova função mb_str_pad</a></li>
+<li><a href="https://wiki.php.net/rfc/proper-range-semantics">Melhor definição da semântica da função <code>range()</code></a></li>
+<li><a href="https://wiki.php.net/rfc/randomizer_additions">Adições à extensão de aleatoriedade (<code>Randomizer</code>)</a></li>
+<li><a href="https://wiki.php.net/rfc/sqlite3_exceptions">Utilizar exceções por padrão na extensão <code>SQLite3</code></a></li>
+<li><a href="https://wiki.php.net/rfc/deprecate_functions_with_overloaded_signatures">Descontinuar funções com sobrecarga</a></li>
+</ul>
+]]></content>
+        </entry>
             <entry>
             <title type="html"><![CDATA[Explorando Métodos Mágicos no PHP: Conceitos e Exemplos Práticos]]></title>
             <link href="https://dias.dev/2023-08-11-metodos-magicos-php/"/>
@@ -1120,107 +1382,6 @@ data-ad-slot="2366637560"></ins></p>
 <p>Cada ecossistema e ferramenta resolve esse problema de uma maneira diferente, mas todos eles possuem alguma solução. Vale a pesquisa para saber mais sobre a linguagem com a qual você trabalha.</p>
 
 <p>Se não estiver familiarizado com conceitos de testes, sugiro assistir <a href="https://youtube.com/playlist?list=PL3j2sfzg3FPsPiaDUmDDKNvco49YMdj8f">esta playlist</a> de testes automatizados. E se quiser se aprofundar em testes e programação em geral, aqui tem um cupom de desconto para você assinar Alura: <a href="https://alura.tv/diasdedev">https://alura.tv/diasdedev</a></p>
-]]></content>
-        </entry>
-            <entry>
-            <title type="html"><![CDATA[Extensões PHP]]></title>
-            <link href="https://dias.dev/2022-02-13-extensoes-php/"/>
-            <updated>2022-02-13T00:00:00+00:00</updated>
-            <id>https://dias.dev/2022-02-13-extensoes-php/</id>
-            <content type="html"><![CDATA[<p>PHP é uma linguagem de programação que roda em uma máquina virtual chamada <em>Zend Engine</em>. Essa máquina
-virtual é escrita em C e permite que nós escrevamos código em C para embutir funcionalidades no PHP. Assim funcionam as
-extensões do PHP.</p>
-
-<h2 id="o-que-s%C3%A3o-extens%C3%B5es-do-php%3F">O que são extensões do PHP?</h2>
-
-<p>As extensões no PHP são códigos escritos em C que são, de certa forma, embutidos na linguagem, logo, se parecem com código
-nativo. É possível criarmos novas funções, classes e até criar sintaxe nova na linguagem a partir de extensões.</p>
-
-<p>Quem usa PHP no dia-a-dia com certeza usa alguma extensão. Alguns exemplos de extensões PHP bem comuns:</p>
-
-<ul>
-<li>PDO</li>
-<li>Sessions</li>
-<li>JSON</li>
-<li>cURL</li>
-</ul>
-
-<h2 id="tipos-de-extens%C3%B5es">Tipos de extensões</h2>
-
-<p>Além de existir um número enorme de extensões do PHP, existem também alguns tipos onde elas podem ser categorizadas.
-Estes tipos são: <em>Core Extensions</em>, <em>Bundled Extensions</em>, <em>External Extensions</em> e <em>PECL Extensions</em>.</p>
-
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
-<h3 id="core-extensions">Core Extensions</h3>
-
-<p>As extensões <em>Core</em>, como o nome já diz, fazem parte do <em>core</em> (núcleo) do PHP. O PHP não existe sem elas e é impossível
-ter uma instalação do PHP sem estas. Alguns exemplos deste tipo de extensões são: Arrays, Classes/Objects, Date/Time,
-JSON, OPCache etc.</p>
-
-<p>Estas extensões são mantidas pela própria equipe do PHP já que fazem parte da linguagem em si.</p>
-
-<h3 id="bundled-extensions">Bundled Extensions</h3>
-
-<p>As extensões empacotadas com o PHP, chamadas de <em>bundled extensions</em>, são extensões que já vêm junto com o PHP, mas é
-possível escolher habilitá-las ou não em sua instalação. Estas extensões também são mantidas pela equipe do PHP já que
-são empacotadas junto com o restante do código da linguagem.</p>
-
-<p>Alguns exemplos de extensões deste tipo: PDO, GD, FFI, intl, Sessions etc.</p>
-
-<h3 id="external-extensions">External Extensions</h3>
-
-<p>As extensões externas são idênticas às <em>bundled</em> em quase todos os aspectos. Elas vêm com o PHP, podem ser habilitadas
-ou não e são mantidas pela equipe do <em>core</em>, porém possuem uma diferença: elas possuem dependências externas.</p>
-
-<p>Para ter este tipo de extensão em sua instalação do PHP você vai precisar ter alguma outra biblioteca ou programa em seu
-sistema operacional. A extensão <em>cURL</em>, por exemplo, entra nessa categoria. Para ter essa extensão no PHP você precisa
-do software <em>cURL</em> instalado no sistema, já que a extensão faz uso do código disponibilizado por este software.</p>
-
-<p>Alguns exemplos de extensões externas são: cURL, DOM, OpenSSL, Sodium, Zip etc.</p>
-
-<h3 id="pecl-extensions">PECL Extensions</h3>
-
-<p>Por último nós temos as extensões disponibilizadas por terceiros usando <em>PECL</em>, que é basicamente um repositório para
-extensões PHP, como se fosse o <em>Packagist</em> de extensões. Se você pretende criar uma extensão para o PHP, vai utilizar
-este repositório.</p>
-
-<p>As extensões desta categoria são mantidas por terceiros e podem ou não possuir dependências externas. Nem todas as
-extensões desta categoria estão no manual da linguagem, afinal de contas é possível que qualquer pessoa crie uma
-extensão.</p>
-
-<p>Alguns exemplos interessantes de extensões disponibilizadas através do <em>PECL</em>: DS (Data Structures), EV, Memcached,
-Parallel, Swoole etc.</p>
-
-<h2 id="refer%C3%AAncias">Referências</h2>
-
-<p>Conhecer todas extensões do PHP é simplesmente impossível, mas conhecer bem algumas extensões mais importantes para seu
-dia-a-dia é de extrema importância.</p>
-
-<p><a href="https://www.php.net/manual/en/extensions.membership.php">Aqui</a> você pode conferir a lista completa de extensões do
-manual do PHP, todas classificadas por categoria.</p>
-
-<p>Se você tiver interesse em criar suas próprias extensões, existem alguns materiais interessantes disponíveis (embora
-não seja uma tarefa tão trivial). No tutorial <em><a href="https://flavioheleno.github.io/how-do-i/">How do I</a></em> do Flavio Heleno
-você pode conferir o início dessa jornada de criação de extensões além de conferir outras referências.</p>
-
-<h2 id="conclus%C3%A3o">Conclusão</h2>
-
-<p>A linguagem de programação PHP é escrita em C e possui diversas extensões que fazem parte ou não da linguagem. Nós
-fazemos uso de várias extensões no dia-a-dia e entender este funcionamento é bastante importante para devs PHP.</p>
-
-<p>Se além de entender sobre algumas extensões você quiser aprender mais sobre PHP em si, você pode usar esse
-<a href="https://alura.tv/diasdedev">cupom</a> que fornece 10% de desconto na assinatura da Alura, plataforma onde
-eu mesmo gravei diversos cursos sobre o assunto.</p>
 ]]></content>
         </entry>
     </feed>
