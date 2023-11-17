@@ -3,7 +3,7 @@
     <title><![CDATA[Dias de Dev]]></title>
     <link href="https://dias.dev/atom.xml" rel="self"/>
     <link href="https://dias.dev"/>
-    <updated>2023-11-17T21:37:52+00:00</updated>
+    <updated>2023-11-17T21:52:03+00:00</updated>
     <id>https://dias.dev</id>
         <generator uri="http://sculpin.io/">Sculpin</generator>
             <entry>
@@ -39,10 +39,8 @@ readonly class Usuario
 <p>Se quiser ver mais sobre essa nova funcionalidade, eu tenho um vídeo sobre ela em meu canal do YouTube:</p>
 
 <p><lite-youtube videoid="yE2Ei9xsJnk">
-    <a href="https://youtube.com/watch?v=yE2Ei9xsJnk" class="lty-playbtn" title="Reproduzir vídeo">
-        <span class="lyt-visually-hidden">
-            Novidades do PHP 8.3: Modificações sobre readonly | Dias de Dev
-        </span>
+    <a href="https://youtube.com/watch?v=yE2Ei9xsJnk" class="lite-youtube-fallback" title="Reproduzir vídeo">
+        Novidades do PHP 8.3: Modificações sobre readonly | Dias de Dev
     </a>
 </lite-youtube></p>
 

@@ -34,8 +34,7 @@
         
         <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Dias de Dev activity feed" />
                     <link rel="stylesheet" href="/build/post.css">
-            <link rel="stylesheet" href="/build/lite-yt-embed-style.css">
-                        </head>
+                    </head>
     <body>
         <div class="global-container">
             <header>
@@ -92,10 +91,8 @@ readonly class Usuario
 <p>Se quiser ver mais sobre essa nova funcionalidade, eu tenho um vídeo sobre ela em meu canal do YouTube:</p>
 
 <p><lite-youtube videoid="yE2Ei9xsJnk">
-    <a href="https://youtube.com/watch?v=yE2Ei9xsJnk" class="lty-playbtn" title="Reproduzir vídeo">
-        <span class="lyt-visually-hidden">
-            Novidades do PHP 8.3: Modificações sobre readonly | Dias de Dev
-        </span>
+    <a href="https://youtube.com/watch?v=yE2Ei9xsJnk" class="lite-youtube-fallback" title="Reproduzir vídeo">
+        Novidades do PHP 8.3: Modificações sobre readonly | Dias de Dev
     </a>
 </lite-youtube></p>
 
@@ -368,6 +365,6 @@ var_dump(array_product($input));
                  alt=""
                  referrerpolicy="no-referrer-when-downgrade" />
         </noscript>
-                    <script src="/build/lite-yt-embed-script.js" async></script>
+                    <script src="/build/lite-yt-embed-script.js" type="module"></script>
         </body>
 </html>
