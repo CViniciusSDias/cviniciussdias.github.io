@@ -3,14 +3,14 @@
     <title><![CDATA[Dias de Dev]]></title>
     <link href="https://dias.dev/categories/PHP.xml" rel="self"/>
     <link href="https://dias.dev"/>
-    <updated>2023-11-17T21:36:51+00:00</updated>
+    <updated>2023-11-17T21:37:52+00:00</updated>
     <id>https://dias.dev/</id>
         <generator uri="http://sculpin.io/">Sculpin</generator>
             <entry>
             <title type="html"><![CDATA[Novidades do PHP 8.3: O que há de novo nessa versão do PHP]]></title>
-            <link href="https://dias.dev/2023-10-18-criptografia-o-minimo-de-encriptacao-que-todo-dev-precisa-saber/"/>
-            <updated>2023-10-18T00:00:00+00:00</updated>
-            <id>https://dias.dev/2023-10-18-criptografia-o-minimo-de-encriptacao-que-todo-dev-precisa-saber/</id>
+            <link href="https://dias.dev/2023-11-17-novidades-do-php-8-3/"/>
+            <updated>2023-11-17T00:00:00+00:00</updated>
+            <id>https://dias.dev/2023-11-17-novidades-do-php-8-3/</id>
             <content type="html"><![CDATA[<p>A versão final do PHP 8.3 está agendada para ser lançada no dia <a href="https://wiki.php.net/todo/php83">23 de novembro de 2023</a> e traz algumas novidades bem interessantes, contando com novas funções, novas classes e código que passa a ser considerado obsoleto.</p>
 
 <h2 id="modifica%C3%A7%C3%B5es-sobre-%60readonly%60">Modificações sobre <code>readonly</code></h2>
