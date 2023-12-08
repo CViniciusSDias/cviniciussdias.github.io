@@ -3,7 +3,7 @@
     <title><![CDATA[Dias de Dev]]></title>
     <link href="https://dias.dev/categories/PHP.xml" rel="self"/>
     <link href="https://dias.dev"/>
-    <updated>2023-11-17T21:52:03+00:00</updated>
+    <updated>2023-12-08T00:02:12+00:00</updated>
     <id>https://dias.dev/</id>
         <generator uri="http://sculpin.io/">Sculpin</generator>
             <entry>
@@ -264,6 +264,9 @@ var_dump(array_product($input));
 <li><a href="https://wiki.php.net/rfc/sqlite3_exceptions">Utilizar exceções por padrão na extensão <code>SQLite3</code></a></li>
 <li><a href="https://wiki.php.net/rfc/deprecate_functions_with_overloaded_signatures">Descontinuar funções com sobrecarga</a></li>
 </ul>
+
+<p>E se você quiser aprender mais sobre PHP e suas funcionalidades, vou deixar aqui um cupom de desconto para a Alura, onde eu tenho diversos cursos sobre PHP, dentre outros assuntos:
+<a href="https://alura.tv/diasdedev">https://alura.tv/diasdedev</a></p>
 ]]></content>
         </entry>
             <entry>
