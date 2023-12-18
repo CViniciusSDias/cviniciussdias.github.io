@@ -13,6 +13,12 @@
     <priority>0.7</priority>
   </url>
     <url>
+    <loc>https://dias.dev/2023-12-18-usando-rust-com-php-e-ffi/</loc>
+    <lastmod>2023-12-18T00:00:00+00:00</lastmod>
+    <changefreq>Never</changefreq>
+    <priority>1.0</priority>
+  </url>
+    <url>
     <loc>https://dias.dev/2023-11-17-novidades-do-php-8-3/</loc>
     <lastmod>2023-11-17T00:00:00+00:00</lastmod>
     <changefreq>Never</changefreq>

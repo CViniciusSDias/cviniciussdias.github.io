@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <title>Executando Funções Rust em PHP com FFI: Um Guia Passo a Passo | Dias de Dev</title>
+        <meta charset="utf-8">
+        <meta name="theme-color" content="#ffffff">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <meta name="robots" content="index, follow">
+    <meta name="title" content="Executando Funções Rust em PHP com FFI: Um Guia Passo a Passo | Dias de Dev">
+    <meta name="keywords" content="PHP FFI, Rust, Execução de Código Externo, Biblioteca em Rust, Integração PHP Rust, Desempenho PHP, Tutorial FFI, Programação em Rust, Desenvolvimento Web, Eficiência de Código">
+    <meta name="description" content="Descubra como usar a FFI (Foreign Function Interface) do PHP para integrar e executar funções escritas em Rust. Aprenda a criar uma biblioteca em Rust, compilá-la e usá-la em conjunto com o PHP, abrindo novas possibilidades de desempenho e eficiência para suas aplicações.">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:article:published_time" content="1702857600">
+    <meta property="og:url" content="https://dias.dev/2023-12-18-usando-rust-com-php-e-ffi/">
+    <meta property="og:title" content="Executando Funções Rust em PHP com FFI: Um Guia Passo a Passo | Dias de Dev">
+    <meta property="og:description" content="Descubra como usar a FFI (Foreign Function Interface) do PHP para integrar e executar funções escritas em Rust. Aprenda a criar uma biblioteca em Rust, compilá-la e usá-la em conjunto com o PHP, abrindo novas possibilidades de desempenho e eficiência para suas aplicações.">
+    <meta property="og:image" content="https://dias.dev/assets/img/thumbs/2023-12-18-usando-rust-com-php-e-ffi.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary">
+    <meta property="twitter:url" content="https://dias.dev/2023-12-18-usando-rust-com-php-e-ffi/">
+    <meta property="twitter:title" content="Executando Funções Rust em PHP com FFI: Um Guia Passo a Passo | Dias de Dev">
+    <meta property="twitter:description" content="Descubra como usar a FFI (Foreign Function Interface) do PHP para integrar e executar funções escritas em Rust. Aprenda a criar uma biblioteca em Rust, compilá-la e usá-la em conjunto com o PHP, abrindo novas possibilidades de desempenho e eficiência para suas aplicações.">
+            <link rel="preload" href="/build/Baloo2-Bold.ttf" as="font" type="font/ttf" crossorigin>
+        <link rel="preload" href="/build/Baloo2-ExtraBold.ttf" as="font" type="font/ttf" crossorigin>
+        <link rel="preload" href="/build/Baloo2-Medium.ttf" as="font" type="font/ttf" crossorigin>
+        <link rel="preload" href="/build/Baloo2-Regular.ttf" as="font" type="font/ttf" crossorigin>
+        <link rel="preload" href="/build/Baloo2-SemiBold.ttf" as="font" type="font/ttf" crossorigin>
+        <link rel="preload" href="/build/FugazOne-Regular.ttf" as="font" type="font/ttf" crossorigin>
+        <link rel="stylesheet" href="/build/app.css">
+
+        
+        <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Dias de Dev activity feed" />
+                    <link rel="stylesheet" href="/build/post.css">
+                    </head>
+    <body>
+        <div class="global-container">
+            <header>
+                <div class="header-title">
+                    <h1 class="main-heading">
+                        <a aria-current="page" href="/">Dias de Dev</a>
+                    </h1>
+                </div>
+                <nav class="menu">
+                    <a aria-current="page" href="/">Home</a>
+                    <a href="/categorias">Categorias</a>
+                                        <a href="/sobre-mim/">Sobre Mim</a>
+                    <a href="https://youtube.com/@DiasDeDev" target="_blank">
+                        YouTube
+                    </a>
+                </nav>
+            </header>
+            <main role="main">
+                    <article itemscope itemtype="https://schema.org/Article">
+        <header>
+            <h1 itemprop="headline" class="post-title">
+                Executando Funções Rust em PHP com FFI: Um Guia Passo a Passo
+            </h1>
+            <p class="post-date" itemprop="dateCreated">
+                18 de dezembro de 2023
+            </p>
+        </header>
+        <div itemprop="articleBody">
+            <p>Usando FFI (<em>Foreign Function Interface</em>) é possível executar código de outras linguagens em PHP. Neste artigo, vamos ver como executar funções escritas em Rust a partir do PHP usando FFI.</p>
+
+<h2 id="ffi">FFI</h2>
+
+<p>FFI não é uma particularidade do PHP, mas sim uma técnica que permite que uma linguagem de programação execute código de outra linguagem. Desde sua versão 7.4, o PHP possui uma <a href="/2022-02-13-extensoes-php">extensão</a> chamada FFI que permite o uso dessa técnica.</p>
+
+<p>Para usar FFI, precisamos ter um arquivo compilado em formato de biblioteca. Normalmente são arquivos <code>.so</code> no Linux e <code>.dll</code> no Windows. Esses arquivos podem ser gerados a partir de código escrito em C, C++ ou Rust, por exemplo.</p>
+
+<h2 id="gerando-uma-biblioteca-em-rust">Gerando uma biblioteca em Rust</h2>
+
+<p>Entendido o conceito de FFI e sabendo que é possível executar essa técnica com PHP, vamos criar uma biblioteca em Rust. Esse texto não tem a intenção de ser um tutorial de Rust, então vou assumir que você já possua o Rust e Cargo instalados corretamente em seu computador.</p>
+
+<p>Para criar um novo projeto em Rust, execute o comando abaixo em uma pasta da sua escolha:</p>
+
+<pre><code class="bash">cargo new --lib nossa-biblioteca
+</code></pre>
+
+<p>Com isso, alguns arquivos serão criados. Você terá o arquivo de configuração do projeto chamado <code>Cargo.toml</code> e o arquivo <code>lib.rs</code> que é o arquivo principal da biblioteca.</p>
+
+<p>No arquivo <code>Cargo.toml</code>, vamos adicionar a seguinte configuração:</p>
+
+<pre><code class="toml">[lib]
+crate-type = ["cdylib"]
+</code></pre>
+
+<p>Com isso, nós informamos ao Cargo que ao compilar nosso projeto, ele deve gerar uma biblioteca que pode ser utilizada por outras linguagens e não apenas por outros projetos Rust.</p>
+
+<p>Se você executar o comando <code>cargo build</code>, o projeto recém-criado deve ser compilado sem nenhum problema.</p>
+
+<p><ins class="adsbygoogle"
+style="display:block; text-align:center;"
+data-ad-layout="in-article"
+data-ad-format="fluid"
+data-ad-client="ca-pub-8918461095244552"
+data-ad-slot="2366637560"></ins></p>
+
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<h2 id="escrevendo-o-c%C3%B3digo-em-rust">Escrevendo o código em Rust</h2>
+
+<p>Para que a função que nós vamos escrever possa ser executada por outras linguagens, precisamos adotar algumas práticas e é isso que veremos agora.</p>
+
+<p>Nossa intenção é criar uma função que receba dois números e retorne a soma deles. No momento da escrita desse artigo, o código de <code>src/lib.rs</code> já possui uma função que faz isso, mas vamos alterá-la para que ela possa ser usada por outras linguagens. Esse é o código inicial ao criar a biblioteca:</p>
+
+<pre><code class="rust">pub fn add(left: usize, right: usize) -&gt; usize {
+    left + right
+}
+</code></pre>
+
+<p>Vamos começar com os tipos. <code>usize</code> significa <em>unsigned size</em> e é um tipo que representa um número inteiro positivo. Nós queremos permitir o uso de números negativos também, então vamos alterar esse tipo. Para manter as coisas simples, vamos usar <code>i32</code> que é um inteiro de 32 bits. Isso é equivalente ao <code>int</code> de C em um sistema de 64 bits. Com essa alteração, nosso código fica assim:</p>
+
+<pre><code class="rust">pub fn add(left: i32, right: i32) -&gt; i32 {
+    left + right
+}
+</code></pre>
+
+<h2 id="tornando-o-c%C3%B3digo-acess%C3%ADvel-por-outras-linguagens">Tornando o código acessível por outras linguagens</h2>
+
+<p>Até agora escrevemos um código perfeitamente funcional em Rust, mas ele ainda não pode ser executado por outras linguagens que consigam executar bibliotecas. Ainda faltam algumas etapas.</p>
+
+<p>A primeira é justamente informar que essa função chamada <code>add</code> pode ser chamada externamente. Isso é feito com a diretiva <code>extern "C"</code> do Rust. Ao adicionar <code>extern "C"</code> antes de <code>fn</code> nós informamos que a função a seguir será visível para outras linguagens.</p>
+
+<p>Mas ainda falta um último detalhe. Ao compilar um código, todo compilador, independente da linguagem, realiza um processo chamado <em>Mangling</em>. Esse processo consiste em renomear a função para adicionar informações ou às vezes até para manipular o tamanho do binário resultante da compilação. O problema é que cada compilador faz isso de uma forma diferente e isso impede que uma função escrita em uma linguagem seja chamada por outra linguagem.</p>
+
+<p>O Rust possui um atributo que, quando adicionado a uma função, informa ao compilador que esse processo não deve ser realizado. Dessa forma, nossa função chamada <code>add</code> continuará se chamando <code>add</code> mesmo após a compilacão. O nome do atributo é <code>#[no_mangle]</code> e ele deve ser adicionado antes da função. Com isso, nosso código fica assim:</p>
+
+<pre><code class="rust">#[no_mangle]
+pub extern "C" fn add(left: i32, right: i32) -&gt; i32 {
+    left + right
+}
+</code></pre>
+
+<p>Com isso, nosso código em Rust está pronto para ser executado por outras linguagens.</p>
+
+<h2 id="compilando-a-biblioteca">Compilando a biblioteca</h2>
+
+<p>Para compilar a biblioteca, basta executar o comando <code>cargo build</code> na pasta do projeto. O arquivo resultante da compilação estará em <code>target/debug/libnossa_biblioteca.so</code> no Linux ou <code>target/debug/nossa_biblioteca.dll</code> no Windows.</p>
+
+<p>O arquivo resultante da compilação é uma biblioteca que pode ser usada por outras linguagens.</p>
+
+<h2 id="usando-a-biblioteca-em-php">Usando a biblioteca em PHP</h2>
+
+<p>Agora que temos um arquivo <code>.so</code> ou <code>.dll</code> gerado, podemos usá-lo em PHP. Para isso, vamos usar a extensão FFI.</p>
+
+<p>Essa extensão possui algumas formas de ser utilizada e o propósito desse texto não é ser um tutorial sobre FFI também. Então vou seguir com a abordagem mais simples, que é informar dois parâmetros à função <code>FFI::cdef</code>: o primeiro é uma string contendo as assinaturas das funções que queremos usar e o segundo é o caminho para a biblioteca que queremos usar.</p>
+
+<p>Vamos criar um arquivo <code>ffi.php</code> na mesma pasta desse nosso projeto em Rust para realizar o teste. Nosso código para utilizar a função <code>add</code> do arquivo <code>target/debug/libnossa_biblioteca.so</code> (troque por <code>.dll</code> no Windows) fica assim:</p>
+
+<pre><code class="php">$ffi = FFI::cdef(
+    'int add(int left, int right);',
+    __DIR__ . '/target/debug/libnossa_biblioteca.so'
+);
+
+var_dump($ffi-&gt;add(1, 2));
+</code></pre>
+
+<p>Caso você tenha a extensão FFI instalada e habilitada, o resultado será <code>int(3)</code>. Isso significa que a função <code>add</code> foi executada corretamente e retornou o valor <code>3</code>.</p>
+
+<p><ins class="adsbygoogle"
+style="display:block; text-align:center;"
+data-ad-layout="in-article"
+data-ad-format="fluid"
+data-ad-client="ca-pub-8918461095244552"
+data-ad-slot="2366637560"></ins></p>
+
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<h2 id="considera%C3%A7%C3%B5es-sobre-tipos">Considerações sobre tipos</h2>
+
+<p>Repare que em Rust nós escrevemos <code>i32</code> como o tipo dos parâmetros e do retorno, enquanto no PHP nós usamos <code>int</code>. A extensão FFI espera como definição das funções uma assinatura compatível com C e o tipo <code>i32</code>, como foi citado anteriormente, é equivalente ao <code>int</code> de C. Por isso, podemos usar <code>int</code> no PHP sem problemas. Além disso, diversas conversões são feitas automaticamente pela extensão FFI, por isso o tipo <code>int</code> de C virou sem nenhum problema um <code>int</code> do PHP, embora por baixo dos panos eles sejam tipos bem diferentes.</p>
+
+<h3 id="strings">Strings</h3>
+
+<p>Tipos numéricos e booleanos são relativamente fáceis de se lidar, mas e quanto a strings? Como podemos passar uma string para o Rust e/ou receber uma string de volta?</p>
+
+<p>O Rust possui um módulo chamado <code>std::ffi</code> que é exatamente pensado para trazer funcionalidades quando estivermos escrevendo código que pode interagir com outras linguagens. Um dos tipos presentes nesse módulo é o chamado <code>c_char</code> que é equivalente ao <code>char</code> de C. Com isso, uma string que em C é um ponteiro para um <code>char</code> pode ser representada em Rust como um ponteiro para um <code>c_char</code>. Logo, para receber uma string por parâmetro ou para retornar uma string, bastaria utilizarmos <code>*const c_char</code> como tipo.</p>
+
+<p>Exemplo de função que recebe uma string e a retorna sem modificações:</p>
+
+<pre><code class="rust">use std::ffi::c_char;
+
+#[no_mangle]
+pub extern "C" fn return_message(message: *const c_char) -&gt; *const c_char {
+    message
+}
+</code></pre>
+
+<p>Em PHP nós poderíamos chamar essa função da seguinte forma:</p>
+
+<pre><code class="php">$ffi = FFI::cdef(
+    'const char *return_message(const char *message);',
+    __DIR__ . '/target/debug/libnossa_biblioteca.so'
+);
+var_dump($ffi-&gt;return_message('Hello, world!'));
+</code></pre>
+
+<p>E isso nos mostraria <code>string(13) "Hello, world!"</code>.</p>
+
+<p>Porém, para manipularmos essa String em Rust, um ponteiro para <code>c_char</code> não seria a melhor forma. Então podemos usar o tipo <code>std::ffi::CStr</code> para transformar esse ponteiro em uma string manipulável da seguinte forma:</p>
+
+<pre><code class="rust">let string: &amp;str = unsafe { CStr::from_ptr(message) }.to_str().unwrap();
+</code></pre>
+
+<p>Como estamos lidando com um ponteiro, o bloco <code>unsafe</code> é necessário. O método <code>to_str()</code> tenta transformar o <code>CStr</code> em uma string do Rust, mas isso pode falhar, então ele retorna um <code>Result</code>. Como sabemos que a string que estamos recebendo é válida, podemos usar o método <code>unwrap()</code> para obter a string sem precisar lidar com o <code>Result</code>.</p>
+
+<p>Além de <code>CStr</code> há também o tipo <code>CString</code>. <code>CStr</code> está para <code>&amp;str</code> assim como <code>CString</code> está para <code>String</code> no Rust. Com isso nós já conseguimos lidar normalmente com strings em Rust.</p>
+
+<h2 id="conclus%C3%A3o">Conclusão</h2>
+
+<p>Já que é possível chamar códigos em Rust (ou outras linguagens como C ou C++) a partir do PHP, algumas tarefas que poderiam ser executadas de forma mais eficiente ou até de forma exclusiva a partir de linguagens compiladas ainda podem viver em projetos PHP.</p>
+
+<p>Dois bons exemplos de caso de uso desse tipo de técnica são:</p>
+
+<ol>
+<li>pacote <code>php-tkui</code> que usa FFI para chamar o Tk, uma biblioteca gráfica escrita em C, o que permite <a href="https://youtube.com/watch?v=5yhJMcCVNSI">criação de aplicações desktop usando PHP</a></li>
+<li>Computação de grandes arquivos JSON ou Markdown, que embora seja perfeitamente possível fazer diretamente me PHP, em alguns cenários pode se tornar mais eficiente usando Rust + FFI.</li>
+</ol>
+
+<p>Se você quiser aprender mais tanto sobre Rust quanto sobre PHP, há cursos gravados por mim lá na Alura. Aqui tem um cupom de 10% de desconto para assinar a plataforma:
+<a href="https://alura.tv/diasdedev">https://alura.tv/diasdedev</a></p>
+
+        </div>
+        <footer class="post-footer" itemprop="author" itemscope itemtype="https://schema.org/Person">
+            <img src="https://gravatar.com/avatar/63579c5a873f3ab6abff10803e9a252f.jpg?s=50"
+                 alt="Foto do Vinicius Dias com o microfone na mão durante uma palestra"
+                 width="50"
+                 height="50"
+                 itemprop="image" />
+            <p>
+                Escrito por
+                <a href="/sobre-mim/" itemprop="url">
+                    <span itemprop="name">Vinicius Dias</span>
+                </a>
+            </p>
+        </footer>
+
+                    <nav class="article-navigation">
+                <ul>
+                    <li>
+                                                <a class="previous" href="/2023-11-17-novidades-do-php-8-3/" title="Novidades do PHP 8.3: O que há de novo nessa versão do PHP">
+                            ← <span class="title">Novidades do PHP 8.3: O que há de novo nessa versão do PHP</span>
+                        </a>
+                                            </li>
+                    <li>
+                                            </li>
+                </ul>
+            </nav>
+            </article>
+
+
+
+            </main>
+            <footer class="global-footer">&copy; 2023 Dias de Dev</footer>
+        </div>
+
+        <script src="/build/app.js"></script>
+                
+        <!-- Google AdSense -->
+        <script async
+                src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8918461095244552"
+                crossorigin="anonymous"></script>
+        <!-- Simple Analytics -->
+        <script async defer src="https://sa.dias.dev/latest.js"></script>
+        <script async defer src="https://sa.dias.dev/auto-events.js"></script>
+        <noscript>
+            <img src="https://sa.dias.dev/noscript.gif"
+                 alt=""
+                 referrerpolicy="no-referrer-when-downgrade" />
+        </noscript>
+                </body>
+</html>
