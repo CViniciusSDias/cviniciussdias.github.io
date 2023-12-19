@@ -3,7 +3,7 @@
     <title><![CDATA[Dias de Dev]]></title>
     <link href="https://dias.dev/categories/Web.xml" rel="self"/>
     <link href="https://dias.dev"/>
-    <updated>2023-12-19T23:08:17+00:00</updated>
+    <updated>2023-12-19T23:17:26+00:00</updated>
     <id>https://dias.dev/</id>
         <generator uri="http://sculpin.io/">Sculpin</generator>
             <entry>
@@ -149,7 +149,7 @@ data-ad-slot="2366637560"></ins></p>
 
 <p>Primeiro, precisamos mesmo de uma loja? Por que não pesquisar diretamente no Google um serviço ao invés de pesquisar em uma loja de aplicativos? Segundo, será que só aplicativos móveis "nativos" são capazes de controlar o <em>hardware</em> dos dispositivos onde eles rodam?</p>
 
-<p><img src="https://web-dev.imgix.net/image/tcFciHGuF3MxnTr1y5ue01OGLBn2/1DKtUFjXLJbiiruKA9P1.svg" alt="Gráfico mostrando a relação entre capacidade e alcance de PWAs e aplicações nativas e serviços web, onde PWAs possuem tanta capacidade quanto um aplicativo nativo e tanto alcance quanto um serviço Web" class="big-image" /></p>
+<p><img src="https://web-dev.imgix.net/image/tcFciHGuF3MxnTr1y5ue01OGLBn2/1DKtUFjXLJbiiruKA9P1.svg" alt="Gráfico mostrando a relação entre capacidade e alcance de PWAs e aplicações nativas e serviços web, onde PWAs possuem tanta capacidade quanto um aplicativo nativo e tanto alcance quanto um serviço Web" class="big-image" loading="lazy" /></p>
 
 <h2 id="o-poder-da-web">O poder da Web</h2>
 
@@ -194,17 +194,17 @@ data-ad-slot="2366637560"></ins></p>
 
 <p>Outro ponto é que um aplicativo possui uma experiência mais imersiva, sem interferências de outras abas do navegador, além de barras de ferramentas, etc.</p>
 
-<p><img src="/build/pwa/pwa-ifood.jpg" alt="Tela da PWA do ifood, que é exatamente igual ao aplicativo nativo" class="big-image" /></p>
+<p><img src="/build/pwa/pwa-ifood.jpg" alt="Tela da PWA do ifood, que é exatamente igual ao aplicativo nativo" class="big-image" loading="lazy" /></p>
 
 <p>Como podemos ver, uma PWA pode se comportar visualmente exatamente como uma aplicação nativa. As barras do navegador podem sumir, a cor da barra de notificação pode ser personalizada, etc.</p>
 
 <p>Além do mais, podemos optar por criar um atalho para essa aplicação web direto em nossa tela inicial:</p>
 
-<p><img src="/build/pwa/menu-instalar-ifood.jpg" alt='Tela do navegador com o menu aberto, mostrando a opção de "Adicionar à tela inicial"' class="big-image" /></p>
+<p><img src="/build/pwa/menu-instalar-ifood.jpg" alt='Tela do navegador com o menu aberto, mostrando a opção de "Adicionar à tela inicial"' class="big-image" loading="lazy" /></p>
 
 <p>Mas claro, nem todo usuário vai abrir o menu do navegador para adicionar um atalho à tela inicial. O ideal seria poder ter um botão de instalar essa aplicação para que o usuário não tenha esse "esforço".</p>
 
-<p><img src="/build/pwa/tela-instalacao-uber.jpg" alt="Mensagem sugerindo a instalação da PWA do uber sem precisar abrir o menu do navegador" class="big-image" /></p>
+<p><img src="/build/pwa/tela-instalacao-uber.jpg" alt="Mensagem sugerindo a instalação da PWA do uber sem precisar abrir o menu do navegador" class="big-image" loading="lazy" /></p>
 
 <p>Conforme podemos ver na imagem anterior, isso também é perfeitamente possível. Além de termos um botão na aplicação para instalá-la, o próprio navegador ao identificar uma PWA pode sugerir sua instalação. A ideia é que isso fiquei cada vez mais natural, inclusive, com os navegadores tomando decisões mais assertivas ao fazer tais sugestões.</p>
 
