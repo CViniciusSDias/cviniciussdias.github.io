@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <title>PHP Strict Types: Entendendo o Uso Prático da Diretiva declare(strict_types=1) no PHP | Dias de Dev</title>
+        <meta charset="utf-8">
+        <meta name="theme-color" content="#ffffff">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <meta name="robots" content="index, follow">
+    <meta name="title" content="PHP Strict Types: Entendendo o Uso Prático da Diretiva declare(strict_types=1) no PHP | Dias de Dev">
+    <meta name="keywords" content="PHP Strict Types, declare strict_types, Type Hints, Type Juggling, Segurança em Programação, Boas Práticas PHP, TypeError PHP, Desenvolvimento PHP, Tipos de Dados PHP">
+    <meta name="description" content="Descubra o verdadeiro impacto da diretiva declare(strict_types=1) no PHP. Este guia prático explora de maneira simples e direta como essa diretiva influencia o comportamento do seu código, assegurando integridade e segurança.">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:article:published_time" content="1703721600">
+    <meta property="og:url" content="https://dias.dev/2023-12-28-entendendo-strict-types-no-php/">
+    <meta property="og:title" content="PHP Strict Types: Entendendo o Uso Prático da Diretiva declare(strict_types=1) no PHP | Dias de Dev">
+    <meta property="og:description" content="Descubra o verdadeiro impacto da diretiva declare(strict_types=1) no PHP. Este guia prático explora de maneira simples e direta como essa diretiva influencia o comportamento do seu código, assegurando integridade e segurança.">
+    <meta property="og:image" content="https://dias.dev/assets/img/thumbs/2023-12-28-entendendo-strict-types-no-php.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary">
+    <meta property="twitter:url" content="https://dias.dev/2023-12-28-entendendo-strict-types-no-php/">
+    <meta property="twitter:title" content="PHP Strict Types: Entendendo o Uso Prático da Diretiva declare(strict_types=1) no PHP | Dias de Dev">
+    <meta property="twitter:description" content="Descubra o verdadeiro impacto da diretiva declare(strict_types=1) no PHP. Este guia prático explora de maneira simples e direta como essa diretiva influencia o comportamento do seu código, assegurando integridade e segurança.">
+            <link rel="preload" href="/build/Baloo2-Bold.ttf" as="font" type="font/ttf" crossorigin>
+        <link rel="preload" href="/build/Baloo2-ExtraBold.ttf" as="font" type="font/ttf" crossorigin>
+        <link rel="preload" href="/build/Baloo2-Medium.ttf" as="font" type="font/ttf" crossorigin>
+        <link rel="preload" href="/build/Baloo2-Regular.ttf" as="font" type="font/ttf" crossorigin>
+        <link rel="preload" href="/build/Baloo2-SemiBold.ttf" as="font" type="font/ttf" crossorigin>
+        <link rel="preload" href="/build/FugazOne-Regular.ttf" as="font" type="font/ttf" crossorigin>
+        <link rel="stylesheet" href="/build/app.css">
+
+        
+        <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Dias de Dev activity feed">
+        <link rel="canonical" href="https://dias.dev/2023-12-28-entendendo-strict-types-no-php/">
+                    <link rel="stylesheet" href="/build/post.css">
+                    </head>
+    <body>
+        <div class="global-container">
+            <header>
+                <div class="header-title">
+                    <h1 class="main-heading">
+                        <a aria-current="page" href="/">Dias de Dev</a>
+                    </h1>
+                </div>
+                <nav class="menu">
+                    <a aria-current="page" href="/">Home</a>
+                    <a href="/categorias">Categorias</a>
+                                        <a href="/sobre-mim/">Sobre Mim</a>
+                    <a href="https://youtube.com/@DiasDeDev" target="_blank">
+                        YouTube
+                    </a>
+                </nav>
+            </header>
+            <main role="main">
+                    <article itemscope itemtype="https://schema.org/Article">
+        <header>
+            <h1 itemprop="headline" class="post-title">
+                PHP Strict Types: Entendendo o Uso Prático da Diretiva declare(strict_types=1) no PHP
+            </h1>
+            <p class="post-date" itemprop="dateCreated">
+                28 de dezembro de 2023
+            </p>
+        </header>
+        <div itemprop="articleBody">
+            <p>A diretiva <code>declare(strict_types=1)</code> é amplamente utilizada no PHP, mas nem todos entendem o que ela faz na prática. Nesse texto nós vamos entender como o comportamento do seu código pode ser alterado ao usar essa diretiva.</p>
+
+<h2 id="type-hints-no-php">Type hints no PHP</h2>
+
+<p>O PHP possui o conceito de <em>Type Hints</em> que é basicamente como nós podemos informar os tipos que usaremos em alguns locais como em parâmetros e retornos de funções. Ao informar o tipo de um parâmetro, por exemplo, o PHP irá verificar se o valor passado é compatível com o tipo informado. Por exemplo:</p>
+
+<pre><code class="php">function soma(int $a, int $b): int
+{
+    return $a + $b;
+}
+
+soma('test 1', 'test 2'); // Fatal error: Uncaught TypeError: Argument 1 passed to soma() must be of the type int, string given
+</code></pre>
+
+<p>Repare que ao tentar passar uma string para uma função que espera inteiros, um erro do tipo <code>TypeError</code> é lançado. Esse tipo de técnica traz mais segurança para nosso código de forma que conhecemos melhor os valores que manipulamos.</p>
+
+<p><ins class="adsbygoogle"
+style="display:block; text-align:center;"
+data-ad-layout="in-article"
+data-ad-format="fluid"
+data-ad-client="ca-pub-8918461095244552"
+data-ad-slot="2366637560"></ins></p>
+
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<h2 id="malabarismo-com-tipos">Malabarismo com tipos</h2>
+
+<p>Embora o PHP possua os famosos e muito úteis <em>type hits</em>, é importante dizer que nem sempre eles são seguidos à risca. O PHP possui outro conceito chamado <em>type juggling</em> (malabarismo de tipos em tradução livre) que é basicamente a conversão de tipos de forma implícita. Essa funcionalidade permite algumas facilidades bem interessantes, principalmente quando nos lembramos que o protocolo HTTP trabalha somente com texto. Se nós recebessemos os dois números para realizar a soma por uma requisição, eles viriam como <code>string</code>s, então o seguinte código seria executado:</p>
+
+<pre><code class="php">soma('1', '2'); // 3
+</code></pre>
+
+<p>Embora ainda estejamos passando strings por parâmetro, agora a chamada da função é bem sucedida. Isso acontece, pois o PHP possui algo chamado <a href="https://www.youtube.com/watch?v=sKw-ruVP9cw">strings numéricas</a>. O exemplo anterior é um caso onde a conversão automática dos tipos nos ajuda, porém há casos onde isso pode ser um problema. Se nós tentarmos passar números com ponto flutuante, por exemplo, o PHP irá remover a parte decimal dos números:</p>
+
+<pre><code class="php">soma(1.5, 2.5); // 3
+</code></pre>
+
+<p>Desde a versão 8.1 o PHP emitirá um aviso de obsolência (<em>deprecation notice</em>) quando tentamos converter <code>float</code> para <code>int</code>, mas ainda assim o código é executado e o resultado é no mínimo inesperado (para não dizer incorreto).</p>
+
+<h2 id="impedindo-convers%C3%B5es">Impedindo conversões</h2>
+
+<p>Para impedir esse comportamento do PHP, nós podemos usar a diretiva <code>declare(strict_types=1)</code> que irá forçar o PHP a seguir os <em>type hits</em> de forma mais rígida, sem conversões implícitas de tipos. Ao usar essa diretiva, o PHP irá lançar um erro do tipo <code>TypeError</code> quando tentarmos passar um tipo diferente do esperado, mesmo que seja possível realizar alguma conversão. Sendo assim, se onde eu chamo a função <code>soma</code> houver a declaração de <code>strict_types</code>, o código lançará um erro:</p>
+
+<pre><code class="php">&lt;?php
+
+declare(strict_types=1);
+
+function soma(int $a, int $b): int
+{
+    return $a + $b;
+}
+
+soma('1', '2'); // Fatal error: Uncaught TypeError: Argument 1 passed to soma() must be of the type int, string given
+soma(1.5, 2.5); // Fatal error: Uncaught TypeError: Argument 1 passed to soma() must be of the type int, float given
+</code></pre>
+
+<p>Um detalhe muito importante é que a diretiva <code>declare(strict_types=1)</code> deve ser declarada no início do arquivo, antes de qualquer código.</p>
+
+<p><ins class="adsbygoogle"
+style="display:block; text-align:center;"
+data-ad-layout="in-article"
+data-ad-format="fluid"
+data-ad-client="ca-pub-8918461095244552"
+data-ad-slot="2366637560"></ins></p>
+
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<h2 id="m%C3%BAltiplos-arquivos">Múltiplos arquivos</h2>
+
+<p>A diretiva <code>declare</code> agirá no arquivo onde ela for declarada, então pode acontecer de termos um arquivo com <code>strict_types=1</code> e outro sem. Nesse cenário, o PHP vai se comportar seguindo o que for declarado no arquivo que <strong>chama</strong> a função e não no arquivo que a declara. Exemplo:</p>
+
+<pre><code class="php">&lt;?php
+// arquivo functions.php
+
+declare(strict_types=1);
+
+function soma(int $a, int $b) {
+    return $a + $b;
+}
+?&gt;
+
+&lt;?php
+// arquivo index.php
+
+require_once 'functions.php';
+
+echo soma('1', '2'); // 3
+?&gt;
+</code></pre>
+
+<p>Repare que mesmo o arquivo <code>functions.php</code> possuindo a diretiva, o arquivo que executa a função é o <code>index.php</code> e ele não informa a diretiva, logo, ela estará desabilitada. Já no caso contrário, o seguinte ocorrerá:</p>
+
+<pre><code class="php">// arquivo functions.php
+
+function soma(int $a, int $b) {
+    return $a + $b;
+}
+?&gt;
+
+&lt;?php
+// arquivo index.php
+
+declare(strict_types=1);
+
+require_once 'functions.php';
+
+echo soma('1', '2'); // Fatal error: Uncaught TypeError: Argument 1 passed to soma() must be of the type int, string given
+?&gt;
+</code></pre>
+
+<p>Mesmo o arquivo <code>functions.php</code> não informando a diretiva <code>declare(strict_types=1)</code> o erro acontece, pois no arquivo <code>index.php</code> é onde a chamada acontece e ele possui a diretiva.</p>
+
+<h2 id="conclus%C3%A3o">Conclusão</h2>
+
+<p>Tipos em PHP podem ser um assunto espinhoso porque além de complexo, nem todo dev concorda em como utilizá-los. Uns (como eu) acreditam que quanto mais estrito, melhor. Outros acreditam que <em>type hints</em> são um desperdício. Mais uma coisa eu acredito que seja unânime: é muito importante para nós, como devs PHP, entender como os tipos funcionam na linguagem com a qual trabalhamos.</p>
+
+<p>Se você deseja explorar ainda mais o tema de tipos em PHP, recomendo a leitura de um artigo abrangente no blog Codamos. O conteúdo discute detalhadamente os diversos tipos em PHP, suas manipulações e conversões, e oferece uma análise mais aprofundada sobre <code>strict_types</code>, inclusive com trechos de código em C do PHP. Para acessar o artigo completo, visite <a href="https://codamos.com.br/tipos-em-php/">este link</a>. E se você quiser aprender mais sobre PHP, há <strong>muitos</strong> cursos gravados por mim lá na Alura. Aqui tem um cupom de 10% de desconto para assinar a plataforma: <a href="https://alura.tv/diasdedev">https://alura.tv/diasdedev</a></p>
+
+        </div>
+        <footer class="post-footer" itemprop="author" itemscope itemtype="https://schema.org/Person">
+            <img src="https://gravatar.com/avatar/63579c5a873f3ab6abff10803e9a252f.jpg?s=50"
+                 alt="Foto do Vinicius Dias com o microfone na mão durante uma palestra"
+                 width="50"
+                 height="50"
+                 loading="lazy"
+                 itemprop="image" />
+            <p>
+                Escrito por
+                <a href="/sobre-mim/" itemprop="url">
+                    <span itemprop="name">Vinicius Dias</span>
+                </a>
+            </p>
+        </footer>
+
+                    <nav class="article-navigation">
+                <ul>
+                    <li>
+                                                <a class="previous" href="/2023-12-18-usando-rust-com-php-e-ffi/" title="Executando Funções Rust em PHP com FFI: Um Guia Passo a Passo">
+                            ← <span class="title">Executando Funções Rust em PHP com FFI: Um Guia Passo a Passo</span>
+                        </a>
+                                            </li>
+                    <li>
+                                            </li>
+                </ul>
+            </nav>
+            </article>
+
+
+
+            </main>
+            <footer class="global-footer">&copy; 2023 Dias de Dev</footer>
+        </div>
+
+        <script src="/build/app.js"></script>
+                
+        <!-- Simple Analytics -->
+        <script defer src="https://sa.dias.dev/latest.js"></script>
+        <script defer src="https://sa.dias.dev/auto-events.js"></script>
+        <noscript>
+            <img src="https://sa.dias.dev/noscript.gif"
+                 alt=""
+                 referrerpolicy="no-referrer-when-downgrade" />
+        </noscript><!-- Google AdSense -->
+        <script defer
+                src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8918461095244552"
+                crossorigin="anonymous"></script>
+                </body>
+</html>
