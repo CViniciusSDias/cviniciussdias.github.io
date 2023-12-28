@@ -3,8 +3,10 @@
     <title><![CDATA[Dias de Dev]]></title>
     <link href="https://dias.dev/categories/Front.xml" rel="self"/>
     <link href="https://dias.dev"/>
-    <updated>2023-12-28T02:59:54+00:00</updated>
+    <updated>2023-12-28T20:30:00+00:00</updated>
     <id>https://dias.dev/</id>
+            <author>
+            <name><![CDATA[Vinicius Dias]]></name>            <email><![CDATA[vinicius@dias.dev]]></email>        </author>
         <generator uri="http://sculpin.io/">Sculpin</generator>
             <entry>
             <title type="html"><![CDATA[Cookies e segurança]]></title>

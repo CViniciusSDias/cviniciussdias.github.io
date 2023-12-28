@@ -33,7 +33,8 @@
 
         
         <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Dias de Dev activity feed">
-        <link rel="canonical" href="https://dias.dev/2023-12-28-entendendo-strict-types-no-php/">
+                <link rel="canonical"
+              href="https://dias.dev/2023-12-28-entendendo-strict-types-no-php/">
                     <link rel="stylesheet" href="/build/post.css">
                     </head>
     <body>
@@ -59,9 +60,9 @@
             <h1 itemprop="headline" class="post-title">
                 PHP Strict Types: Entendendo o Uso Prático da Diretiva declare(strict_types=1) no PHP
             </h1>
-            <p class="post-date" itemprop="dateCreated">
+            <time class="post-date" itemprop="dateCreated" pubdate datetime="2023-12-28">
                 28 de dezembro de 2023
-            </p>
+            </time>
         </header>
         <div itemprop="articleBody">
             <p>A diretiva <code>declare(strict_types=1)</code> é amplamente utilizada no PHP, mas nem todos entendem o que ela faz na prática. Nesse texto nós vamos entender como o comportamento do seu código pode ser alterado ao usar essa diretiva.</p>
@@ -189,7 +190,7 @@ echo soma('1', '2'); // Fatal error: Uncaught TypeError: Argument 1 passed to so
         </div>
         <footer class="post-footer" itemprop="author" itemscope itemtype="https://schema.org/Person">
             <img src="https://gravatar.com/avatar/63579c5a873f3ab6abff10803e9a252f.jpg?s=50"
-                 alt="Foto do Vinicius Dias com o microfone na mão durante uma palestra"
+                 alt="Foto do Vinicius Dias, um homem branco de cabelos escuros e curtos, em perfil com o fundo bem escuro em tons de azul enquanto mexe em um laptop durante uma apresentação."
                  width="50"
                  height="50"
                  loading="lazy"
