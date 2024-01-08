@@ -3,7 +3,7 @@
     <title><![CDATA[Dias de Dev]]></title>
     <link href="https://dias.dev/categories/PHP.xml" rel="self"/>
     <link href="https://dias.dev"/>
-    <updated>2023-12-28T20:39:54+00:00</updated>
+    <updated>2024-01-08T18:07:23+00:00</updated>
     <id>https://dias.dev/</id>
             <author>
             <name><![CDATA[Vinicius Dias]]></name>            <email><![CDATA[vinicius@dias.dev]]></email>        </author>
@@ -42,7 +42,7 @@ data-ad-slot="2366637560"></ins></p>
 
 <h2 id="malabarismo-com-tipos">Malabarismo com tipos</h2>
 
-<p>Embora o PHP possua os famosos e muito úteis <em>type hits</em>, é importante dizer que nem sempre eles são seguidos à risca. O PHP possui outro conceito chamado <em>type juggling</em> (malabarismo de tipos em tradução livre) que é basicamente a conversão de tipos de forma implícita. Essa funcionalidade permite algumas facilidades bem interessantes, principalmente quando nos lembramos que o protocolo HTTP trabalha somente com texto. Se nós recebessemos os dois números para realizar a soma por uma requisição, eles viriam como <code>string</code>s, então o seguinte código seria executado:</p>
+<p>Embora o PHP possua os famosos e muito úteis <em>type hints</em>, é importante dizer que nem sempre eles são seguidos à risca. O PHP possui outro conceito chamado <em>type juggling</em> (malabarismo de tipos em tradução livre) que é basicamente a conversão de tipos de forma implícita. Essa funcionalidade permite algumas facilidades bem interessantes, principalmente quando nos lembramos que o protocolo HTTP trabalha somente com texto. Se nós recebessemos os dois números para realizar a soma por uma requisição, eles viriam como <code>string</code>s, então o seguinte código seria executado:</p>
 
 <pre><code class="php">soma('1', '2'); // 3
 </code></pre>
@@ -56,7 +56,7 @@ data-ad-slot="2366637560"></ins></p>
 
 <h2 id="impedindo-convers%C3%B5es">Impedindo conversões</h2>
 
-<p>Para impedir esse comportamento do PHP, nós podemos usar a diretiva <code>declare(strict_types=1)</code> que irá forçar o PHP a seguir os <em>type hits</em> de forma mais rígida, sem conversões implícitas de tipos. Ao usar essa diretiva, o PHP irá lançar um erro do tipo <code>TypeError</code> quando tentarmos passar um tipo diferente do esperado, mesmo que seja possível realizar alguma conversão. Sendo assim, se onde eu chamo a função <code>soma</code> houver a declaração de <code>strict_types</code>, o código lançará um erro:</p>
+<p>Para impedir esse comportamento do PHP, nós podemos usar a diretiva <code>declare(strict_types=1)</code> que irá forçar o PHP a seguir os <em>type hints</em> de forma mais rígida, sem conversões implícitas de tipos. Ao usar essa diretiva, o PHP irá lançar um erro do tipo <code>TypeError</code> quando tentarmos passar um tipo diferente do esperado, mesmo que seja possível realizar alguma conversão. Sendo assim, se onde eu chamo a função <code>soma</code> houver a declaração de <code>strict_types</code>, o código lançará um erro:</p>
 
 <pre><code class="php">&lt;?php
 
