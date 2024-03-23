@@ -59,3 +59,15 @@ output {
     padding: 0.5rem;
     font-family: monospace;
 }
+
+table {
+    width: 100%;
+    border-width: 1px;
+    border-style: solid;
+    border-collapse: collapse;
+
+    td, th {
+        border: 1px solid;
+        text-align: center;
+    }
+}
