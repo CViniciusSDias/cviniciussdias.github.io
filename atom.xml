@@ -3,7 +3,7 @@
     <title><![CDATA[Dias de Dev]]></title>
     <link href="https://dias.dev/atom.xml" rel="self"/>
     <link href="https://dias.dev/"/>
-    <updated>2024-03-23T16:40:07+00:00</updated>
+    <updated>2024-04-09T17:41:44+00:00</updated>
     <id>https://dias.dev</id>
             <author>
             <name><![CDATA[Vinicius Dias]]></name>            <email><![CDATA[vinicius@dias.dev]]></email>        </author>
@@ -244,8 +244,7 @@ $acuracia = $metrica-&gt;score($predicoesDeTeste, $teste-&gt;labels());
     </a>
 </lite-youtube></p>
 
-<p>E para se aprofundar ainda mais no mundo de machine learning, inteligência artificial e também PHP, você pode aproveitar esse cupom de 10% de desconto na Alura:
-<a href="https://alura.tv/diasdedev">https://alura.tv/diasdedev</a></p>
+<p>E para se aprofundar ainda mais no mundo de machine learning, inteligência artificial e também PHP, você pode aproveitar <a href="https://tidd.ly/4d42Myb">esse cupom de 10% de desconto na Alura</a>.</p>
 ]]></content>
         </entry>
             <entry>
@@ -373,7 +372,7 @@ echo soma('1', '2'); // Fatal error: Uncaught TypeError: Argument 1 passed to so
 
 <p>Tipos em PHP podem ser um assunto espinhoso porque além de complexo, nem todo dev concorda em como utilizá-los. Uns (como eu) acreditam que quanto mais estrito, melhor. Outros acreditam que <em>type hints</em> são um desperdício. Mais uma coisa eu acredito que seja unânime: é muito importante para nós, como devs PHP, entender como os tipos funcionam na linguagem com a qual trabalhamos.</p>
 
-<p>Se você deseja explorar ainda mais o tema de tipos em PHP, recomendo a leitura de um artigo abrangente no blog Codamos. O conteúdo discute detalhadamente os diversos tipos em PHP, suas manipulações e conversões, e oferece uma análise mais aprofundada sobre <code>strict_types</code>, inclusive com trechos de código em C do PHP. Para acessar o artigo completo, visite <a href="https://codamos.com.br/tipos-em-php/">este link</a>. E se você quiser aprender mais sobre PHP, há <strong>muitos</strong> cursos gravados por mim lá na Alura. Aqui tem um cupom de 10% de desconto para assinar a plataforma: <a href="https://alura.tv/diasdedev">https://alura.tv/diasdedev</a></p>
+<p>Se você deseja explorar ainda mais o tema de tipos em PHP, recomendo a leitura de um artigo abrangente no blog Codamos. O conteúdo discute detalhadamente os diversos tipos em PHP, suas manipulações e conversões, e oferece uma análise mais aprofundada sobre <code>strict_types</code>, inclusive com trechos de código em C do PHP. Para acessar o artigo completo, visite <a href="https://codamos.com.br/tipos-em-php/">este link</a>. E se você quiser aprender mais sobre PHP, há <strong>muitos</strong> cursos gravados por mim lá na Alura. Aqui tem um <a href="https://tidd.ly/4d42Myb">cupom de 10% de desconto</a> para assinar a plataforma.</p>
 ]]></content>
         </entry>
             <entry>
@@ -543,8 +542,7 @@ var_dump($ffi-&gt;return_message('Hello, world!'));
 <li>Computação de grandes arquivos JSON ou Markdown, que embora seja perfeitamente possível fazer diretamente me PHP, em alguns cenários pode se tornar mais eficiente usando Rust + FFI.</li>
 </ol>
 
-<p>Se você quiser aprender mais tanto sobre Rust quanto sobre PHP, há cursos gravados por mim lá na Alura. Aqui tem um cupom de 10% de desconto para assinar a plataforma:
-<a href="https://alura.tv/diasdedev">https://alura.tv/diasdedev</a></p>
+<p>Se você quiser aprender mais tanto sobre Rust quanto sobre PHP, há cursos gravados por mim lá na Alura. Aqui tem um <a href="https://tidd.ly/4d42Myb">cupom de 10% de desconto</a> para assinar a plataforma.</p>
 ]]></content>
         </entry>
             <entry>
@@ -806,8 +804,7 @@ var_dump(array_product($input));
 <li><a href="https://wiki.php.net/rfc/deprecate_functions_with_overloaded_signatures">Descontinuar funções com sobrecarga</a></li>
 </ul>
 
-<p>E se você quiser aprender mais sobre PHP e suas funcionalidades, vou deixar aqui um cupom de desconto para a Alura, onde eu tenho diversos cursos sobre PHP, dentre outros assuntos:
-<a href="https://alura.tv/diasdedev">https://alura.tv/diasdedev</a></p>
+<p>E se você quiser aprender mais sobre PHP e suas funcionalidades, vou deixar aqui um <a href="https://tidd.ly/4d42Myb">cupom de desconto para a Alura</a>, onde eu tenho diversos cursos sobre PHP, dentre outros assuntos.</p>
 ]]></content>
         </entry>
             <entry>
@@ -1031,7 +1028,7 @@ $objeto-&gt;qualquerCoisa(1, 2);
 
 <p>Lembrar de todos os métodos (e suas assinaturas) e o que cada um deles faz não é necessário, mas é importante saber da existência deles para saber o que pesquisar quando for necessário.</p>
 
-<p>Se quiser aprender mais sobre PHP como um todo e sobre tecnologia em geral, vou deixar aqui um cupom de 10% de desconto na Alura, plataforma onde eu gravei inúmeros cursos: <a href="https://alura.tv/diasdedev">https://alura.tv/diasdedev</a>.</p>
+<p>Se quiser aprender mais sobre PHP e sobre tecnologia em geral, vou deixar aqui um <a href="https://tidd.ly/4d42Myb">cupom de 10% de desconto na Alura</a>, plataforma onde eu gravei inúmeros cursos.</p>
 ]]></content>
         </entry>
             <entry>
@@ -1161,8 +1158,7 @@ data-ad-slot="2366637560"></ins></p>
 
 <p>O simples uso de uma extensão apropriada faz com que essa complexa tarefa seja imensamente facilitada. Recomendo acessar os links que deixei durante o post como referência para se aprofundar em cada um dos assuntos aqui abordados.</p>
 
-<p>Já no link a seguir eu deixo um cupom de 10% de desconto para você assinar a Alura, plataforma onde há cursos completos (alguns comigo, inclusive) sobre manipulação de strings (dentre vários outros assuntos de tecnologia):
-<a href="https://alura.tv/diasdedev">https://alura.tv/diasdedev</a></p>
+<p>Já no link a seguir eu deixo um <a href="https://tidd.ly/4d42Myb">cupom de 10% de desconto</a> para você assinar a Alura, plataforma onde há cursos completos (alguns comigo, inclusive) sobre manipulação de strings (dentre vários outros assuntos de tecnologia).</p>
 ]]></content>
         </entry>
             <entry>
@@ -1310,8 +1306,7 @@ int main()
     </a>
 </lite-youtube></p>
 
-<p>Já no link a seguir eu deixo um cupom de 10% de desconto para você assinar a Alura, plataforma onde há cursos completos (alguns comigo, inclusive) sobre programação paralela e programação assíncrona (dentre vários outros assuntos de tecnologia):
-<a href="https://alura.tv/diasdedev">https://alura.tv/diasdedev</a></p>
+<p>Já no link a seguir eu deixo um <a href="https://tidd.ly/4d42Myb">cupom de 10% de desconto</a> para você assinar a Alura, plataforma onde há cursos completos (alguns comigo, inclusive) sobre programação paralela e programação assíncrona (dentre vários outros assuntos de tecnologia).</p>
 
 <h2 id="conclus%C3%A3o">Conclusão</h2>
 
@@ -1398,7 +1393,7 @@ echo mb_convert_encoding('string em UTF-8', 'ISO-8859-1', 'UTF-8');
 
 <p>Tendo entendido o conceito de <em>strings multibyte</em>, fica bastante claro tanto o papel da extensão <code>mbstring</code> quanto vários problemas que nós já enfrentamos ao manipular caracteres acentuados, por exemplo.</p>
 
-<p>Se você quiser aprender mais sobre manipulações de strings, encodings, charsets, PHP e mais assuntos relacionados a tecnologia, aqui está um cupom de desconto para assinar a Alura, plataforma de cursos online onde eu sou o instrutor da maioria dos cursos de PHP: <a href="https://alura.tv/diasdedev">https://alura.tv/diasdedev</a></p>
+<p>Se você quiser aprender mais sobre manipulações de strings, encodings, charsets, PHP e mais assuntos relacionados a tecnologia, aqui está um <a href="https://tidd.ly/4d42Myb">cupom de desconto</a> para assinar a Alura, plataforma de cursos online onde eu sou o instrutor da maioria dos cursos de PHP.</p>
 ]]></content>
         </entry>
             <entry>
@@ -1498,7 +1493,7 @@ header('Location: /url-de-redirecionamento');
 
 <p>Um dos erros mais conhecidos do mundo PHP, embora assustador, não é tão difícil de resolver. Com esse post você deve ter as informações necessárias para não se deparar com ele novamente e para resolver o problema caso o encontre.</p>
 
-<p>Caso queira se aprofundar e conhecer ainda mais nos estudos sobre PHP, aqui tem um cupom de desconto para assinar a Alura, plataforma de cursos online onde eu sou o instrutor da maioria dos cursos de PHP: <a href="https://alura.tv/diasdedev">https://alura.tv/diasdedev</a></p>
+<p>Caso queira se aprofundar e conhecer ainda mais nos estudos sobre PHP, aqui tem um <a href="https://tidd.ly/4d42Myb">cupom de desconto</a> para assinar a Alura, plataforma de cursos online onde eu sou o instrutor da maioria dos cursos de PHP.</p>
 ]]></content>
         </entry>
             <entry>
@@ -1623,7 +1618,7 @@ opcache.enable=0
 <li>Post aqui no blog sobre Extensões PHP: <a href="/2022-02-13-extensoes-php/">https://dias.dev/2022-02-13-extensoes-php/</a></li>
 <li>Vídeo no meu canal sobre <em>Opcache</em>: <a href="https://youtube.com/watch?v=6vEspHqjrkI">https://youtube.com/watch?v=6vEspHqjrkI</a></li>
 <li>Documentação sobre as diretivas do <code>php.ini</code>: <a href="https://www.php.net/manual/en/ini.php">https://www.php.net/manual/en/ini.php</a></li>
-<li>Cupom de desconto na Alura para você se aprofundar em PHP: <a href="https://alura.tv/diasdedev">https://alura.tv/diasdedev</a></li>
+<li>Cupom de desconto na Alura para você se aprofundar em PHP: <a href="https://tidd.ly/4d42Myb">Cupom de desconto</a></li>
 </ul>
 ]]></content>
         </entry>
@@ -1875,8 +1870,7 @@ data-ad-slot="2366637560"></ins></p>
 
 <p>Se segurança é um assunto que te interessa, recomendo essa <em>playlist</em> com alguns vídeos básicos sobre o assunto: <a href="https://youtube.com/playlist?list=PL3j2sfzg3FPuOOt13tOcNTx6hCFYcQls9">https://youtube.com/playlist?list=PL3j2sfzg3FPuOOt13tOcNTx6hCFYcQls9</a></p>
 
-<p>Se quiser se aprofundar, na Alura há diversos cursos e formações sobre o tema de segurança. Aqui está um cupom de desconto para assinar a plataforma:
-<a href="https://alura.tv/diasdedev">https://alura.tv/diasdedev</a></p>
+<p>Se quiser se aprofundar, na Alura há diversos cursos e formações sobre o tema de segurança. Aqui está um <a href="https://tidd.ly/4d42Myb">cupom de desconto</a> para assinar a plataforma.</p>
 ]]></content>
         </entry>
             <entry>
@@ -1923,7 +1917,7 @@ data-ad-slot="2366637560"></ins></p>
 
 <p>Cada ecossistema e ferramenta resolve esse problema de uma maneira diferente, mas todos eles possuem alguma solução. Vale a pesquisa para saber mais sobre a linguagem com a qual você trabalha.</p>
 
-<p>Se não estiver familiarizado com conceitos de testes, sugiro assistir <a href="https://youtube.com/playlist?list=PL3j2sfzg3FPsPiaDUmDDKNvco49YMdj8f">esta playlist</a> de testes automatizados. E se quiser se aprofundar em testes e programação em geral, aqui tem um cupom de desconto para você assinar Alura: <a href="https://alura.tv/diasdedev">https://alura.tv/diasdedev</a></p>
+<p>Se não estiver familiarizado com conceitos de testes, sugiro assistir <a href="https://youtube.com/playlist?list=PL3j2sfzg3FPsPiaDUmDDKNvco49YMdj8f">esta playlist</a> de testes automatizados. E se quiser se aprofundar em testes e programação em geral, aqui tem um <a href="https://tidd.ly/4d42Myb">cupom de desconto</a> para você assinar Alura.</p>
 ]]></content>
         </entry>
             <entry>
@@ -2023,7 +2017,7 @@ você pode conferir o início dessa jornada de criação de extensões além de 
 fazemos uso de várias extensões no dia-a-dia e entender este funcionamento é bastante importante para devs PHP.</p>
 
 <p>Se além de entender sobre algumas extensões você quiser aprender mais sobre PHP em si, você pode usar esse
-<a href="https://alura.tv/diasdedev">cupom</a> que fornece 10% de desconto na assinatura da Alura, plataforma onde
+<a href="https://tidd.ly/4d42Myb">cupom</a> que fornece 10% de desconto na assinatura da Alura, plataforma onde
 eu mesmo gravei diversos cursos sobre o assunto.</p>
 ]]></content>
         </entry>
@@ -2118,7 +2112,7 @@ data-ad-slot="2366637560"></ins></p>
 </div>
 
 <p>Agora se você prefere estudar através de cursos e vídeos, super recomendo os treinamentos de front-end e de PWA da Alura. Lá você consegue toda a base para desenvolver uma PWA de forma profissional, aprendendo desde a base, passando por <em>JavaScript</em> avançado e <em>APIs Web</em>, até <em>PWAs</em> de fato. Se for o seu caso, aqui tenho um cupom de 10% de desconto para estudar na Alura:
-<a href="https://alura.tv/diasdedev">https://alura.tv/diasdedev</a></p>
+<a href="https://tidd.ly/4d42Myb">https://tidd.ly/4d42Myb</a></p>
 ]]></content>
         </entry>
             <entry>
@@ -2194,7 +2188,7 @@ data-ad-slot="2366637560"></ins></p>
 
 <p>Creio que seja seguro afirmar que a grande maioria dos textos que tratamos como desenvolvedores utiliza UTF-8 como encoding e neste artigo nós entendemos o motivo disso e como o tratamento de textos evoluiu até chegar a esse ponto.</p>
 
-<p>Se você quiser aprender mais sobre esse assunto, pode considerar assinar a Alura. Lá existem treinamentos que tratam sobre charsets, encoding, manipulação de <em>strings</em>    e muito mais. Caso pretenda estudar na Alura, <a href="https://alura.tv/diasdedev">neste link</a> você tem um desconto de 10%.</p>
+<p>Se você quiser aprender mais sobre esse assunto, pode considerar assinar a Alura. Lá existem treinamentos que tratam sobre charsets, encoding, manipulação de <em>strings</em> e muito mais. Caso pretenda estudar na Alura, <a href="https://tidd.ly/4d42Myb">neste link</a> você tem um desconto de 10%.</p>
 ]]></content>
         </entry>
             <entry>
@@ -2222,7 +2216,7 @@ data-ad-slot="2366637560"></ins></p>
 - <a href="https://amzn.to/3lzFVkD">Desconstruindo a Web: As tecnologias por trás de uma requisição</a>
 - <a href="https://amzn.to/35k9rT1">HTTP: The Definitive Guide</a>
 - <a href="https://amzn.to/3gEgz22">Learning Http/2: A Practical Guide for Beginners</a>
-- <a href="https://alura.tv/diasdedev">Cursos de HTTP na Alura</a></p>
+- <a href="https://tidd.ly/4d42Myb">Cursos de HTTP na Alura</a></p>
 
 <p>Com esse conhecimento, já podemos partir para o foco deste artigo: como o <strong>PHP</strong> funciona na Web?</p>
 
@@ -2303,7 +2297,7 @@ data-ad-slot="2366637560"></ins></p>
 
 <p>No caso do PHP-FPM precisamos de um servidor para receber as requisições HTTP e enviar as chamadas para o PHP com FastCGI. No caso de um servidor auto-contido, podemos ter um proxy reverso servindo os arquivos estáticos e realizando cache, por exemplo, enquanto o servidor auto-contido responde apenas as requisições realmente necessárias.</p>
 
-<p>Se você quiser aprender mais sobre algum desses assuntos, pode considerar assinar a Alura. Lá existem treinamentos (gravados por mim) sobre Nginx, ReactPHP, Swoole e muito mais. Caso pretenda estudar na Alura, <a href="https://alura.tv/diasdedev">neste link</a> você tem um desconto de 10%.</p>
+<p>Se você quiser aprender mais sobre algum desses assuntos, pode considerar assinar a Alura. Lá existem treinamentos (gravados por mim) sobre Nginx, ReactPHP, Swoole e muito mais. Caso pretenda estudar na Alura, <a href="https://tidd.ly/4d42Myb">neste link</a> você tem um desconto de 10%.</p>
 ]]></content>
         </entry>
             <entry>
@@ -2446,7 +2440,7 @@ simples antes de 2011, já que ele facilitava a instalação da praticamente a �
 for um servidor de produção, XAMPP nunca foi uma alternativa viável. Sendo assim, para desenvolvedores PHP, não há
 motivos válidos para uso do XAMPP nos dias atuais.</p>
 
-<p>Se você quiser aprender mais sobre algum desses assuntos, pode considerar assinar a Alura. Lá existem treinamentos (gravados por mim) sobre PHP, Nginx e muito mais. Caso pretenda estudar na Alura, <a href="https://alura.tv/diasdedev">neste link</a> você tem um desconto de 10%.</p>
+<p>Se você quiser aprender mais sobre algum desses assuntos, pode considerar assinar a Alura. Lá existem treinamentos (gravados por mim) sobre PHP, Nginx e muito mais. Caso pretenda estudar na Alura, <a href="https://tidd.ly/4d42Myb">neste link</a> você tem um desconto de 10%.</p>
 ]]></content>
         </entry>
             <entry>
@@ -2896,10 +2890,10 @@ de streams podemos compactar e descompactar arquivos, enviar dados por FTP, aces
 <ul>
 <li>A documentação oficial é sempre um ótimo lugar para recorrer e entender a fundo as funcionalidades</li>
 </ul></li>
-<li><a href="https://www.alura.com.br/curso-online-php-io-arquivos-streams">https://www.alura.com.br/curso-online-php-io-arquivos-streams</a>
+<li><a href="https://tidd.ly/4aqwpba">Curso online: PHP I/O - Arquivos de streams</a>
 
 <ul>
-<li>Na Alura existe um curso específico de streams usando filtros, contextos e muito mais. Se quiser 10% de desconto na sua assinatura, confere <a href="https://alura.tv/diasdedev">esse link aqui</a>.</li>
+<li>Na Alura existe um curso específico de streams usando filtros, contextos e muito mais. Se quiser 10% de desconto na sua assinatura, confere <a href="https://tidd.ly/4d42Myb">esse link aqui</a>.</li>
 </ul></li>
 <li><a href="/2020-09-16-php-assincrono-de-forma-nativa/">PHP Assíncrono de Forma Nativa</a>
 
@@ -3244,7 +3238,7 @@ array(3) {
 
 <p>Mas seguindo o que citei no post sobre aprendizado, eu penso como <a href="https://pt.wikipedia.org/wiki/Richard_Feynman">Richard Feynman</a> (Nobel de física): "O que eu não consigo criar, eu não entendo". Então antes de utilizar uma ferramenta que realiza o trabalho para mim, eu gosto de saber como realizar este trabalho sem ela. Com isso, se algum problema acontecer com a biblioteca, por exemplo, eu vou estar mais preparado para resolvê-lo já que eu entendo um pouco melhor como as coisas funcionam.</p>
 
-<p>Se você quiser aprender mais sobre algum desses assuntos, pode considerar assinar a Alura. Lá existem treinamentos (gravados por mim) sobre PHP Streams, ReactPHP e muito mais. Caso pretenda estudar na Alura, <a href="https://alura.tv/diasdedev">neste link</a> você tem um desconto de 10%.</p>
+<p>Se você quiser aprender mais sobre algum desses assuntos, pode considerar assinar a Alura. Lá existem treinamentos (gravados por mim) sobre PHP Streams, ReactPHP e muito mais. Caso pretenda estudar na Alura, <a href="https://tidd.ly/4d42Myb">neste link</a> você tem um desconto de 10%.</p>
 ]]></content>
         </entry>
             <entry>
