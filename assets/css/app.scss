@@ -1,4 +1,5 @@
-@import "highlight.js/styles/github.min.css";
+@import url("highlight.js/styles/github.min.css") screen and (prefers-color-scheme: light);
+@import url("highlight.js/styles/github-dark-dimmed.min.css") screen and (prefers-color-scheme: dark);
 @import "normalize";
 @import "fonts";
 
@@ -41,6 +42,7 @@ a {
 p {
     margin-bottom: 2rem;
     line-height: 1.625;
+    font-size: 1.15rem;
 }
 
 img {
@@ -114,4 +116,19 @@ nav.menu {
     margin-top: 2rem;
     display: flex;
     justify-content: space-between;
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background: #1d1e22;
+        color: #f0f0f0;
+    }
+
+    .main-heading a {
+        color: #f0f0f0;
+    }
+
+    a {
+        color: lightblue;
+    }
 }
