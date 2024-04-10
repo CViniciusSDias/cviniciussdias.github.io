@@ -9,15 +9,3 @@ hljs.registerLanguage('bash', require('highlight.js/lib/languages/bash'));
 hljs.registerLanguage('rust', require('highlight.js/lib/languages/rust'));
 
 hljs.highlightAll();
-
-window.onload = () => {
-    if (document.querySelector('.utterances-frame')) {
-        const theme = window?.matchMedia('(prefers-color-scheme: dark)')?.matches ? 'github-dark' : 'github-light';
-        const message = {
-            type: 'set-theme',
-            theme: theme
-        };
-        const iframe = document.querySelector('.utterances-frame');
-        iframe.contentWindow.postMessage(message, 'https://utteranc.es');
-    }
-};
