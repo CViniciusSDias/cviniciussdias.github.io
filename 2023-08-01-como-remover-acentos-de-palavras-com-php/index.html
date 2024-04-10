@@ -90,17 +90,6 @@ echo iconv('UTF-8', 'ASCII//TRANSLIT', $string); // Exibe: Aeiou
 
 <p>Essa abordagem vai funcionar na maioria dos cenários, mas há algumas observações que devem ser consideradas.</p>
 
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
 <h3 id="locale">Locale</h3>
 
 <p>A conversão com <code>iconv</code> não vai funcionar caso a categoria <code>LC_CTYPE</code> do <code>locale</code> esteja definida como <code>C</code> ou <code>POSIX</code>.</p>
@@ -149,17 +138,6 @@ echo preg_replace('/[\x{0300}-\x{036F}]/u', '', $normalized); // Exibe: Aeiou
 <p>O código acima pega a string <code>"Ãéïòû"</code> e a normaliza utilizando a forma de normalização D (<code>NFD</code>), conhecida também como decomposição canônica (<em>Canonical Decomposition</em>). Essa regra consiste em separar os caracteres de acentuação dos demais, ou seja, caracteres como crase (&#96;) ou til (~) são separados das letras. O caractere <code>Ã</code>, por exemplo, se torna <code>A~</code>.</p>
 
 <p>Essa forma de normalização foi definida e nomeada pelo <a href="/2021-08-24-charsets-e-encodings-como-strings-funcionam/"><em>Unicode Consortium</em></a>, mas não é a única. Você pode conferir mais detalhes sobre cada uma das "regras" no site oficial: <a href="https://unicode.org/reports/tr15/">https://unicode.org/reports/tr15/</a>.</p>
-
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
 
 <h3 id="extens%C3%A3o-php">Extensão PHP</h3>
 

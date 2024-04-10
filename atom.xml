@@ -3,7 +3,7 @@
     <title><![CDATA[Dias de Dev]]></title>
     <link href="https://dias.dev/atom.xml" rel="self"/>
     <link href="https://dias.dev/"/>
-    <updated>2024-04-10T02:50:25+00:00</updated>
+    <updated>2024-04-10T03:03:21+00:00</updated>
     <id>https://dias.dev</id>
             <author>
             <name><![CDATA[Vinicius Dias]]></name>            <email><![CDATA[vinicius@dias.dev]]></email>        </author>
@@ -37,17 +37,6 @@
 <p>Nós vamos treinar um modelo de classificação usando PHP para prever se determinado jogador vai durar mais de 5 anos na liga profissional de basquete estadunidense, a famosa NBA.</p>
 
 <p>Para isso, precisamos de estatísticas de diversos jogadores antes de entrarem na NBA e o resultado deles, ou seja, se jogaram durante pelo menos 5 anos após chegarem na liga. Esses dados podem ser encontrados <a href="https://github.com/ptyadana/Data-Science-and-Machine-Learning-Projects-Dojo/blob/master/Project%20-%20Predict%20Career%20Longevity%20for%20NBA%20Rookies%20with%20Binary%20Classification%20-%20Logistic%20Regression/data/nba_logreg.csv">neste arquivo</a> que contém informações como o número de partidas jogadas, número de minutos, quantidade de pontos por jogo, número de cestas de 3 pontos feitas, etc. E a última coluna contém a classe onde cada jogador se encontra, onde <code>1.0</code> significa que o jogador participou por pelo menos 5 anos da liga e <code>0.0</code> quer dizer que ele ficou menos do que 5 anos.</p>
-
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
 
 <h2 id="etapas-do-processo-de-machine-learning">Etapas do processo de Machine Learning</h2>
 
@@ -143,17 +132,6 @@ $predicoesDeTeste = $modelo-&gt;predict($teste);
 </code></pre>
 
 <p>Como nós temos os dados de teste, incluindo suas classes (também chamadas de labels) e temos as predições, podemos comparar ambos para medir quão corretas são as previsões do nosso modelo. Por exemplo, sabendo que determinado jogador realmente jogou por mais de 5 anos na NBA, nosso modelo teria previsto que ele atingiria essa marca ou teria dito que ele não chegaria lá?</p>
-
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
 
 <h3 id="medi%C3%A7%C3%A3o-do-resultado">Medição do resultado</h3>
 
@@ -268,17 +246,6 @@ soma('test 1', 'test 2'); // Fatal error: Uncaught TypeError: Argument 1 passed 
 
 <p>Repare que ao tentar passar uma string para uma função que espera inteiros, um erro do tipo <code>TypeError</code> é lançado. Esse tipo de técnica traz mais segurança para nosso código de forma que conhecemos melhor os valores que manipulamos.</p>
 
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
 <h2 id="malabarismo-com-tipos">Malabarismo com tipos</h2>
 
 <p>Embora o PHP possua os famosos e muito úteis <em>type hints</em>, é importante dizer que nem sempre eles são seguidos à risca. O PHP possui outro conceito chamado <em>type juggling</em> (malabarismo de tipos em tradução livre) que é basicamente a conversão de tipos de forma implícita. Essa funcionalidade permite algumas facilidades bem interessantes, principalmente quando nos lembramos que o protocolo HTTP trabalha somente com texto. Se nós recebessemos os dois números para realizar a soma por uma requisição, eles viriam como <code>string</code>s, então o seguinte código seria executado:</p>
@@ -311,17 +278,6 @@ soma(1.5, 2.5); // Fatal error: Uncaught TypeError: Argument 1 passed to soma() 
 </code></pre>
 
 <p>Um detalhe muito importante é que a diretiva <code>declare(strict_types=1)</code> deve ser declarada no início do arquivo, antes de qualquer código.</p>
-
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
 
 <h2 id="m%C3%BAltiplos-arquivos">Múltiplos arquivos</h2>
 
@@ -409,17 +365,6 @@ crate-type = ["cdylib"]
 
 <p>Se você executar o comando <code>cargo build</code>, o projeto recém-criado deve ser compilado sem nenhum problema.</p>
 
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
 <h2 id="escrevendo-o-c%C3%B3digo-em-rust">Escrevendo o código em Rust</h2>
 
 <p>Para que a função que nós vamos escrever possa ser executada por outras linguagens, precisamos adotar algumas práticas e é isso que veremos agora.</p>
@@ -479,17 +424,6 @@ var_dump($ffi-&gt;add(1, 2));
 </code></pre>
 
 <p>Caso você tenha a extensão FFI instalada e habilitada, o resultado será <code>int(3)</code>. Isso significa que a função <code>add</code> foi executada corretamente e retornou o valor <code>3</code>.</p>
-
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
 
 <h2 id="considera%C3%A7%C3%B5es-sobre-tipos">Considerações sobre tipos</h2>
 
@@ -611,17 +545,6 @@ class ClasseBase implements InterfaceTeste {
 }
 </code></pre>
 
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
 <h2 id="retorno-nulo-em-ffi">Retorno nulo em FFI</h2>
 
 <p>Ao chamar uma função que não retorna nada, ou seja, <code>void</code>, via <code>FFI</code>, o PHP retornava um tipo específico chamado <code>FFI\CData</code> com o valor <code>void</code>. Agora, assim como em uma função PHP com o retorno <code>void</code>, nós receberemos <code>null</code> dessa função. Exemplo:</p>
@@ -732,17 +655,6 @@ new DateTime('data inválida');
     </a>
 </lite-youtube></p>
 
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
 <h2 id="comando-%60php--l%60-agora-suporta-m%C3%BAltiplos-arquivos">Comando <code>php -l</code> agora suporta múltiplos arquivos</h2>
 
 <p>Um comando muito útil é o <code>php -l</code> que permite verificar se um arquivo possui algum erro de sintaxe. Até a versão 8.2 do PHP apenas um arquivo podia ser analisado por vez. Agora, a partir do PHP 8.3, nós podemos passar diversos arquivos para o <code>php -l</code> analisar. Exemplo:</p>
@@ -847,17 +759,6 @@ $user-&gt;save();
 </code></pre>
 
 <p>O método <code>save</code> é entendido como parte da classe base <code>Model</code>, mas e quanto às propriedades? Para cenários como esse, os métodos mágicos foram concebidos.</p>
-
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
 
 <h2 id="implementa%C3%A7%C3%A3o-de-m%C3%A9todos-m%C3%A1gicos">Implementação de métodos mágicos</h2>
 
@@ -1052,17 +953,6 @@ echo iconv('UTF-8', 'ASCII//TRANSLIT', $string); // Exibe: Aeiou
 
 <p>Essa abordagem vai funcionar na maioria dos cenários, mas há algumas observações que devem ser consideradas.</p>
 
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
 <h3 id="locale">Locale</h3>
 
 <p>A conversão com <code>iconv</code> não vai funcionar caso a categoria <code>LC_CTYPE</code> do <code>locale</code> esteja definida como <code>C</code> ou <code>POSIX</code>.</p>
@@ -1111,17 +1001,6 @@ echo preg_replace('/[\x{0300}-\x{036F}]/u', '', $normalized); // Exibe: Aeiou
 <p>O código acima pega a string <code>"Ãéïòû"</code> e a normaliza utilizando a forma de normalização D (<code>NFD</code>), conhecida também como decomposição canônica (<em>Canonical Decomposition</em>). Essa regra consiste em separar os caracteres de acentuação dos demais, ou seja, caracteres como crase (&#96;) ou til (~) são separados das letras. O caractere <code>Ã</code>, por exemplo, se torna <code>A~</code>.</p>
 
 <p>Essa forma de normalização foi definida e nomeada pelo <a href="/2021-08-24-charsets-e-encodings-como-strings-funcionam/"><em>Unicode Consortium</em></a>, mas não é a única. Você pode conferir mais detalhes sobre cada uma das "regras" no site oficial: <a href="https://unicode.org/reports/tr15/">https://unicode.org/reports/tr15/</a>.</p>
-
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
 
 <h3 id="extens%C3%A3o-php">Extensão PHP</h3>
 
@@ -1179,17 +1058,6 @@ data-ad-slot="2366637560"></ins></p>
 <p>Essa definição parece bastante vaga e nada clara, não é mesmo? Então vamos tentar usar um exemplo prático, usando uma linguagem bastante comum na <em>Web</em> (embora esse conceito seja válido para qualquer ecossistema). Quando você usa a função <code>fetch</code> do <em>JavaScript</em>, a requisição <em>HTTP</em> será feita, mas a resposta, quando disponível, não vai ser tratada imediatamente. O motor de execução do <em>JavaScript</em> vai executar o código que lida com essa resposta o mais rápido possível, mas não será de forma síncrona ou imediata.</p>
 
 <p>O que isso quer dizer? Ao receber a resposta, o motor de execução do <em>JavaScript</em> vai colocar a função que lida com essa resposta em uma fila e, assim que possível, essa função será executada. Enquanto a resposta não está disponível, ou até mesmo após a resposta chegar, mas antes da função que lida com ela ter sua vez de ser rodada, outros pedaços de código podem ser executados.</p>
-
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
 
 <p>No exemplo a seguir, usamos <em>Promises</em> para informar qual é a função que será adicionada na fila quando a resposta estiver pronta, e até lá, outras linhas de código vão sendo executadas.</p>
 
@@ -1332,17 +1200,6 @@ echo strlen('Olá'); // Exibe 4
 echo strtoupper('olá'); // Exibe "OLá"
 </code></pre>
 
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
 <h2 id="strings-multibyte">Strings multibyte</h2>
 
 <p>Como foi exposto logo na introdução do post, uma <em>string multibyte</em> é um texto que possui caracteres que demandam mais de um <em>byte</em> para serem representados. Caracteres com acento são um ótimo exemplo desse cenário. É necessário mais de um <em>byte</em> para representá-los, já que em um único <em>byte</em> nós conseguimos representar apenas 256 caracteres, que são, não coincidentemente, os caracteres da tabela <em>ASCII</em>.</p>
@@ -1442,17 +1299,6 @@ echo mb_convert_encoding('string em UTF-8', 'ISO-8859-1', 'UTF-8');
 <li>etc</li>
 </ul>
 
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
 <h2 id="entendendo-o-problema">Entendendo o problema</h2>
 
 <p>Como foi dito logo na introdução desse <em>post</em>, o problema "<em>Cannot modify header information - headers already sent</em>" acontece quando tentamos enviar um cabeçalho <em>HTTP</em> após já termos enviado algo no corpo da resposta.</p>
@@ -1527,17 +1373,6 @@ Additional .ini files parsed:      /etc/php/8.2/cli/conf.d/10-opcache.ini,
 <h4 id="prioridade-de-carregamento">Prioridade de carregamento</h4>
 
 <p>Você deve ter notado que os arquivos "extra" de configuração possuem um número como prefixo (<code>10-opcache.ini</code> e <code>10-pdo.ini</code>). Esse número <strong>não</strong> tem um significado especial para o PHP, mas nos permite ordenar os arquivos por prioridade. O PHP vai carregar os arquivos <code>.ini</code> do diretório configurado em ordem alfabetica, sendo assim, números são adicionados para nós podermos definir a prioridade de carregamento de cada arquivo. Quanto maior o número, "mais depois" ele será carregado, fazendo com que suas definições sejam aplicadas por último, sobrescrevendo as anteriores caso hajam configurações duplicadas.</p>
-
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
 
 <h2 id="o-que-pode-ser-configurado-pelo-php.ini">O que pode ser configurado pelo php.ini</h2>
 
@@ -1675,17 +1510,6 @@ opcache.enable=0
 
 <p>Quando você envia um e-mail usando um cliente de e-mail como o Microsoft Outlook ou o Gmail, o cliente se comunica com um servidor SMTP para enviar a mensagem. Esse servidor é responsável por encaminhar a mensagem para o servidor de e-mail do destinatário, que, por sua vez, entrega a mensagem ao cliente de e-mail do destinatário.</p>
 
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
 <h2 id="pacotes-de-envio-de-e-mails">Pacotes de envio de e-mails</h2>
 
 <p>Se você precisa de mais flexibilidade do que a função <code>mail</code> do PHP pode oferecer, existem algumas bibliotecas que podem ser usadas para enviar e-mails com PHP. Dois exemplos populares são o PHPMailer e o Symfony Mailer.</p>
@@ -1772,17 +1596,6 @@ try {
 <p>Aperte F12, vá até a aba "Aplicativo" (ou "Application") e lá você verá, no menu lateral, a parte de <em>Cookies</em>. Repare que eles são separados por domínio.</p>
 
 <p>Para entender essa separação por domínio, vamos imaginar o seguinte cenário: sua aplicação, hospedada no domínio X, envia um <em>cookie</em> de identificação de sessão. No código do seu app há chamadas para um servidor que configura relatórios de acesso ao site. Esse servidor está em outro local, no domínio Y. Sendo assim, você verá <em>cookies</em> dos domínios X e Y ao acessar essa ferramenta de desenvolvedores.</p>
-
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
 
 <h3 id="o-que-_cookies_-armazenam">O que <em>Cookies</em> armazenam</h3>
 
@@ -1888,17 +1701,6 @@ data-ad-slot="2366637560"></ins></p>
 
 <p>É muito comum que ao executar a nossa suíte de testes, cada cenário seja executado de forma isolada, um por vez. Porém, atualmente é praticamente regra que os nossos computadores possuam CPUs com capacidade de executar mais de um processo por vez, sendo assim, por que não executar mais de um teste por vez?</p>
 
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
 <h2 id="paraleliza%C3%A7%C3%A3o-de-testes">Paralelização de testes</h2>
 
 <p>Paralelismo é um assunto bastante complexo, mas a ideia de paralelizar uma suíte de testes é, na verdade, bem simples: executar mais de um caso de teste por vez, em processos separados.</p>
@@ -1947,17 +1749,6 @@ nativo. É possível criarmos novas funções, classes e até criar sintaxe nova
 
 <p>Além de existir um número enorme de extensões do PHP, existem também alguns tipos onde elas podem ser categorizadas.
 Estes tipos são: <em>Core Extensions</em>, <em>Bundled Extensions</em>, <em>External Extensions</em> e <em>PECL Extensions</em>.</p>
-
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
 
 <h3 id="core-extensions">Core Extensions</h3>
 
@@ -2052,17 +1843,6 @@ eu mesmo gravei diversos cursos sobre o assunto.</p>
 
 <p>Aqui você pode conferir algumas <em>APIs Web</em> para ter acesso a recursos que antigamente só eram possíveis através de aplicações nativas: https://developer.mozilla.org/en-US/docs/Web/API</p>
 
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
 <h2 id="aplica%C3%A7%C3%B5es-progressivas">Aplicações progressivas</h2>
 
 <p>Já vimos que através da <em>Web</em> podemos ter acesso a recursos muito poderosos, mas o que significa o <strong>P</strong> de PWA?</p>
@@ -2133,17 +1913,6 @@ data-ad-slot="2366637560"></ins></p>
 <p><img src="https://raw.githubusercontent.com/wiki/tomgibara/ascii-table/tables/ascii-table-1.1.png" alt="Tabela ASCII" /></p>
 
 <p>Isso funcionava muito bem para textos que usavam inglês como idioma (ou algum idioma com o mesmo conjunto de caracteres). Porém, diversos outros idiomas possuem caracteres que não estão representados nesta tabela. Caracteres acentuados, por exemplo, não estão na tabela ASCII. Como representar textos em português, por exemplo?</p>
-
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
 
 <h2 id="extended-ascii">Extended ASCII</h2>
 
@@ -2230,17 +1999,6 @@ data-ad-slot="2366637560"></ins></p>
 
 <p>Esta é a forma mais rudimentar de se executar um código <em>server-side</em> e não é mais recomendada, pois há alternativas mais interessantes que veremos neste artigo.</p>
 
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
 <h2 id="apache-mod_php">Apache mod_php</h2>
 
 <p>Conforme o PHP (e a Web em si) foi evoluindo, a abordagem utilizando CGI foi se mostrando ineficaz, desperdiçando recursos de processamento.</p>
@@ -2320,17 +2078,6 @@ problemas do que solução.</p>
 <p>Antes de falarmos os motivos de não usar XAMPP, é importante entendermos o que é a ferramenta. XAMPP é uma sigla para
 <strong>A</strong>pache, <strong>M</strong>ySQL, <strong>P</strong>HP e <strong>P</strong>earl, sendo o <strong>X</strong> inicial para identificar que esta ferramenta é multiplataforma
 (funciona em Windows, Linux e Mac).</p>
-
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
 
 <h2 id="qual-o-problema-dessa-abordagem%3F">Qual o problema dessa abordagem?</h2>
 
@@ -2469,17 +2216,6 @@ que fornece informações sobre o universo <em>Star Wars</em>. Essa API é gratu
 
 <p>O que queremos fazer é buscar a lista de filmes (através da url https://swapi.dev/api/films/) e para cada filme buscar
 os seus detalhes em outra URL (https://swapi.dev/api/films/:id/).</p>
-
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
 
 <h3 id="solu%C3%A7%C3%A3o-bloqueante">Solução bloqueante</h3>
 
@@ -2741,17 +2477,6 @@ echo file_get_contents('file://arquivo.txt'); // lê um arquivo
 echo file_get_contents('http://google.com'); // faz uma requisição HTTP
 </code></pre>
 
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
 <h3 id="wrappers-dispon%C3%ADveis">Wrappers disponíveis</h3>
 
 <p>Por padrão o PHP já fornece diversos wrappers como</p>
@@ -2916,17 +2641,6 @@ de streams podemos compactar e descompactar arquivos, enviar dados por FTP, aces
 
 <p>Antes de sair da Web, acredito que seja muito importante citar que nem só de HTML vive a Web. É mais do que comum vermos URLs gerando dados nos mais diversos formatos como XML, JSON, etc. Você provavelmente conhece isso como API, correto? Obviamente o PHP está mais do que preparado para este tipo de trabalho e de forma muito simples. A ideia desse artigo é trazer as possibilidades realmente fora da Web.</p>
 
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
 <h2 id="por-que-usar-php-fora-da-web%3F">Por que usar PHP fora da web?</h2>
 
 <p>Antes de vermos as possibilidades, por que eu iria fazer isso? Se o PHP nasceu na Web, por que não mantê-lo lá? Bom, existem diversos motivos para trazermos o PHP para demais ambientes, mas acredito que o mais óbvio e o principal é a equipe. Se nós já temos uma equipe de pessoas que desenvolvem em PHP na Web, por que não utilizar esse conhecimento também fora da Web para processamento de dados assíncronos, leitura de filas, cronjobs, scripts da CLI em geral, etc? É justamente sobre essas possibilidades que quero tratar nesta publicação.</p>
@@ -3008,17 +2722,6 @@ data-ad-slot="2366637560"></ins></p>
 <p>Antes de falar sobre técnicas e funções que permitem a programação assíncrona, é importante saber como normalmente nós trabalhamos com I/O.</p>
 
 <p>Acesso a arquivos, requisições HTTP, sockets e muito mais pode ser feito através de <a href="https://php.net/streams">streams</a>. Um stream é basicamente um fluxo de dados, sendo que a origem desse fluxo pode variar (vide o início desse parágrafo). Quando utilizamos funções como <code>file_get_contents</code>, <code>fopen</code>, <code>fgets</code>, e as demais, estamos trabalhando com streams do PHP.</p>
-
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
 
 <h2 id="programa%C3%A7%C3%A3o-ass%C3%ADncrona">Programação assíncrona</h2>
 
@@ -3254,17 +2957,6 @@ array(3) {
 
 <p>Obviamente não existe alternativa certa ou errada, então nesse post eu vou somente expor minha opinião. Não tome o que for dito aqui como verdade, mas sim reflita e analise se faz sentido para você.</p>
 
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
 <h2 id="mercado-de-trabalho">Mercado de trabalho</h2>
 
 <p>É inegável que para atuar no mercado de trabalho nós precisamos de muito mais conhecimento do que nos é passado inicialmente em qualquer livro, curso ou post de blog. Somente a experiência e vivência vão nos dar a bagagem necessária para resolver os problemas e gerar valor para os clientes.</p>
@@ -3402,17 +3094,6 @@ Antes de aprender Orientação a Objetos, é importante conhecermos o paradigma 
 <p>"Podemos fazer uma analogia da arquitetura de software com a arquitetura de uma casa. Onde fica cada cômodo, como se encaixam juntos, etc. É uma visão de bem <strong>alto nível</strong>. Já o design de código pode ser considerado análogo aos móveis de uma casa. É uma visão de mais <strong>baixo nível</strong> sobre nossas decisões sobre o código".</p>
 
 <p>Então, basicamente (beem basicamente), arquitetura diz respeito a como você vai separar sua aplicação em camadas, por exemplo, onde cada camada pode ter sua responsabilidade bem definida. Já o design de código diz respeito a como você vai organizar suas classes e métodos em cada uma das camadas. Quais padrões você vai seguir, como cada classe vai se comportar sozinha ou em conjunto com suas respetivas dependências, etc.</p>
-
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
 
 <h2 id="escolhas-corriqueiras">Escolhas corriqueiras</h2>
 
@@ -3557,17 +3238,6 @@ class UserService
 <p>Partindo desse pressuposto, também acredito que seja intenção de qualquer pessoa que trabalhe com desenvolvimento aprender mais e mais as técnicas e boas práticas deste paradigma de programação.</p>
 
 <p>O problema acontece quando a gente vem de um aprendizado de programação procedural e tenta aplicar as mesmas técnicas fazendo uso de classes e objetos.</p>
-
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
 
 <h2 id="exemplo-cl%C3%A1ssico">Exemplo clássico</h2>
 
@@ -3719,17 +3389,6 @@ echo "{$pessoa-&gt;nomeCompleto()} tem {$pessoa-&gt;idade()} anos.";
 <p>Como você trabalha com PHP, escolhe o framework que está "na boca do povo": Laravel. Começa o desenvolvimento e rapidamente entrega uma primeira versão do projeto. A equipe de negócios está feliz com toda a velocidade de entrega e a equipe técnica está feliz de utilizar um framework da moda.</p>
 
 <p>Os anos se passam. No futuro, você precisa dar manutenção em um sistema que usa uma versão mega desatualizada do framework já que eles decidiram trocar a ferramenta que fazia o acesso ao banco de dados, e toda a regra de negócios da aplicação está em "models" do Eloquent.</p>
-
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
 
 <h2 id="mundo-real">Mundo real</h2>
 

@@ -3,7 +3,7 @@
     <title><![CDATA[Dias de Dev]]></title>
     <link href="https://dias.dev/categories/Front.xml" rel="self"/>
     <link href="https://dias.dev"/>
-    <updated>2024-04-10T02:50:26+00:00</updated>
+    <updated>2024-04-10T03:03:21+00:00</updated>
     <id>https://dias.dev/</id>
             <author>
             <name><![CDATA[Vinicius Dias]]></name>            <email><![CDATA[vinicius@dias.dev]]></email>        </author>
@@ -36,17 +36,6 @@
 <p>Aperte F12, vá até a aba "Aplicativo" (ou "Application") e lá você verá, no menu lateral, a parte de <em>Cookies</em>. Repare que eles são separados por domínio.</p>
 
 <p>Para entender essa separação por domínio, vamos imaginar o seguinte cenário: sua aplicação, hospedada no domínio X, envia um <em>cookie</em> de identificação de sessão. No código do seu app há chamadas para um servidor que configura relatórios de acesso ao site. Esse servidor está em outro local, no domínio Y. Sendo assim, você verá <em>cookies</em> dos domínios X e Y ao acessar essa ferramenta de desenvolvedores.</p>
-
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
 
 <h3 id="o-que-_cookies_-armazenam">O que <em>Cookies</em> armazenam</h3>
 
@@ -167,17 +156,6 @@ data-ad-slot="2366637560"></ins></p>
 <p>Hoje em dia é perfeitamente possível que após acessar um aplicativo <em>web</em>, os próximos acessos possam ser feitos sem uma conexão ativa com a <em>internet</em>. Além disso é muito comum aplicativos <em>web</em> acessarem recursos nativos como localização, sistema de sons, baterias, etc.</p>
 
 <p>Aqui você pode conferir algumas <em>APIs Web</em> para ter acesso a recursos que antigamente só eram possíveis através de aplicações nativas: https://developer.mozilla.org/en-US/docs/Web/API</p>
-
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
 
 <h2 id="aplica%C3%A7%C3%B5es-progressivas">Aplicações progressivas</h2>
 

@@ -3,7 +3,7 @@
     <title><![CDATA[Dias de Dev]]></title>
     <link href="https://dias.dev/categories/Conceitos.xml" rel="self"/>
     <link href="https://dias.dev"/>
-    <updated>2024-04-10T02:50:25+00:00</updated>
+    <updated>2024-04-10T03:03:21+00:00</updated>
     <id>https://dias.dev/</id>
             <author>
             <name><![CDATA[Vinicius Dias]]></name>            <email><![CDATA[vinicius@dias.dev]]></email>        </author>
@@ -37,17 +37,6 @@
 <p>Nós vamos treinar um modelo de classificação usando PHP para prever se determinado jogador vai durar mais de 5 anos na liga profissional de basquete estadunidense, a famosa NBA.</p>
 
 <p>Para isso, precisamos de estatísticas de diversos jogadores antes de entrarem na NBA e o resultado deles, ou seja, se jogaram durante pelo menos 5 anos após chegarem na liga. Esses dados podem ser encontrados <a href="https://github.com/ptyadana/Data-Science-and-Machine-Learning-Projects-Dojo/blob/master/Project%20-%20Predict%20Career%20Longevity%20for%20NBA%20Rookies%20with%20Binary%20Classification%20-%20Logistic%20Regression/data/nba_logreg.csv">neste arquivo</a> que contém informações como o número de partidas jogadas, número de minutos, quantidade de pontos por jogo, número de cestas de 3 pontos feitas, etc. E a última coluna contém a classe onde cada jogador se encontra, onde <code>1.0</code> significa que o jogador participou por pelo menos 5 anos da liga e <code>0.0</code> quer dizer que ele ficou menos do que 5 anos.</p>
-
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
 
 <h2 id="etapas-do-processo-de-machine-learning">Etapas do processo de Machine Learning</h2>
 
@@ -143,17 +132,6 @@ $predicoesDeTeste = $modelo-&gt;predict($teste);
 </code></pre>
 
 <p>Como nós temos os dados de teste, incluindo suas classes (também chamadas de labels) e temos as predições, podemos comparar ambos para medir quão corretas são as previsões do nosso modelo. Por exemplo, sabendo que determinado jogador realmente jogou por mais de 5 anos na NBA, nosso modelo teria previsto que ele atingiria essa marca ou teria dito que ele não chegaria lá?</p>
-
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
 
 <h3 id="medi%C3%A7%C3%A3o-do-resultado">Medição do resultado</h3>
 
@@ -265,17 +243,6 @@ $acuracia = $metrica-&gt;score($predicoesDeTeste, $teste-&gt;labels());
 <p>Essa definição parece bastante vaga e nada clara, não é mesmo? Então vamos tentar usar um exemplo prático, usando uma linguagem bastante comum na <em>Web</em> (embora esse conceito seja válido para qualquer ecossistema). Quando você usa a função <code>fetch</code> do <em>JavaScript</em>, a requisição <em>HTTP</em> será feita, mas a resposta, quando disponível, não vai ser tratada imediatamente. O motor de execução do <em>JavaScript</em> vai executar o código que lida com essa resposta o mais rápido possível, mas não será de forma síncrona ou imediata.</p>
 
 <p>O que isso quer dizer? Ao receber a resposta, o motor de execução do <em>JavaScript</em> vai colocar a função que lida com essa resposta em uma fila e, assim que possível, essa função será executada. Enquanto a resposta não está disponível, ou até mesmo após a resposta chegar, mas antes da função que lida com ela ter sua vez de ser rodada, outros pedaços de código podem ser executados.</p>
-
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
 
 <p>No exemplo a seguir, usamos <em>Promises</em> para informar qual é a função que será adicionada na fila quando a resposta estiver pronta, e até lá, outras linhas de código vão sendo executadas.</p>
 
@@ -428,17 +395,6 @@ int main()
 
 <p>Para entender essa separação por domínio, vamos imaginar o seguinte cenário: sua aplicação, hospedada no domínio X, envia um <em>cookie</em> de identificação de sessão. No código do seu app há chamadas para um servidor que configura relatórios de acesso ao site. Esse servidor está em outro local, no domínio Y. Sendo assim, você verá <em>cookies</em> dos domínios X e Y ao acessar essa ferramenta de desenvolvedores.</p>
 
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
 <h3 id="o-que-_cookies_-armazenam">O que <em>Cookies</em> armazenam</h3>
 
 <p>Entendido o funcionamento básico e onde encontrá-los, vamos analisar quais informações um <em>cookie</em> pode conter. Todo cookie possui, necessariamente, um nome e um valor. O nome é, como você deve imaginar, a forma que usamos para identificar a informação que esse cookie carrega em seu valor. Um <em>cookie</em> de sessão, por exemplo, geralmente possui a palavra <em>session</em> em seu nome enquanto seu valor será o ID da sessão.</p>
@@ -543,17 +499,6 @@ data-ad-slot="2366637560"></ins></p>
 
 <p>É muito comum que ao executar a nossa suíte de testes, cada cenário seja executado de forma isolada, um por vez. Porém, atualmente é praticamente regra que os nossos computadores possuam CPUs com capacidade de executar mais de um processo por vez, sendo assim, por que não executar mais de um teste por vez?</p>
 
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
 <h2 id="paraleliza%C3%A7%C3%A3o-de-testes">Paralelização de testes</h2>
 
 <p>Paralelismo é um assunto bastante complexo, mas a ideia de paralelizar uma suíte de testes é, na verdade, bem simples: executar mais de um caso de teste por vez, em processos separados.</p>
@@ -593,17 +538,6 @@ data-ad-slot="2366637560"></ins></p>
 <p><img src="https://raw.githubusercontent.com/wiki/tomgibara/ascii-table/tables/ascii-table-1.1.png" alt="Tabela ASCII" /></p>
 
 <p>Isso funcionava muito bem para textos que usavam inglês como idioma (ou algum idioma com o mesmo conjunto de caracteres). Porém, diversos outros idiomas possuem caracteres que não estão representados nesta tabela. Caracteres acentuados, por exemplo, não estão na tabela ASCII. Como representar textos em português, por exemplo?</p>
-
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
 
 <h2 id="extended-ascii">Extended ASCII</h2>
 
@@ -677,17 +611,6 @@ que fornece informações sobre o universo <em>Star Wars</em>. Essa API é gratu
 
 <p>O que queremos fazer é buscar a lista de filmes (através da url https://swapi.dev/api/films/) e para cada filme buscar
 os seus detalhes em outra URL (https://swapi.dev/api/films/:id/).</p>
-
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
 
 <h3 id="solu%C3%A7%C3%A3o-bloqueante">Solução bloqueante</h3>
 
@@ -932,17 +855,6 @@ acontecer com a biblioteca, por exemplo, eu vou estar mais preparado para resolv
 
 <p>Acesso a arquivos, requisições HTTP, sockets e muito mais pode ser feito através de <a href="https://php.net/streams">streams</a>. Um stream é basicamente um fluxo de dados, sendo que a origem desse fluxo pode variar (vide o início desse parágrafo). Quando utilizamos funções como <code>file_get_contents</code>, <code>fopen</code>, <code>fgets</code>, e as demais, estamos trabalhando com streams do PHP.</p>
 
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
 <h2 id="programa%C3%A7%C3%A3o-ass%C3%ADncrona">Programação assíncrona</h2>
 
 <p>Se você não está familiarizado com o termo "programação assíncrona", recomendo assistir este vídeo antes de continuar o artigo:</p>
@@ -1177,17 +1089,6 @@ array(3) {
 
 <p>Obviamente não existe alternativa certa ou errada, então nesse post eu vou somente expor minha opinião. Não tome o que for dito aqui como verdade, mas sim reflita e analise se faz sentido para você.</p>
 
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
 <h2 id="mercado-de-trabalho">Mercado de trabalho</h2>
 
 <p>É inegável que para atuar no mercado de trabalho nós precisamos de muito mais conhecimento do que nos é passado inicialmente em qualquer livro, curso ou post de blog. Somente a experiência e vivência vão nos dar a bagagem necessária para resolver os problemas e gerar valor para os clientes.</p>
@@ -1325,17 +1226,6 @@ Antes de aprender Orientação a Objetos, é importante conhecermos o paradigma 
 <p>"Podemos fazer uma analogia da arquitetura de software com a arquitetura de uma casa. Onde fica cada cômodo, como se encaixam juntos, etc. É uma visão de bem <strong>alto nível</strong>. Já o design de código pode ser considerado análogo aos móveis de uma casa. É uma visão de mais <strong>baixo nível</strong> sobre nossas decisões sobre o código".</p>
 
 <p>Então, basicamente (beem basicamente), arquitetura diz respeito a como você vai separar sua aplicação em camadas, por exemplo, onde cada camada pode ter sua responsabilidade bem definida. Já o design de código diz respeito a como você vai organizar suas classes e métodos em cada uma das camadas. Quais padrões você vai seguir, como cada classe vai se comportar sozinha ou em conjunto com suas respetivas dependências, etc.</p>
-
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
 
 <h2 id="escolhas-corriqueiras">Escolhas corriqueiras</h2>
 
@@ -1480,17 +1370,6 @@ class UserService
 <p>Partindo desse pressuposto, também acredito que seja intenção de qualquer pessoa que trabalhe com desenvolvimento aprender mais e mais as técnicas e boas práticas deste paradigma de programação.</p>
 
 <p>O problema acontece quando a gente vem de um aprendizado de programação procedural e tenta aplicar as mesmas técnicas fazendo uso de classes e objetos.</p>
-
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
 
 <h2 id="exemplo-cl%C3%A1ssico">Exemplo clássico</h2>
 

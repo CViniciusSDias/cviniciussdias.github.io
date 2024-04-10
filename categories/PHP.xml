@@ -3,7 +3,7 @@
     <title><![CDATA[Dias de Dev]]></title>
     <link href="https://dias.dev/categories/PHP.xml" rel="self"/>
     <link href="https://dias.dev"/>
-    <updated>2024-04-10T02:50:26+00:00</updated>
+    <updated>2024-04-10T03:03:21+00:00</updated>
     <id>https://dias.dev/</id>
             <author>
             <name><![CDATA[Vinicius Dias]]></name>            <email><![CDATA[vinicius@dias.dev]]></email>        </author>
@@ -28,17 +28,6 @@ soma('test 1', 'test 2'); // Fatal error: Uncaught TypeError: Argument 1 passed 
 </code></pre>
 
 <p>Repare que ao tentar passar uma string para uma função que espera inteiros, um erro do tipo <code>TypeError</code> é lançado. Esse tipo de técnica traz mais segurança para nosso código de forma que conhecemos melhor os valores que manipulamos.</p>
-
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
 
 <h2 id="malabarismo-com-tipos">Malabarismo com tipos</h2>
 
@@ -72,17 +61,6 @@ soma(1.5, 2.5); // Fatal error: Uncaught TypeError: Argument 1 passed to soma() 
 </code></pre>
 
 <p>Um detalhe muito importante é que a diretiva <code>declare(strict_types=1)</code> deve ser declarada no início do arquivo, antes de qualquer código.</p>
-
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
 
 <h2 id="m%C3%BAltiplos-arquivos">Múltiplos arquivos</h2>
 
@@ -170,17 +148,6 @@ crate-type = ["cdylib"]
 
 <p>Se você executar o comando <code>cargo build</code>, o projeto recém-criado deve ser compilado sem nenhum problema.</p>
 
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
 <h2 id="escrevendo-o-c%C3%B3digo-em-rust">Escrevendo o código em Rust</h2>
 
 <p>Para que a função que nós vamos escrever possa ser executada por outras linguagens, precisamos adotar algumas práticas e é isso que veremos agora.</p>
@@ -240,17 +207,6 @@ var_dump($ffi-&gt;add(1, 2));
 </code></pre>
 
 <p>Caso você tenha a extensão FFI instalada e habilitada, o resultado será <code>int(3)</code>. Isso significa que a função <code>add</code> foi executada corretamente e retornou o valor <code>3</code>.</p>
-
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
 
 <h2 id="considera%C3%A7%C3%B5es-sobre-tipos">Considerações sobre tipos</h2>
 
@@ -372,17 +328,6 @@ class ClasseBase implements InterfaceTeste {
 }
 </code></pre>
 
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
 <h2 id="retorno-nulo-em-ffi">Retorno nulo em FFI</h2>
 
 <p>Ao chamar uma função que não retorna nada, ou seja, <code>void</code>, via <code>FFI</code>, o PHP retornava um tipo específico chamado <code>FFI\CData</code> com o valor <code>void</code>. Agora, assim como em uma função PHP com o retorno <code>void</code>, nós receberemos <code>null</code> dessa função. Exemplo:</p>
@@ -493,17 +438,6 @@ new DateTime('data inválida');
     </a>
 </lite-youtube></p>
 
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
 <h2 id="comando-%60php--l%60-agora-suporta-m%C3%BAltiplos-arquivos">Comando <code>php -l</code> agora suporta múltiplos arquivos</h2>
 
 <p>Um comando muito útil é o <code>php -l</code> que permite verificar se um arquivo possui algum erro de sintaxe. Até a versão 8.2 do PHP apenas um arquivo podia ser analisado por vez. Agora, a partir do PHP 8.3, nós podemos passar diversos arquivos para o <code>php -l</code> analisar. Exemplo:</p>
@@ -608,17 +542,6 @@ $user-&gt;save();
 </code></pre>
 
 <p>O método <code>save</code> é entendido como parte da classe base <code>Model</code>, mas e quanto às propriedades? Para cenários como esse, os métodos mágicos foram concebidos.</p>
-
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
 
 <h2 id="implementa%C3%A7%C3%A3o-de-m%C3%A9todos-m%C3%A1gicos">Implementação de métodos mágicos</h2>
 
@@ -813,17 +736,6 @@ echo iconv('UTF-8', 'ASCII//TRANSLIT', $string); // Exibe: Aeiou
 
 <p>Essa abordagem vai funcionar na maioria dos cenários, mas há algumas observações que devem ser consideradas.</p>
 
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
 <h3 id="locale">Locale</h3>
 
 <p>A conversão com <code>iconv</code> não vai funcionar caso a categoria <code>LC_CTYPE</code> do <code>locale</code> esteja definida como <code>C</code> ou <code>POSIX</code>.</p>
@@ -872,17 +784,6 @@ echo preg_replace('/[\x{0300}-\x{036F}]/u', '', $normalized); // Exibe: Aeiou
 <p>O código acima pega a string <code>"Ãéïòû"</code> e a normaliza utilizando a forma de normalização D (<code>NFD</code>), conhecida também como decomposição canônica (<em>Canonical Decomposition</em>). Essa regra consiste em separar os caracteres de acentuação dos demais, ou seja, caracteres como crase (&#96;) ou til (~) são separados das letras. O caractere <code>Ã</code>, por exemplo, se torna <code>A~</code>.</p>
 
 <p>Essa forma de normalização foi definida e nomeada pelo <a href="/2021-08-24-charsets-e-encodings-como-strings-funcionam/"><em>Unicode Consortium</em></a>, mas não é a única. Você pode conferir mais detalhes sobre cada uma das "regras" no site oficial: <a href="https://unicode.org/reports/tr15/">https://unicode.org/reports/tr15/</a>.</p>
-
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
 
 <h3 id="extens%C3%A3o-php">Extensão PHP</h3>
 
@@ -940,17 +841,6 @@ data-ad-slot="2366637560"></ins></p>
 echo strlen('Olá'); // Exibe 4
 echo strtoupper('olá'); // Exibe "OLá"
 </code></pre>
-
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
 
 <h2 id="strings-multibyte">Strings multibyte</h2>
 
@@ -1051,17 +941,6 @@ echo mb_convert_encoding('string em UTF-8', 'ISO-8859-1', 'UTF-8');
 <li>etc</li>
 </ul>
 
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
 <h2 id="entendendo-o-problema">Entendendo o problema</h2>
 
 <p>Como foi dito logo na introdução desse <em>post</em>, o problema "<em>Cannot modify header information - headers already sent</em>" acontece quando tentamos enviar um cabeçalho <em>HTTP</em> após já termos enviado algo no corpo da resposta.</p>
@@ -1136,17 +1015,6 @@ Additional .ini files parsed:      /etc/php/8.2/cli/conf.d/10-opcache.ini,
 <h4 id="prioridade-de-carregamento">Prioridade de carregamento</h4>
 
 <p>Você deve ter notado que os arquivos "extra" de configuração possuem um número como prefixo (<code>10-opcache.ini</code> e <code>10-pdo.ini</code>). Esse número <strong>não</strong> tem um significado especial para o PHP, mas nos permite ordenar os arquivos por prioridade. O PHP vai carregar os arquivos <code>.ini</code> do diretório configurado em ordem alfabetica, sendo assim, números são adicionados para nós podermos definir a prioridade de carregamento de cada arquivo. Quanto maior o número, "mais depois" ele será carregado, fazendo com que suas definições sejam aplicadas por último, sobrescrevendo as anteriores caso hajam configurações duplicadas.</p>
-
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
 
 <h2 id="o-que-pode-ser-configurado-pelo-php.ini">O que pode ser configurado pelo php.ini</h2>
 
@@ -1284,17 +1152,6 @@ opcache.enable=0
 
 <p>Quando você envia um e-mail usando um cliente de e-mail como o Microsoft Outlook ou o Gmail, o cliente se comunica com um servidor SMTP para enviar a mensagem. Esse servidor é responsável por encaminhar a mensagem para o servidor de e-mail do destinatário, que, por sua vez, entrega a mensagem ao cliente de e-mail do destinatário.</p>
 
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
 <h2 id="pacotes-de-envio-de-e-mails">Pacotes de envio de e-mails</h2>
 
 <p>Se você precisa de mais flexibilidade do que a função <code>mail</code> do PHP pode oferecer, existem algumas bibliotecas que podem ser usadas para enviar e-mails com PHP. Dois exemplos populares são o PHPMailer e o Symfony Mailer.</p>
@@ -1380,17 +1237,6 @@ nativo. É possível criarmos novas funções, classes e até criar sintaxe nova
 
 <p>Além de existir um número enorme de extensões do PHP, existem também alguns tipos onde elas podem ser categorizadas.
 Estes tipos são: <em>Core Extensions</em>, <em>Bundled Extensions</em>, <em>External Extensions</em> e <em>PECL Extensions</em>.</p>
-
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
 
 <h3 id="core-extensions">Core Extensions</h3>
 

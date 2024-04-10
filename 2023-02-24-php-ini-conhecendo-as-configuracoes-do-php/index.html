@@ -101,17 +101,6 @@ Additional .ini files parsed:      /etc/php/8.2/cli/conf.d/10-opcache.ini,
 
 <p>Você deve ter notado que os arquivos "extra" de configuração possuem um número como prefixo (<code>10-opcache.ini</code> e <code>10-pdo.ini</code>). Esse número <strong>não</strong> tem um significado especial para o PHP, mas nos permite ordenar os arquivos por prioridade. O PHP vai carregar os arquivos <code>.ini</code> do diretório configurado em ordem alfabetica, sendo assim, números são adicionados para nós podermos definir a prioridade de carregamento de cada arquivo. Quanto maior o número, "mais depois" ele será carregado, fazendo com que suas definições sejam aplicadas por último, sobrescrevendo as anteriores caso hajam configurações duplicadas.</p>
 
-<p><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-layout="in-article"
-data-ad-format="fluid"
-data-ad-client="ca-pub-8918461095244552"
-data-ad-slot="2366637560"></ins></p>
-
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
 <h2 id="o-que-pode-ser-configurado-pelo-php.ini">O que pode ser configurado pelo php.ini</h2>
 
 <p>Existem muitas configurações diferentes que podem ser definidas no arquivo <code>php.ini</code>. Algumas das configurações mais comuns incluem:</p>
