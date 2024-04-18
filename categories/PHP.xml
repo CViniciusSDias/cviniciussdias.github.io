@@ -3,11 +3,76 @@
     <title><![CDATA[Dias de Dev]]></title>
     <link href="https://dias.dev/categories/PHP.xml" rel="self"/>
     <link href="https://dias.dev"/>
-    <updated>2024-04-12T15:20:58+00:00</updated>
+    <updated>2024-04-18T01:12:21+00:00</updated>
     <id>https://dias.dev/</id>
             <author>
             <name><![CDATA[Vinicius Dias]]></name>            <email><![CDATA[vinicius@dias.dev]]></email>        </author>
         <generator uri="http://sculpin.io/">Sculpin</generator>
+            <entry>
+            <title type="html"><![CDATA[Descubra Como o PHP Utiliza Copy on Write para Economizar Memória]]></title>
+            <link href="https://dias.dev/2024-04-18-copy-on-write-php/"/>
+            <updated>2024-04-18T00:00:00+00:00</updated>
+            <id>https://dias.dev/2024-04-18-copy-on-write-php/</id>
+            <content type="html"><![CDATA[<p><em>CoW (Copy on Write)</em>, significa que um dado só é copiado em memória se alguma escrita for feita nele. No PHP, isso significa que os dados de um <em>array</em> só são copiados se nós realizarmos alguma escrita nessa cópia, evitando um grande desperdício de memória. Vem comigo nesse texto para entender melhor.</p>
+
+<h2 id="_arrays_-e-consumo-de-mem%C3%B3ria"><em>Arrays</em> e consumo de memória</h2>
+
+<p>Um <em>array</em>, em diversas linguagens, utiliza uma <em>estrutura de dados</em> conhecida como <strong>vetor</strong>, enquanto em PHP uma estrutura conhecida como <em>HashMap</em> é utilizada por baixo dos panos. Mas independente de qual estrutura de dados é utilizada, uma coisa é óbvia: <em>arrays</em> podem ocupar bastante espaço na memória. PS.: se quiser aprender sobre estruturas de dados com PHP, aqui tem um <a href="https://tidd.ly/4d42Myb">cupom de desconto para a Alura</a> e lá tem cursos sobre o assunto. 😉</p>
+
+<p>Pensa naquela última query super demorada que você fez e retorna um caminhão de dados do banco. Agora imagina armazenar isso tudo em sua aplicação PHP. Isso vai ocupar espaço. Inclusive, na maioria das vezes vamos usar paginação de dados para não cairmos em alguns problemas, mas isso é assunto para outro post.</p>
+
+<p>Vamos simular de forma bastante simples um <em>array</em> grande, e vamos ver quanta memória ele ocupa. Para isso, vamos usar a função <code>memory_get_usage</code> para recuperar o uso de memória e a função <code>array_fill</code> para criar um <em>array</em> com muitos dados.</p>
+
+<pre><code class="php">&lt;?php
+
+// Armazena o uso de memória inicial
+$memoriaInicial = memory_get_usage();
+
+// Cria um array de 1000 elementos
+$arrayGrande = array_fill(0, 1000, 'Valor de exemplo');
+
+$memoriaUsada = memory_get_usage() - $memoriaInicial;
+
+// Exibe a memória ocupada em KB
+echo $memoriaUsada / 1024;
+</code></pre>
+
+<p>O trecho de código acima vai mostrar que utilizamos aproximadamente 20 <em>kilobytes</em> após copiarmos um array contendo 1000 strings. Agora vamos realizar uma cópia desse array grande. Podemos fazer isso o passando por parâmetro para uma função, ou simplesmente o associando a uma nova variável:</p>
+
+<pre><code class="php">// ...
+$copiaDoArray = $arrayGrande;
+</code></pre>
+
+<p>Sendo assim, eu esperaria que a memória utilizada agora fosse de aproximadamente 40 <em>kilobytes</em>, já que tenho o array ocupando 20 KB duas vezes. Porém, se eu realizo a medição, tenho uma surpresa:</p>
+
+<pre><code class="php">// ...
+echo (memory_get_usage() - $memoriaInicial) / 1024;
+</code></pre>
+
+<p>Eu vejo agora um uso de aproximadamente 21 KB, ou seja, o consumo de memória praticamente não mudou. Um único <em>kilobyte</em> extra foi necessário para armazenar o novo array de 20 KBs. Como?</p>
+
+<h2 id="copy-on-write---php-ao-resgate">Copy on Write - PHP ao resgate</h2>
+
+<p>O PHP entende que arrays são uma estrutura de dados muito comum, muito utilizada e muito poderosa. Por isso, há uma técnica bastante comum implementada por baixo dos panos nos <em>arrays</em> do PHP: <em>Copy on Write</em>, ou, no bom e velho português, cópia somente no momento da escrita.</p>
+
+<p>O que isso quer dizer é que, ao realizar uma "cópia" de um array, ou seja, ao passar um array por parâmetro ou atribuí-lo a outra variável, o PHP não realiza uma cópia nos dados em memória. Ele, na verdade, faz com que esse parâmetro ou variável apontem para o mesmo endereço de memória do array original, nos poupando muita memória, principalmente em cenário de grandes volumes de dados.</p>
+
+<p>Porém, se ambos apontam para o mesmo endereço de memória, isso significa que ao manipular os itens desse novo array, eu acabaria alterando o array original também, certo? Errado. Daí que vem o nome da técnica de <em>copy on write</em>. Ao tentar realizar alguma manipulação nos dados dessa "cópia", só então os dados serão efetivamente copiados. Sendo assim, podemos ver o aumento no uso de memória com o seguinte trecho de código:</p>
+
+<pre><code class="php">// ...
+$copiaDoArray[1] = 'Outro valor';
+echo (memory_get_usage() - $memoriaInicial) / 1024;
+</code></pre>
+
+<p>Agora, após modificar a variável <code>$copiaDoArray</code>, uma cópia dos dados em memória será realmente feita, então o uso de memória finalmente dobrará e veremos um uso de aproximadamente 42KB.</p>
+
+<h2 id="conclus%C3%A3o">Conclusão</h2>
+
+<p><em>Arrays</em> são extremamente versáteis e poderosos no PHP e por isso são amplamente utilizados (às vezes até mal utilizados). Pensando nisso, o PHP faz de tudo para que seu uso seja o mais otimizado possível, e garantir que cópias desnecessárias sejam evitadas nos poupa <strong>muita</strong> RAM.</p>
+
+<p>Se você quiser aprender mais sobre as "entranhas" do PHP, manipulação de memória, otimização além de boas práticas, lá na Alura eu tenho vários cursos sobre o assunto (e sobre outros temas também). Aqui tem um <a href="https://tidd.ly/4d42Myb">cupom de 15% desconto</a> para você aproveitar a plataforma.</p>
+]]></content>
+        </entry>
             <entry>
             <title type="html"><![CDATA[PHP Strict Types: Entendendo o Uso Prático da Diretiva declare(strict_types=1) no PHP]]></title>
             <link href="https://dias.dev/2023-12-28-entendendo-strict-types-no-php/"/>
@@ -111,7 +176,7 @@ echo soma('1', '2'); // Fatal error: Uncaught TypeError: Argument 1 passed to so
 
 <p>Tipos em PHP podem ser um assunto espinhoso porque além de complexo, nem todo dev concorda em como utilizá-los. Uns (como eu) acreditam que quanto mais estrito, melhor. Outros acreditam que <em>type hints</em> são um desperdício. Mais uma coisa eu acredito que seja unânime: é muito importante para nós, como devs PHP, entender como os tipos funcionam na linguagem com a qual trabalhamos.</p>
 
-<p>Se você deseja explorar ainda mais o tema de tipos em PHP, recomendo a leitura de um artigo abrangente no blog Codamos. O conteúdo discute detalhadamente os diversos tipos em PHP, suas manipulações e conversões, e oferece uma análise mais aprofundada sobre <code>strict_types</code>, inclusive com trechos de código em C do PHP. Para acessar o artigo completo, visite <a href="https://codamos.com.br/tipos-em-php/">este link</a>. E se você quiser aprender mais sobre PHP, há <strong>muitos</strong> cursos gravados por mim lá na Alura. Aqui tem um <a href="https://tidd.ly/4d42Myb">cupom de 10% de desconto</a> para assinar a plataforma.</p>
+<p>Se você deseja explorar ainda mais o tema de tipos em PHP, recomendo a leitura de um artigo abrangente no blog Codamos. O conteúdo discute detalhadamente os diversos tipos em PHP, suas manipulações e conversões, e oferece uma análise mais aprofundada sobre <code>strict_types</code>, inclusive com trechos de código em C do PHP. Para acessar o artigo completo, visite <a href="https://codamos.com.br/tipos-em-php/">este link</a>. E se você quiser aprender mais sobre PHP, há <strong>muitos</strong> cursos gravados por mim lá na Alura. Aqui tem um <a href="https://tidd.ly/4d42Myb">cupom de 15% de desconto</a> para assinar a plataforma.</p>
 ]]></content>
         </entry>
             <entry>
@@ -259,7 +324,7 @@ var_dump($ffi-&gt;return_message('Hello, world!'));
 <li>Computação de grandes arquivos JSON ou Markdown, que embora seja perfeitamente possível fazer diretamente me PHP, em alguns cenários pode se tornar mais eficiente usando Rust + FFI.</li>
 </ol>
 
-<p>Se você quiser aprender mais tanto sobre Rust quanto sobre PHP, há cursos gravados por mim lá na Alura. Aqui tem um <a href="https://tidd.ly/4d42Myb">cupom de 10% de desconto</a> para assinar a plataforma.</p>
+<p>Se você quiser aprender mais tanto sobre Rust quanto sobre PHP, há cursos gravados por mim lá na Alura. Aqui tem um <a href="https://tidd.ly/4d42Myb">cupom de 15% de desconto</a> para assinar a plataforma.</p>
 ]]></content>
         </entry>
             <entry>
@@ -712,7 +777,7 @@ $objeto-&gt;qualquerCoisa(1, 2);
 
 <p>Lembrar de todos os métodos (e suas assinaturas) e o que cada um deles faz não é necessário, mas é importante saber da existência deles para saber o que pesquisar quando for necessário.</p>
 
-<p>Se quiser aprender mais sobre PHP e sobre tecnologia em geral, vou deixar aqui um <a href="https://tidd.ly/4d42Myb">cupom de 10% de desconto na Alura</a>, plataforma onde eu gravei inúmeros cursos.</p>
+<p>Se quiser aprender mais sobre PHP e sobre tecnologia em geral, vou deixar aqui um <a href="https://tidd.ly/4d42Myb">cupom de 15% de desconto na Alura</a>, plataforma onde eu gravei inúmeros cursos.</p>
 ]]></content>
         </entry>
             <entry>
@@ -820,7 +885,7 @@ echo preg_replace('/[\x{0300}-\x{036F}]/u', '', $normalized); // Exibe: Aeiou
 
 <p>O simples uso de uma extensão apropriada faz com que essa complexa tarefa seja imensamente facilitada. Recomendo acessar os links que deixei durante o post como referência para se aprofundar em cada um dos assuntos aqui abordados.</p>
 
-<p>Já no link a seguir eu deixo um <a href="https://tidd.ly/4d42Myb">cupom de 10% de desconto</a> para você assinar a Alura, plataforma onde há cursos completos (alguns comigo, inclusive) sobre manipulação de strings (dentre vários outros assuntos de tecnologia).</p>
+<p>Já no link a seguir eu deixo um <a href="https://tidd.ly/4d42Myb">cupom de 15% de desconto</a> para você assinar a Alura, plataforma onde há cursos completos (alguns comigo, inclusive) sobre manipulação de strings (dentre vários outros assuntos de tecnologia).</p>
 ]]></content>
         </entry>
             <entry>
@@ -1208,96 +1273,6 @@ try {
 <p>Enviar e-mails com PHP é uma tarefa relativamente simples graças à função <code>mail</code> nativa da linguagem. No entanto, essa função tem algumas limitações e pode não ser a opção mais adequada para todos os casos de uso. Se você precisar de mais flexibilidade, pode usar bibliotecas como o PHPMailer ou o Symfony Mailer, que oferecem recursos avançados para o envio de e-mails.</p>
 
 <p>Espero que este post tenha sido útil para você entender as opções disponíveis para enviar e-mails com PHP e escolher a opção mais adequada para o seu projeto.</p>
-]]></content>
-        </entry>
-            <entry>
-            <title type="html"><![CDATA[Extensões PHP]]></title>
-            <link href="https://dias.dev/2022-02-13-extensoes-php/"/>
-            <updated>2022-02-13T00:00:00+00:00</updated>
-            <id>https://dias.dev/2022-02-13-extensoes-php/</id>
-            <content type="html"><![CDATA[<p>PHP é uma linguagem de programação que roda em uma máquina virtual chamada <em>Zend Engine</em>. Essa máquina
-virtual é escrita em C e permite que nós escrevamos código em C para embutir funcionalidades no PHP. Assim funcionam as
-extensões do PHP.</p>
-
-<h2 id="o-que-s%C3%A3o-extens%C3%B5es-do-php%3F">O que são extensões do PHP?</h2>
-
-<p>As extensões no PHP são códigos escritos em C que são, de certa forma, embutidos na linguagem, logo, se parecem com código
-nativo. É possível criarmos novas funções, classes e até criar sintaxe nova na linguagem a partir de extensões.</p>
-
-<p>Quem usa PHP no dia-a-dia com certeza usa alguma extensão. Alguns exemplos de extensões PHP bem comuns:</p>
-
-<ul>
-<li>PDO</li>
-<li>Sessions</li>
-<li>JSON</li>
-<li>cURL</li>
-</ul>
-
-<h2 id="tipos-de-extens%C3%B5es">Tipos de extensões</h2>
-
-<p>Além de existir um número enorme de extensões do PHP, existem também alguns tipos onde elas podem ser categorizadas.
-Estes tipos são: <em>Core Extensions</em>, <em>Bundled Extensions</em>, <em>External Extensions</em> e <em>PECL Extensions</em>.</p>
-
-<h3 id="core-extensions">Core Extensions</h3>
-
-<p>As extensões <em>Core</em>, como o nome já diz, fazem parte do <em>core</em> (núcleo) do PHP. O PHP não existe sem elas e é impossível
-ter uma instalação do PHP sem estas. Alguns exemplos deste tipo de extensões são: Arrays, Classes/Objects, Date/Time,
-JSON, OPCache etc.</p>
-
-<p>Estas extensões são mantidas pela própria equipe do PHP já que fazem parte da linguagem em si.</p>
-
-<h3 id="bundled-extensions">Bundled Extensions</h3>
-
-<p>As extensões empacotadas com o PHP, chamadas de <em>bundled extensions</em>, são extensões que já vêm junto com o PHP, mas é
-possível escolher habilitá-las ou não em sua instalação. Estas extensões também são mantidas pela equipe do PHP já que
-são empacotadas junto com o restante do código da linguagem.</p>
-
-<p>Alguns exemplos de extensões deste tipo: PDO, GD, FFI, intl, Sessions etc.</p>
-
-<h3 id="external-extensions">External Extensions</h3>
-
-<p>As extensões externas são idênticas às <em>bundled</em> em quase todos os aspectos. Elas vêm com o PHP, podem ser habilitadas
-ou não e são mantidas pela equipe do <em>core</em>, porém possuem uma diferença: elas possuem dependências externas.</p>
-
-<p>Para ter este tipo de extensão em sua instalação do PHP você vai precisar ter alguma outra biblioteca ou programa em seu
-sistema operacional. A extensão <em>cURL</em>, por exemplo, entra nessa categoria. Para ter essa extensão no PHP você precisa
-do software <em>cURL</em> instalado no sistema, já que a extensão faz uso do código disponibilizado por este software.</p>
-
-<p>Alguns exemplos de extensões externas são: cURL, DOM, OpenSSL, Sodium, Zip etc.</p>
-
-<h3 id="pecl-extensions">PECL Extensions</h3>
-
-<p>Por último nós temos as extensões disponibilizadas por terceiros usando <em>PECL</em>, que é basicamente um repositório para
-extensões PHP, como se fosse o <em>Packagist</em> de extensões. Se você pretende criar uma extensão para o PHP, vai utilizar
-este repositório.</p>
-
-<p>As extensões desta categoria são mantidas por terceiros e podem ou não possuir dependências externas. Nem todas as
-extensões desta categoria estão no manual da linguagem, afinal de contas é possível que qualquer pessoa crie uma
-extensão.</p>
-
-<p>Alguns exemplos interessantes de extensões disponibilizadas através do <em>PECL</em>: DS (Data Structures), EV, Memcached,
-Parallel, Swoole etc.</p>
-
-<h2 id="refer%C3%AAncias">Referências</h2>
-
-<p>Conhecer todas extensões do PHP é simplesmente impossível, mas conhecer bem algumas extensões mais importantes para seu
-dia-a-dia é de extrema importância.</p>
-
-<p><a href="https://www.php.net/manual/en/extensions.membership.php">Aqui</a> você pode conferir a lista completa de extensões do
-manual do PHP, todas classificadas por categoria.</p>
-
-<p>Se você tiver interesse em criar suas próprias extensões, existem alguns materiais interessantes disponíveis (embora
-não seja uma tarefa tão trivial). No tutorial <em><a href="https://flavioheleno.github.io/how-do-i/">How do I</a></em> do Flavio Heleno
-você pode conferir o início dessa jornada de criação de extensões além de conferir outras referências.</p>
-
-<h2 id="conclus%C3%A3o">Conclusão</h2>
-
-<p>A linguagem de programação PHP é escrita em C e possui diversas extensões que fazem parte ou não da linguagem. Nós
-fazemos uso de várias extensões no dia-a-dia e entender este funcionamento é bastante importante para devs PHP.</p>
-
-<p>Se além de entender sobre algumas extensões você quiser aprender mais sobre PHP em si, você pode usar esse
-<a href="https://tidd.ly/4d42Myb">cupom</a> que fornece 10% de desconto na assinatura da Alura, plataforma onde
-eu mesmo gravei diversos cursos sobre o assunto.</p>
 ]]></content>
         </entry>
     </feed>

@@ -3,11 +3,76 @@
     <title><![CDATA[Dias de Dev]]></title>
     <link href="https://dias.dev/atom.xml" rel="self"/>
     <link href="https://dias.dev/"/>
-    <updated>2024-04-12T15:20:58+00:00</updated>
+    <updated>2024-04-18T01:12:21+00:00</updated>
     <id>https://dias.dev</id>
             <author>
             <name><![CDATA[Vinicius Dias]]></name>            <email><![CDATA[vinicius@dias.dev]]></email>        </author>
         <generator uri="http://sculpin.io/">Sculpin</generator>
+            <entry>
+            <title type="html"><![CDATA[Descubra Como o PHP Utiliza Copy on Write para Economizar Memória]]></title>
+            <link href="https://dias.dev/2024-04-18-copy-on-write-php/"/>
+            <updated>2024-04-18T00:00:00+00:00</updated>
+            <id>https://dias.dev/2024-04-18-copy-on-write-php/</id>
+            <content type="html"><![CDATA[<p><em>CoW (Copy on Write)</em>, significa que um dado só é copiado em memória se alguma escrita for feita nele. No PHP, isso significa que os dados de um <em>array</em> só são copiados se nós realizarmos alguma escrita nessa cópia, evitando um grande desperdício de memória. Vem comigo nesse texto para entender melhor.</p>
+
+<h2 id="_arrays_-e-consumo-de-mem%C3%B3ria"><em>Arrays</em> e consumo de memória</h2>
+
+<p>Um <em>array</em>, em diversas linguagens, utiliza uma <em>estrutura de dados</em> conhecida como <strong>vetor</strong>, enquanto em PHP uma estrutura conhecida como <em>HashMap</em> é utilizada por baixo dos panos. Mas independente de qual estrutura de dados é utilizada, uma coisa é óbvia: <em>arrays</em> podem ocupar bastante espaço na memória. PS.: se quiser aprender sobre estruturas de dados com PHP, aqui tem um <a href="https://tidd.ly/4d42Myb">cupom de desconto para a Alura</a> e lá tem cursos sobre o assunto. 😉</p>
+
+<p>Pensa naquela última query super demorada que você fez e retorna um caminhão de dados do banco. Agora imagina armazenar isso tudo em sua aplicação PHP. Isso vai ocupar espaço. Inclusive, na maioria das vezes vamos usar paginação de dados para não cairmos em alguns problemas, mas isso é assunto para outro post.</p>
+
+<p>Vamos simular de forma bastante simples um <em>array</em> grande, e vamos ver quanta memória ele ocupa. Para isso, vamos usar a função <code>memory_get_usage</code> para recuperar o uso de memória e a função <code>array_fill</code> para criar um <em>array</em> com muitos dados.</p>
+
+<pre><code class="php">&lt;?php
+
+// Armazena o uso de memória inicial
+$memoriaInicial = memory_get_usage();
+
+// Cria um array de 1000 elementos
+$arrayGrande = array_fill(0, 1000, 'Valor de exemplo');
+
+$memoriaUsada = memory_get_usage() - $memoriaInicial;
+
+// Exibe a memória ocupada em KB
+echo $memoriaUsada / 1024;
+</code></pre>
+
+<p>O trecho de código acima vai mostrar que utilizamos aproximadamente 20 <em>kilobytes</em> após copiarmos um array contendo 1000 strings. Agora vamos realizar uma cópia desse array grande. Podemos fazer isso o passando por parâmetro para uma função, ou simplesmente o associando a uma nova variável:</p>
+
+<pre><code class="php">// ...
+$copiaDoArray = $arrayGrande;
+</code></pre>
+
+<p>Sendo assim, eu esperaria que a memória utilizada agora fosse de aproximadamente 40 <em>kilobytes</em>, já que tenho o array ocupando 20 KB duas vezes. Porém, se eu realizo a medição, tenho uma surpresa:</p>
+
+<pre><code class="php">// ...
+echo (memory_get_usage() - $memoriaInicial) / 1024;
+</code></pre>
+
+<p>Eu vejo agora um uso de aproximadamente 21 KB, ou seja, o consumo de memória praticamente não mudou. Um único <em>kilobyte</em> extra foi necessário para armazenar o novo array de 20 KBs. Como?</p>
+
+<h2 id="copy-on-write---php-ao-resgate">Copy on Write - PHP ao resgate</h2>
+
+<p>O PHP entende que arrays são uma estrutura de dados muito comum, muito utilizada e muito poderosa. Por isso, há uma técnica bastante comum implementada por baixo dos panos nos <em>arrays</em> do PHP: <em>Copy on Write</em>, ou, no bom e velho português, cópia somente no momento da escrita.</p>
+
+<p>O que isso quer dizer é que, ao realizar uma "cópia" de um array, ou seja, ao passar um array por parâmetro ou atribuí-lo a outra variável, o PHP não realiza uma cópia nos dados em memória. Ele, na verdade, faz com que esse parâmetro ou variável apontem para o mesmo endereço de memória do array original, nos poupando muita memória, principalmente em cenário de grandes volumes de dados.</p>
+
+<p>Porém, se ambos apontam para o mesmo endereço de memória, isso significa que ao manipular os itens desse novo array, eu acabaria alterando o array original também, certo? Errado. Daí que vem o nome da técnica de <em>copy on write</em>. Ao tentar realizar alguma manipulação nos dados dessa "cópia", só então os dados serão efetivamente copiados. Sendo assim, podemos ver o aumento no uso de memória com o seguinte trecho de código:</p>
+
+<pre><code class="php">// ...
+$copiaDoArray[1] = 'Outro valor';
+echo (memory_get_usage() - $memoriaInicial) / 1024;
+</code></pre>
+
+<p>Agora, após modificar a variável <code>$copiaDoArray</code>, uma cópia dos dados em memória será realmente feita, então o uso de memória finalmente dobrará e veremos um uso de aproximadamente 42KB.</p>
+
+<h2 id="conclus%C3%A3o">Conclusão</h2>
+
+<p><em>Arrays</em> são extremamente versáteis e poderosos no PHP e por isso são amplamente utilizados (às vezes até mal utilizados). Pensando nisso, o PHP faz de tudo para que seu uso seja o mais otimizado possível, e garantir que cópias desnecessárias sejam evitadas nos poupa <strong>muita</strong> RAM.</p>
+
+<p>Se você quiser aprender mais sobre as "entranhas" do PHP, manipulação de memória, otimização além de boas práticas, lá na Alura eu tenho vários cursos sobre o assunto (e sobre outros temas também). Aqui tem um <a href="https://tidd.ly/4d42Myb">cupom de 15% desconto</a> para você aproveitar a plataforma.</p>
+]]></content>
+        </entry>
             <entry>
             <title type="html"><![CDATA[Machine Learning com PHP: Aprendendo a Criar Algoritmos de Classificação]]></title>
             <link href="https://dias.dev/2024-03-23-o-que-e-machine-learning/"/>
@@ -222,7 +287,7 @@ $acuracia = $metrica-&gt;score($predicoesDeTeste, $teste-&gt;labels());
     </a>
 </lite-youtube></p>
 
-<p>E para se aprofundar ainda mais no mundo de machine learning, inteligência artificial e também PHP, você pode aproveitar <a href="https://tidd.ly/4d42Myb">esse cupom de 10% de desconto na Alura</a>.</p>
+<p>E para se aprofundar ainda mais no mundo de machine learning, inteligência artificial e também PHP, você pode aproveitar <a href="https://tidd.ly/4d42Myb">esse cupom de 15% de desconto na Alura</a>.</p>
 ]]></content>
         </entry>
             <entry>
@@ -328,7 +393,7 @@ echo soma('1', '2'); // Fatal error: Uncaught TypeError: Argument 1 passed to so
 
 <p>Tipos em PHP podem ser um assunto espinhoso porque além de complexo, nem todo dev concorda em como utilizá-los. Uns (como eu) acreditam que quanto mais estrito, melhor. Outros acreditam que <em>type hints</em> são um desperdício. Mais uma coisa eu acredito que seja unânime: é muito importante para nós, como devs PHP, entender como os tipos funcionam na linguagem com a qual trabalhamos.</p>
 
-<p>Se você deseja explorar ainda mais o tema de tipos em PHP, recomendo a leitura de um artigo abrangente no blog Codamos. O conteúdo discute detalhadamente os diversos tipos em PHP, suas manipulações e conversões, e oferece uma análise mais aprofundada sobre <code>strict_types</code>, inclusive com trechos de código em C do PHP. Para acessar o artigo completo, visite <a href="https://codamos.com.br/tipos-em-php/">este link</a>. E se você quiser aprender mais sobre PHP, há <strong>muitos</strong> cursos gravados por mim lá na Alura. Aqui tem um <a href="https://tidd.ly/4d42Myb">cupom de 10% de desconto</a> para assinar a plataforma.</p>
+<p>Se você deseja explorar ainda mais o tema de tipos em PHP, recomendo a leitura de um artigo abrangente no blog Codamos. O conteúdo discute detalhadamente os diversos tipos em PHP, suas manipulações e conversões, e oferece uma análise mais aprofundada sobre <code>strict_types</code>, inclusive com trechos de código em C do PHP. Para acessar o artigo completo, visite <a href="https://codamos.com.br/tipos-em-php/">este link</a>. E se você quiser aprender mais sobre PHP, há <strong>muitos</strong> cursos gravados por mim lá na Alura. Aqui tem um <a href="https://tidd.ly/4d42Myb">cupom de 15% de desconto</a> para assinar a plataforma.</p>
 ]]></content>
         </entry>
             <entry>
@@ -476,7 +541,7 @@ var_dump($ffi-&gt;return_message('Hello, world!'));
 <li>Computação de grandes arquivos JSON ou Markdown, que embora seja perfeitamente possível fazer diretamente me PHP, em alguns cenários pode se tornar mais eficiente usando Rust + FFI.</li>
 </ol>
 
-<p>Se você quiser aprender mais tanto sobre Rust quanto sobre PHP, há cursos gravados por mim lá na Alura. Aqui tem um <a href="https://tidd.ly/4d42Myb">cupom de 10% de desconto</a> para assinar a plataforma.</p>
+<p>Se você quiser aprender mais tanto sobre Rust quanto sobre PHP, há cursos gravados por mim lá na Alura. Aqui tem um <a href="https://tidd.ly/4d42Myb">cupom de 15% de desconto</a> para assinar a plataforma.</p>
 ]]></content>
         </entry>
             <entry>
@@ -929,7 +994,7 @@ $objeto-&gt;qualquerCoisa(1, 2);
 
 <p>Lembrar de todos os métodos (e suas assinaturas) e o que cada um deles faz não é necessário, mas é importante saber da existência deles para saber o que pesquisar quando for necessário.</p>
 
-<p>Se quiser aprender mais sobre PHP e sobre tecnologia em geral, vou deixar aqui um <a href="https://tidd.ly/4d42Myb">cupom de 10% de desconto na Alura</a>, plataforma onde eu gravei inúmeros cursos.</p>
+<p>Se quiser aprender mais sobre PHP e sobre tecnologia em geral, vou deixar aqui um <a href="https://tidd.ly/4d42Myb">cupom de 15% de desconto na Alura</a>, plataforma onde eu gravei inúmeros cursos.</p>
 ]]></content>
         </entry>
             <entry>
@@ -1037,7 +1102,7 @@ echo preg_replace('/[\x{0300}-\x{036F}]/u', '', $normalized); // Exibe: Aeiou
 
 <p>O simples uso de uma extensão apropriada faz com que essa complexa tarefa seja imensamente facilitada. Recomendo acessar os links que deixei durante o post como referência para se aprofundar em cada um dos assuntos aqui abordados.</p>
 
-<p>Já no link a seguir eu deixo um <a href="https://tidd.ly/4d42Myb">cupom de 10% de desconto</a> para você assinar a Alura, plataforma onde há cursos completos (alguns comigo, inclusive) sobre manipulação de strings (dentre vários outros assuntos de tecnologia).</p>
+<p>Já no link a seguir eu deixo um <a href="https://tidd.ly/4d42Myb">cupom de 15% de desconto</a> para você assinar a Alura, plataforma onde há cursos completos (alguns comigo, inclusive) sobre manipulação de strings (dentre vários outros assuntos de tecnologia).</p>
 ]]></content>
         </entry>
             <entry>
@@ -1174,7 +1239,7 @@ int main()
     </a>
 </lite-youtube></p>
 
-<p>Já no link a seguir eu deixo um <a href="https://tidd.ly/4d42Myb">cupom de 10% de desconto</a> para você assinar a Alura, plataforma onde há cursos completos (alguns comigo, inclusive) sobre programação paralela e programação assíncrona (dentre vários outros assuntos de tecnologia).</p>
+<p>Já no link a seguir eu deixo um <a href="https://tidd.ly/4d42Myb">cupom de 15% de desconto</a> para você assinar a Alura, plataforma onde há cursos completos (alguns comigo, inclusive) sobre programação paralela e programação assíncrona (dentre vários outros assuntos de tecnologia).</p>
 
 <h2 id="conclus%C3%A3o">Conclusão</h2>
 
@@ -1808,7 +1873,7 @@ você pode conferir o início dessa jornada de criação de extensões além de 
 fazemos uso de várias extensões no dia-a-dia e entender este funcionamento é bastante importante para devs PHP.</p>
 
 <p>Se além de entender sobre algumas extensões você quiser aprender mais sobre PHP em si, você pode usar esse
-<a href="https://tidd.ly/4d42Myb">cupom</a> que fornece 10% de desconto na assinatura da Alura, plataforma onde
+<a href="https://tidd.ly/4d42Myb">cupom</a> que fornece 15% de desconto na assinatura da Alura, plataforma onde
 eu mesmo gravei diversos cursos sobre o assunto.</p>
 ]]></content>
         </entry>
@@ -1891,7 +1956,7 @@ eu mesmo gravei diversos cursos sobre o assunto.</p>
     <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//ws-na.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&OneJS=1&Operation=GetAdHtml&MarketPlace=BR&source=ss&ref=as_ss_li_til&ad_type=product_link&tracking_id=cviniciussd06-20&language=pt_BR&marketplace=amazon&region=BR&placement=B075HP52WY&asins=B075HP52WY&linkId=955ce63a435057d47ccd0bd81620193c&show_border=true&link_opens_in_new_window=true"></iframe>
 </div>
 
-<p>Agora se você prefere estudar através de cursos e vídeos, super recomendo os treinamentos de front-end e de PWA da Alura. Lá você consegue toda a base para desenvolver uma PWA de forma profissional, aprendendo desde a base, passando por <em>JavaScript</em> avançado e <em>APIs Web</em>, até <em>PWAs</em> de fato. Se for o seu caso, aqui tenho um cupom de 10% de desconto para estudar na Alura:
+<p>Agora se você prefere estudar através de cursos e vídeos, super recomendo os treinamentos de front-end e de PWA da Alura. Lá você consegue toda a base para desenvolver uma PWA de forma profissional, aprendendo desde a base, passando por <em>JavaScript</em> avançado e <em>APIs Web</em>, até <em>PWAs</em> de fato. Se for o seu caso, aqui tenho um cupom de 15% de desconto para estudar na Alura:
 <a href="https://tidd.ly/4d42Myb">https://tidd.ly/4d42Myb</a></p>
 ]]></content>
         </entry>
@@ -1957,7 +2022,7 @@ eu mesmo gravei diversos cursos sobre o assunto.</p>
 
 <p>Creio que seja seguro afirmar que a grande maioria dos textos que tratamos como desenvolvedores utiliza UTF-8 como encoding e neste artigo nós entendemos o motivo disso e como o tratamento de textos evoluiu até chegar a esse ponto.</p>
 
-<p>Se você quiser aprender mais sobre esse assunto, pode considerar assinar a Alura. Lá existem treinamentos que tratam sobre charsets, encoding, manipulação de <em>strings</em> e muito mais. Caso pretenda estudar na Alura, <a href="https://tidd.ly/4d42Myb">neste link</a> você tem um desconto de 10%.</p>
+<p>Se você quiser aprender mais sobre esse assunto, pode considerar assinar a Alura. Lá existem treinamentos que tratam sobre charsets, encoding, manipulação de <em>strings</em> e muito mais. Caso pretenda estudar na Alura, <a href="https://tidd.ly/4d42Myb">neste link</a> você tem um desconto de 15%.</p>
 ]]></content>
         </entry>
             <entry>
@@ -2055,7 +2120,7 @@ eu mesmo gravei diversos cursos sobre o assunto.</p>
 
 <p>No caso do PHP-FPM precisamos de um servidor para receber as requisições HTTP e enviar as chamadas para o PHP com FastCGI. No caso de um servidor auto-contido, podemos ter um proxy reverso servindo os arquivos estáticos e realizando cache, por exemplo, enquanto o servidor auto-contido responde apenas as requisições realmente necessárias.</p>
 
-<p>Se você quiser aprender mais sobre algum desses assuntos, pode considerar assinar a Alura. Lá existem treinamentos (gravados por mim) sobre Nginx, ReactPHP, Swoole e muito mais. Caso pretenda estudar na Alura, <a href="https://tidd.ly/4d42Myb">neste link</a> você tem um desconto de 10%.</p>
+<p>Se você quiser aprender mais sobre algum desses assuntos, pode considerar assinar a Alura. Lá existem treinamentos (gravados por mim) sobre Nginx, ReactPHP, Swoole e muito mais. Caso pretenda estudar na Alura, <a href="https://tidd.ly/4d42Myb">neste link</a> você tem um desconto de 15%.</p>
 ]]></content>
         </entry>
             <entry>
@@ -2187,7 +2252,7 @@ simples antes de 2011, já que ele facilitava a instalação da praticamente a �
 for um servidor de produção, XAMPP nunca foi uma alternativa viável. Sendo assim, para desenvolvedores PHP, não há
 motivos válidos para uso do XAMPP nos dias atuais.</p>
 
-<p>Se você quiser aprender mais sobre algum desses assuntos, pode considerar assinar a Alura. Lá existem treinamentos (gravados por mim) sobre PHP, Nginx e muito mais. Caso pretenda estudar na Alura, <a href="https://tidd.ly/4d42Myb">neste link</a> você tem um desconto de 10%.</p>
+<p>Se você quiser aprender mais sobre algum desses assuntos, pode considerar assinar a Alura. Lá existem treinamentos (gravados por mim) sobre PHP, Nginx e muito mais. Caso pretenda estudar na Alura, <a href="https://tidd.ly/4d42Myb">neste link</a> você tem um desconto de 15%.</p>
 ]]></content>
         </entry>
             <entry>
@@ -2618,7 +2683,7 @@ de streams podemos compactar e descompactar arquivos, enviar dados por FTP, aces
 <li><a href="https://tidd.ly/4aqwpba">Curso online: PHP I/O - Arquivos de streams</a>
 
 <ul>
-<li>Na Alura existe um curso específico de streams usando filtros, contextos e muito mais. Se quiser 10% de desconto na sua assinatura, confere <a href="https://tidd.ly/4d42Myb">esse link aqui</a>.</li>
+<li>Na Alura existe um curso específico de streams usando filtros, contextos e muito mais. Se quiser 15% de desconto na sua assinatura, confere <a href="https://tidd.ly/4d42Myb">esse link aqui</a>.</li>
 </ul></li>
 <li><a href="/2020-09-16-php-assincrono-de-forma-nativa/">PHP Assíncrono de Forma Nativa</a>
 
@@ -2941,7 +3006,7 @@ array(3) {
 
 <p>Mas seguindo o que citei no post sobre aprendizado, eu penso como <a href="https://pt.wikipedia.org/wiki/Richard_Feynman">Richard Feynman</a> (Nobel de física): "O que eu não consigo criar, eu não entendo". Então antes de utilizar uma ferramenta que realiza o trabalho para mim, eu gosto de saber como realizar este trabalho sem ela. Com isso, se algum problema acontecer com a biblioteca, por exemplo, eu vou estar mais preparado para resolvê-lo já que eu entendo um pouco melhor como as coisas funcionam.</p>
 
-<p>Se você quiser aprender mais sobre algum desses assuntos, pode considerar assinar a Alura. Lá existem treinamentos (gravados por mim) sobre PHP Streams, ReactPHP e muito mais. Caso pretenda estudar na Alura, <a href="https://tidd.ly/4d42Myb">neste link</a> você tem um desconto de 10%.</p>
+<p>Se você quiser aprender mais sobre algum desses assuntos, pode considerar assinar a Alura. Lá existem treinamentos (gravados por mim) sobre PHP Streams, ReactPHP e muito mais. Caso pretenda estudar na Alura, <a href="https://tidd.ly/4d42Myb">neste link</a> você tem um desconto de 15%.</p>
 ]]></content>
         </entry>
             <entry>

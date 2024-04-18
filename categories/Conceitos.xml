@@ -3,7 +3,7 @@
     <title><![CDATA[Dias de Dev]]></title>
     <link href="https://dias.dev/categories/Conceitos.xml" rel="self"/>
     <link href="https://dias.dev"/>
-    <updated>2024-04-12T15:20:58+00:00</updated>
+    <updated>2024-04-18T01:12:21+00:00</updated>
     <id>https://dias.dev/</id>
             <author>
             <name><![CDATA[Vinicius Dias]]></name>            <email><![CDATA[vinicius@dias.dev]]></email>        </author>
@@ -222,7 +222,7 @@ $acuracia = $metrica-&gt;score($predicoesDeTeste, $teste-&gt;labels());
     </a>
 </lite-youtube></p>
 
-<p>E para se aprofundar ainda mais no mundo de machine learning, inteligência artificial e também PHP, você pode aproveitar <a href="https://tidd.ly/4d42Myb">esse cupom de 10% de desconto na Alura</a>.</p>
+<p>E para se aprofundar ainda mais no mundo de machine learning, inteligência artificial e também PHP, você pode aproveitar <a href="https://tidd.ly/4d42Myb">esse cupom de 15% de desconto na Alura</a>.</p>
 ]]></content>
         </entry>
             <entry>
@@ -359,7 +359,7 @@ int main()
     </a>
 </lite-youtube></p>
 
-<p>Já no link a seguir eu deixo um <a href="https://tidd.ly/4d42Myb">cupom de 10% de desconto</a> para você assinar a Alura, plataforma onde há cursos completos (alguns comigo, inclusive) sobre programação paralela e programação assíncrona (dentre vários outros assuntos de tecnologia).</p>
+<p>Já no link a seguir eu deixo um <a href="https://tidd.ly/4d42Myb">cupom de 15% de desconto</a> para você assinar a Alura, plataforma onde há cursos completos (alguns comigo, inclusive) sobre programação paralela e programação assíncrona (dentre vários outros assuntos de tecnologia).</p>
 
 <h2 id="conclus%C3%A3o">Conclusão</h2>
 
@@ -582,7 +582,7 @@ int main()
 
 <p>Creio que seja seguro afirmar que a grande maioria dos textos que tratamos como desenvolvedores utiliza UTF-8 como encoding e neste artigo nós entendemos o motivo disso e como o tratamento de textos evoluiu até chegar a esse ponto.</p>
 
-<p>Se você quiser aprender mais sobre esse assunto, pode considerar assinar a Alura. Lá existem treinamentos que tratam sobre charsets, encoding, manipulação de <em>strings</em> e muito mais. Caso pretenda estudar na Alura, <a href="https://tidd.ly/4d42Myb">neste link</a> você tem um desconto de 10%.</p>
+<p>Se você quiser aprender mais sobre esse assunto, pode considerar assinar a Alura. Lá existem treinamentos que tratam sobre charsets, encoding, manipulação de <em>strings</em> e muito mais. Caso pretenda estudar na Alura, <a href="https://tidd.ly/4d42Myb">neste link</a> você tem um desconto de 15%.</p>
 ]]></content>
         </entry>
             <entry>
@@ -1073,7 +1073,7 @@ array(3) {
 
 <p>Mas seguindo o que citei no post sobre aprendizado, eu penso como <a href="https://pt.wikipedia.org/wiki/Richard_Feynman">Richard Feynman</a> (Nobel de física): "O que eu não consigo criar, eu não entendo". Então antes de utilizar uma ferramenta que realiza o trabalho para mim, eu gosto de saber como realizar este trabalho sem ela. Com isso, se algum problema acontecer com a biblioteca, por exemplo, eu vou estar mais preparado para resolvê-lo já que eu entendo um pouco melhor como as coisas funcionam.</p>
 
-<p>Se você quiser aprender mais sobre algum desses assuntos, pode considerar assinar a Alura. Lá existem treinamentos (gravados por mim) sobre PHP Streams, ReactPHP e muito mais. Caso pretenda estudar na Alura, <a href="https://tidd.ly/4d42Myb">neste link</a> você tem um desconto de 10%.</p>
+<p>Se você quiser aprender mais sobre algum desses assuntos, pode considerar assinar a Alura. Lá existem treinamentos (gravados por mim) sobre PHP Streams, ReactPHP e muito mais. Caso pretenda estudar na Alura, <a href="https://tidd.ly/4d42Myb">neste link</a> você tem um desconto de 15%.</p>
 ]]></content>
         </entry>
             <entry>
