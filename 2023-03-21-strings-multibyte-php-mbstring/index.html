@@ -217,6 +217,21 @@ echo mb_convert_encoding('string em UTF-8', 'ISO-8859-1', 'UTF-8');
         <script defer
                 src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8918461095244552"
                 crossorigin="anonymous"></script>
+        <script type="speculationrules">
+            {
+              "prerender": [
+                {
+                  "source": "document",
+                  "where": {
+                    "and": [
+                      {"href_matches": "/*"},
+                    ]
+                  },
+                  "eagerness": "moderate"
+                }
+              ]
+            }
+        </script>
                     <script defer src="/build/lite-yt-embed-script.js" type="module"></script>
         </body>
 </html>

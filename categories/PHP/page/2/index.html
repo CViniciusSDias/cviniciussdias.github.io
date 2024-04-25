@@ -103,5 +103,20 @@
         <script defer
                 src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8918461095244552"
                 crossorigin="anonymous"></script>
+        <script type="speculationrules">
+            {
+              "prerender": [
+                {
+                  "source": "document",
+                  "where": {
+                    "and": [
+                      {"href_matches": "/*"},
+                    ]
+                  },
+                  "eagerness": "moderate"
+                }
+              ]
+            }
+        </script>
                     </body>
 </html>
