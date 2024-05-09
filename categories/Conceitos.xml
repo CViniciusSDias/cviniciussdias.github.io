@@ -3,7 +3,7 @@
     <title><![CDATA[Dias de Dev]]></title>
     <link href="https://dias.dev/categories/Conceitos.xml" rel="self"/>
     <link href="https://dias.dev"/>
-    <updated>2024-05-09T14:34:31+00:00</updated>
+    <updated>2024-05-09T17:32:47+00:00</updated>
     <id>https://dias.dev/</id>
             <author>
             <name><![CDATA[Vinicius Dias]]></name>            <email><![CDATA[vinicius@dias.dev]]></email>        </author>
@@ -20,6 +20,7 @@
 <p>Antes de conhecermos os tipos de <em>locks</em>, é importante entendermos <strong>o que são</strong> os bloqueios dos bancos de dados. Imagine o seguinte cenário: um produto está a venda e possui apenas 1 unidade em estoque. O que acontece se 2 pessoas clicarem no botão de compra simultaneamente? Se você tiver um código semelhante ao seguinte, terá problemas.</p>
 
 <pre><code class="sql">SELECT estoque FROM produto WHERE id = ?;
+
 -- Na aplicação, verifica se estoque &gt; 0.
 -- Se sim:
 UPDATE produto SET estoque = estoque - 1 WHERE id = ?;
@@ -46,6 +47,7 @@ Agora imagine se 100 pessoas comprarem em simultâneo. E se 1000 pessoas o fizer
 
 <pre><code class="sql">START TRANSACTION;
     SELECT estoque FROM produto WHERE id = ?;
+
     -- Na aplicação, verifica se estoque &gt; 0.
     -- Se sim:
     UPDATE produto SET estoque = estoque - 1 WHERE id = ?;
@@ -67,6 +69,7 @@ COMMIT;
       FROM produto
      WHERE id = ?
        FOR UPDATE;
+
     -- Na aplicação, verifica se estoque &gt; 0.
     -- Se sim:
     UPDATE produto SET estoque = estoque - 1 WHERE id = ?;
@@ -96,6 +99,7 @@ COMMIT;
       FROM produto
      WHERE id = ?
        FOR SHARE;
+
     -- Demais consultas
 COMMIT;
 </code></pre>
