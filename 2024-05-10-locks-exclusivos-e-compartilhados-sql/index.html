@@ -8,21 +8,21 @@
             <meta name="robots" content="index, follow">
     <meta name="title" content="Locks de bancos de dados: Como Funcionam os Bloqueios Exclusivos e Compartilhados | Dias de Dev">
     <meta name="keywords" content="Bloqueios de bancos de dados, Locks de bancos de dados, Bloqueios exclusivos, Bloqueios compartilhados, Exclusive locks, Shared locks, Database locking, Locks pessimistas, Locks otimistas, Consistência de dados, Transações concorrentes, Bancos de dados relacionais, Integridade dos sistemas, SQL, Estratégias de bloqueio de dados">
-    <meta name="description" content="Descubra como os bloqueios exclusivos e compartilhados em bancos de dados garantem a consistência dos seus dados. Este texto explora o funcionamento dos locks de bancos de dados e sua importância para a integridade dos sistemas e consistência dos dados. Saiba como aplicar essas técnicas para evitar conflitos em transações concorrentes.">
+    <meta name="description" content="Descubra como os bloqueios exclusivos e compartilhados em bancos de dados garantem a consistência dos seus dados. Este texto explora o funcionamento dos locks de bancos de dados e sua importância para a integridade dos sistemas. Saiba como aplicar essas técnicas para evitar conflitos em transações concorrentes.">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="article">
     <meta property="og:article:published_time" content="1715299200">
     <meta property="og:url" content="https://dias.dev/2024-05-10-locks-exclusivos-e-compartilhados-sql/">
     <meta property="og:title" content="Locks de bancos de dados: Como Funcionam os Bloqueios Exclusivos e Compartilhados | Dias de Dev">
-    <meta property="og:description" content="Descubra como os bloqueios exclusivos e compartilhados em bancos de dados garantem a consistência dos seus dados. Este texto explora o funcionamento dos locks de bancos de dados e sua importância para a integridade dos sistemas e consistência dos dados. Saiba como aplicar essas técnicas para evitar conflitos em transações concorrentes.">
+    <meta property="og:description" content="Descubra como os bloqueios exclusivos e compartilhados em bancos de dados garantem a consistência dos seus dados. Este texto explora o funcionamento dos locks de bancos de dados e sua importância para a integridade dos sistemas. Saiba como aplicar essas técnicas para evitar conflitos em transações concorrentes.">
     <meta property="og:image" content="https://dias.dev/assets/img/thumbs/2024-05-10-locks-exclusivos-e-compartilhados-sql.png">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary">
     <meta property="twitter:url" content="https://dias.dev/2024-05-10-locks-exclusivos-e-compartilhados-sql/">
     <meta property="twitter:title" content="Locks de bancos de dados: Como Funcionam os Bloqueios Exclusivos e Compartilhados | Dias de Dev">
-    <meta property="twitter:description" content="Descubra como os bloqueios exclusivos e compartilhados em bancos de dados garantem a consistência dos seus dados. Este texto explora o funcionamento dos locks de bancos de dados e sua importância para a integridade dos sistemas e consistência dos dados. Saiba como aplicar essas técnicas para evitar conflitos em transações concorrentes.">
+    <meta property="twitter:description" content="Descubra como os bloqueios exclusivos e compartilhados em bancos de dados garantem a consistência dos seus dados. Este texto explora o funcionamento dos locks de bancos de dados e sua importância para a integridade dos sistemas. Saiba como aplicar essas técnicas para evitar conflitos em transações concorrentes.">
 
     <link rel="preconnect" href="https://gravatar.com">
     <link rel="preconnect" href="https://utteranc.es">
@@ -77,53 +77,63 @@
 
 <h2 id="o-que-s%C3%A3o-bloqueios-de-bancos-de-dados">O que são bloqueios de bancos de dados</h2>
 
-<p>Antes de conhecermos os tipos de <em>locks</em>, é importante entendermos <strong>o que são</strong> os bloqueios dos bancos de dados. Imagine o seguinte cenário: um produto está a venda e possui apenas 1 item em estoque. O que acontece se 2 pessoas clicarem no botão de compra simultaneamente? Se você tiver um código semelhante ao seguinte, terá problemas.</p>
+<p>Antes de conhecermos os tipos de <em>locks</em>, é importante entendermos <strong>o que são</strong> os bloqueios dos bancos de dados. Imagine o seguinte cenário: um produto está a venda e possui apenas 1 unidade em estoque. O que acontece se 2 pessoas clicarem no botão de compra simultaneamente? Se você tiver um código semelhante ao seguinte, terá problemas.</p>
 
 <pre><code class="sql">SELECT estoque FROM produto WHERE id = ?;
--- Na aplicação, verifica se estoque &gt; 0. Se sim:
+-- Na aplicação, verifica se estoque &gt; 0.
+-- Se sim:
 UPDATE produto SET estoque = estoque - 1 WHERE id = ?;
 </code></pre>
 
-<p>O que acontece é que se duas pessoas clicarem em "comprar" ao mesmo tempo, ambas verão o produto com 1 item em estoque, e ambas subtrairão esse item do estoque, gerando uma venda a mais do que o permitido.
-Agora imagine se 100 pessoas comprarem em simultâneo. E se 1000 pessoas fizerem? Para esse cenário existem os bloqueios (<em>locks</em>) de bancos de dados.</p>
+<p>O que acontece é que se duas pessoas clicarem em "comprar" ao mesmo tempo, ambas terão como resultado do <code>SELECT</code> o produto com 1 unidade em estoque, e ambas subtrairão esse item do estoque, gerando uma venda a mais do que o permitido.
+Agora imagine se 100 pessoas comprarem em simultâneo. E se 1000 pessoas o fizerem? Para esse cenário existem os bloqueios (<em>locks</em>) de bancos de dados.</p>
 
 <h2 id="bloqueios-impl%C3%ADcitos">Bloqueios implícitos</h2>
 
-<p>Um "detalhe" que nem toda pessoa iniciante no mundo de banco de dados sabe é que mesmo sem conhecer o conceito de <em>locks</em>, eles ainda são utilizados por <em>queries</em> do dia-a-dia. Ao realizar o <code>UPDATE</code> citado no parágrafo anterior, por exemplo, há um bloqueio no registro que está sendo alterado. Isso significa que se duas conexões tentarem realizar o <code>UPDATE</code> ao mesmo tempo, uma delas conseguirá executar enquanto a outra ficará em um estado de espera até que a primeira termine. Só então a segunda poderá prosseguir e ser executada. Se não fosse assim, em nosso exemplo uma das compras poderia iniciar a alteração da quantidade de estoque (de 1 para 0), e antes de finalizar, a outra compra poderia realizar exatamente a mesma operação, sendo assim as duas compras teriam subtraído apenas 1 item do estoque, gerando um problema completamente diferente.</p>
+<p>Um "detalhe" que nem toda pessoa iniciante no mundo de banco de dados sabe é que mesmo sem conhecer o conceito de <em>locks</em>, eles ainda são utilizados por <em>queries</em> do dia-a-dia. Ao realizar o <code>UPDATE</code> citado no parágrafo anterior, por exemplo, há um bloqueio no registro que está sendo alterado. Isso significa que se duas conexões tentarem realizar o <code>UPDATE</code> ao mesmo tempo, uma delas conseguirá executar enquanto a outra ficará em um estado de espera até que a primeira termine. Só então a segunda poderá prosseguir e ser executada.</p>
+
+<p>Se não fosse assim, em nosso exemplo uma das compras poderia iniciar a alteração (<code>UPDATE</code>) da quantidade de estoque (de 1 para 0), e antes dessa instrução finalizar no banco de dados, a outra compra poderia realizar exatamente a mesma operação. Sendo assim, as duas compras teriam subtraído apenas 1 item do estoque, gerando um problema completamente diferente.</p>
 
 <p>Quando realizamos operações de <em>DML</em>, ou seja, operações como <code>INSERT</code>, <code>UPDATE</code> e <code>DELETE</code>, os registros que serão afetados são bloqueados para que nenhum outro comando que esteja sendo executado em paralelo cause problemas de consistência. Isso ocorre automaticamente, por isso o nome de "bloqueios implícitos" (<em>implicit locking</em>).</p>
 
 <h2 id="bloqueios-expl%C3%ADcitos">Bloqueios explícitos</h2>
 
-<p>Em diversos cenários, nós precisamos bloquear algum(ns) registro(s) de forma manual, pois não será executada apenas 1 <em>query</em> nele(s). O exemplo da compra de um produto é exatamente esse caso: primeiro nós buscamos os dados do produto, e após verificar esses dados, nós realizamos a atualização. Ou seja, realizamos primeiro um <code>SELECT</code> e depois um <code>UPDATE</code>. O problema é que precisamos bloquear esse registro já no momento do <code>SELECT</code> para que nenhuma consulta sendo executada concorrentemente busque a quantia incorreta do estoque, ou seja, precisamos fazer isso de forma explícita.</p>
+<p>Em diversos cenários, nós precisamos bloquear algum(ns) registro(s) de forma manual, pois não será executada apenas 1 <em>query</em> nele(s). O exemplo da compra de um produto é exatamente esse caso: primeiro nós buscamos os dados do produto, e após verificar esses dados em nossa aplicação, nós realizamos a atualização. Ou seja, realizamos primeiro um <code>SELECT</code> e depois um <code>UPDATE</code>.</p>
 
-<p>Para realizarmos um bloqueio explícito (<em>explicit locking</em>), nós precisamos envolver as <em>queries</em> em uma transação. Então a primeira mudança no código do exemplo anterior seria iniciar uma transação antes de buscar o estoque e encerrá-la somente após realizar a alteração.</p>
+<p>O problema é que precisamos bloquear esse registro já no momento do <code>SELECT</code> para que nenhuma consulta sendo executada concorrentemente busque a quantia incorreta do estoque, ou seja, precisamos fazer isso de forma explícita. Dessa forma, nós dizemos que queremos obter um <em>lock</em> para o registro em questão, garantindo que antes de terminarmos a atualização, ninguém vai acessá-lo.</p>
+
+<p>Para realizarmos um bloqueio explícito (<em>explicit locking</em>) nós precisamos, antes de qualquer coisa, envolver as <em>queries</em> em uma transação. Então a primeira mudança no código do exemplo anterior seria iniciar uma transação antes de buscar o estoque e encerrá-la somente após realizar a alteração.</p>
 
 <pre><code class="sql">START TRANSACTION;
-SELECT estoque FROM produto WHERE id = ?;
--- Na aplicação, verifica se estoque &gt; 0. Se sim:
-UPDATE produto SET estoque = estoque - 1 WHERE id = ?;
+    SELECT estoque FROM produto WHERE id = ?;
+    -- Na aplicação, verifica se estoque &gt; 0.
+    -- Se sim:
+    UPDATE produto SET estoque = estoque - 1 WHERE id = ?;
 COMMIT;
 </code></pre>
 
-<p>Claro que os comandos de iniciar e finalizar a transação seriam realizados utilizando a interface de acesso ao banco de dados que sua linguagem de programação fornece, mas por baixo dos panos, isso aconteceria.</p>
+<p>Claro que os comandos de iniciar e finalizar a transação seriam realizados utilizando a interface de acesso ao banco de dados que sua linguagem de programação fornece, mas por baixo dos panos, as instruções de início e término de transação seriam enviados para o banco da forma como o exemplo mostra.</p>
 
-<p>Porém, essa modificação ainda não faz com que o nosso objetivo seja atingido. Várias transações podem buscar o estoque ainda antes de estar zerado e realizar o <code>UPDATE</code> mesmo sem poder. Para nós informarmos que apenas uma transação por vez pode manipular esse registro, precisamos modificar nossa <em>query</em> <code>SELECT</code>. E é nessa modificação que vamos identificar se é um <em>lock</em> exclusivo ou compartilhado.</p>
+<p>Porém, essa modificação ainda não faz com que o nosso objetivo seja atingido. Várias transações podem buscar o estoque ainda antes dele ter sido atualizado e elas podem acabar realizando o <code>UPDATE</code> em um item que possivelmente teria o estoque zerado. Para informarmos ao banco que apenas uma transação por vez pode manipular esse registro, precisamos modificar nossa <em>query</em> <code>SELECT</code>. E é nessa modificação que vamos identificar se é um <em>lock</em> exclusivo ou compartilhado.</p>
 
 <h3 id="bloqueio-exclusivo">Bloqueio exclusivo</h3>
 
-<p>Para nosso cenário, nós queremos obter um tipo de bloqueio para podermos atualizar o registro futuramente na transação, ou seja, nós vamos informar que somente 1 transação pode realizar essa operação por vez. Isso acontece porque antes da transação atual finalizar, o valor do estoque pode ser alterado, então as outras transações concorrentes precisam esperar a transação atual ser finalizada para só então poderem buscar o dado e garantir que está recuperando a informação correta.</p>
+<p>Para nosso cenário, nós queremos obter um tipo de bloqueio para podermos atualizar o registro futuramente na transação, ou seja, nós vamos informar que somente 1 transação pode realizar essa operação por vez. Isso acontece porque antes da transação atual finalizar, o valor do estoque pode ser alterado, então as outras transações concorrentes precisam esperar a transação atual ser finalizada para só então poderem buscar o dado. Assim garantimos que todas as transações recuperarão a informação correta.</p>
 
 <p>Essa é a ideia de um bloqueio exclusivo (<em>exclusive lock</em>) e pode ser feito adicionando um simples <code>FOR UPDATE</code> ao nosso <code>SELECT</code>:</p>
 
 <pre><code class="sql">START TRANSACTION;
-SELECT estoque FROM produto WHERE id = ? FOR UPDATE;
--- Na aplicação, verifica se estoque &gt; 0. Se sim:
-UPDATE produto SET estoque = estoque - 1 WHERE id = ?;
+    SELECT estoque
+      FROM produto
+     WHERE id = ?
+       FOR UPDATE;
+    -- Na aplicação, verifica se estoque &gt; 0.
+    -- Se sim:
+    UPDATE produto SET estoque = estoque - 1 WHERE id = ?;
 COMMIT;
 </code></pre>
 
-<p>Agora, ao realizar o <code>SELECT</code>, nós estamos informando ao banco que nenhuma outra transação pode realizar nenhuma operação nos registros que esse <code>SELECT</code> nos retornar, ou seja, independente de quantas compras forem feitas de forma paralela, apenas uma transação por vez poderá agir sobre os dados desse produto. Isso garante que aquela verificação de <code>estoque &gt; 0</code> seja segura.</p>
+<p>Agora, ao realizar esse <code>SELECT</code>, nós estamos informando ao banco que nenhuma outra transação pode realizar nenhuma operação nos registros que esse <code>SELECT</code> nos retornar até que a transação atual seja encerrada, ou seja, independente de quantas compras forem feitas de forma paralela, apenas uma transação por vez poderá agir sobre os dados desse produto. Isso garante que aquela verificação de <code>estoque &gt; 0</code> seja segura, já que em uma nova transação o estoque só será buscado após todas as alterações de uma transação existente sejam realizadas.</p>
 
 <p>Essa foi a estratégia utilizada na explicação de outro conceito no meu canal do YouTube, onde falo sobre bloqueios pessimistas (<em>pessimistic locking</em>) e bloqueios otimistas (<em>optimistic locking</em>):</p>
 
@@ -137,15 +147,20 @@ COMMIT;
 
 <p>Agora imagine o seguinte cenário: você está realizando diversas consultas no banco de dados para montar um relatório. Sendo assim, entre as diversas consultas que serão executadas, você quer garantir a consistência, mas o tipo de bloqueio que você quer adquirir agora é um pouco menos "restrito", já que múltiplas transações gerando o relatório podem ser executadas de forma paralela sem nenhum problema.</p>
 
+<p>Isso quer dizer que o bloqueio que queremos obter agora não vai ficar esperando outras transações que apenas pretendem ler o mesmo registro. E quando obtivermos esse bloqueio, outras transações continuam podendo ler os registros bloqueados sem problema. Apenas modificações nesses registros precisarão aguardar que a transação finalize, garantindo a consistência do relatório.</p>
+
 <p>Para esse cenário, o <em>lock</em> exclusivo (através do <code>FOR UPDATE</code>) vai realizar um bloqueio muito "agressivo", não atingindo nosso objetivo e travando até mesmo as consultas dos demais relatórios. Ao invés de utilizamos <code>FOR UPDATE</code>, vamos utilizar a instrução <code>FOR SHARE</code> para a criação desse <strong>bloqueio compartilhado</strong> (<em>shared lock</em>).</p>
 
 <pre><code class="sql">START TRANSACTION;
-SELECT estoque FROM produto WHERE id = ? FOR SHARE;
--- Demais consultas
+    SELECT estoque
+      FROM produto
+     WHERE id = ?
+       FOR SHARE;
+    -- Demais consultas
 COMMIT;
 </code></pre>
 
-<p>Isso garante que outras transações possam realizar consultas nos registros bloqueados, mas não possam realizar nenhuma modificação, ou seja, nenhuma atualização pode ser feita no produto selecionado até que a transação seja finalizada, mas outras transações podem ler os detalhes desse produto de forma concorrente sem nenhum problema.</p>
+<p>Isso garante que outras transações possam realizar consultas nos registros bloqueados (e obter <em>locks</em> compartilhados), mas não possam realizar nenhuma modificação (nem obter <em>locks</em> exclusivos), ou seja, nenhuma atualização pode ser feita no produto selecionado até que a transação seja finalizada, mas outras transações podem ler os detalhes desse produto de forma concorrente sem nenhum problema.</p>
 
 <h2 id="conclus%C3%A3o">Conclusão</h2>
 
