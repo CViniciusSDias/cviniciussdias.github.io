@@ -3,11 +3,147 @@
     <title><![CDATA[Dias de Dev]]></title>
     <link href="https://dias.dev/categories/Conceitos.xml" rel="self"/>
     <link href="https://dias.dev"/>
-    <updated>2024-05-09T17:32:47+00:00</updated>
+    <updated>2024-07-16T02:45:33+00:00</updated>
     <id>https://dias.dev/</id>
             <author>
             <name><![CDATA[Vinicius Dias]]></name>            <email><![CDATA[vinicius@dias.dev]]></email>        </author>
         <generator uri="http://sculpin.io/">Sculpin</generator>
+            <entry>
+            <title type="html"><![CDATA[Kubernetes para Iniciantes: Conceitos Básicos e Aplicações Práticas]]></title>
+            <link href="https://dias.dev/2024-07-16-kubernetes-para-iniciantes-conceitos-basicos/"/>
+            <updated>2024-07-16T00:00:00+00:00</updated>
+            <id>https://dias.dev/2024-07-16-kubernetes-para-iniciantes-conceitos-basicos/</id>
+            <content type="html"><![CDATA[<p>Kubernetes, ou para abreviar, k8s, é um orquestrador de contêineres. Nesse texto eu vou te explicar o que isso significa e em que cenários ele é útil. Esse post <strong>não é um tutorial</strong> de como usar o Kubernetes, mas sim uma explicação de conceitos.</p>
+
+<h2 id="o-que-%C3%A9-k8s">O que é k8s</h2>
+
+<p>Como eu já disse, Kubernetes é um orquestrador de contêineres. Mas o que isso significa? Vamos por partes.</p>
+
+<h3 id="o-que-s%C3%A3o-cont%C3%AAineres">O que são contêineres</h3>
+
+<p>O kubernetes vai te ajudar a organizar uma aplicação executada em um ambiente de contêineres (<em>containers</em>), geralmente utilizando Docker. Um <em>container</em> é uma forma de empacotar uma aplicação com todas as suas dependências, de forma que ela possa ser executada em qualquer ambiente que tenha o Docker instalado. Isso é muito útil para garantir que a aplicação vai funcionar da mesma forma em qualquer lugar.</p>
+
+<p>De forma super simplificada, um <em>container</em> é como se fosse uma máquina virtual muito mais leve, pois pode compartilhar recursos do sistema operacional onde ele está sendo executado.</p>
+
+<h3 id="docker-compose">Docker compose</h3>
+
+<p>Uma aplicação geralmente possui mais de um <em>container</em>. Nós temos, por exemplo, um <em>container</em> para a aplicação em si, um para um servidor web, outro para um sistema de mensageria, e assim por diante. O Docker Compose é uma ferramenta que nos ajuda a definir e executar aplicações com múltiplos <em>containers</em>.</p>
+
+<p>Mas para execução de uma aplicação como essa em ambiente de produção, o Docker Compose apresenta limitações. Se um <em>container</em> falhar, ele não será reiniciado automaticamente. Se você quiser escalar a aplicação, você terá que fazer isso manualmente. E se você quiser atualizar a aplicação, você terá que fazer isso manualmente também. Para automatizar essas tarefas, precisamos de um orquestrador de <em>containers</em> mais robusto.</p>
+
+<h3 id="orquestra%C3%A7%C3%A3o">Orquestração</h3>
+
+<p>A orquestração de <em>containers</em> é o processo de gerenciar a execução de múltiplos <em>containers</em> em um ambiente de produção. Isso inclui tarefas como:</p>
+
+<ul>
+<li>Monitorar os recursos utilizados por cada <em>container</em>;</li>
+<li>Escalar automaticamente o número de <em>containers</em> caso necessário;</li>
+<li>Reiniciar um <em>container</em> em caso de falhar;</li>
+<li>Permitir a atualização de uma aplicação sem downtime;</li>
+<li>Expor uma forma de acessar os <em>containers</em> sem precisar saber em qual máquina eles estão rodando.</li>
+</ul>
+
+<p>Existem alguns orquestradores de <em>containers</em> no mercado, como o Docker Swarm, o Apache Mesos e o Kubernetes. O Kubernetes é o mais popular deles, sendo sobre ele que vamos falar aqui.</p>
+
+<h2 id="conceitos-de-kubernetes">Conceitos de kubernetes</h2>
+
+<h3 id="cluster">Cluster</h3>
+
+<p>Um cluster Kubernetes nada mais é do que um ambiente onde você vai executar suas aplicações. Esse ambiente precisa estar configurado para que o Kubernetes consiga ter acesso para gerenciar os diversos recursos que sua aplicação vai precisar.</p>
+
+<p>Para executar os recursos necessários para sua aplicação, obviamente você vai precisar de máquinas. Essas máquinas podem ser disponibilizadas de diversas formas diferentes. Cada ambiente pode disponibilizar um cluster de forma diferente, ou você mesmo pode configurar um cluster de forma que acesse os recursos dessas máquinas de formas diferentes.</p>
+
+<p>Ambientes em nuvem, como AWS, Azure, Google Cloud Platform, Digital Ocean e vários outros, disponibilizam clusters gerenciados de kubernetes para facilitar a configuração. Caso prefira, você também pode configurar manualmente um cluster de kubernetes. Inclusive, para executar um cluster localmente, normalmente nós configuramos um cluster de forma simplificada utilizando ferramentas como Minikube ou Kind.</p>
+
+<p>Um cluster Kubernetes é composto por <em>Nodes</em>, que basicamente são as máquinas que executaram a sua aplicação. Existem os <em>master nodes</em> e <em>worker nodes</em>. Os <em>master nodes</em> são responsáveis por gerenciar o cluster, realizando as ações de criar, reiniciar e remover recursos, enquanto os <em>worker nodes</em> são responsáveis por efetivamente executar os recursos que rodarão a aplicação.</p>
+
+<p>Vamos entender um pouco melhor sobre o que são esses "recursos".</p>
+
+<h3 id="pod">Pod</h3>
+
+<p>Um <em>Pod</em> é a menor unidade de execução no Kubernetes. Ele é composto por um ou mais <em>containers</em> que compartilham recursos, como rede e armazenamento. Normalmente, um <em>Pod</em> contém apenas um <em>container</em>, mas é possível ter mais de um <em>container</em> em um <em>Pod</em>.</p>
+
+<p>Para resumir, um <em>Pod</em> é uma casca que envolve um <em>container</em> da sua aplicação e permite que o Kubernetes faça a gestão.</p>
+
+<h3 id="service">Service</h3>
+
+<p>Quando trabalhamos com <em>containers</em> localmente, podemos acessá-los diretamente de nossa máquina a partir de portas mapeadas. Quando trabalhamos em um cluster Kubernetes, nós precisamos expor o acesso aos <em>Pods</em> de uma forma mais organizada. Para isso utilizamos <em>Services</em>.</p>
+
+<p>Um <em>service</em> pode expor um <em>Pod</em> somente para outros <em>Pods</em> dentro do mesmo cluster ou para fora, permitindo acesso externo (via internet). Ele é uma forma de abstrair o acesso a um <em>Pod</em>, permitindo que ele seja acessado de forma mais organizada.</p>
+
+<h3 id="deployment">Deployment</h3>
+
+<p>Algo que foi citado anteriormente é que o Kubernetes permite que você atualize sua aplicação sem downtime. Para isso, você pode utilizar um <em>Deployment</em>. Um deployment garante que um número específico de <em>Pods</em> esteja sempre rodando. Se você atualizar a imagem de um <em>container</em> em um <em>Deployment</em>, o Kubernetes vai criar novos <em>Pods</em> com a nova imagem e remover os antigos, garantindo que a aplicação esteja sempre disponível.</p>
+
+<p>Existem diversas estratégias para que um <em>deployment</em> seja feito, mas o padrão já permite que você faça isso sem downtime.</p>
+
+<h3 id="autoscaling">Autoscaling</h3>
+
+<p>O Kubernetes permite que você configure regras para que o número de <em>Pods</em> seja aumentado ou diminuído automaticamente. Isso é muito útil para aplicações que possuem picos de acesso em determinados momentos do dia, por exemplo, ou para garantir que sua aplicação esteja pronta para receber um número inesperado de acessos.</p>
+
+<p>Isso pode ser feito através de um recurso chamado <em>Horizontal Pod Autoscaler</em> (HPA).</p>
+
+<p>Outra possibilidade de escalabilidade é a vertical, que é aumentar a capacidade de uma máquina. O Kubernetes também permite que você configure regras para que o tamanho de um <em>Pod</em> seja aumentado ou diminuído automaticamente. Isso é feito através de um recurso chamado <em>Vertical Pod Autoscaler</em> (VPA). Embora seja menos comum, não deixa de ser uma alternativa.</p>
+
+<h2 id="como-k8s-%C3%A9-utilizado">Como k8s é utilizado</h2>
+
+<p>Em uma aplicação executada via kubernetes, normalmente você vai ter um cluster configurado localmente com ferramentas que simplificam esse trabalho, como Minikube ou Kind. Além disso, o ambiente de produção precisa também de um cluster configurado, mas de forma muito mais robusta. Como já foi dito, ambientes em nuvem disponibilizam clusters gerenciados de kubernetes para facilitar essa configuração, mas nada te impede de realizar toda a configuração de um cluster manualmente.</p>
+
+<h3 id="acesso-%C3%A0s-funcionalidades">Acesso às funcionalidades</h3>
+
+<p>Para acessar as funcionalidades que um cluster kubernetes expõe, como por exemplo, criar pods, services e deployments, você pode utilizar a linha de comando, através do <code>kubectl</code>, que é a ferramenta oficial de linha de comando do Kubernetes.</p>
+
+<p>Com essa ferramenta você pode tanto realizar alterações em seu cluster local como realizar deploys automatizados no ambiente de produção.</p>
+
+<h3 id="arquivos-de-configura%C3%A7%C3%A3o">Arquivos de configuração</h3>
+
+<p>Para facilitar a criação de recursos no Kubernetes, é possível criar arquivos de configuração que descrevem o que você quer que seja criado. Esses arquivos são escritos em YAML e são passados para o <code>kubectl</code> para que ele possa criar os recursos no cluster.</p>
+
+<p>Um exemplo bem básico de uma aplicação Kubernetes que garante deploy sem <em>downtime</em> e assegura que sempre hajam 3 réplicas da mesma sendo executadas além de ser exposta para internet pode ser visto no arquivo abaixo:</p>
+
+<pre><code class="yaml">apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: deployment-da-aplicacao
+spec:
+    replicas: 3
+    selector:
+        matchLabels:
+            app: minha-aplicacao
+    template:
+        metadata:
+            labels:
+                app: minha-aplicacao
+        spec:
+            containers:
+                - name: container-minha-aplicacao
+                  image: imagem-docker-minha-aplicacao:latest
+                  ports:
+                      - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: svc-minha-aplicacao
+spec:
+    selector:
+        app: minha-aplicacao
+    ports:
+        - protocol: TCP
+          port: 80
+          targetPort: 8080
+    type: LoadBalancer
+</code></pre>
+
+<p>Com um simples comando <code>kubectl apply -f arquivo.yaml</code>, desde que o <code>kubectl</code> esteja corretamente configurado para acessar o <em>cluster</em>, todas as configurações descritas no arquivo serão aplicadas no cluster.</p>
+
+<h2 id="conclus%C3%A3o">Conclusão</h2>
+
+<p>Obviamente isso não é tudo que se há para saber sobre Kubernetes. Mesmo conceitos básicos como ConfigMap e Secrets foram deixados de fora para manter o texto breve. Mas a ideia por trás da ferramenta é essa: permitir que você gerencie sua aplicação de forma mais organizada, escalável e resiliente.</p>
+
+<p>Caso você queira aprender mais sobre Kubernetes, colocando a mão na massa e aplicando os conceitos desse texto e muitos outros, a Alura possui diversos cursos sobre o assunto e aqui você tem <a href="https://tidd.ly/3WmC1yi">15% de desconto</a> para assinar a plataforma.</p>
+]]></content>
+        </entry>
             <entry>
             <title type="html"><![CDATA[Locks de bancos de dados: Como Funcionam os Bloqueios Exclusivos e Compartilhados]]></title>
             <link href="https://dias.dev/2024-05-10-locks-exclusivos-e-compartilhados-sql/"/>
@@ -1313,154 +1449,6 @@ Antes de aprender Orientação a Objetos, é importante conhecermos o paradigma 
 <p>Frameworks e bibliotecas são ferramentas que facilitam a resolução de problemas <strong>que você deveria saber resolver sem elas</strong>. Richard Feynman, ganhador do Nobel de física, escreveu uma vez: “What I cannot create I do not understand”. Traduzindo: "O que eu não consigo criar eu não entendo".</p>
 
 <p>Então antes de utilizar um framework, saiba resolver o problema sem ele. Antes de utilizar uma biblioteca mais específica, saiba resolver o problema sem ela. Isso faz com que você consiga resolver um problema nas ferramentas, caso aconteça.</p>
-]]></content>
-        </entry>
-            <entry>
-            <title type="html"><![CDATA[Programação procedural orientada a classes - Parte 2]]></title>
-            <link href="https://dias.dev/2020-04-16-programacao-procedural-orientada-a-classes-parte-2/"/>
-            <updated>2020-04-16T00:00:00+00:00</updated>
-            <id>https://dias.dev/2020-04-16-programacao-procedural-orientada-a-classes-parte-2/</id>
-            <content type="html"><![CDATA[<h2 id="design-de-c%C3%B3digo">Design de código</h2>
-
-<p>Uma vez eu ouvi uma frase mas não me lembro o autor: "Não existe código sem design. Existe código com design ruim". Inclusive adaptei esta frase para "arquitetura" na primeira parte desta publicação.</p>
-
-<p>Antes de falarmos sobre as péssimas decisões de design que tomamos, vamos falar sobre o que é design de código.</p>
-
-<p>Uma analogia interessante foi feita pelo <a href="https://twitter.com/junior_grossi">Junior Grossi</a> em um workshop maravilhoso de qualidade de código que fiz com ele. Foi mais ou menos assim (não com essas exatas palavras):</p>
-
-<p>"Podemos fazer uma analogia da arquitetura de software com a arquitetura de uma casa. Onde fica cada cômodo, como se encaixam juntos, etc. É uma visão de bem <strong>alto nível</strong>. Já o design de código pode ser considerado análogo aos móveis de uma casa. É uma visão de mais <strong>baixo nível</strong> sobre nossas decisões sobre o código".</p>
-
-<p>Então, basicamente (beem basicamente), arquitetura diz respeito a como você vai separar sua aplicação em camadas, por exemplo, onde cada camada pode ter sua responsabilidade bem definida. Já o design de código diz respeito a como você vai organizar suas classes e métodos em cada uma das camadas. Quais padrões você vai seguir, como cada classe vai se comportar sozinha ou em conjunto com suas respetivas dependências, etc.</p>
-
-<h2 id="escolhas-corriqueiras">Escolhas corriqueiras</h2>
-
-<p>Agora que já entendemos basicamente o que é Design de Código, vamos falar sobre escolhas que fazemos frequentemente e que talvez não sejam as mais interessantes sob a ótica da programação orientada a objetos, ou melhor, sob a ótica do design orientado a objetos.</p>
-
-<p>Como já foi discutido no post anterior, é muito comum termos um modelo anêmico: Classes que apenas possuem <code>getters</code> e <code>setters</code>, ou seja, meros sacos de dados. Para quem já estudou C sabe que no fundo isso não é uma classe, mas sim uma <code>struct</code>.</p>
-
-<p>O fato de termos modelos anêmicos onde classes que deveriam ser do nosso domínio na verdade acabam sem nenhuma regra de negócio, geralmente faz com que nós transfiramos essas regras para lugares "errados" (entre aspas porque quem sou eu pra dizer o que é certo ou errado?).</p>
-
-<p>Que lugares errados seriam esses?</p>
-
-<h2 id="helpers-ou-utils">Helpers ou Utils</h2>
-
-<p>Quem nunca viu uma classe chamada <code>StringHelper</code> ou <code>DateUtils</code>? São classes que claramente estão perdidas em nosso sistema. O que seria, no mundo real, um(a) <code>StringHelper</code>? Se não existe no mundo real, tem certeza que deveria existir no código?</p>
-
-<p><img src="https://i.imgur.com/rc9OMWr.jpg" alt="Reflitão" /></p>
-
-<p>Esse tipo de classe é uma herança clara da programação procedural em nosso código onde estamos separando o comportamento dos seus dados, quando a orientação a objetos tem todas as ferramentas necessárias para nós os juntarmos.</p>
-
-<h3 id="poss%C3%ADvel-solu%C3%A7%C3%A3o">Possível solução</h3>
-
-<p>Se você possui uma classe <code>StringHelper</code>, talvez ela esteja fazendo validações bem genéricas. Nesse caso, nada mais justo do que transformá-la em uma classe bem genérica, como <code>String</code>. Nessa classe você pode ter comportamentos e verificações pertinentes a uma string em seu código.</p>
-
-<p>Mas na maioria das vezes as verificações nesse tipo de classe são específicas de regras de negócio. Ex.: Garantir que nome possua pelo menos 10 letras.</p>
-
-<p>Se é uma regra de negócio, deveria estar na classe de negócio. Talvez na classe <code>Pessoa</code>. Talvez numa classe mais específica, como <code>Nome</code>. Depende do seu sistema.</p>
-
-<h2 id="services-in%C3%BAteis">Services inúteis</h2>
-
-<p><a href="https://amzn.to/39MBuNH">O livro do Eric Evans sobre DDD</a> é certamente uma obra que revolucionou o mundo do desenvolvimento. Eu particularmente ainda não o li, mas li <a href="https://amzn.to/2Q1bW8d">obras inspiradas por este livro</a>, então sei que: Neste livro foram definidos alguns conceitos sobre classes chamadas de <code>Services</code>.</p>
-
-<p>Uma das possíveis "categorias" desse tipo de classe é <code>Application Service</code>. Este tipo de classe tem como propósito receber informações de fora do domínio do sistema (da web, linha de comando, etc) e orquestrar as chamadas a regras de domínio.</p>
-
-<p>Um exemplo clássico:</p>
-
-<pre><code class="php">&lt;?php
-
-class AddUser
-{
-    private UserRepository $repository;
-    private PasswordHasher $hasher;
-
-    public function __construct(UserRepository $repository, PasswordHasher $hasher)
-    {
-        $this-&gt;repository = $repository;
-        $this-&gt;hasher = $hasher;
-    }
-
-    public function execute(AddUserDto $data): void
-    {
-        $hashedPassword = $this-&gt;hasher
-            -&gt;hash($data-&gt;password());
-        $user = new User($data-&gt;email(), $hashedPassword);
-
-        $this-&gt;repository-&gt;add($user);
-    }
-}
-</code></pre>
-
-<p>Há pontos de melhoria nesse código (sempre há), mas basicamente: Ele recebe os dados de algum mecanismo de entrega através de um DTO (objeto de transferência de dados, que serve basicamente para transferir dados entre camadas no sistema), e passa para o domínio que sabe cifrar a senha, armazenar o usuário no repositório, etc.</p>
-
-<h3 id="problema-comum">Problema comum</h3>
-
-<p>Essa definição de <code>Application Service</code> em algum momento foi tomada por alguém como "Classe obrigatória para adicionar <em>indireção</em> desnecessária no sistema".</p>
-
-<p>Na prática é muito comum vermos código onde um Controller chama um método de uma classe com <code>Service</code> no nome, e esse método não faz nada além de chamar um método de outra classe. Essa chamada extra de um método é conhecida como indireção, de forma resumida.</p>
-
-<p>Algo parecido com isso:</p>
-
-<pre><code class="php">&lt;?php
-
-class UserService
-{
-    private UserRepository $repository;
-
-    public function __construct(UserRepository $repository)
-    {
-        $this-&gt;repository = $repository;
-    }
-
-    public function add(User $user): void
-    {
-        $this-&gt;repository-&gt;add($user);
-    }
-
-    // todos os outros métodos públicos que também existem em UserRepository
-}
-</code></pre>
-
-<p>Agora me responda: O que ganhamos ao ter a classe <code>UserService</code>? Ganhamos apenas mais indireções em nosso sistema. Mais um lugar que nossa IDE vai nos fazer passar até chegar no código que de fato executa algo.</p>
-
-<p>Além de parecerem ser classes conhecidas como <em>God classes</em>, já que aparentam fazer tudo no sistema, são inúteis na prática.</p>
-
-<p>Esse é mais um exemplo de programação procedural sendo aplicada, onde temos apenas funções sem nenhum significado pro negócio agrupadas em uma classe que simplesmente chama outras funções.</p>
-
-<p>Outra característica de programação procedural nesse caso é que muito comumente temos métodos não tão relacionados na mesma classe <code>Service</code>.</p>
-
-<p>É comum um <code>UserService</code> ter um método com uma chamada para salvar um usuário e outro método para enviar um e-mail para ele. Responsabilidades que deveriam estar em classes separadas.</p>
-
-<p>No canal <em>Dev Eficiente</em>, do Aberto Souza, tem um vídeo falando um pouco mais sobre o problema deste tipo de classe, mas sob uma outra ótica. Vale a pena conferir:</p>
-
-<p><lite-youtube videoid="szGb93_hXgI" style="background-image: url('https://i.ytimg.com/vi/szGb93_hXgI/hqdefault.jpg');">
-    <a href="https://youtube.com/watch?v=szGb93_hXgI" class="lty-playbtn" title="Reproduzir vídeo">
-        <span class="lyt-visually-hidden">Reproduzir vídeo: Paradigmas de Programação | Programando com Vinicius Dias</span>
-    </a>
-</lite-youtube></p>
-
-<h2 id="camada-model-do-mvc">Camada Model do MVC</h2>
-
-<p>Um ponto que tem levantado bastante discussão em comunidades que participo é: O que é a camada <em>Model</em> no MVC?</p>
-
-<p>Discutir sobre MVC é assunto pra outro post, mas o que tenho visto como consenso é: Camada que faz a persistência dos dados.</p>
-
-<p>E a regra de negócio? Uma galera tem colocado nos <em>Controllers</em>. E aí? Se essa lógica precisar ser reaproveitada, como fazemos? Como chamamos um <em>Controller</em> dentro de outro? Complicado, né?</p>
-
-<p>Em nossos <em>Controllers</em> é muito comum ver aquele código super famoso da programação procedural cheio de IFs e verificações em tipos primitivos, sem nenhum significado para o negócio.</p>
-
-<h3 id="padr%C3%B5es-arquiteturais">Padrões arquiteturais</h3>
-
-<p>Para "resolver" esse problema, diversos padrões arquiteturais existem, e eu falei um pouquinho (bem pouquinho) sobre arquitetura nesse meu outro post: <a href="https://dias.dev/2020-04-10-o-que-e-arquitetura/">O que é Arquitetura</a></p>
-
-<h2 id="conclus%C3%A3o">Conclusão</h2>
-
-<p>Por mais que a gente estude muito sobre ferramentas, frameworks, hypes e modinhas, os princípios da programação orientada a objetos mudam muito pouco e merecem MUITA atenção.</p>
-
-<p>Estude conceitos, princípios, padrões... Tudo isso vai poder ser aplicado naquele framework que foi lançado semana passada e você está doido pra usar pra fazer um CRUD. Acredite.</p>
-
-<p>Infelizmente eu ainda vejo muito código utilizando estas "técnicas" procedurais utilizando classes, e pessoas acreditando que isso é desenvolver utilizando a programação orientada a objetos.</p>
-
-<p>Você costuma ver código assim no seu dia a dia? Compartilha aqui nos comentários algum caso que você tenha visto recentemente.</p>
 ]]></content>
         </entry>
     </feed>

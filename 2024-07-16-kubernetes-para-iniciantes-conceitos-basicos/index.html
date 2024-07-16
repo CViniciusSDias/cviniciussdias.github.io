@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <title>Kubernetes para Iniciantes: Conceitos Básicos e Aplicações Práticas | Dias de Dev</title>
+        <meta charset="utf-8">
+        <meta name="theme-color" content="#ffffff">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <meta name="robots" content="index, follow">
+    <meta name="title" content="Kubernetes para Iniciantes: Conceitos Básicos e Aplicações Práticas | Dias de Dev">
+    <meta name="keywords" content="Kubernetes, Orquestração de contêineres, Contêineres Docker, Deployment Kubernetes, Pods Kubernetes, Serviços Kubernetes, Escalabilidade automática Kubernetes, Orquestrador de contêineres, Cloud-native, Microserviços, DevOps, Gerenciamento de aplicações, Dias de Dev">
+    <meta name="description" content="Descubra o que é Kubernetes e como ele simplifica a gestão de aplicações em contêineres. Este guia para iniciantes explora os conceitos essenciais do Kubernetes, incluindo pods, serviços e escalabilidade automática, preparando você para entender seu papel fundamental na moderna arquitetura de aplicações.">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:article:published_time" content="1721088000">
+    <meta property="og:url" content="https://dias.dev/2024-07-16-kubernetes-para-iniciantes-conceitos-basicos/">
+    <meta property="og:title" content="Kubernetes para Iniciantes: Conceitos Básicos e Aplicações Práticas | Dias de Dev">
+    <meta property="og:description" content="Descubra o que é Kubernetes e como ele simplifica a gestão de aplicações em contêineres. Este guia para iniciantes explora os conceitos essenciais do Kubernetes, incluindo pods, serviços e escalabilidade automática, preparando você para entender seu papel fundamental na moderna arquitetura de aplicações.">
+    <meta property="og:image" content="https://dias.dev/assets/img/thumbs/2024-07-16-kubernetes-para-iniciantes-conceitos-basicos.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary">
+    <meta property="twitter:url" content="https://dias.dev/2024-07-16-kubernetes-para-iniciantes-conceitos-basicos/">
+    <meta property="twitter:title" content="Kubernetes para Iniciantes: Conceitos Básicos e Aplicações Práticas | Dias de Dev">
+    <meta property="twitter:description" content="Descubra o que é Kubernetes e como ele simplifica a gestão de aplicações em contêineres. Este guia para iniciantes explora os conceitos essenciais do Kubernetes, incluindo pods, serviços e escalabilidade automática, preparando você para entender seu papel fundamental na moderna arquitetura de aplicações.">
+
+    <link rel="preconnect" href="https://gravatar.com">
+    <link rel="preconnect" href="https://utteranc.es">
+
+    <link rel="prefetch" href="/build/social/facebook.svg" as="image" type="image/svg+xml">
+    <link rel="prefetch" href="/build/social/twitter_x.svg" as="image" type="image/svg+xml">
+    <link rel="prefetch" href="/build/social/linkedin.svg" as="image" type="image/svg+xml">
+    <link rel="prefetch" href="/build/social/whatsapp.svg" as="image" type="image/svg+xml">
+
+        <link rel="preload" href="/build/Baloo2-Bold.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/build/Baloo2-ExtraBold.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/build/Baloo2-Medium.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/build/Baloo2-Regular.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/build/Baloo2-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/build/FugazOne-Regular.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="stylesheet" href="/build/app.css">
+
+        <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Dias de Dev activity feed">
+                <link rel="canonical"
+              href="https://dias.dev/2024-07-16-kubernetes-para-iniciantes-conceitos-basicos/">
+                    <link rel="stylesheet" href="/build/post.css">
+                    </head>
+    <body>
+        <div class="global-container">
+            <header>
+                <div class="header-title">
+                    <h1 class="main-heading">
+                        <a aria-current="page" href="/">Dias de Dev</a>
+                    </h1>
+                </div>
+                <nav class="menu">
+                    <a aria-current="page" href="/">Home</a>
+                    <a href="/categorias">Categorias</a>
+                                        <a href="/sobre-mim/">Sobre Mim</a>
+                    <a href="https://youtube.com/@DiasDeDev" target="_blank">
+                        YouTube
+                    </a>
+                </nav>
+            </header>
+            <main>
+                    <article itemscope itemtype="https://schema.org/Article">
+        <header>
+            <h1 itemprop="headline" class="post-title">
+                Kubernetes para Iniciantes: Conceitos Básicos e Aplicações Práticas
+            </h1>
+            <time class="post-date" itemprop="datePublished" pubdate datetime="2024-07-16">
+                16 de julho de 2024
+            </time>
+        </header>
+        <div itemprop="articleBody">
+            <p>Kubernetes, ou para abreviar, k8s, é um orquestrador de contêineres. Nesse texto eu vou te explicar o que isso significa e em que cenários ele é útil. Esse post <strong>não é um tutorial</strong> de como usar o Kubernetes, mas sim uma explicação de conceitos.</p>
+
+<h2 id="o-que-%C3%A9-k8s">O que é k8s</h2>
+
+<p>Como eu já disse, Kubernetes é um orquestrador de contêineres. Mas o que isso significa? Vamos por partes.</p>
+
+<h3 id="o-que-s%C3%A3o-cont%C3%AAineres">O que são contêineres</h3>
+
+<p>O kubernetes vai te ajudar a organizar uma aplicação executada em um ambiente de contêineres (<em>containers</em>), geralmente utilizando Docker. Um <em>container</em> é uma forma de empacotar uma aplicação com todas as suas dependências, de forma que ela possa ser executada em qualquer ambiente que tenha o Docker instalado. Isso é muito útil para garantir que a aplicação vai funcionar da mesma forma em qualquer lugar.</p>
+
+<p>De forma super simplificada, um <em>container</em> é como se fosse uma máquina virtual muito mais leve, pois pode compartilhar recursos do sistema operacional onde ele está sendo executado.</p>
+
+<h3 id="docker-compose">Docker compose</h3>
+
+<p>Uma aplicação geralmente possui mais de um <em>container</em>. Nós temos, por exemplo, um <em>container</em> para a aplicação em si, um para um servidor web, outro para um sistema de mensageria, e assim por diante. O Docker Compose é uma ferramenta que nos ajuda a definir e executar aplicações com múltiplos <em>containers</em>.</p>
+
+<p>Mas para execução de uma aplicação como essa em ambiente de produção, o Docker Compose apresenta limitações. Se um <em>container</em> falhar, ele não será reiniciado automaticamente. Se você quiser escalar a aplicação, você terá que fazer isso manualmente. E se você quiser atualizar a aplicação, você terá que fazer isso manualmente também. Para automatizar essas tarefas, precisamos de um orquestrador de <em>containers</em> mais robusto.</p>
+
+<h3 id="orquestra%C3%A7%C3%A3o">Orquestração</h3>
+
+<p>A orquestração de <em>containers</em> é o processo de gerenciar a execução de múltiplos <em>containers</em> em um ambiente de produção. Isso inclui tarefas como:</p>
+
+<ul>
+<li>Monitorar os recursos utilizados por cada <em>container</em>;</li>
+<li>Escalar automaticamente o número de <em>containers</em> caso necessário;</li>
+<li>Reiniciar um <em>container</em> em caso de falhar;</li>
+<li>Permitir a atualização de uma aplicação sem downtime;</li>
+<li>Expor uma forma de acessar os <em>containers</em> sem precisar saber em qual máquina eles estão rodando.</li>
+</ul>
+
+<p>Existem alguns orquestradores de <em>containers</em> no mercado, como o Docker Swarm, o Apache Mesos e o Kubernetes. O Kubernetes é o mais popular deles, sendo sobre ele que vamos falar aqui.</p>
+
+<h2 id="conceitos-de-kubernetes">Conceitos de kubernetes</h2>
+
+<h3 id="cluster">Cluster</h3>
+
+<p>Um cluster Kubernetes nada mais é do que um ambiente onde você vai executar suas aplicações. Esse ambiente precisa estar configurado para que o Kubernetes consiga ter acesso para gerenciar os diversos recursos que sua aplicação vai precisar.</p>
+
+<p>Para executar os recursos necessários para sua aplicação, obviamente você vai precisar de máquinas. Essas máquinas podem ser disponibilizadas de diversas formas diferentes. Cada ambiente pode disponibilizar um cluster de forma diferente, ou você mesmo pode configurar um cluster de forma que acesse os recursos dessas máquinas de formas diferentes.</p>
+
+<p>Ambientes em nuvem, como AWS, Azure, Google Cloud Platform, Digital Ocean e vários outros, disponibilizam clusters gerenciados de kubernetes para facilitar a configuração. Caso prefira, você também pode configurar manualmente um cluster de kubernetes. Inclusive, para executar um cluster localmente, normalmente nós configuramos um cluster de forma simplificada utilizando ferramentas como Minikube ou Kind.</p>
+
+<p>Um cluster Kubernetes é composto por <em>Nodes</em>, que basicamente são as máquinas que executaram a sua aplicação. Existem os <em>master nodes</em> e <em>worker nodes</em>. Os <em>master nodes</em> são responsáveis por gerenciar o cluster, realizando as ações de criar, reiniciar e remover recursos, enquanto os <em>worker nodes</em> são responsáveis por efetivamente executar os recursos que rodarão a aplicação.</p>
+
+<p>Vamos entender um pouco melhor sobre o que são esses "recursos".</p>
+
+<h3 id="pod">Pod</h3>
+
+<p>Um <em>Pod</em> é a menor unidade de execução no Kubernetes. Ele é composto por um ou mais <em>containers</em> que compartilham recursos, como rede e armazenamento. Normalmente, um <em>Pod</em> contém apenas um <em>container</em>, mas é possível ter mais de um <em>container</em> em um <em>Pod</em>.</p>
+
+<p>Para resumir, um <em>Pod</em> é uma casca que envolve um <em>container</em> da sua aplicação e permite que o Kubernetes faça a gestão.</p>
+
+<h3 id="service">Service</h3>
+
+<p>Quando trabalhamos com <em>containers</em> localmente, podemos acessá-los diretamente de nossa máquina a partir de portas mapeadas. Quando trabalhamos em um cluster Kubernetes, nós precisamos expor o acesso aos <em>Pods</em> de uma forma mais organizada. Para isso utilizamos <em>Services</em>.</p>
+
+<p>Um <em>service</em> pode expor um <em>Pod</em> somente para outros <em>Pods</em> dentro do mesmo cluster ou para fora, permitindo acesso externo (via internet). Ele é uma forma de abstrair o acesso a um <em>Pod</em>, permitindo que ele seja acessado de forma mais organizada.</p>
+
+<h3 id="deployment">Deployment</h3>
+
+<p>Algo que foi citado anteriormente é que o Kubernetes permite que você atualize sua aplicação sem downtime. Para isso, você pode utilizar um <em>Deployment</em>. Um deployment garante que um número específico de <em>Pods</em> esteja sempre rodando. Se você atualizar a imagem de um <em>container</em> em um <em>Deployment</em>, o Kubernetes vai criar novos <em>Pods</em> com a nova imagem e remover os antigos, garantindo que a aplicação esteja sempre disponível.</p>
+
+<p>Existem diversas estratégias para que um <em>deployment</em> seja feito, mas o padrão já permite que você faça isso sem downtime.</p>
+
+<h3 id="autoscaling">Autoscaling</h3>
+
+<p>O Kubernetes permite que você configure regras para que o número de <em>Pods</em> seja aumentado ou diminuído automaticamente. Isso é muito útil para aplicações que possuem picos de acesso em determinados momentos do dia, por exemplo, ou para garantir que sua aplicação esteja pronta para receber um número inesperado de acessos.</p>
+
+<p>Isso pode ser feito através de um recurso chamado <em>Horizontal Pod Autoscaler</em> (HPA).</p>
+
+<p>Outra possibilidade de escalabilidade é a vertical, que é aumentar a capacidade de uma máquina. O Kubernetes também permite que você configure regras para que o tamanho de um <em>Pod</em> seja aumentado ou diminuído automaticamente. Isso é feito através de um recurso chamado <em>Vertical Pod Autoscaler</em> (VPA). Embora seja menos comum, não deixa de ser uma alternativa.</p>
+
+<h2 id="como-k8s-%C3%A9-utilizado">Como k8s é utilizado</h2>
+
+<p>Em uma aplicação executada via kubernetes, normalmente você vai ter um cluster configurado localmente com ferramentas que simplificam esse trabalho, como Minikube ou Kind. Além disso, o ambiente de produção precisa também de um cluster configurado, mas de forma muito mais robusta. Como já foi dito, ambientes em nuvem disponibilizam clusters gerenciados de kubernetes para facilitar essa configuração, mas nada te impede de realizar toda a configuração de um cluster manualmente.</p>
+
+<h3 id="acesso-%C3%A0s-funcionalidades">Acesso às funcionalidades</h3>
+
+<p>Para acessar as funcionalidades que um cluster kubernetes expõe, como por exemplo, criar pods, services e deployments, você pode utilizar a linha de comando, através do <code>kubectl</code>, que é a ferramenta oficial de linha de comando do Kubernetes.</p>
+
+<p>Com essa ferramenta você pode tanto realizar alterações em seu cluster local como realizar deploys automatizados no ambiente de produção.</p>
+
+<h3 id="arquivos-de-configura%C3%A7%C3%A3o">Arquivos de configuração</h3>
+
+<p>Para facilitar a criação de recursos no Kubernetes, é possível criar arquivos de configuração que descrevem o que você quer que seja criado. Esses arquivos são escritos em YAML e são passados para o <code>kubectl</code> para que ele possa criar os recursos no cluster.</p>
+
+<p>Um exemplo bem básico de uma aplicação Kubernetes que garante deploy sem <em>downtime</em> e assegura que sempre hajam 3 réplicas da mesma sendo executadas além de ser exposta para internet pode ser visto no arquivo abaixo:</p>
+
+<pre><code class="yaml">apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: deployment-da-aplicacao
+spec:
+    replicas: 3
+    selector:
+        matchLabels:
+            app: minha-aplicacao
+    template:
+        metadata:
+            labels:
+                app: minha-aplicacao
+        spec:
+            containers:
+                - name: container-minha-aplicacao
+                  image: imagem-docker-minha-aplicacao:latest
+                  ports:
+                      - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: svc-minha-aplicacao
+spec:
+    selector:
+        app: minha-aplicacao
+    ports:
+        - protocol: TCP
+          port: 80
+          targetPort: 8080
+    type: LoadBalancer
+</code></pre>
+
+<p>Com um simples comando <code>kubectl apply -f arquivo.yaml</code>, desde que o <code>kubectl</code> esteja corretamente configurado para acessar o <em>cluster</em>, todas as configurações descritas no arquivo serão aplicadas no cluster.</p>
+
+<h2 id="conclus%C3%A3o">Conclusão</h2>
+
+<p>Obviamente isso não é tudo que se há para saber sobre Kubernetes. Mesmo conceitos básicos como ConfigMap e Secrets foram deixados de fora para manter o texto breve. Mas a ideia por trás da ferramenta é essa: permitir que você gerencie sua aplicação de forma mais organizada, escalável e resiliente.</p>
+
+<p>Caso você queira aprender mais sobre Kubernetes, colocando a mão na massa e aplicando os conceitos desse texto e muitos outros, a Alura possui diversos cursos sobre o assunto e aqui você tem <a href="https://tidd.ly/3WmC1yi">15% de desconto</a> para assinar a plataforma.</p>
+
+        </div>
+        <footer itemprop="author" itemscope itemtype="https://schema.org/Person">
+            <div class="social-links-footer">
+                <p>
+                    Gostou desse post? Que tal compartilhar?
+                </p>
+                <span>
+                    <a href="https://facebook.com/sharer/sharer.php?u=https://dias.dev/2024-07-16-kubernetes-para-iniciantes-conceitos-basicos/" target="_blank" aria-label="Compartilhar post no Facebook">
+                        <img src="/build/social/facebook.svg" alt="Logo do Facebook" loading="lazy" width="25" height="25" />
+                    </a>
+                    <a href="https://twitter.com/intent/tweet/?text=Kubernetes%20para%20Iniciantes%3A%20Conceitos%20B%C3%A1sicos%20e%20Aplica%C3%A7%C3%B5es%20Pr%C3%A1ticas%20%7C%20Dias%20de%20Dev%0A&url=https://dias.dev/2024-07-16-kubernetes-para-iniciantes-conceitos-basicos/" target="_blank" aria-label="Compartilhar post no X (Twitter)">
+                        <img src="/build/social/twitter_x.svg" alt="Logo do X (Twitter)" loading="lazy" width="25" height="25" />
+                    </a>
+                    <a href="https://linkedin.com/sharing/share-offsite/?url=https://dias.dev/2024-07-16-kubernetes-para-iniciantes-conceitos-basicos/" target="_blank" aria-label="Compartilhar post no LinkedIn">
+                        <img src="/build/social/linkedin.svg" alt="Logo do LinkedIn" loading="lazy" width="25" height="25" />
+                    </a>
+                    <a href="https://api.whatsapp.com/send?text=https://dias.dev/2024-07-16-kubernetes-para-iniciantes-conceitos-basicos/" target="_blank" aria-label="Compartilhar post no WhatsApp">
+                        <img src="/build/social/whatsapp.svg" alt="Logo do WhatsApp" loading="lazy" width="25" height="25" />
+                    </a>
+                </span>
+            </div>
+            <div class="post-author-footer">
+                <img src="https://gravatar.com/avatar/63579c5a873f3ab6abff10803e9a252f.jpg?s=50"
+                     alt="Foto do Vinicius Dias, um homem branco de cabelos escuros e curtos, em perfil com o fundo bem escuro em tons de azul enquanto mexe em um laptop durante uma apresentação."
+                     width="50"
+                     height="50"
+                     loading="lazy"
+                     itemprop="image">
+                <p>
+                    Escrito por
+                    <a href="/sobre-mim/" itemprop="url">
+                        <span itemprop="name">Vinicius Dias</span>
+                    </a>
+                </p>
+            </div>
+        </footer>
+
+        <!-- TODO: Tema de acordo com as preferências do usuário -->
+        <script src="https://utteranc.es/client.js"
+                repo="cviniciussdias/cviniciussdias.github.io"
+                issue-term="pathname"
+                theme="github-light"
+                crossorigin="anonymous"
+                async>
+        </script>
+
+                    <nav class="article-navigation">
+                <ul>
+                    <li>
+                                                <a class="previous" href="/2024-05-10-locks-exclusivos-e-compartilhados-sql/" title="Locks de bancos de dados: Como Funcionam os Bloqueios Exclusivos e Compartilhados">
+                            ← <span class="title">Locks de bancos de dados: Como Funcionam os Bloqueios Exclusivos e Compartilhados</span>
+                        </a>
+                                            </li>
+                    <li>
+                                            </li>
+                </ul>
+            </nav>
+            </article>
+            </main>
+            <footer class="global-footer">&copy; 2024 Dias de Dev</footer>
+        </div>
+
+        <script src="/build/app.js"></script>
+                
+        <!-- Simple Analytics -->
+        <script defer src="https://sa.dias.dev/latest.js"></script>
+        <script defer src="https://sa.dias.dev/auto-events.js"></script>
+        <noscript>
+            <img src="https://sa.dias.dev/noscript.gif"
+                 alt=""
+                 referrerpolicy="no-referrer-when-downgrade">
+        </noscript><!-- Google AdSense -->
+        <script defer
+                src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8918461095244552"
+                crossorigin="anonymous"></script>
+        <script type="speculationrules">
+            {
+              "prerender": [
+                {
+                  "source": "document",
+                  "where": {
+                    "href_matches": "/*"
+                  },
+                  "eagerness": "moderate"
+                }
+              ]
+            }
+        </script>
+                </body>
+</html>
