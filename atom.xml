@@ -3,7 +3,7 @@
     <title><![CDATA[Dias de Dev]]></title>
     <link href="https://dias.dev/atom.xml" rel="self"/>
     <link href="https://dias.dev/"/>
-    <updated>2024-09-27T04:03:33+00:00</updated>
+    <updated>2024-09-28T18:47:42+00:00</updated>
     <id>https://dias.dev</id>
             <author>
             <name><![CDATA[Vinicius Dias]]></name>            <email><![CDATA[vinicius@dias.dev]]></email>        </author>
@@ -119,11 +119,11 @@ $negativa = $analisador('I hate JavaScript!');
 
 <h2 id="conclus%C3%A3o">Conclusão</h2>
 
-<p>Machine Learning é uma área de estudos fascinante e pode nos abrir um novo mundo de possibilidades e com ferramentas como TransformersPHP essas possibilidades estão abertas a nós, devs PHP. Se você se interessou pelo assunto, pode gostar do vídeo a seguir onde eu explico novamente o conceito de classificação e o aplico em outro conjunto de dados:</p>
+<p>Machine Learning é uma área de estudos fascinante e pode nos abrir um novo mundo de possibilidades e com ferramentas como TransformersPHP essas possibilidades estão abertas a nós, devs PHP. Se você se interessou pelo assunto, pode gostar do vídeo a seguir onde eu explico novamente sobre TransformersPHP e mostro alguns outros exemplos de uso da ferramenta:</p>
 
-<p><lite-youtube videoid="HP7gluvSY9U" style="background-image: url('https://i.ytimg.com/vi/HP7gluvSY9U/hqdefault.jpg');">
-    <a href="https://youtube.com/watch?v=HP7gluvSY9U" class="lty-playbtn" title="Reproduzir vídeo">
-        <span class="lyt-visually-hidden">Reproduzir vídeo: Machine Learning com PHP: Aprendizado de máquina na prática | Dias de Dev</span>
+<p><lite-youtube videoid="Ax8yF15VSFg" style="background-image: url('https://i.ytimg.com/vi/Ax8yF15VSFg/hqdefault.jpg');">
+    <a href="https://youtube.com/watch?v=Ax8yF15VSFg" class="lty-playbtn" title="Reproduzir vídeo">
+        <span class="lyt-visually-hidden">Reproduzir vídeo: PHP e IA: Desvendando a Inteligência Artificial com PHP e TransformersPHP | Dias de Dev</span>
     </a>
 </lite-youtube></p>
 
