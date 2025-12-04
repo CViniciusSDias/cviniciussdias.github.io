@@ -68,7 +68,7 @@
             <h1 itemprop="headline" class="post-title">
                 Locks de bancos de dados: Como Funcionam os Bloqueios Exclusivos e Compartilhados
             </h1>
-            <time class="post-date" itemprop="datePublished" pubdate datetime="2024-05-10">
+            <time class="post-date" itemprop="datePublished" datetime="2024-05-10">
                 10 de maio de 2024
             </time>
         </header>
@@ -173,7 +173,7 @@ COMMIT;
 <p>Para se aprofundar em assuntos de bancos de dados, recomendo a Alura! Lá, há <strong>vários</strong> cursos sobre o assunto, utilizando diversos bancos diferentes como MySQL, PostgreSQL, SQLite, Oracle e SQL Server. Aqui tem um <a href="https://tidd.ly/4d42Myb">cupom de 15% desconto</a> para você aproveitar a plataforma.</p>
 
         </div>
-        <footer itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <footer>
             <div class="social-links-footer">
                 <p>
                     Gostou desse post? Que tal compartilhar?
@@ -193,7 +193,7 @@ COMMIT;
                     </a>
                 </span>
             </div>
-            <div class="post-author-footer">
+            <div class="post-author-footer" itemprop="author" itemscope itemtype="https://schema.org/Person">
                 <img src="https://gravatar.com/avatar/63579c5a873f3ab6abff10803e9a252f.jpg?s=50"
                      alt="Foto do Vinicius Dias, um homem branco de cabelos escuros e curtos, em perfil com o fundo bem escuro em tons de azul enquanto mexe em um laptop durante uma apresentação."
                      width="50"
@@ -234,11 +234,12 @@ COMMIT;
             </nav>
             </article>
             </main>
-            <footer class="global-footer">&copy; 2024 Dias de Dev</footer>
+            <footer class="global-footer">&copy; 2025 Dias de Dev</footer>
         </div>
 
-        <script src="/build/app.js"></script>
-                
+        <script defer async src="/build/app.js"></script>
+        <script defer src="/build/enable-highlight.js"></script>
+
         <!-- Simple Analytics -->
         <script defer src="https://sa.dias.dev/latest.js"></script>
         <script defer src="https://sa.dias.dev/auto-events.js"></script>

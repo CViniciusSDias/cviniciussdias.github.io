@@ -68,7 +68,7 @@
             <h1 itemprop="headline" class="post-title">
                 Machine Learning com PHP: Aprendendo a Criar Algoritmos de Classificação
             </h1>
-            <time class="post-date" itemprop="datePublished" pubdate datetime="2024-03-23">
+            <time class="post-date" itemprop="datePublished" datetime="2024-03-23">
                 23 de março de 2024
             </time>
         </header>
@@ -285,7 +285,7 @@ $acuracia = $metrica-&gt;score($predicoesDeTeste, $teste-&gt;labels());
 <p>E para se aprofundar ainda mais no mundo de machine learning, inteligência artificial e também PHP, você pode aproveitar <a href="https://tidd.ly/4d42Myb">esse cupom de 15% de desconto na Alura</a>.</p>
 
         </div>
-        <footer itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <footer>
             <div class="social-links-footer">
                 <p>
                     Gostou desse post? Que tal compartilhar?
@@ -305,7 +305,7 @@ $acuracia = $metrica-&gt;score($predicoesDeTeste, $teste-&gt;labels());
                     </a>
                 </span>
             </div>
-            <div class="post-author-footer">
+            <div class="post-author-footer" itemprop="author" itemscope itemtype="https://schema.org/Person">
                 <img src="https://gravatar.com/avatar/63579c5a873f3ab6abff10803e9a252f.jpg?s=50"
                      alt="Foto do Vinicius Dias, um homem branco de cabelos escuros e curtos, em perfil com o fundo bem escuro em tons de azul enquanto mexe em um laptop durante uma apresentação."
                      width="50"
@@ -346,11 +346,12 @@ $acuracia = $metrica-&gt;score($predicoesDeTeste, $teste-&gt;labels());
             </nav>
             </article>
             </main>
-            <footer class="global-footer">&copy; 2024 Dias de Dev</footer>
+            <footer class="global-footer">&copy; 2025 Dias de Dev</footer>
         </div>
 
-        <script src="/build/app.js"></script>
-                
+        <script defer async src="/build/app.js"></script>
+        <script defer src="/build/enable-highlight.js"></script>
+
         <!-- Simple Analytics -->
         <script defer src="https://sa.dias.dev/latest.js"></script>
         <script defer src="https://sa.dias.dev/auto-events.js"></script>

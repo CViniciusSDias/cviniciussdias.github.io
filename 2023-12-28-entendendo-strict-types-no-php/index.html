@@ -68,7 +68,7 @@
             <h1 itemprop="headline" class="post-title">
                 PHP Strict Types: Entendendo o Uso Prático da Diretiva declare(strict_types=1) no PHP
             </h1>
-            <time class="post-date" itemprop="datePublished" pubdate datetime="2023-12-28">
+            <time class="post-date" itemprop="datePublished" datetime="2023-12-28">
                 28 de dezembro de 2023
             </time>
         </header>
@@ -174,7 +174,7 @@ echo soma('1', '2'); // Fatal error: Uncaught TypeError: Argument 1 passed to so
 <p>Se você deseja explorar ainda mais o tema de tipos em PHP, recomendo a leitura de um artigo abrangente no blog Codamos. O conteúdo discute detalhadamente os diversos tipos em PHP, suas manipulações e conversões, e oferece uma análise mais aprofundada sobre <code>strict_types</code>, inclusive com trechos de código em C do PHP. Para acessar o artigo completo, visite <a href="https://codamos.com.br/tipos-em-php/">este link</a>. E se você quiser aprender mais sobre PHP, há <strong>muitos</strong> cursos gravados por mim lá na Alura. Aqui tem um <a href="https://tidd.ly/4d42Myb">cupom de 15% de desconto</a> para assinar a plataforma.</p>
 
         </div>
-        <footer itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <footer>
             <div class="social-links-footer">
                 <p>
                     Gostou desse post? Que tal compartilhar?
@@ -194,7 +194,7 @@ echo soma('1', '2'); // Fatal error: Uncaught TypeError: Argument 1 passed to so
                     </a>
                 </span>
             </div>
-            <div class="post-author-footer">
+            <div class="post-author-footer" itemprop="author" itemscope itemtype="https://schema.org/Person">
                 <img src="https://gravatar.com/avatar/63579c5a873f3ab6abff10803e9a252f.jpg?s=50"
                      alt="Foto do Vinicius Dias, um homem branco de cabelos escuros e curtos, em perfil com o fundo bem escuro em tons de azul enquanto mexe em um laptop durante uma apresentação."
                      width="50"
@@ -235,11 +235,12 @@ echo soma('1', '2'); // Fatal error: Uncaught TypeError: Argument 1 passed to so
             </nav>
             </article>
             </main>
-            <footer class="global-footer">&copy; 2024 Dias de Dev</footer>
+            <footer class="global-footer">&copy; 2025 Dias de Dev</footer>
         </div>
 
-        <script src="/build/app.js"></script>
-                
+        <script defer async src="/build/app.js"></script>
+        <script defer src="/build/enable-highlight.js"></script>
+
         <!-- Simple Analytics -->
         <script defer src="https://sa.dias.dev/latest.js"></script>
         <script defer src="https://sa.dias.dev/auto-events.js"></script>

@@ -68,7 +68,7 @@
             <h1 itemprop="headline" class="post-title">
                 O que é arquitetura de software
             </h1>
-            <time class="post-date" itemprop="datePublished" pubdate datetime="2020-04-10">
+            <time class="post-date" itemprop="datePublished" datetime="2020-04-10">
                 10 de abril de 2020
             </time>
         </header>
@@ -142,7 +142,7 @@
 <p>Mesmo que no desenvolvimento de um sistema você não siga nenhum padrão arquitetural, há decisões de arquitetura no código, e se mal feitas, essas decisões podem te assombrar por muito MUITO tempo.</p>
 
         </div>
-        <footer itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <footer>
             <div class="social-links-footer">
                 <p>
                     Gostou desse post? Que tal compartilhar?
@@ -162,7 +162,7 @@
                     </a>
                 </span>
             </div>
-            <div class="post-author-footer">
+            <div class="post-author-footer" itemprop="author" itemscope itemtype="https://schema.org/Person">
                 <img src="https://gravatar.com/avatar/63579c5a873f3ab6abff10803e9a252f.jpg?s=50"
                      alt="Foto do Vinicius Dias, um homem branco de cabelos escuros e curtos, em perfil com o fundo bem escuro em tons de azul enquanto mexe em um laptop durante uma apresentação."
                      width="50"
@@ -200,11 +200,12 @@
             </nav>
             </article>
             </main>
-            <footer class="global-footer">&copy; 2024 Dias de Dev</footer>
+            <footer class="global-footer">&copy; 2025 Dias de Dev</footer>
         </div>
 
-        <script src="/build/app.js"></script>
-                
+        <script defer async src="/build/app.js"></script>
+        <script defer src="/build/enable-highlight.js"></script>
+
         <!-- Simple Analytics -->
         <script defer src="https://sa.dias.dev/latest.js"></script>
         <script defer src="https://sa.dias.dev/auto-events.js"></script>

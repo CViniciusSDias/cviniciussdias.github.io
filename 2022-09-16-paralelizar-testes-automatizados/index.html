@@ -68,7 +68,7 @@
             <h1 itemprop="headline" class="post-title">
                 Paralelizar testes automatizados
             </h1>
-            <time class="post-date" itemprop="datePublished" pubdate datetime="2022-09-16">
+            <time class="post-date" itemprop="datePublished" datetime="2022-09-16">
                 16 de setembro de 2022
             </time>
         </header>
@@ -104,7 +104,7 @@
 <p>Se não estiver familiarizado com conceitos de testes, sugiro assistir <a href="https://youtube.com/playlist?list=PL3j2sfzg3FPsPiaDUmDDKNvco49YMdj8f">esta playlist</a> de testes automatizados. E se quiser se aprofundar em testes e programação em geral, aqui tem um <a href="https://tidd.ly/4d42Myb">cupom de desconto</a> para você assinar Alura.</p>
 
         </div>
-        <footer itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <footer>
             <div class="social-links-footer">
                 <p>
                     Gostou desse post? Que tal compartilhar?
@@ -124,7 +124,7 @@
                     </a>
                 </span>
             </div>
-            <div class="post-author-footer">
+            <div class="post-author-footer" itemprop="author" itemscope itemtype="https://schema.org/Person">
                 <img src="https://gravatar.com/avatar/63579c5a873f3ab6abff10803e9a252f.jpg?s=50"
                      alt="Foto do Vinicius Dias, um homem branco de cabelos escuros e curtos, em perfil com o fundo bem escuro em tons de azul enquanto mexe em um laptop durante uma apresentação."
                      width="50"
@@ -165,11 +165,12 @@
             </nav>
             </article>
             </main>
-            <footer class="global-footer">&copy; 2024 Dias de Dev</footer>
+            <footer class="global-footer">&copy; 2025 Dias de Dev</footer>
         </div>
 
-        <script src="/build/app.js"></script>
-                
+        <script defer async src="/build/app.js"></script>
+        <script defer src="/build/enable-highlight.js"></script>
+
         <!-- Simple Analytics -->
         <script defer src="https://sa.dias.dev/latest.js"></script>
         <script defer src="https://sa.dias.dev/auto-events.js"></script>

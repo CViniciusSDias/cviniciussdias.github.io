@@ -68,7 +68,7 @@
             <h1 itemprop="headline" class="post-title">
                 Strings multibyte: o que são e por que você precisa da extensão mbstring do PHP
             </h1>
-            <time class="post-date" itemprop="datePublished" pubdate datetime="2023-03-21">
+            <time class="post-date" itemprop="datePublished" datetime="2023-03-21">
                 21 de março de 2023
             </time>
         </header>
@@ -140,7 +140,7 @@ echo mb_convert_encoding('string em UTF-8', 'ISO-8859-1', 'UTF-8');
 <p>Se você quiser aprender mais sobre manipulações de strings, encodings, charsets, PHP e mais assuntos relacionados a tecnologia, aqui está um <a href="https://tidd.ly/4d42Myb">cupom de desconto</a> para assinar a Alura, plataforma de cursos online onde eu sou o instrutor da maioria dos cursos de PHP.</p>
 
         </div>
-        <footer itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <footer>
             <div class="social-links-footer">
                 <p>
                     Gostou desse post? Que tal compartilhar?
@@ -160,7 +160,7 @@ echo mb_convert_encoding('string em UTF-8', 'ISO-8859-1', 'UTF-8');
                     </a>
                 </span>
             </div>
-            <div class="post-author-footer">
+            <div class="post-author-footer" itemprop="author" itemscope itemtype="https://schema.org/Person">
                 <img src="https://gravatar.com/avatar/63579c5a873f3ab6abff10803e9a252f.jpg?s=50"
                      alt="Foto do Vinicius Dias, um homem branco de cabelos escuros e curtos, em perfil com o fundo bem escuro em tons de azul enquanto mexe em um laptop durante uma apresentação."
                      width="50"
@@ -201,11 +201,12 @@ echo mb_convert_encoding('string em UTF-8', 'ISO-8859-1', 'UTF-8');
             </nav>
             </article>
             </main>
-            <footer class="global-footer">&copy; 2024 Dias de Dev</footer>
+            <footer class="global-footer">&copy; 2025 Dias de Dev</footer>
         </div>
 
-        <script src="/build/app.js"></script>
-                
+        <script defer async src="/build/app.js"></script>
+        <script defer src="/build/enable-highlight.js"></script>
+
         <!-- Simple Analytics -->
         <script defer src="https://sa.dias.dev/latest.js"></script>
         <script defer src="https://sa.dias.dev/auto-events.js"></script>

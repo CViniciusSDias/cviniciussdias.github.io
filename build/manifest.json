@@ -1,6 +1,6 @@
 {
-  "build/app.css": "/build/app.css",
   "build/app.js": "/build/app.js",
+  "build/enable-highlight.js": "/build/enable-highlight.js",
   "build/lite-yt-embed-script.js": "/build/lite-yt-embed-script.js",
   "build/index.css": "/build/index.css",
   "build/post.css": "/build/post.css",
@@ -17,7 +17,6 @@
   "build/thumbs/2024-05-10-locks-exclusivos-e-compartilhados-sql.png": "/build/thumbs/2024-05-10-locks-exclusivos-e-compartilhados-sql.png",
   "build/thumbs/2024-03-23-o-que-e-machine-learning.png": "/build/thumbs/2024-03-23-o-que-e-machine-learning.png",
   "build/thumbs/2023-03-07-entenda-o-erro-cannot-modify-header-information-php.png": "/build/thumbs/2023-03-07-entenda-o-erro-cannot-modify-header-information-php.png",
-  "build/thumbs/2024-09-16-inteligencia-artificial-com-php.png": "/build/thumbs/2024-09-16-inteligencia-artificial-com-php.png",
   "build/thumbs/2024-09-16-inteligencia-artificial-php-transformersphp.png": "/build/thumbs/2024-09-16-inteligencia-artificial-php-transformersphp.png",
   "build/thumbs/2024-07-16-kubernetes-para-iniciantes-conceitos-basicos.png": "/build/thumbs/2024-07-16-kubernetes-para-iniciantes-conceitos-basicos.png",
   "build/thumbs/2023-08-11-metodos-magicos-php.png": "/build/thumbs/2023-08-11-metodos-magicos-php.png",
@@ -26,7 +25,6 @@
   "build/thumbs/2022-12-16-como-enviar-emails-com-php.png": "/build/thumbs/2022-12-16-como-enviar-emails-com-php.png",
   "build/thumbs/2023-12-18-usando-rust-com-php-e-ffi.png": "/build/thumbs/2023-12-18-usando-rust-com-php-e-ffi.png",
   "build/thumbs/2023-11-17-novidades-do-php-8-3.png": "/build/thumbs/2023-11-17-novidades-do-php-8-3.png",
-  "build/thumbs/2023-10-18-criptografia-o-minimo-de-encriptacao-que-todo-dev-precisa-saber.png": "/build/thumbs/2023-10-18-criptografia-o-minimo-de-encriptacao-que-todo-dev-precisa-saber.png",
   "build/thumbs/2023-02-24-php-ini-conhecendo-as-configuracoes-do-php.png": "/build/thumbs/2023-02-24-php-ini-conhecendo-as-configuracoes-do-php.png",
   "build/thumbs/2020-04-16-programacao-procedural-orientada-a-classes-parte-2.png": "/build/thumbs/2020-04-16-programacao-procedural-orientada-a-classes-parte-2.png",
   "build/thumbs/2020-04-13-programacao-procedural-orientada-a-classes-parte-1.png": "/build/thumbs/2020-04-13-programacao-procedural-orientada-a-classes-parte-1.png",
@@ -47,7 +45,6 @@
   "build/social/whatsapp.svg": "/build/social/whatsapp.svg",
   "build/thumbs/2022-02-13-extensoes-php.png": "/build/thumbs/2022-02-13-extensoes-php.png",
   "build/external-link-symbol.svg": "/build/external-link-symbol.svg",
-  "build/images/external-link-symbol.svg": "/build/images/external-link-symbol.3252f348.svg",
   "build/social/linkedin.svg": "/build/social/linkedin.svg",
   "build/social/facebook.svg": "/build/social/facebook.svg",
   "build/social/twitter_x.svg": "/build/social/twitter_x.svg"

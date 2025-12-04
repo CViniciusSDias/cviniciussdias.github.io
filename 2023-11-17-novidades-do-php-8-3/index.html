@@ -68,7 +68,7 @@
             <h1 itemprop="headline" class="post-title">
                 Novidades do PHP 8.3: O que há de novo nessa versão do PHP
             </h1>
-            <time class="post-date" itemprop="datePublished" pubdate datetime="2023-11-17">
+            <time class="post-date" itemprop="datePublished" datetime="2023-11-17">
                 17 de novembro de 2023
             </time>
         </header>
@@ -308,7 +308,7 @@ var_dump(array_product($input));
 <p>E se você quiser aprender mais sobre PHP e suas funcionalidades, vou deixar aqui um <a href="https://tidd.ly/4d42Myb">cupom de desconto para a Alura</a>, onde eu tenho diversos cursos sobre PHP, dentre outros assuntos.</p>
 
         </div>
-        <footer itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <footer>
             <div class="social-links-footer">
                 <p>
                     Gostou desse post? Que tal compartilhar?
@@ -328,7 +328,7 @@ var_dump(array_product($input));
                     </a>
                 </span>
             </div>
-            <div class="post-author-footer">
+            <div class="post-author-footer" itemprop="author" itemscope itemtype="https://schema.org/Person">
                 <img src="https://gravatar.com/avatar/63579c5a873f3ab6abff10803e9a252f.jpg?s=50"
                      alt="Foto do Vinicius Dias, um homem branco de cabelos escuros e curtos, em perfil com o fundo bem escuro em tons de azul enquanto mexe em um laptop durante uma apresentação."
                      width="50"
@@ -369,11 +369,12 @@ var_dump(array_product($input));
             </nav>
             </article>
             </main>
-            <footer class="global-footer">&copy; 2024 Dias de Dev</footer>
+            <footer class="global-footer">&copy; 2025 Dias de Dev</footer>
         </div>
 
-        <script src="/build/app.js"></script>
-                
+        <script defer async src="/build/app.js"></script>
+        <script defer src="/build/enable-highlight.js"></script>
+
         <!-- Simple Analytics -->
         <script defer src="https://sa.dias.dev/latest.js"></script>
         <script defer src="https://sa.dias.dev/auto-events.js"></script>

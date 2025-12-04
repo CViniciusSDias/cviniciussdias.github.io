@@ -1,11 +1,13 @@
 {
   "entrypoints": {
     "app": {
-      "css": [
-        "/build/app.css"
-      ],
       "js": [
         "/build/app.js"
+      ]
+    },
+    "enable-highlight": {
+      "js": [
+        "/build/enable-highlight.js"
       ]
     },
     "lite-yt-embed-script": {
