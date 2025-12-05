@@ -3,7 +3,7 @@
     <title><![CDATA[Dias de Dev]]></title>
     <link href="https://dias.dev/categories/Front.xml" rel="self"/>
     <link href="https://dias.dev"/>
-    <updated>2025-12-04T17:19:06+00:00</updated>
+    <updated>2025-12-05T15:05:22+00:00</updated>
     <id>https://dias.dev/</id>
             <author>
             <name><![CDATA[Vinicius Dias]]></name>            <email><![CDATA[vinicius@dias.dev]]></email>        </author>
@@ -92,7 +92,7 @@
 
 <h3 id="_cookies_-e-csrf"><em>Cookies</em> e CSRF</h3>
 
-<p>Um ataque <em>CSRF</em> (<em>Cross-Site Request Forgery</em>) permite que um atacante se passe por outro usuário tabmém, enviando requisições de um site para outro.</p>
+<p>Um ataque <em>CSRF</em> (<em>Cross-Site Request Forgery</em>) permite que um atacante se passe por outro usuário também, enviando requisições de um site para outro.</p>
 
 <p>Para exemplificar: imagine que meu site dias.dev seja malicioso. Nele eu vou colocar a seguinte tag <code>img</code>:</p>
 
