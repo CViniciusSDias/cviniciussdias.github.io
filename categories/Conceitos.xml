@@ -3,11 +3,242 @@
     <title><![CDATA[Dias de Dev]]></title>
     <link href="https://dias.dev/categories/Conceitos.xml" rel="self"/>
     <link href="https://dias.dev"/>
-    <updated>2026-03-17T19:30:59+00:00</updated>
+    <updated>2026-09-09T23:47:23+00:00</updated>
     <id>https://dias.dev/</id>
             <author>
             <name><![CDATA[Vinicius Dias]]></name>            <email><![CDATA[vinicius@dias.dev]]></email>        </author>
         <generator uri="http://sculpin.io/">Sculpin</generator>
+            <entry>
+            <title type="html"><![CDATA[Computação Forense e Perícia Digital: Analisando um documento Word]]></title>
+            <link href="https://dias.dev/2026-09-09-computacao-forense-e-pericia-digital-em-documento-word/"/>
+            <updated>2026-09-09T00:00:00+00:00</updated>
+            <id>https://dias.dev/2026-09-09-computacao-forense-e-pericia-digital-em-documento-word/</id>
+            <content type="html"><![CDATA[<p>Computação forense, ou perícia digital, é a ciência usada para lidar com evidências digitais, principalmente para serem usadas em tribunais.
+Como estou fazendo uma pós-graduação na área, decidi escrever um pouco sobre um caso específico em que trabalhei para compartilhar não só um pouco da área, mas também um conhecimento específico sobre análise de documentos Word.</p>
+
+<h2 id="computa%C3%A7%C3%A3o-forense-al%C3%A9m-da-per%C3%ADcia-criminal">Computação forense além da perícia criminal</h2>
+
+<p>É muito comum ver a área de computação forense associada com perícia criminal, casos de CSI, etc, mas o ramo de atuação é bem mais amplo.</p>
+
+<p>Além da perícia criminal, existem os papéis de perito judicial, assistente técnico (também em casos judiciais), profissional de resposta a incidentes, etc.</p>
+
+<p>Posso trazer um pouco de como funciona cada uma dessas formas de atuar em artigos futuros, mas nesse texto eu quero trazer como exemplo um caso concreto em que trabalhei prestando consultoria para uma empresa para realizar uma simples análise em um documento Word (<code>.docx</code>).</p>
+
+<h2 id="caso-concreto---an%C3%A1lise-de-documento-word">Caso concreto - análise de documento Word</h2>
+
+<p>O pedido desse caso era uma "simples" análise documental: verificar o que é possível extrair de informações de um arquivo Word específico. Quem editou, quando editou e, principalmente, o que foi editado no documento.</p>
+
+<p>O Word possui uma funcionalidade chamada <strong>controle de alterações</strong> que permite rastrear exatamente isso de forma muito simples, mas o documento em questão não possuía tal funcionalidade habilitada, logo, a gama de informações que podemos extrair é muito menor.</p>
+
+<p>Informações como qual o usuário criador do documento, último usuário que realizou modificações nele e os horários de tais operações são triviais de se obter, mas nessa análise eu quis ir além: como identificar quais alterações no documento podem ser agrupadas para que possamos identificar padrões.</p>
+
+<h3 id="rsid">RSID</h3>
+
+<p>Documentos Word no formato <code>.docx</code> possuem um conceito chamado <em>Revision Save ID</em> (RSID). Ele é um identificador utilizado pelo Word para associar determinados elementos do documento a uma operação de edição ou salvamento.</p>
+
+<p>Na prática, diferentes partes de um documento podem possuir RSIDs diferentes, permitindo identificar grupos de alterações e encontrar relações entre elas.</p>
+
+<p>O RSID não identifica o usuário que fez a alteração e também não representa necessariamente uma única sessão de edição. Ele é apenas uma das evidências que podemos encontrar na estrutura interna do documento.</p>
+
+<p>Salvar o documento, colar conteúdo copiado de outro documento e algumas outras operações registram um novo RSID. Para efeitos de simplicidade, vou chamar cada RSID de "sessão" daqui em diante, mas lembre-se que um RSID não significa necessariamente uma única sessão de edição.</p>
+
+<h3 id="exemplo-real">Exemplo real</h3>
+
+<p>Vamos, para termos um cenário de exemplo, imaginar o seguinte: um novo documento é criado com o seguinte conteúdo:</p>
+
+<p><img src="/build/forense/documento-inicial.png" alt='Documento Word contendo 3 linhas os textos "Título", "Parágrafo 1" e "Parágrafo 2"' title="Documento Inicial"></p>
+
+<p>Quando esse documento for salvo nós podemos constatar que todo o conteúdo nele foi criado pelo mesmo RSID, ou seja, pela mesma sessão.</p>
+
+<p>Após salvar o documento inicial, realizamos duas alterações: primeiro, trocamos a palavra "Parágrafo" do primeiro parágrafo por "Texto" e salvamos. Logo após, adicionamos um novo parágrafo contendo o texto "Parágrafo 3". Esse seria o resultado do documento:</p>
+
+<p><img src="/build/forense/documento-alterado.png" alt="Documento Word após as alterações descritas acima" title="Documento alterado"></p>
+
+<p>Com isso teríamos as seguintes "sessões" com seus respectivos <em>RSIDs</em>:</p>
+
+<ul>
+<li>RSID inicial que criou o "Título" e o "Parágrafo 2"</li>
+<li>Segundo RSID que alterou o texto "Parágrafo 1" para "Texto 1"</li>
+<li>Terceiro RSID que criou o "Parágrafo 3"</li>
+</ul>
+
+<p>Conseguir identificar essas diferentes "sessões" em um documento fictício pode não ser tão útil, mas em um documento empresarial, por exemplo, pode trazer informações valiosas sobre quais partes do documento foram alteradas e até identificar possível má-fé em um processo de negociação.</p>
+
+<h2 id="ferramentas-de-an%C3%A1lise">Ferramentas de análise</h2>
+
+<p>Análise de documentos Word <strong>além do controle de alterações</strong> que o próprio editor fornece não é uma tarefa com muitas ferramentas disponíveis. O mais comum nesse cenário é extrair o documento e analisar cada arquivo XML individualmente.</p>
+
+<blockquote>
+  <p>Documentos <code>.docx</code> são basicamente um arquivo ZIP contendo diversos arquivos XML em sua estrutura interna contendo conteúdo, formatação, etc.</p>
+</blockquote>
+
+<p>Em um arquivo muito grande, essa análise manual seria inviável, então, como bom programador PHP, desenvolvi dois simples scripts para automatizar essa tarefa. O primeiro, e que foi utilizado no caso para enviar o laudo, extrai um arquivo CSV identificando quais alterações foram feitas por cada RSID. A seguir está um exemplo da saída desse script para aquele documento inicial, com somente um RSID:</p>
+
+<table>
+<thead>
+<tr>
+  <th align="left">RSID</th>
+  <th align="left">Tipo_Alteracao</th>
+  <th align="left">Paragrafo</th>
+  <th align="left">Conteudo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="left">6E46E0AC</td>
+  <td align="left">Texto</td>
+  <td align="left">parágrafo #1</td>
+  <td align="left">Título</td>
+</tr>
+<tr>
+  <td align="left">6E46E0AC</td>
+  <td align="left">Criação de parágrafo</td>
+  <td align="left">parágrafo #2</td>
+  <td align="left">Marca de parágrafo inserida nesta sessão</td>
+</tr>
+<tr>
+  <td align="left">6E46E0AC</td>
+  <td align="left">Texto</td>
+  <td align="left">parágrafo #2</td>
+  <td align="left">Parágrafo 1</td>
+</tr>
+<tr>
+  <td align="left">6E46E0AC</td>
+  <td align="left">Criação de parágrafo</td>
+  <td align="left">parágrafo #3</td>
+  <td align="left">Marca de parágrafo inserida nesta sessão</td>
+</tr>
+<tr>
+  <td align="left">6E46E0AC</td>
+  <td align="left">Texto</td>
+  <td align="left">parágrafo #3</td>
+  <td align="left">Parágrafo 2</td>
+</tr>
+</tbody>
+</table>
+
+<p>E aqui está a saída do comando para a versão final do documento, com diferentes RSIDs salvando o conteúdo:</p>
+
+<table>
+<thead>
+<tr>
+  <th align="left">RSID</th>
+  <th align="left">Tipo_Alteracao</th>
+  <th align="left">Paragrafo</th>
+  <th align="left">Conteudo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="left">6E46E0AC</td>
+  <td align="left">Texto</td>
+  <td align="left">parágrafo #1</td>
+  <td align="left">Título</td>
+</tr>
+<tr>
+  <td align="left">6E46E0AC</td>
+  <td align="left">Texto</td>
+  <td align="left">parágrafo #2</td>
+  <td align="left">o 1</td>
+</tr>
+<tr>
+  <td align="left">6E46E0AC</td>
+  <td align="left">Criação de parágrafo</td>
+  <td align="left">parágrafo #3</td>
+  <td align="left">Marca de parágrafo inserida nesta sessão</td>
+</tr>
+<tr>
+  <td align="left">6E46E0AC</td>
+  <td align="left">Texto</td>
+  <td align="left">parágrafo #3</td>
+  <td align="left">Parágrafo 2</td>
+</tr>
+<tr>
+  <td align="left">3920D9B0</td>
+  <td align="left">Formatação de parágrafo</td>
+  <td align="left">parágrafo #1</td>
+  <td align="left">Propriedades do parágrafo (alinhamento, espaçamento, estilo) definidas ou alteradas nesta sessão</td>
+</tr>
+<tr>
+  <td align="left">3920D9B0</td>
+  <td align="left">Definição de estilo</td>
+  <td align="left">word/styles.xml / estilo 'Heading1'</td>
+  <td align="left">Estilo 'heading 1' (tipo: paragraph) criado ou alterado por último nesta sessão</td>
+</tr>
+<tr>
+  <td align="left">6E368697</td>
+  <td align="left">Criação de parágrafo</td>
+  <td align="left">parágrafo #2</td>
+  <td align="left">Marca de parágrafo inserida nesta sessão</td>
+</tr>
+<tr>
+  <td align="left">6E368697</td>
+  <td align="left">Texto</td>
+  <td align="left">parágrafo #2</td>
+  <td align="left">Text</td>
+</tr>
+<tr>
+  <td align="left">7DCB8B2E</td>
+  <td align="left">Criação de parágrafo</td>
+  <td align="left">parágrafo #4</td>
+  <td align="left">Marca de parágrafo inserida nesta sessão</td>
+</tr>
+<tr>
+  <td align="left">7DCB8B2E</td>
+  <td align="left">Texto</td>
+  <td align="left">parágrafo #4</td>
+  <td align="left">Parágrafo 3</td>
+</tr>
+</tbody>
+</table>
+
+<p>Repare que com esse arquivo CSV seria possível identificar que o "Parágrafo 1" foi alterado para "Texto 1" por um RSID diferente do que criou o documento, porém seria muito difícil identificar cada alteração em um documento real com muitas alterações.</p>
+
+<p>E é aí que entra o segundo script que criei, que analisa o documento original e cria um novo contendo cores de fundo que identificam cada alteração, conforme a imagem a seguir:</p>
+
+<p><img src="/build/forense/documento-marcado.png" alt="Captura de tela de um documento com quatro parágrafos destacados em cores diferentes" title="Documento Marcado"></p>
+
+<p>Visualmente, fica muito mais fácil perceber como as diferentes partes do documento estão relacionadas.</p>
+
+<p>No exemplo acima, podemos identificar que determinados trechos foram criados ou modificados em um grupo de alterações, enquanto outros pertencem a grupos diferentes. Isso permite analisar o documento de uma forma muito mais intuitiva do que simplesmente olhando para uma lista de identificadores.</p>
+
+<h3 id="o-que-essa-an%C3%A1lise-permite-descobrir%3F">O que essa análise permite descobrir?</h3>
+
+<p>É importante deixar claro que essa técnica não permite descobrir, sozinha, quem fez cada alteração.</p>
+
+<p>Um RSID não é um usuário, não é uma conta do Windows e não é uma assinatura digital. Portanto, não podemos concluir que "RSID X foi criado por João" apenas porque encontramos esse identificador no documento.</p>
+
+<p>O que podemos fazer é correlacionar diferentes evidências.</p>
+
+<p>Por exemplo, podemos encontrar nos metadados que determinado usuário foi o último responsável por salvar o documento e, ao mesmo tempo, encontrar diferentes grupos de alterações no conteúdo. Isso pode ajudar a construir uma linha de investigação, mas não permite atribuir automaticamente cada alteração àquela pessoa.</p>
+
+<p>Essa distinção é especialmente importante em uma análise forense: uma evidência técnica precisa ser interpretada dentro do contexto e não deve sustentar uma conclusão maior do que aquilo que ela realmente demonstra.</p>
+
+<h2 id="limita%C3%A7%C3%B5es">Limitações</h2>
+
+<p>A análise de RSIDs é interessante justamente porque permite encontrar informações que não ficam visíveis para o usuário comum do Word. Mas ela possui limitações importantes.</p>
+
+<p>O documento <code>.docx</code> não é um sistema de versionamento. Ele não mantém necessariamente um histórico completo de tudo o que aconteceu durante sua existência.</p>
+
+<p>Uma pessoa pode abrir o documento, fazer diversas alterações, copiar conteúdo de outro arquivo, salvar, fechar e depois realizar novas alterações. Muitas dessas operações podem não deixar evidências suficientes para reconstruir exatamente a sequência dos acontecimentos.</p>
+
+<p>Também não é possível assumir que cada RSID representa uma única sessão de edição ou uma única ação do usuário.</p>
+
+<p>Por isso, a análise dos RSIDs deve ser encarada como uma fonte de evidências, e não como um histórico completo do documento.</p>
+
+<p>Dependendo do caso, outras informações também podem ser relevantes, como metadados do arquivo, propriedades do documento, cópias anteriores e outros artefatos encontrados no ambiente analisado.</p>
+
+<h2 id="conclus%C3%A3o">Conclusão</h2>
+
+<p>Embora relativamente simples, esse caso foi interessante, pois mostrou que mesmo sem o controle de alterações habilitado, a estrutura interna do <code>.docx</code> pode preservar evidências que ajudam a entender como diferentes partes do documento foram criadas ou modificadas.</p>
+
+<p>Os RSIDs são apenas um exemplo disso. Sozinhos, eles não permitem reconstruir perfeitamente o histórico de um documento nem identificar quem realizou cada alteração. Porém, quando analisados em conjunto com outras evidências, podem ser bastante úteis para uma investigação.</p>
+
+<p>E esse é justamente um dos aspectos mais interessantes da computação forense: muitas vezes, a informação mais relevante não está naquilo que o usuário consegue ver, mas nos rastros deixados pela forma como os dados foram armazenados.</p>
+
+<p>No meu caso, uma "simples" análise de um documento Word acabou se tornando um projetinho para automatizar a identificação desses rastros e eu decidi compartilhar aqui com vocês.</p>
+]]></content>
+        </entry>
             <entry>
             <title type="html"><![CDATA[Inteligência Artificial com PHP - Executando modelos com TransformersPHP]]></title>
             <link href="https://dias.dev/2024-09-27-inteligencia-artificial-php-transformersphp/"/>
@@ -1201,242 +1432,6 @@ opção para isso.</p>
 Richard Feynman (Nobel de física): “O que eu não consigo criar, eu não entendo”. Então antes de utilizar uma ferramenta
 que realiza o trabalho para mim, eu gosto de saber como realizar este trabalho sem ela. Com isso, se algum problema
 acontecer com a biblioteca, por exemplo, eu vou estar mais preparado para resolvê-lo já que entendo um pouco melhor como as coisas funcionam.</p>
-]]></content>
-        </entry>
-            <entry>
-            <title type="html"><![CDATA[PHP assíncrono de forma nativa]]></title>
-            <link href="https://dias.dev/2020-09-16-php-assincrono-de-forma-nativa/"/>
-            <updated>2020-09-16T00:00:00+00:00</updated>
-            <id>https://dias.dev/2020-09-16-php-assincrono-de-forma-nativa/</id>
-            <content type="html"><![CDATA[<p>Realizar acesso a streams é uma tarefa relativamente comum para devs PHP. Seja lendo e escrevendo em arquivos, fazendo requisições HTTP, etc.</p>
-
-<p>Operações de I/O são custosas e levam algum tempo para serem executadas. Quando temos diversas operações desse tipo, uma técnica que pode ajudar (e muito) na performance da aplicação é realizá-las de forma assíncrona.</p>
-
-<h2 id="acesso-a-streams">Acesso a streams</h2>
-
-<p>Antes de falar sobre técnicas e funções que permitem a programação assíncrona, é importante saber como normalmente nós trabalhamos com I/O.</p>
-
-<p>Acesso a arquivos, requisições HTTP, sockets e muito mais pode ser feito através de <a href="https://php.net/streams">streams</a>. Um stream é basicamente um fluxo de dados, sendo que a origem desse fluxo pode variar (vide o início desse parágrafo). Quando utilizamos funções como <code>file_get_contents</code>, <code>fopen</code>, <code>fgets</code>, e as demais, estamos trabalhando com streams do PHP.</p>
-
-<h2 id="programa%C3%A7%C3%A3o-ass%C3%ADncrona">Programação assíncrona</h2>
-
-<p>Se você não está familiarizado com o termo "programação assíncrona", recomendo assistir este vídeo antes de continuar o artigo:</p>
-
-<p><lite-youtube videoid="zLfXPSeCkB8">
-    <a href="https://youtube.com/watch?v=zLfXPSeCkB8" class="lty-playbtn" title="Reproduzir vídeo">
-        <span class="lyt-visually-hidden">
-            Programação assíncrona vs Programação paralela - Entenda a diferença | Programando com Vinicius Dias
-        </span>
-    </a>
-</lite-youtube></p>
-
-<p>Entendido o que é programação assíncrona, como podemos fazer acesso a streams de forma assíncrona utilizando PHP sem nenhuma extensão ou biblioteca externa? Será possível?</p>
-
-<h2 id="eventos">Eventos</h2>
-
-<p>Programação orientada a eventos não é novidade e nós utilizamos muito na web. Para agir quando um botão for clicado, ou quando um texto for digitado em um <code>input</code> nós utilizamos eventos no JavaScript. Eventos podem acontecer a qualquer momento então sua natureza é assíncrona. Mas será possível fazer algo parecido do lado do PHP?</p>
-
-<p>Antes de falar do PHP em si, acho válido citar que o sistema operacional já trabalha com chamadas assíncronas. Diversos eventos acontecem durante a execução do seu sistema, e há código reagindo a estes eventos o tempo todo. Utilizando PHP nós podemos acessar algumas dessas funcionalidades do sistema operacional</p>
-
-<h3 id="fun%C3%A7%C3%A3o-stream_select">Função stream_select</h3>
-
-<p>Uma função não muito comum para nós que trabalhamos com PHP é a <a href="https://php.net/stream_select">stream_select</a>. Essa função nos permite "observar" modificações que possam acontecer em streams. O problema é que ela não é nada fácil de se entender, então vou tentar tornar este processo menos doloroso para você.</p>
-
-<h2 id="cen%C3%A1rio">Cenário</h2>
-
-<p>Imagine que para executar uma tarefa nós precisemos ler 5 arquivos distintos e depois realizar algum processamento. Normalmente utilizando PHP nós poderíamos fazer algo como:</p>
-
-<pre><code class="php">&lt;?php
-
-$conteudoDoArquivo1 = file_get_contents('arquivo1.txt');
-$conteudoDoArquivo2 = file_get_contents('arquivo2.txt');
-$conteudoDoArquivo3 = file_get_contents('arquivo3.txt');
-$conteudoDoArquivo4 = file_get_contents('arquivo4.txt');
-$conteudoDoArquivo5 = file_get_contents('arquivo5.txt');
-
-// Processar os 5 arquivos
-</code></pre>
-
-<p>O problema nessa abordagem é óbvio: Antes de ler o <code>arquivo2.txt</code> precisamos terminar de ler todo o conteúdo de <code>arquivo1.txt</code>. Enquanto o computador espera, nós já poderíamos estar lendo os demais arquivos e os processando de forma individual.</p>
-
-<p>Quando temos uma operação de I/O (acesso a arquivos, rede, etc) sendo realizada de forma síncrona, o processador fica ocioso enquanto a operação não é executada. Ou seja, enquanto o arquivo estiver sendo carregado, o processador fica esperando, sem fazer nada. É exatamente isso que queremos evitar. Queremos garantir que ele continue trabalhando enquanto o arquivo não estiver pronto para leitura.</p>
-
-<h2 id="solu%C3%A7%C3%A3o-com-assincronicidade">Solução com assincronicidade</h2>
-
-<p>Para resolver essa situação, podemos utilizar a função <code>stream_select</code> que observa alterações no status de uma lista de streams, ou seja, quando algum dos arquivos estiver pronto para leitura, essa função nos avisará. E é interessante citar que a leitura não necessariamente vai acontecer em ordem. O sistema operacional pode abrir o <code>arquivo3.txt</code> mais rápido do que o <code>arquivo1.txt</code>, por exemplo. Neste cenário, vamos processá-lo logo, sem ficar esperando os arquivos anteriores.</p>
-
-<pre><code class="php">&lt;?php
-
-$listaDeStreamsDeArquivos = [
-    fopen('arquivo1.txt', 'r'),
-    fopen('arquivo2.txt', 'r'),
-    fopen('arquivo3.txt', 'r'),
-    fopen('arquivo4.txt', 'r'),
-    fopen('arquivo5.txt', 'r'),
-];
-
-foreach ($listaDeStreamsDeArquivos as $streamDeArquivo) {
-    stream_set_blocking($streamDeArquivo, false);
-}
-
-do {
-    $streamsParaLer = $listaDeStreamsDeArquivos;
-    $streamsComNovidades = stream_select($streamsParaLer, $write, $except, 1, 0);
-
-    if ($streamsComNovidades === false) {
-        echo 'Erro inesperado';
-        exit(1);
-    }
-
-    if ($streamsComNovidades === 0) {
-        continue;
-    }
-
-    foreach ($streamsParaLer as $indice =&gt; $streamDeArquivo) {
-        $conteudo = stream_get_contents($streamDeArquivo);
-        // processa o conteúdo do arquivo
-        if (feof($streamDeArquivo)) {
-            fclose($streamDeArquivo);
-            unset($listaDeStreamsDeArquivos[$indice]);
-        }
-    }
-} while ($listaDeStreamsDeArquivos !== []);
-</code></pre>
-
-<h3 id="explica%C3%A7%C3%A3o">Explicação</h3>
-
-<h4 id="prepara%C3%A7%C3%A3o">Preparação</h4>
-
-<p>Como eu disse, não é muito fácil, então vamos por partes. Primeiro abrimos todos os arquivos que queremos ler com o <code>fopen</code>. Até aí sem segredo. Depois, informamos com a função <code>stream_set_blocking</code> que o recurso deve ser aberto em modo não-bloqueante - assim, o processo que acessa o arquivo não bloqueará a CPU por causar um estado de espera ao tentar acessar os arquivos.</p>
-
-<p>Nesse ponto, temos um array com 5 recursos abertos para podermos trabalhar com estes streams. Então analisando o este pedaço de código:</p>
-
-<pre><code class="php">$listaDeStreamsDeArquivos = [
-    fopen('arquivo1.txt', 'r'),
-    fopen('arquivo2.txt', 'r'),
-    fopen('arquivo3.txt', 'r'),
-    fopen('arquivo4.txt', 'r'),
-    fopen('arquivo5.txt', 'r'),
-];
-
-var_dump($listaDeStreamsDeArquivos);
-</code></pre>
-
-<p>Teríamos a seguinte saída:</p>
-
-<pre><code class="php">array(5) {
-  [0]=&gt;
-  resource(5) of type (stream)
-  [1]=&gt;
-  resource(6) of type (stream)
-  [2]=&gt;
-  resource(7) of type (stream)
-  [3]=&gt;
-  resource(8) of type (stream)
-  [4]=&gt;
-  resource(9) of type (stream)
-}
-</code></pre>
-
-<p>Depois disso que começa a parte difícil. A chamada para a função <code>stream_select</code> deve estar em um loop, porque pode acontecer de nem todos os streams estarem prontos para leitura logo de cara.</p>
-
-<h4 id="par%C3%A2metros">Parâmetros</h4>
-
-<p>Segundo detalhe importante: os parâmetros. Os 3 primeiros parâmetros dessa função são passados por referência. Por isso o segundo e terceiro são variáveis que nós nem tínhamos definido ainda. O primeiro parâmetro é a lista de streams que queremos observar para ler. O segundo é para escrita. Já o terceiro, menos comum, é para dados excepcionais que possuem maior prioridade. Os 2 últimos parâmetros são sobre timeout.</p>
-
-<p>O parâmetro passado como 1 indica o número de segundos que essa função deve esperar receber uma notificação de novidade nos streams até "desistir", ou seja, o timeout. Esse é o motivo pelo qual ela deve estar em um loop. Se esse tempo passar e nós não tivermos novidade, devemos tentar de novo depois. Caso algum (não necessariamente todos) stream esteja pronto antes desse 1 segundo, a função retornará. O último parâmetro, que informamos como 0, indica o tempo em microsegundos para timeout.</p>
-
-<h4 id="retorno-e-leitura">Retorno e leitura</h4>
-
-<p>Agora vamos falar do retorno. Essa função retorna o número de streams que contém modificações. No nosso caso, vai informar quantos arquivos estão prontos para leitura. Porém em caso de erro essa função nos retorna o valor <code>false</code>.</p>
-
-<p>Além disso, os parâmetros que nós passamos podem ter sido modificados. Por isso eu realizo uma cópia da lista original de streams em <code>$arquivosParaLer = $listaDeArquivos;</code>. Após o retorno da função, o parâmetro passado vai conter apenas os streams que possuem novidades, ou seja, no nosso caso, os arquivos que estão prontos para leitura.</p>
-
-<p>Para exemplificar, vamos supor que na primeira execução do loop todos os arquivos já estejam disponíveis. Nesse caso, analisando os valores das variáveis, podemos entender o que está acontecendo. Analisando então o valor de <code>$streamsComNovidades</code>, teríamos <code>int(5)</code> como resultado deste cenário.</p>
-
-<p>Já analisando ambos arrays de streams (<code>$listaDeStreamsDeArquivos</code> e <code>$streamsParaLer</code>), teríamos exatamente o mesmo resultado:</p>
-
-<pre><code class="php">array(5) {
-  [0]=&gt;
-  resource(5) of type (stream)
-  [1]=&gt;
-  resource(6) of type (stream)
-  [2]=&gt;
-  resource(7) of type (stream)
-  [3]=&gt;
-  resource(8) of type (stream)
-  [4]=&gt;
-  resource(9) of type (stream)
-}
-array(5) {
-  [0]=&gt;
-  resource(5) of type (stream)
-  [1]=&gt;
-  resource(6) of type (stream)
-  [2]=&gt;
-  resource(7) of type (stream)
-  [3]=&gt;
-  resource(8) of type (stream)
-  [4]=&gt;
-  resource(9) of type (stream)
-}
-</code></pre>
-
-<p>Agora caso na primeira execução tivéssemos apenas 3 dos 5 arquivos prontos, e analisássemos os 3 valores anteriores, teríamos ter algo como:</p>
-
-<pre><code class="php">var_dump($streamsComNovidades, $listaDeStreamsDeArquivos, $streamsParaLer);
-</code></pre>
-
-<pre><code class="php">int(3)
-array(5) {
-  [0]=&gt;
-  resource(5) of type (stream)
-  [1]=&gt;
-  resource(6) of type (stream)
-  [2]=&gt;
-  resource(7) of type (stream)
-  [3]=&gt;
-  resource(8) of type (stream)
-  [4]=&gt;
-  resource(9) of type (stream)
-}
-array(3) {
-  [0]=&gt;
-  resource(5) of type (stream)
-  [2]=&gt;
-  resource(7) of type (stream)
-  [4]=&gt;
-  resource(9) of type (stream)
-}
-</code></pre>
-
-<p>Onde, nesse caso, o segundo array exibido é o de <code>$streamsParaLer</code>, e possui apenas os 3 arquivos prontos para leitura.</p>
-
-<p>Sendo assim, posso percorrer este array tendo a certeza de que há dados para ler e processar. Mas não há garantia de que todo o conteúdo do arquivo estará lá, por isso verifico se cheguei ao fim do arquivo com <code>feof</code>. Para arquivos pequenos, via de regra, todo o conteúdo virá de uma vez só, mas não conte com isso e prepare seu código para ler até mesmo um único byte por vez.</p>
-
-<p>Após ler todo o arquivo, devemos fechá-lo. Mas um outro detalhe importante é que eu também o removo da lista original de streams que queremos ler. Faço isso para que caso seja necessária uma nova iteração no loop, ou seja, caso nem todos os arquivos tenham sido lidos, eu não tente ler novamente os arquivos que já foram lidos e fechados.</p>
-
-<p>Com isso temos nossa condição de saída do loop. Quando todos os arquivos tiverem sido removidos e minha lista estiver vazia, sei que processei todos os arquivos.</p>
-
-<p>PS.: A função <code>stream_set_blocking</code> só surte efeito com arquivos e sockets. Os outros wrappers, com esta técnica, não podem ser lidos de forma assíncrona e não bloqueante.</p>
-
-<h2 id="conceitos">Conceitos</h2>
-
-<p>Esse código obviamente pode ser refatorado para torná-lo um pouco mais legível, mas acredito que a lógica por trás dele tenha ficado clara. Caso contrário, você pode usar a sessão de comentários dessa página para fazer perguntas.</p>
-
-<p>O que nós escrevemos de forma rudimentar aqui pode ser visto como uma implementação do que é conhecido como <em>Event Loop</em>, ou loop de eventos. Você provavelmente já ouviu esse termo se estuda sobre a runtime Node.js.</p>
-
-<p>Claro que essa implementação não é completa ou otimizada, mas atende nosso propósito: ler arquivos conforme eles fiquem prontos para leitura. Dessa forma nós vamos pedir para que o sistema operacional prepare todos os arquivos para leitura de uma só vez.</p>
-
-<p>As vantagens nessa abordagem assíncrona são mais perceptíveis quando temos operações mais lentas como chamadas HTTP, por exemplo. Mas isso aumentaria a complexidade do código para este artigo.</p>
-
-<h2 id="conclus%C3%A3o">Conclusão</h2>
-
-<p>Claro que o PHP já possui ferramentas que realizam este trabalho de forma muito mais simples. ReactPHP com seu pacote de Streams é um ótimo exemplo.</p>
-
-<p>Mas seguindo o que citei no post sobre aprendizado, eu penso como <a href="https://pt.wikipedia.org/wiki/Richard_Feynman">Richard Feynman</a> (Nobel de física): "O que eu não consigo criar, eu não entendo". Então antes de utilizar uma ferramenta que realiza o trabalho para mim, eu gosto de saber como realizar este trabalho sem ela. Com isso, se algum problema acontecer com a biblioteca, por exemplo, eu vou estar mais preparado para resolvê-lo já que eu entendo um pouco melhor como as coisas funcionam.</p>
-
-<p>Se você quiser aprender mais sobre algum desses assuntos, pode considerar assinar a Alura. Lá existem treinamentos (gravados por mim) sobre PHP Streams, ReactPHP e muito mais. Caso pretenda estudar na Alura, <a href="https://tidd.ly/4d42Myb">neste link</a> você tem um desconto de 15%.</p>
 ]]></content>
         </entry>
     </feed>
